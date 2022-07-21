@@ -2,22 +2,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import Integer, String, Date, Boolean, Text
 from sqlalchemy.orm import declarative_base, relationship
-from flask_login import UserMixin
-
+from .user import User
 
 db = SQLAlchemy()
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
-
-    id = Column(Integer, primary_key=True)
-    username = Column(String(30))
-    email = Column(String(254))
-    photo = Column(Text)
-    hashed_password = Column(String)
-
-    messages = relationship("Message", back_populates="user", cascade= "all, delete")
-    servers = relationship("Server", back_populates="master_admin", cascade="all, delete")
 
 class Server(db.Model):
     __tablename__ = 'servers'
