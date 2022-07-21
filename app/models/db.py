@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import Column, ForeignKey, Table
 from sqlalchemy.types import Integer, String, Boolean, Text
 from sqlalchemy.orm import declarative_base, relationship
-from .user import User
 
 db = SQLAlchemy()
 
