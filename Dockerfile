@@ -7,7 +7,7 @@ FROM python:3.9
 # FLASK_ENV -> Tell flask to use the production server
 # SQLALCHEMY_ECHO -> Just set it to true
 # Link of the heroku
-ENV REACT_APP_BASE_URL=http://localhost:3000
+ENV REACT_APP_BASE_URL=https://wecord.herokuapp.com/
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
