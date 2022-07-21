@@ -9,8 +9,11 @@ db = SQLAlchemy()
 server_users = Table(
     "server_users",
     db.Model.metadata,
+    Column("id", Integer, primary_key=True),
     Column("userId", Integer, ForeignKey("users.id"), primary_key=True),
-    Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True)
+    Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True),
+    Column("adminStatus", Boolean),
+    Column("muted", Boolean)
 )
 
 class Server(db.Model):
