@@ -1,10 +1,10 @@
-from app.models import db, Server, Channel, Message, server_users
+from ..models.db import db, Server, Channel, Message, server_users
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_servers():
     server1 = Server(
-        masterAdmin = 1, name = "example", private=False, picture=None)
+        master_admin = 1, name = "example", private=False, picture=None)
 
     db.session.add(server1)
 
