@@ -27,11 +27,11 @@ class Server(db.Model):
     # relationships
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
-    user = db.relationship("User",
-        secondary="server_users",
-        back_populates="server",
-        cascade="all, delete"
-    )
+    # user = db.relationship("User",
+    #     secondary="server_users",
+    #     back_populates="server",
+    #     cascade="all, delete"
+    # )
 
 class Channel(db.Model):
     __tablename__ = 'channels'

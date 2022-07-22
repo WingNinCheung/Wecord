@@ -15,10 +15,10 @@ class User(db.Model, UserMixin):
 
     messages = relationship("Message", back_populates="user", cascade= "all, delete")
     servers = relationship("Server", back_populates="masterAdmin", cascade="all, delete")
+    # many to many relationship
     server = db.relationship("Server",
         secondary="server_users",
-        back_populates="user",
-        cascade="all, delete"
+        back_populates="user"
     )
 
     @property
