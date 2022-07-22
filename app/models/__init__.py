@@ -1,2 +1,2 @@
-from .db import Server, Channel, Message, server_users
+from .db import Server, Channel, Message
 from .user import User

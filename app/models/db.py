@@ -19,14 +19,14 @@ class Server(db.Model):
     __tablename__ = 'servers'
 
     id = db.Column(db.Integer, primary_key=True)
-    master_admin = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False )
+    master_admin = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     private = db.Column(db.Boolean, nullable=False)
     picture = db.Column(db.Text)
 
     # relationships
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
-    master_admin = relationship("User", back_populates="servers")
+    masterAdmin = relationship("User", back_populates="servers")
     user = db.relationship("User",
         secondary="server_users",
         back_populates="server",

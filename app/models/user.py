@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     messages = relationship("Message", back_populates="user", cascade= "all, delete")
-    servers = relationship("Server", back_populates="master_admin", cascade="all, delete")
+    servers = relationship("Server", back_populates="masterAdmin", cascade="all, delete")
     server = db.relationship("Server",
         secondary="server_users",
         back_populates="user",

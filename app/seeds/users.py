@@ -1,4 +1,5 @@
-from app.models import db, User
+from ..models.user import User
+from ..models.db import db, Server, Channel, Message, server_users
 
 
 # Adds a demo user, you can add other users here if you want
