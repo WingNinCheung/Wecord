@@ -25,11 +25,28 @@ def seed_server_users():
         serverId = 6, userId = 2, adminStatus = True, muted = True )
     server_users11 = server_users(
         serverId = 6, userId = 3, adminStatus = False, muted = True )
-    server_users11 = server_users(
+    server_users12 = server_users(
         serverId = 7, userId = 3, adminStatus = True, muted = True )
 
 
-    db.session.add(server1)
+    statement = student_identifier.insert().values(, user_id=sti1.id)
+
+
+
+
+    db.session.add(server_users2)
+    db.session.add(server_users1)
+    db.session.add(server_users3)
+    db.session.add(server_users4)
+    db.session.add(server_users5)
+    db.session.add(server_users6)
+    db.session.add(server_users7)
+    db.session.add(server_users8)
+    db.session.add(server_users9)
+    db.session.add(server_users10)
+    db.session.add(server_users11)
+    db.session.add(server_users12)
+
 
     db.session.commit()
 

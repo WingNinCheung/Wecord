@@ -19,6 +19,12 @@ def seed_servers():
         master_admin = 3, name = "example7", private=False, picture=None)
 
     db.session.add(server1)
+    db.session.add(server2)
+    db.session.add(server3)
+    db.session.add(server4)
+    db.session.add(server5)
+    db.session.add(server6)
+    db.session.add(server7)
 
     db.session.commit()
 

@@ -16,7 +16,18 @@ def seed_channels():
     channel11 = Channel(serverId = 6, title = "channel11")
     channel12 = Channel(serverId = 7, title = "channel12")
 
-    db.session.add(server1)
+    db.session.add(channel1)
+    db.session.add(channel2)
+    db.session.add(channel3)
+    db.session.add(channel4)
+    db.session.add(channel5)
+    db.session.add(channel6)
+    db.session.add(channel7)
+    db.session.add(channel8)
+    db.session.add(channel9)
+    db.session.add(channel10)
+    db.session.add(channel11)
+    db.session.add(channel12)
 
     db.session.commit()
 

@@ -34,7 +34,22 @@ def seed_messages():
     message15 = Message(
         userId = 3, channelId = 12, message = "Hello whatever")
 
-    db.session.add(server1)
+    db.session.add(message1)
+    db.session.add(message2)
+    db.session.add(message3)
+    db.session.add(message4)
+    db.session.add(message5)
+    db.session.add(message6)
+    db.session.add(message7)
+    db.session.add(message8)
+    db.session.add(message9)
+    db.session.add(message10)
+    db.session.add(message11)
+    db.session.add(message12)
+    db.session.add(message13)
+    db.session.add(message14)
+    db.session.add(message15)
+
 
     db.session.commit()
 
