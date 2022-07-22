@@ -1,6 +1,5 @@
-from flask import Blueprint, jsonify, request, redirect, render_template
+from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-import json
 from ..models import db
 
 servers = Blueprint('servers', __name__)
@@ -62,4 +61,4 @@ def delete_server(id):
         db.session.commit()
         return server.to_dict()
     else:
-        return json.dumps({"Only the server admin may delete this server"})
+        return jsonify({"Only the server admin may delete this server"})
