@@ -4,6 +4,8 @@ from ..models import db
 
 servers = Blueprint('servers', __name__)
 
+#NOTE: Might want to add jsonify for the return statements so that the responses have the correct headers
+
 # GET /api/servers/:serverId - read a single server
 @servers.route('/<int:id>')
 @login_required
@@ -54,8 +56,8 @@ def edit_server(id):
 @servers.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_server(id):
-    #TODO: Add a check to ensure that only the master_admin of the server can delete it!
     server = db.Server.query.get(id)
+    # Verify that this current_user.id method works
     if current_user.id == server.master_admin:
         db.session.delete(server)
         db.session.commit()

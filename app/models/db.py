@@ -33,6 +33,15 @@ class Server(db.Model):
         cascade="all, delete"
     )
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'master_admin': self.master_admin,
+            'name': self.name,
+            'private': self.private, #maybe take out the private one
+            'picture': self.picture
+        }
+
 class Channel(db.Model):
     __tablename__ = 'channels'
 
