@@ -32,7 +32,7 @@ function HomePage() {
         <ul>
           {publicServers &&
             publicServers.map((server) => (
-              <li>
+              <li key={server.id}>
                 <NavLink to="/">{server.name}</NavLink>
               </li>
             ))}
@@ -44,7 +44,7 @@ function HomePage() {
         <ul>
           {privateServers &&
             privateServers.map((server) => (
-              <li>
+              <li key={server.id}>
                 <NavLink to="/">{server.name}</NavLink>
               </li>
             ))}
