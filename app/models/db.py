@@ -5,15 +5,27 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
-server_users = Table(
-    "server_users",
-    db.Model.metadata,
-    Column("id", Integer, primary_key=True),
-    Column("userId", Integer, ForeignKey("users.id"), primary_key=True),
-    Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True),
-    Column("adminStatus", Boolean),
-    Column("muted", Boolean)
-)
+# server_users = Table(
+#     "server_users",
+#     db.Model.metadata,
+#     Column("id", Integer, primary_key=True),
+#     Column("userId", Integer, ForeignKey("users.id"), primary_key=True),
+#     Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True),
+#     Column("adminStatus", Boolean),
+#     Column("muted", Boolean)
+# )
+
+class Server_users(db.Model):
+    __tablename__ = "serverusers"
+    id = db.Column(db.Integer, primary_key=True)
+    serverId = Column(Integer, db.ForeignKey('servers.id'), nullable=False)
+    userId = Column(Integer, db.ForeignKey('users.id'), nullable=False)
+    adminStatus = Column(Boolean)
+    muted = Column(Boolean)
+
+    server = relationship("Server", back_populates='users')
+    user = relationship("User", back_populates='server')
+
 
 class Server(db.Model):
     __tablename__ = 'servers'
@@ -25,6 +37,7 @@ class Server(db.Model):
     picture = db.Column(db.Text)
 
     # relationships
+    users = relationship('Server_users', back_populates='server')
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
     user = db.relationship("User",
