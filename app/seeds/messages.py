@@ -60,5 +60,5 @@ def seed_messages():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_messages():
-    db.session.execute('TRUNCATE servers RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
     db.session.commit()

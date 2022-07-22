@@ -15,7 +15,7 @@ db = SQLAlchemy()
 #     Column("muted", Boolean)
 # )
 
-class Server_users(db.Model):
+class Server_user(db.Model):
     __tablename__ = "serverusers"
     id = db.Column(db.Integer, primary_key=True)
     serverId = Column(Integer, db.ForeignKey('servers.id'), nullable=False)
@@ -37,14 +37,10 @@ class Server(db.Model):
     picture = db.Column(db.Text)
 
     # relationships
-    users = relationship('Server_users', back_populates='server')
+    users = relationship('Server_user', back_populates='server')
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
-    user = db.relationship("User",
-        secondary="server_users",
-        back_populates="server",
-        cascade="all, delete"
-    )
+
 
 class Channel(db.Model):
     __tablename__ = 'channels'

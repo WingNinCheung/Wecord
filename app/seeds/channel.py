@@ -38,5 +38,5 @@ def seed_channels():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_channels():
-    db.session.execute('TRUNCATE servers RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE channels RESTART IDENTITY CASCADE;')
     db.session.commit()
