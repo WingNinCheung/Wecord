@@ -8,23 +8,22 @@ servers = Blueprint('servers', __name__)
 
 # GET /api/servers/:serverId - read a single server
 @servers.route('/<int:id>')
-@login_required
 def single_server(id):
     server = db.Server.query.get(id)
     return server.to_dict()
 
 # GET /api/servers - read all servers
 @servers.route('/')
-@login_required
 def all_servers():
     servers = db.Server.query.all()
     return {'servers': [server.to_dict() for server in servers]}
 
 # POST /api/servers - create a new public server
 @servers.route('/', methods= ['POST'])
-@login_required
 def new_server():
     data = request.json
+    print('current_user:----------', current_user.data)
+
     server = db.Server(
         # NOTE: check what current_user looks like so we know what the id is
         master_admin = current_user.id,
@@ -54,7 +53,6 @@ def edit_server(id):
 
 # DELETE /api/servers/:serverId - delete a server
 @servers.route('/<int:id>', methods=['DELETE'])
-@login_required
 def delete_server(id):
     server = db.Server.query.get(id)
     # Verify that this current_user.id method works
