@@ -27,6 +27,7 @@ function HomePage() {
 
   return (
     <div className="outContainer">
+      <NavLink to="/create-server">Add a Server</NavLink>
       <div className="publicServers">
         <h3>Public</h3>
         <ul>

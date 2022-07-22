@@ -17,26 +17,28 @@ server_routes = Blueprint("server_routes", __name__)
 # @login_required
 def all_servers():
     servers = Server.query.all()
-    print(servers)
     return {"servers": [server.to_dict() for server in servers]}
 
 
 # POST /api/servers - create a new public server
-# @server_routes.route('/', methods= ['POST'])
-# def new_server():
-#     data = request.json
-#     print('current_user:----------', current_user.data)
+@server_routes.route("/", methods=["POST"])
+# @login_required
+def new_server():
+    print("hererererere")
+    name = request.json["name"]
+    print("hererererere")
 
-#     server = db.Server(
-#         # NOTE: check what current_user looks like so we know what the id is
-#         master_admin = current_user.id,
-#         name = data['name'],
-#         private = False,
-#         picture = data['picture']
-#     )
-#     db.session.add(server)
-#     db.session.commit()
-#     return server.to_dict()
+    # server = Server(
+    #     # NOTE: check what current_user looks like so we know what the id is
+    #     master_admin=current_user.id,
+    #     name=data["name"],
+    #     private=False,
+    #     picture=data["picture"],
+    # )
+    # db.session.add(server)
+    # db.session.commit()
+    # return server.to_dict()
+
 
 # # POST /api/servers - create a new private server
 # # TODO: copy/paste public version once that's debugged
