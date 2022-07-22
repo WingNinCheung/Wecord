@@ -1,19 +1,34 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import Column, ForeignKey, Table
 from sqlalchemy.types import Integer, String, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 db = SQLAlchemy()
 
-server_users = Table(
-    "server_users",
-    db.Model.metadata,
-    Column("id", Integer, primary_key=True),
-    Column("userId", Integer, ForeignKey("users.id"), primary_key=True),
-    Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True),
-    Column("adminStatus", Boolean),
-    Column("muted", Boolean)
-)
+
+class Server_Users(db.Model):
+    __tablename__ = 'server_users'
+
+    id = Column(Integer, primary_key=True),
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True),
+    server_id = Column(Integer, ForeignKey("servers.id"), primary_key=True),
+    admin_status = Column(Boolean),
+    muted = Column(Boolean)
+
+    user = relationship("User", backref=backref("server_users", cascade="all, delete-orphan" ))
+    server = relationship("Server", backref=backref("server_users", cascade="all, delete-orphan" ))
+
+
+
+# server_users = Table(
+#     "server_users",
+#     db.Model.metadata,
+#     Column("id", Integer, primary_key=True),
+#     Column("userId", Integer, ForeignKey("users.id"), primary_key=True),
+#     Column("serverId", Integer, ForeignKey("servers.id"), primary_key=True),
+#     Column("adminStatus", Boolean),
+#     Column("muted", Boolean)
+# )
 
 class Server(db.Model):
     __tablename__ = 'servers'
@@ -25,12 +40,12 @@ class Server(db.Model):
     picture = db.Column(db.Text)
 
     # relationships
+
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
     user = db.relationship("User",
         secondary="server_users",
-        back_populates="server",
-        cascade="all, delete"
+        viewonly = True
     )
 
     def to_dict(self):

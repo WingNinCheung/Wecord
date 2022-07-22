@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.associationproxy import association_proxy
 
 
 class User(db.Model, UserMixin):
@@ -17,8 +18,7 @@ class User(db.Model, UserMixin):
     servers = relationship("Server", back_populates="masterAdmin", cascade="all, delete")
     server = db.relationship("Server",
         secondary="server_users",
-        back_populates="user",
-        cascade="all, delete"
+        viewonly=True
     )
 
     @property
