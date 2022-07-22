@@ -1,31 +1,31 @@
-from ..models.db import db, Server, Channel, Message, Server_user
+from ..models.db import db, Server, Channel, Message, Server_User
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_server_users():
-    server_users1 = Server_user(
+    server_users1 = Server_User(
         serverId = 1, userId = 1, adminStatus = True, muted = False )
-    server_users2 = Server_user(
+    server_users2 = Server_User(
         serverId = 1, userId = 2, adminStatus = False, muted = False )
-    server_users3 = Server_user(
+    server_users3 = Server_User(
         serverId = 1, userId = 3, adminStatus = False, muted = False )
-    server_users4 = Server_user(
+    server_users4 = Server_User(
         serverId = 2, userId = 1, adminStatus = True, muted = False )
-    server_users5 = Server_user(
+    server_users5 = Server_User(
         serverId = 2, userId = 2, adminStatus = False, muted = False )
-    server_users6 = Server_user(
+    server_users6 = Server_User(
         serverId = 3, userId = 1, adminStatus = True, muted = False )
-    server_users7 = Server_user(
+    server_users7 = Server_User(
         serverId = 4, userId = 1, adminStatus = True, muted = False )
-    server_users8 = Server_user(
+    server_users8 = Server_User(
         serverId = 4, userId = 3, adminStatus = False, muted = False )
-    server_users9 = Server_user(
+    server_users9 = Server_User(
         serverId = 5, userId = 1, adminStatus = True, muted = False )
-    server_users10 = Server_user(
+    server_users10 = Server_User(
         serverId = 6, userId = 2, adminStatus = True, muted = False )
-    server_users11 = Server_user(
+    server_users11 = Server_User(
         serverId = 6, userId = 3, adminStatus = False, muted = False )
-    server_users12 = Server_user(
+    server_users12 = Server_User(
         serverId = 7, userId = 3, adminStatus = True, muted = False )
 
 
