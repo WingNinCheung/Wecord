@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from ..models.db import db, Server
+from ..models.db import Server_User, db, Server
 
-server_routes = Blueprint('server_routes', __name__)
+server_routes = Blueprint("server_routes", __name__)
 
-#NOTE: Might want to add jsonify for the return statements so that the responses have the correct headers
+# NOTE: Might want to add jsonify for the return statements so that the responses have the correct headers
 
 # GET /api/servers/:serverId - read a single server
 # @server_routes.route('/<int:id>')
@@ -13,12 +13,13 @@ server_routes = Blueprint('server_routes', __name__)
 #     return server.to_dict()
 
 # GET /api/servers - read all servers
-@server_routes.route('/')
+@server_routes.route("/")
 # @login_required
 def all_servers():
     servers = Server.query.all()
     print(servers)
-    return {'servers': [server.to_dict() for server in servers]}
+    return {"servers": [server.to_dict() for server in servers]}
+
 
 # POST /api/servers - create a new public server
 # @server_routes.route('/', methods= ['POST'])
