@@ -5,6 +5,18 @@ from ..models.db import db, Server, Channel, Message, server_users
 def seed_servers():
     server1 = Server(
         master_admin = 1, name = "example", private=False, picture=None)
+    server2 = Server(
+        master_admin = 1, name = "example2", private=False, picture=None)
+    server3 = Server(
+        master_admin = 1, name = "example3", private=False, picture=None)
+    server4 = Server(
+        master_admin = 1, name = "example4", private=True, picture=None)
+    server5 = Server(
+        master_admin = 1, name = "example5", private=True, picture=None)
+    server6 = Server(
+        master_admin = 2, name = "example6", private=False, picture=None)
+    server7 = Server(
+        master_admin = 3, name = "example7", private=False, picture=None)
 
     db.session.add(server1)
 
