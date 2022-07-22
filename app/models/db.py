@@ -31,6 +31,15 @@ class Server(db.Model):
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
 
+    def to_dict(self):
+        return {
+            "id":self.id,
+            "master_admin":self.master_admin,
+            "name":self.name,
+            "private":self.private,
+            "picture":self.picture
+        }
+
 
 class Channel(db.Model):
     __tablename__ = 'channels'
