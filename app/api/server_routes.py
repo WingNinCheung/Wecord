@@ -38,7 +38,6 @@ def new_server():
 
     db.session.add(server)
     db.session.commit()
-    print("OK")
     return server.to_dict()
 
 

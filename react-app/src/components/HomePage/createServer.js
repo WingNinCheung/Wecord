@@ -25,8 +25,6 @@ export default function CreateForm() {
     if (newServer) {
       history.push("/home");
     }
-
-    setName("");
   };
 
   const handleCancel = (e) => {

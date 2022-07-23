@@ -19,7 +19,6 @@ function HomePage() {
     (server) =>
       server.private === true && server.master_admin === sessionUser.id
   );
-  console.log(privateServers);
 
   useEffect(() => {
     dispatch(getAllServers());
