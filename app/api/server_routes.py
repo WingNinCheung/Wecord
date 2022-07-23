@@ -38,6 +38,12 @@ def new_server():
 
     db.session.add(server)
     db.session.commit()
+
+    server_user = Server_User(
+        serverId=server.id, userId=server.master_admin, adminStatus=True, muted=False
+    )
+    db.session.add(server_user)
+    db.session.commit()
     return server.to_dict()
 
 
