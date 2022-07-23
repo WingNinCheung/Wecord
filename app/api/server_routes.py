@@ -21,23 +21,25 @@ def all_servers():
 
 
 # POST /api/servers - create a new public server
-@server_routes.route("/", methods=["POST"])
-# @login_required
+@server_routes.route("/add", methods=["POST"])
+@login_required
 def new_server():
-    print("hererererere")
     name = request.json["name"]
-    print("hererererere")
+    private = request.json["private"]
+    picture = request.json["picture"]
+    master_admin = request.json["master_admin"]
 
-    # server = Server(
-    #     # NOTE: check what current_user looks like so we know what the id is
-    #     master_admin=current_user.id,
-    #     name=data["name"],
-    #     private=False,
-    #     picture=data["picture"],
-    # )
-    # db.session.add(server)
-    # db.session.commit()
-    # return server.to_dict()
+    server = Server(
+        name=name,
+        private=private,
+        picture=picture,
+        master_admin=master_admin,
+    )
+
+    db.session.add(server)
+    db.session.commit()
+    print("OK")
+    return server.to_dict()
 
 
 # # POST /api/servers - create a new private server

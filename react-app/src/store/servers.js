@@ -30,7 +30,7 @@ export const getAllServers = () => async (dispatch) => {
 
 export const createServer = (server) => async (dispatch) => {
   console.log(server);
-  const res = await fetch("/api/servers", {
+  const res = await fetch("/api/servers/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(server),
@@ -47,7 +47,7 @@ export const createServer = (server) => async (dispatch) => {
 
 // ------------------- REDUCER ------------------
 const servers = (state = {}, action) => {
-  const allServers = {};
+  let allServers = {};
   switch (action.type) {
     case GET_ALL_SERVERS:
       action.servers.servers.forEach((server) => {
