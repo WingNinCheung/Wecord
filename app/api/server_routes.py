@@ -50,6 +50,7 @@ def new_server():
 def edit_server(id):
     server = Server.query.get(id)
     data = request.json
+    print('data')
     # server.master_admin = current_user.id
     server.name = data['name']
     # server.private skip for now

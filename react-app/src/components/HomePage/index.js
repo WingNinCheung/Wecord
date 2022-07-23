@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { NavLink, useHistory} from "react-router-dom";
+import { useEffect, useState} from "react";
 import { getAllServers, updateServer } from "../../store/servers";
 import "./HomePage.css";
 
@@ -14,6 +14,7 @@ function HomePage() {
     const publicServers = allServersArray.filter(
         (server) => server.private === false
     );
+    console.log(publicServers)
 
     const privateServers = allServersArray.filter(
         (server) =>
@@ -29,25 +30,37 @@ function HomePage() {
     const [validationErrors, setValidationErrors] = useState([]);
     const [mainServer, setMainServer] = useState(false)
     const [selectedServerId, setSelectedServerId] = useState(1)
+    const [adminId, setAdminId] = useState(1)
     const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const payload = {
-            name
+
+
+        if(adminId === sessionUser.id){
+            const payload = {
+                name
+            }
+            console.log(name)
+            await dispatch(updateServer(payload, selectedServerId));
+            setName("")
+            setMainServer(false)
+            history.push("/home")
+
+        }else{
+            setValidationErrors(['only master admin can edit public servers'])
+            setName("")
+            history.push("/home")
         }
-        console.log(name)
-        await dispatch(updateServer(payload, selectedServerId));
-        setName("")
-        setMainServer(false)
-        history.push("/home")
 
     };
+
 
     const handleCancel = (e) => {
         e.preventDefault();
         history.push("/home");
     };
+
     useEffect(() => {
         const errors = [];
 
@@ -73,6 +86,7 @@ function HomePage() {
                                 <button onClick={() => {
                                     setMainServer(true)
                                     setSelectedServerId(server.id)
+                                    setAdminId(server.master_admin)
 
                                 }}>{server.name}</button>
                             </li>
@@ -86,7 +100,11 @@ function HomePage() {
                     {privateServers &&
                         privateServers.map((server) => (
                             <li key={server.id}>
-                                <NavLink to="/">{server.name}</NavLink>
+                                <button onClick={() => {
+                                    setMainServer(true)
+                                    setSelectedServerId(server.id)
+
+                                }}>{server.name}</button>
                             </li>
                         ))}
                 </ul>
@@ -95,19 +113,21 @@ function HomePage() {
             <div>
                 {mainServer ? (
                     <div>
+                        <h3>Update Yout Server Here!</h3>
                         <form onSubmit={handleSubmit}>
                             <ul>
                                 {validationErrors.map((error) => (
-                                    <li key={error}>error</li>
+                                    <li key={error}>only master admin can edit</li>
                                 ))}
                             </ul>
                             <label>Name</label>
                             <input
                                 placeholder="Update Server Name"
+                                value={name}
                                 onChange={(e) => setName(e.target.value)}
                             ></input>
                             <button>Edit</button>
-                            <button onClick={handleCancel}>Cancel</button>
+                            <button onClick={handleCancel} disabled={!!validationErrors.length}>Cancel</button>
                         </form>
                     </div>
                 ) :
