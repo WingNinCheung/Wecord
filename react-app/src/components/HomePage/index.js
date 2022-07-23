@@ -39,6 +39,7 @@ function HomePage() {
         console.log(name)
         await dispatch(updateServer(payload, selectedServerId));
         setName("")
+        setMainServer(false)
         history.push("/home")
 
     };
