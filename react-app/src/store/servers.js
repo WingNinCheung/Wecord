@@ -45,6 +45,29 @@ export const createServer = (server) => async (dispatch) => {
   }
 };
 
+// UPDATE A SERVER
+const UPDATE_SERVER = 'servers/UPDATE_SERVER'
+
+const editServer = (serverName) => {
+  return {
+    type: UPDATE_SERVER,
+    payload:serverName
+
+  }
+}
+
+export const updateServer = (name, id) => async(dispatch) => {
+  console.log("thunk:", name, id)
+  const res = await fetch(`/api/servers/${id}/edit`, {
+    method: "PUT",
+    headers:{"Content-Type": "application/json"},
+    body: JSON.stringify(name)
+  })
+
+  const data = await res.json()
+  dispatch(editServer(data))
+}
+
 // ------------------- REDUCER ------------------
 const servers = (state = {}, action) => {
   let allServers = {};
@@ -67,6 +90,9 @@ const servers = (state = {}, action) => {
         },
       };
       return allServers;
+    case UPDATE_SERVER:
+      const newState = {...state, [action.payload.id]: action.payload}
+      return newState
     default:
       return state;
   }

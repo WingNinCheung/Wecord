@@ -44,18 +44,18 @@ def new_server():
 # # POST /api/servers - create a new private server
 # # TODO: copy/paste public version once that's debugged
 
-# # PUT /api/servers/:serverId - update server info
-# @server_routes.route('/<int:id>', methods= ['PUT'])
-# @login_required
-# def edit_server(id):
-#     server = db.Server.query.get(id)
-#     data = request.json
-#     server.master_admin = current_user.id
-#     server.name = data['name']
-#     # server.private skip for now
-#     server.picture = data['picture']
-#     db.session.commit()
-#     return server.to_dict()
+# PUT /api/servers/:serverId - update server info
+@server_routes.route('/<int:id>/edit', methods= ['PUT'])
+@login_required
+def edit_server(id):
+    server = Server.query.get(id)
+    data = request.json
+    # server.master_admin = current_user.id
+    server.name = data['name']
+    # server.private skip for now
+    # server.picture = data['picture']
+    db.session.commit()
+    return server.to_dict()
 
 # # DELETE /api/servers/:serverId - delete a server
 # @server_routes.route('/<int:id>', methods=['DELETE'])
