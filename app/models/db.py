@@ -57,9 +57,10 @@ class Channel(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "serverId": self.serverId
+            "serverId": self.serverId,
+            "messages": [message.to_dict() for message in self.messages]
         }
-        
+
 
 class Message(db.Model):
     __tablename__ = 'messages'
@@ -72,3 +73,11 @@ class Message(db.Model):
     # relationships
     user = relationship("User", back_populates="messages")
     channel = relationship("Channel", back_populates="messages")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "channelId": self.channelId,
+            "message": self.message
+        }

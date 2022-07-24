@@ -3,19 +3,19 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer } from "../../store/servers";
 import { getServerChannelsThunk } from "../../store/channel";
+import { getChannelMessagesThunk } from "../../store/messages";
 import "./HomePage.css";
 
 function HomePage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+
+    // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
     const allServers = useSelector((state) => state.servers);
-
     const allServersArray = Object.values(allServers);
-
     const publicServers = allServersArray.filter(
         (server) => server.private === false
     );
-    // console.log(publicServers)
 
     const privateServers = allServersArray.filter(
         (server) =>
@@ -28,15 +28,17 @@ function HomePage() {
 
 
 
-    // Edit server form - may use modal to refactor it
+    // EDIT SERVER - may use modal to refactor it  ------working
     const [name, setName] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
     const [mainServer, setMainServer] = useState(false)
     const [selectedServerId, setSelectedServerId] = useState(1)
     const [adminId, setAdminId] = useState(1)
     const [goToChannel, setGoToChannels] = useState(false)
-    console.log("------gotoChannel:", goToChannel)
     const [openChannels, setOpenChannels] = useState(false)
+    const [selectedChannelId, setSelectedChannelId] = useState(1)
+    const [showChannelMessages, setShowChannelMessages] = useState(false)
+    const [goToChannelMessages, setGoToChannelsMessages] = useState(false)
     const history = useHistory();
 
     const handleSubmit = async (e) => {
@@ -85,7 +87,7 @@ function HomePage() {
 
     // -------------------------------------------------
 
-    // Read all channels of a server
+    // Read all channels of a server  ------ working
     const loadChannel = async () => {
         if (goToChannel) {
             const result = await dispatch(getServerChannelsThunk(selectedServerId))
@@ -99,12 +101,37 @@ function HomePage() {
         loadChannel();
     }, [dispatch, goToChannel])
 
-    // const [goToChannel, setGoToChannels] = useState(false)
-    // const [openChannels, setOpenChannels] = useState(false)
     const allChannels = useSelector((state) => state.channel)
-    console.log("allChannels:", allChannels)
+
     const serverChannels = Object.values(allChannels)
 
+    //----------------------------------------------------
+
+    // READ ALL MESSAGES OF A SINGLE CHANNEL
+    const channelMessages = useSelector((state) => state.messages)
+    console.log("channelMessages:",channelMessages)
+    // const channelMessagesArr = Object.values(channelMessages)
+
+    // const handleChannelClick = async (e) => {
+
+    //     await dispatch(getChannelMessagesThunk(selectedServerId, channelId))
+    // }
+
+    useEffect(() => {
+        dispatch(getChannelMessagesThunk(selectedChannelId))
+    }, [dispatch, showChannelMessages, selectedChannelId])
+
+    // const LoadChannelMessages = async(e) => {
+    //     if(goToChannelMessages){
+
+    //     }
+    // }
+
+
+
+
+
+    // ------------------------------------------------
 
     return (
         <div className="outContainer">
@@ -187,8 +214,16 @@ function HomePage() {
                     <ul>
                         {serverChannels &&
                             serverChannels.map((channel) => (
+                                // <li key={channel.id}>
+                                //     <button onClick={handleChannelClick}>{channel.title}</button>
+                                // </li>
                                 <li key={channel.id}>
-                                    <button>{channel.title}</button>
+                                    <button onClick={() => {
+                                        setSelectedChannelId(channel.id)
+                                        setShowChannelMessages(true)
+                                        setGoToChannelsMessages(true)
+
+                                    }}>{channel.title}</button>
                                 </li>
                             ))}
                     </ul>
@@ -196,8 +231,9 @@ function HomePage() {
             ) :
                 <div> </div>}
 
-
+            <div>-----------------------------</div>
             <div className="messages"></div>
+
             <div className="userLists"></div>
         </div>
     );

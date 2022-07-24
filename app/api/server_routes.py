@@ -80,12 +80,12 @@ def edit_server(id):
 def get_server_channels(id):
     server = Server.query.get(id)
     serverchannels = server.to_dict()
-    print("server:-------------------------")
-    print(server)
-    print("serverchannels:---------------------")
-    print(serverchannels)
-    print("result:")
-    print(serverchannels["channels"])
+    # print("server:-------------------------")
+    # print(server)
+    # print("serverchannels:---------------------")
+    # print(serverchannels)
+    # print("result:")
+    # print(serverchannels["channels"])
     return {"channels": serverchannels["channels"]}
 
 # create a new channel in a server
@@ -128,10 +128,21 @@ def delete_channel(channelId):
 # ------------------------- Routes for messages -------------------------------------
 
 # read all messages of a single channel
-@server_routes.route("/<int:id>/channels/<int:channelId>")
+# @server_routes.route("/<int:serverId>/<int:channelId>")
+# @login_required
+# def get_channel_messages(serverId, channelId):
+#     channel = Channel.query.get(channelId)
+#     target_channel = channel.to_dict()
+#     print("backend target channel:")
+#     print(target_channel["messages"])
+#     return {target_channel["messages"]}
+
+@server_routes.route("/channels/<int:id>")
 @login_required
 def get_channel_messages(id):
+    print("----------------")
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
+    print("backend target channel:")
     # print(target_channel["messages"])
-    return {target_channel["messages"]}
+    # return {target_channel["messages"]}
