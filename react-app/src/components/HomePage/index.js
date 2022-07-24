@@ -38,6 +38,7 @@ function HomePage() {
 
   const history = useHistory();
 
+  // Right click menu
   const Menu = ({ x, y }) => {
     return (
       <div
@@ -68,24 +69,19 @@ function HomePage() {
       </div>
     );
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (adminId === sessionUser.id) {
-      const payload = {
-        name,
-      };
-      await dispatch(updateServer(payload, selectedServerId));
-      setName("");
-      setMainServer(false);
-      setShow(false);
-      setEdit(false);
-      history.push("/home");
-    } else {
-      setValidationErrors(["only master admin can edit public servers"]);
-      setName("");
-      history.push("/home");
-    }
+    const payload = {
+      name,
+    };
+    await dispatch(updateServer(payload, selectedServerId));
+    setName("");
+    setMainServer(false);
+    setShow(false);
+    setEdit(false);
+    history.push("/home");
   };
 
   const handleCancel = (e) => {
@@ -135,6 +131,7 @@ function HomePage() {
                   setSelectedServerId(server.id);
                   setAdminId(server.master_admin);
                   setLocation({ x: e.pageX, y: e.pageY });
+                  setName(server.name);
                 }}
               >
                 <li key={server.id}>
@@ -157,6 +154,7 @@ function HomePage() {
                   onClick={() => {
                     setMainServer(true);
                     setSelectedServerId(server.id);
+                    setName(server.name);
                   }}
                 >
                   {server.name}
@@ -173,7 +171,7 @@ function HomePage() {
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
-                  <li key={error}>only master admin can edit</li>
+                  <li key={error}>{error}</li>
                 ))}
               </ul>
               <label>Name</label>
@@ -182,12 +180,7 @@ function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-              <button
-                // onClick={() => setEdit(false)}
-                disabled={!!validationErrors.length}
-              >
-                Edit
-              </button>
+              <button disabled={!!validationErrors.length}>Edit</button>
               <button onClick={handleCancel}>Cancel</button>
             </form>
           </div>
