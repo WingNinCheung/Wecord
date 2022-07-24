@@ -132,6 +132,7 @@ function HomePage() {
                   setAdminId(server.master_admin);
                   setLocation({ x: e.pageX, y: e.pageY });
                   setName(server.name);
+                  setEdit(false);
                 }}
               >
                 <li key={server.id}>
