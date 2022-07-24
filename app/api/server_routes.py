@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from ..models.db import Server_User, db, Server
+from ..models.db import Server_User, db, Server, Channel
 
 server_routes = Blueprint("server_routes", __name__)
 
@@ -69,3 +69,53 @@ def edit_server(id):
 #         return server.to_dict()
 #     else:
 #         return jsonify({"Only the server admin may delete this server"})
+
+
+
+
+# ------------------------- Routes for channels -------------------------------------
+@server_routes.route("/<int:id>/channels")
+@login_required
+def get_server_channels(id):
+    servers = Server.query.get(id)
+    serverchannels = servers.to_dict()
+    print(serverchannels["channels"])
+    return {"channels": serverchannels["channels"]}
+
+
+@server_routes.route("/channels/create", methods=["post"])
+@login_required
+def create_channels():
+
+    newChannel = Channel(
+        title=request.json["title"],
+        serverId=request.json["serverId"]
+    )
+
+    db.session.add(newChannel)
+    db.session.commit()
+    return newChannel.to_dict()
+
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["post"])
+@login_required
+def channels_edit(channelId):
+    title = request.json["title"]
+    channel = Channel.query.get(channelId)
+    channel.title = title
+    db.session.commit()
+    return channel.to_dict()
+
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=['delete'])
+@login_required
+def delete_channel(channelId):
+    target_channel = Channel.query.filter_by(id=channelId)
+    target_channel.delete()
+    db.session.commit()
+    return jsonify({"Already deleted"})
+    # return jsonify(channelId)
+
+
+
+# ------------------------- Routes for messages -------------------------------------
+# read all messages of a single channel
+

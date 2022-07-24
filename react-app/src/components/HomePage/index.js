@@ -61,6 +61,13 @@ function HomePage() {
         history.push("/home");
     };
 
+    // const handleUserClick = (e) => {
+    //     e.preventDefault();
+    //     setAdminId(server.master_admin)
+    //     console.log(adminId)
+
+    // }
+
     useEffect(() => {
         const errors = [];
 
@@ -92,6 +99,14 @@ function HomePage() {
                             </li>
                         ))}
                 </ul>
+                {/* <ul>
+                    {publicServers &&
+                        publicServers.map((server) => (
+                            <li key={server.id}>
+                                <button onClick={handleUserClick}>{server.name}</button>
+                            </li>
+                        ))}
+                </ul> */}
             </div>
             <div>----------------</div>
             <div className="privateServers">
