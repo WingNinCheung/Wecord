@@ -127,10 +127,8 @@ function HomePage() {
 
     return (
         <div>
+            <NavLink to="/create-server">Add a Server</NavLink>
             <div className="outContainer">
-                <NavLink to="/create-server">Add a Server</NavLink>
-
-                {/* <NavLink to="/update-server">Edit a Server</NavLink> */}
                 <div className="publicServers">
                     <h3>Public</h3>
                     <ul className="publicServersDisplay">
@@ -179,100 +177,82 @@ function HomePage() {
                     </ul>
                 </div>
 
-                {/* <div className="updateServerForm">
-                    {mainServer ? (
+                <div className="serverChannels">
+                    <h3>Channels</h3>
+                    {openChannels ? (
                         <div>
-                            <h3>Update Yout Server Here!</h3>
-                            <form onSubmit={handleSubmit}>
-                                <ul>
-                                    {validationErrors.map((error) => (
-                                        <li key={error}>only master admin can edit</li>
+                            <ul className="channelsDisplay">
+                                {serverChannels &&
+                                    serverChannels.map((channel) => (
+                                        // <li key={channel.id}>
+                                        //     <button onClick={handleChannelClick}>{channel.title}</button>
+                                        // </li>
+                                        <li key={channel.id}>
+                                            <button className="singleServerDisplay" onClick={() => {
+                                                setSelectedChannelId(channel.id)
+                                                setShowChannelMessages(true)
+                                                setGoToChannelsMessages(true)
+
+                                            }}>{channel.title}</button>
+                                        </li>
                                     ))}
-                                </ul>
-                                <label>Name</label>
-                                <input
-                                    placeholder="Update Server Name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                ></input>
-                                <button disabled={!!validationErrors.length}>Edit</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </form>
+                            </ul>
                         </div>
                     ) :
                         <div> </div>}
-                </div> */}
-
-                <div className="serverChannels"></div>
-                <h3>Channels</h3>
-                {openChannels ? (
-                    <div>
-                        <ul className="channelsDisplay">
-                            {serverChannels &&
-                                serverChannels.map((channel) => (
-                                    // <li key={channel.id}>
-                                    //     <button onClick={handleChannelClick}>{channel.title}</button>
-                                    // </li>
-                                    <li key={channel.id}>
-                                        <button className="singleServerDisplay" onClick={() => {
-                                            setSelectedChannelId(channel.id)
-                                            setShowChannelMessages(true)
-                                            setGoToChannelsMessages(true)
-
-                                        }}>{channel.title}</button>
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                ) :
-                    <div> </div>}
 
 
-                <div className="messages"></div>
-                <h3>messages</h3>
-                {showChannelMessages ? (
-                    <div>
-                        <ul className="messagesDisplay">
-                            {channelMessagesArr &&
-                                channelMessagesArr.map((message) => (
-                                    <li key={message.id}>
-                                        <button className="singleMessageDisplay"
+                </div>
 
-                                        >{message.message}</button>
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                ) :
-                    <div> </div>}
+                <div className="messagesContainer">
+                    <h3>messages</h3>
+                    {showChannelMessages ? (
+                        <div>
+                            <ul className="messagesDisplay">
+                                {channelMessagesArr &&
+                                    channelMessagesArr.map((message) => (
+                                        <li key={message.id}>
+                                            <button className="singleMessageDisplay"
+
+                                            >{message.message}</button>
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
+                    ) :
+                        <div> </div>}
+
+
+                </div>
+
 
 
                 <div className="userLists"></div>
             </div>
 
             <div className="updateServerForm">
-                    {mainServer ? (
-                        <div>
-                            <h3>Update Yout Server Here!</h3>
-                            <form onSubmit={handleSubmit}>
-                                <ul>
-                                    {validationErrors.map((error) => (
-                                        <li key={error}>only master admin can edit</li>
-                                    ))}
-                                </ul>
-                                <label>Name</label>
-                                <input
-                                    placeholder="Update Server Name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                ></input>
-                                <button disabled={!!validationErrors.length}>Edit</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </form>
-                        </div>
-                    ) :
-                        <div> </div>}
-                </div>
+                {mainServer ? (
+                    <div>
+                        <h3>Update Yout Server Here!</h3>
+                        <form onSubmit={handleSubmit}>
+                            <ul>
+                                {validationErrors.map((error) => (
+                                    <li key={error}>only master admin can edit</li>
+                                ))}
+                            </ul>
+                            <label>Name</label>
+                            <input
+                                placeholder="Update Server Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            ></input>
+                            <button disabled={!!validationErrors.length}>Edit</button>
+                            <button onClick={handleCancel}>Cancel</button>
+                        </form>
+                    </div>
+                ) :
+                    <div> </div>}
+            </div>
 
         </div>
 
