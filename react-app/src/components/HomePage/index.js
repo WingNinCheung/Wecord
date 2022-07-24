@@ -194,8 +194,8 @@ function HomePage() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             ></input>
-                            <button>Edit</button>
-                            <button onClick={handleCancel} disabled={!!validationErrors.length}>Cancel</button>
+                            <button disabled={!!validationErrors.length}>Edit</button>
+                            <button onClick={handleCancel}>Cancel</button>
                         </form>
                     </div>
                 ) :
@@ -243,17 +243,6 @@ function HomePage() {
                 </div>
             ) :
                 <div> </div>}
-
-            {/* <ul>
-                    {channelMessagesArr &&
-                        channelMessagesArr.map((message) => (
-                            <li key={message.id}>
-                                <button
-
-                                >{message.message}</button>
-                            </li>
-                        ))}
-                </ul> */}
 
             <div>-----------all users-------------------</div>
             <div className="userLists"></div>
