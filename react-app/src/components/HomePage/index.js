@@ -5,7 +5,7 @@ import { getAllServers, updateServer } from "../../store/servers";
 
 import "./HomePage.css";
 
-const Menu = () => {
+const Menu = ({ x, y }) => {
   return (
     <div
       style={{
@@ -14,9 +14,12 @@ const Menu = () => {
         border: "1px solid black",
         boxSizing: "border-box",
         width: "200px",
+        position: "absolute",
+        top: `${x}px`,
+        left: `${y}px`,
       }}
     >
-      Menu!
+      Menu! {x}
     </div>
   );
 };
@@ -48,6 +51,7 @@ function HomePage() {
   const [selectedServerId, setSelectedServerId] = useState(1);
   const [adminId, setAdminId] = useState(1);
   const [show, setShow] = useState(false);
+  const [location, setLocation] = useState({ x: 0, y: 0 });
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -109,7 +113,12 @@ function HomePage() {
         <ul>
           {publicServers &&
             publicServers.map((server) => (
-              <div onContextMenu={handleContextMenu}>
+              <div
+                onContextMenu={(e) => {
+                  handleContextMenu(e);
+                  setLocation({ x: e.pageX, y: e.pageY });
+                }}
+              >
                 <li key={server.id}>
                   <button
                     onClick={() => {
@@ -123,7 +132,7 @@ function HomePage() {
                 </li>
               </div>
             ))}
-          {show && <Menu />}
+          {show && <Menu x={location.y} y={location.x} />}
         </ul>
       </div>
 
