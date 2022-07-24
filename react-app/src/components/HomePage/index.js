@@ -5,24 +5,29 @@ import { getAllServers, updateServer } from "../../store/servers";
 
 import "./HomePage.css";
 
-const Menu = ({ x, y }) => {
-  return (
-    <div
-      style={{
-        borderRadius: "4px",
-        padding: "10px",
-        border: "1px solid black",
-        boxSizing: "border-box",
-        width: "200px",
-        position: "absolute",
-        top: `${x}px`,
-        left: `${y}px`,
-      }}
-    >
-      Menu! {x}
-    </div>
-  );
-};
+// const Menu = ({ x, y }) => {
+//   return (
+//     <div
+//       style={{
+//         borderRadius: "4px",
+//         padding: "10px",
+//         border: "1px solid black",
+//         boxSizing: "border-box",
+//         width: "200px",
+//         position: "absolute",
+//         top: `${x}px`,
+//         left: `${y}px`,
+//       }}
+//     >
+//       <div>
+//         <button>Edit</button>
+//       </div>
+//       <div>
+//         <button>Delete</button>
+//       </div>
+//     </div>
+//   );
+// };
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -52,8 +57,44 @@ function HomePage() {
   const [adminId, setAdminId] = useState(1);
   const [show, setShow] = useState(false);
   const [location, setLocation] = useState({ x: 0, y: 0 });
+  const [edit, setEdit] = useState(false);
+
   const history = useHistory();
 
+  const Menu = ({ x, y, serverId, master_admin }) => {
+    return (
+      <div
+        style={{
+          borderRadius: "4px",
+          padding: "10px",
+          border: "1px solid black",
+          boxSizing: "border-box",
+          width: "200px",
+          position: "absolute",
+          top: `${x}px`,
+          left: `${y}px`,
+        }}
+      >
+        <div>
+          <button
+            onClick={() => {
+              //   console.log(edit);
+              setEdit(true);
+              //   setMainServer(true);
+              setSelectedServerId(serverId);
+              setAdminId(master_admin);
+              console.log(serverId, master_admin);
+            }}
+          >
+            Edit
+          </button>
+        </div>
+        <div>
+          <button>Delete</button>
+        </div>
+      </div>
+    );
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,6 +116,7 @@ function HomePage() {
 
   const handleCancel = (e) => {
     e.preventDefault();
+    // setEdit(false);
     history.push("/home");
   };
 
@@ -116,23 +158,33 @@ function HomePage() {
               <div
                 onContextMenu={(e) => {
                   handleContextMenu(e);
+                  console.log(e.target.value);
+                  setSelectedServerId(e.target.value);
                   setLocation({ x: e.pageX, y: e.pageY });
                 }}
               >
                 <li key={server.id}>
                   <button
                     onClick={() => {
-                      setMainServer(true);
-                      setSelectedServerId(server.id);
-                      setAdminId(server.master_admin);
+                      //   setMainServer(true);
+                      //   setSelectedServerId(server.id);
+                      //   setAdminId(server.master_admin);
                     }}
+                    value={server.id}
                   >
                     {server.name}
                   </button>
                 </li>
+                {show && (
+                  <Menu
+                    x={location.y}
+                    y={location.x}
+                    serverId={selectedServerId}
+                    master_admin={server.master_admin}
+                  />
+                )}
               </div>
             ))}
-          {show && <Menu x={location.y} y={location.x} />}
         </ul>
       </div>
 
@@ -157,7 +209,7 @@ function HomePage() {
       </div>
       <div>------------------------</div>
       <div>
-        {mainServer ? (
+        {edit && (
           <div>
             <h3>Update Yout Server Here!</h3>
             <form onSubmit={handleSubmit}>
@@ -168,7 +220,7 @@ function HomePage() {
               </ul>
               <label>Name</label>
               <input
-                placeholder="Update Server Name"
+                placeholder={name}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
@@ -181,8 +233,6 @@ function HomePage() {
               </button>
             </form>
           </div>
-        ) : (
-          <div> </div>
         )}
       </div>
       <div className="channels"></div>
