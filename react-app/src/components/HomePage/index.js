@@ -102,36 +102,25 @@ function HomePage() {
     }, [dispatch, goToChannel])
 
     const allChannels = useSelector((state) => state.channel)
-
     const serverChannels = Object.values(allChannels)
+
 
     //----------------------------------------------------
 
     // READ ALL MESSAGES OF A SINGLE CHANNEL
     const channelMessages = useSelector((state) => state.messages)
-    console.log("channelMessages:",channelMessages)
-    // const channelMessagesArr = Object.values(channelMessages)
+    const channelMessagesArr = Object.values(channelMessages)
 
-
-
-    // useEffect(() => {
-    //     dispatch(getChannelMessagesThunk(selectedChannelId))
-    // }, [dispatch, showChannelMessages, selectedChannelId])
-
-    const LoadChannelMessages = async() => {
-        if(goToChannelMessages){
-             const result = await dispatch(getChannelMessagesThunk(selectedChannelId))
-             console.log("frontend:", result)
-             setGoToChannelsMessages(false)
+    const LoadChannelMessages = async () => {
+        if (goToChannelMessages) {
+            const result = await dispatch(getChannelMessagesThunk(selectedChannelId))
+            setGoToChannelsMessages(false)
         }
     }
 
     useEffect(() => {
         LoadChannelMessages()
-    },[dispatch, goToChannelMessages])
-
-
-
+    }, [dispatch, goToChannelMessages])
 
 
     // ------------------------------------------------
@@ -234,9 +223,21 @@ function HomePage() {
             ) :
                 <div> </div>}
 
-            <div>-----------------------------</div>
+            <div>-----------all channel messages------------------</div>
             <div className="messages"></div>
 
+                <ul>
+                    {channelMessagesArr &&
+                        channelMessagesArr.map((message) => (
+                            <li key={message.id}>
+                                <button
+
+                                >{message.message}</button>
+                            </li>
+                        ))}
+                </ul>
+
+            <div>-----------all users-------------------</div>
             <div className="userLists"></div>
         </div>
     );

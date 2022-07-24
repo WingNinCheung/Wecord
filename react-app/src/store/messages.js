@@ -2,7 +2,7 @@
 
 const GET_CHANNEL_MESSAGES = "messages/GET_CHANNEL_MESSAGES"
 
-const getChannelMessages = () => {
+const getChannelMessages = (messages) => {
     return {
         type: GET_CHANNEL_MESSAGES,
         messages
@@ -28,6 +28,7 @@ const messages = (state={}, action) => {
     let messages = {}
     switch(action.type){
         case GET_CHANNEL_MESSAGES:
+            console.log("in the reducer", action.messages.messages)
             action.messages.messages.forEach((message) => {
                 messages[message.id] = message
             })
