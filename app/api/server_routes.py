@@ -74,15 +74,16 @@ def edit_server(id):
 
 
 # ------------------------- Routes for channels -------------------------------------
+# read all channels of a single server
 @server_routes.route("/<int:id>/channels")
 @login_required
 def get_server_channels(id):
-    servers = Server.query.get(id)
-    serverchannels = servers.to_dict()
+    server = Server.query.get(id)
+    serverchannels = server.to_dict()
     print(serverchannels["channels"])
     return {"channels": serverchannels["channels"]}
 
-
+# create a new channel in a server
 @server_routes.route("/channels/create", methods=["post"])
 @login_required
 def create_channels():
@@ -96,7 +97,9 @@ def create_channels():
     db.session.commit()
     return newChannel.to_dict()
 
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["post"])
+
+# edit a channel
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["put"])
 @login_required
 def channels_edit(channelId):
     title = request.json["title"]
@@ -105,7 +108,8 @@ def channels_edit(channelId):
     db.session.commit()
     return channel.to_dict()
 
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=['delete'])
+# delete a channel
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["delete"])
 @login_required
 def delete_channel(channelId):
     target_channel = Channel.query.filter_by(id=channelId)
@@ -117,5 +121,12 @@ def delete_channel(channelId):
 
 
 # ------------------------- Routes for messages -------------------------------------
-# read all messages of a single channel
 
+# read all messages of a single channel
+@server_routes.route("/<int:id>/channels/<int:channelId>")
+@login_required
+def get_channel_messages(id):
+    channel = Channel.query.get(id)
+    target_channel = channel.to_dict()
+    print(target_channel["messages"])
+    return {target_channel["messages"]}
