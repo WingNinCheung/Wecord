@@ -142,6 +142,8 @@ function HomePage() {
                                     setAdminId(server.master_admin)
                                     setOpenChannels(true)
                                     setGoToChannels(true)
+                                    setGoToChannelsMessages(false)
+                                    setShowChannelMessages(false)
 
                                 }}>{server.name}</button>
                             </li>
@@ -168,6 +170,7 @@ function HomePage() {
                                     setSelectedServerId(server.id)
                                     setOpenChannels(true)
                                     setGoToChannels(true)
+                                    setShowChannelMessages(false)
 
                                 }}>{server.name}</button>
                             </li>
@@ -225,8 +228,23 @@ function HomePage() {
 
             <div>-----------all channel messages------------------</div>
             <div className="messages"></div>
+            {showChannelMessages ? (
+                <div>
+                    <ul>
+                        {channelMessagesArr &&
+                            channelMessagesArr.map((message) => (
+                                <li key={message.id}>
+                                    <button
 
-                <ul>
+                                    >{message.message}</button>
+                                </li>
+                            ))}
+                    </ul>
+                </div>
+            ) :
+                <div> </div>}
+
+            {/* <ul>
                     {channelMessagesArr &&
                         channelMessagesArr.map((message) => (
                             <li key={message.id}>
@@ -235,7 +253,7 @@ function HomePage() {
                                 >{message.message}</button>
                             </li>
                         ))}
-                </ul>
+                </ul> */}
 
             <div>-----------all users-------------------</div>
             <div className="userLists"></div>
