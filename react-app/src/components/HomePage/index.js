@@ -68,7 +68,7 @@ function HomePage() {
             }}
             disabled={loggedInUserId !== adminId}
           >
-            Edit
+            Edit Name
           </button>
         </div>
         <div>
@@ -179,13 +179,8 @@ function HomePage() {
                 <div
                   onContextMenu={(e) => {
                     handleContextMenu(e);
-                    setMainServer(true);
                     setSelectedServerId(server.id);
                     setAdminId(server.master_admin);
-                    setOpenChannels(true);
-                    setGoToChannels(true);
-                    setGoToChannelsMessages(false);
-                    setShowChannelMessages(false);
                     setEdit(false);
                     setName(server.name);
                     setLocation({ x: e.pageX, y: e.pageY });
@@ -317,7 +312,7 @@ function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-              <button disabled={!!validationErrors.length}>Edit</button>
+              <button disabled={validationErrors.length > 0}>Edit</button>
               <button onClick={handleCancel}>Cancel</button>
             </form>
           </div>
