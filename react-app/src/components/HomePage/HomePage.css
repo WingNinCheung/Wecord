@@ -96,7 +96,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #2F3136;
-    margin-left: 5.5rem;
+    margin-left: 8.5rem;
 
 }
 
@@ -118,7 +118,7 @@
     display: flex;
     flex-direction: column;
     height: 2rem;
-    width: 5rem;
+    width: 6rem;
     margin: 1rem;
     background-color:  #202225;
     justify-content: space-evenly;
@@ -126,6 +126,13 @@
     overflow: hidden;
     cursor: pointer;
 }
+
+.singleServerDisplay:hover{
+    text-decoration: underline;
+    font-size: large;
+
+}
+
 
 .singleChannelDisplay{
     color: white;
@@ -139,6 +146,12 @@
     border:none;
     overflow: hidden;
     cursor: pointer;
+
+}
+
+.singleChannelDisplay:hover{
+    text-decoration: underline;
+    font-size: large;
 
 }
 
@@ -162,4 +175,11 @@
 .channelList{
     display:flex;
     flex-direction: row;
+}
+
+.addServerLinkContainer{
+    color:white;
+    background-color: #2F3136;
+    height:3rem;
+    text-decoration: none;
 }

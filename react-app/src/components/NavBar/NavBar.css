@@ -1,0 +1,28 @@
+.navbarcontainer{
+    color:white;
+    background-color:  #2F3136;
+    margin: 0;
+}
+
+
+.navlink{
+
+    color:white;
+    text-decoration: none;
+}
+
+.navbarli{
+    color:white;
+    text-decoration: none;
+    margin-top: 1.3rem;;
+    text-decoration: none;
+}
+
+.navbarlist{
+    list-style-type:none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height:65px;
+
+}

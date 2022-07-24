@@ -127,7 +127,9 @@ function HomePage() {
 
     return (
         <div>
-            <NavLink to="/create-server">Add a Server</NavLink>
+            <div className="addServerLinkContainer">
+                <NavLink className="addServerLinkContainer" to="/create-server">Add a Server</NavLink>
+            </div>
             <div className="outContainer">
                 <div className="publicServers">
                     <h3>Public</h3>
