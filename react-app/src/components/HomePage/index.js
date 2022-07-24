@@ -187,8 +187,9 @@ function HomePage() {
                                         // <li key={channel.id}>
                                         //     <button onClick={handleChannelClick}>{channel.title}</button>
                                         // </li>
-                                        <li key={channel.id}>
-                                            <button className="singleServerDisplay" onClick={() => {
+                                        <li key={channel.id} >
+                                            <div><i class="fa-solid fa-hashtag"></i></div>
+                                            <button className="singleChannelDisplay" onClick={() => {
                                                 setSelectedChannelId(channel.id)
                                                 setShowChannelMessages(true)
                                                 setGoToChannelsMessages(true)

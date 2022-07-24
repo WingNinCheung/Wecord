@@ -80,12 +80,6 @@ def edit_server(id):
 def get_server_channels(id):
     server = Server.query.get(id)
     serverchannels = server.to_dict()
-    # print("server:-------------------------")
-    # print(server)
-    # print("serverchannels:---------------------")
-    # print(serverchannels)
-    # print("result:")
-    # print(serverchannels["channels"])
     return {"channels": serverchannels["channels"]}
 
 # create a new channel in a server
@@ -140,10 +134,7 @@ def delete_channel(channelId):
 @server_routes.route("/channels/<int:id>")
 @login_required
 def get_channel_messages(id):
-    print("banana")
-    print("----------------")
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
-    print("backend target channel:")
     print(target_channel["messages"])
     return {"messages": target_channel["messages"]}
