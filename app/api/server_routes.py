@@ -80,6 +80,7 @@ def edit_server(id):
 def get_server_channels(id):
     server = Server.query.get(id)
     serverchannels = server.to_dict()
+    print("result")
     print(serverchannels["channels"])
     return {"channels": serverchannels["channels"]}
 
@@ -128,5 +129,5 @@ def delete_channel(channelId):
 def get_channel_messages(id):
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
-    print(target_channel["messages"])
+    # print(target_channel["messages"])
     return {target_channel["messages"]}

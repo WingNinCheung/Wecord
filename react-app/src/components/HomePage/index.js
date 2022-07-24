@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory} from "react-router-dom";
-import { useEffect, useState} from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { getAllServers, updateServer } from "../../store/servers";
+import { getServerChannelsThunk } from "../../store/channel";
 import "./HomePage.css";
 
 function HomePage() {
@@ -14,7 +15,7 @@ function HomePage() {
     const publicServers = allServersArray.filter(
         (server) => server.private === false
     );
-    console.log(publicServers)
+    // console.log(publicServers)
 
     const privateServers = allServersArray.filter(
         (server) =>
@@ -25,19 +26,23 @@ function HomePage() {
         dispatch(getAllServers());
     }, [dispatch]);
 
-    // edit server form - may use modal to refactor it
+
+
+    // Edit server form - may use modal to refactor it
     const [name, setName] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
     const [mainServer, setMainServer] = useState(false)
     const [selectedServerId, setSelectedServerId] = useState(1)
     const [adminId, setAdminId] = useState(1)
+    const [goToChannel, setGoToChannels] = useState(false)
+    const [openChannels, setOpenChannels] = useState(false)
     const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
-        if(adminId === sessionUser.id){
+        if (adminId === sessionUser.id) {
             const payload = {
                 name
             }
@@ -47,7 +52,7 @@ function HomePage() {
             setMainServer(false)
             history.push("/home")
 
-        }else{
+        } else {
             setValidationErrors(['only master admin can edit public servers'])
             setName("")
             history.push("/home")
@@ -79,6 +84,17 @@ function HomePage() {
 
     // -------------------------------------------------
 
+    // Read all channels of a server
+    // const [goToChannel, setGoToChannels] = useState(false)
+    // const [openChannels, setOpenChannels] = useState(false)
+    const allChannels = useSelector((state) => state.channels)
+    console.log(allChannels)
+    // const serverChannels = Object.values(allChannels)
+    if (goToChannel) {
+        const result = dispatch(getServerChannelsThunk(selectedServerId))
+        console.log("result:", result)
+    }
+
     return (
         <div className="outContainer">
             <NavLink to="/create-server">Add a Server</NavLink>
@@ -94,6 +110,8 @@ function HomePage() {
                                     setMainServer(true)
                                     setSelectedServerId(server.id)
                                     setAdminId(server.master_admin)
+                                    setOpenChannels(true)
+                                    setGoToChannels(true)
 
                                 }}>{server.name}</button>
                             </li>
@@ -118,6 +136,8 @@ function HomePage() {
                                 <button onClick={() => {
                                     setMainServer(true)
                                     setSelectedServerId(server.id)
+                                    setOpenChannels(true)
+                                    setGoToChannels(true)
 
                                 }}>{server.name}</button>
                             </li>
@@ -148,7 +168,24 @@ function HomePage() {
                 ) :
                     <div> </div>}
             </div>
-            <div className="channels"></div>
+            <div>------------------------</div>
+            <div className="serverChannels"></div>
+            <h3>Channels</h3>
+            {openChannels ? (
+                <div>
+                    <ul>
+                        {/* {serverChannels &&
+                            serverChannels.map((channel) => (
+                                <li key={channel.id}>
+                                    <button>{channel.title}</button>
+                                </li>
+                            ))} */}
+                    </ul>
+                </div>
+            ) :
+                <div> </div>}
+
+
             <div className="messages"></div>
             <div className="userLists"></div>
         </div>

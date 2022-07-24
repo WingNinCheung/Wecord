@@ -37,7 +37,8 @@ class Server(db.Model):
             "master_admin":self.master_admin,
             "name":self.name,
             "private":self.private,
-            "picture":self.picture
+            "picture":self.picture,
+            "channels":[channel.to_dict() for channel in self.channels]
         }
 
 
@@ -51,6 +52,14 @@ class Channel(db.Model):
     # relationships
     server = relationship("Server", back_populates="channels", cascade="all, delete")
     messages = relationship("Message", back_populates="channel", cascade="all, delete")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "serverId": self.serverId
+        }
+        
 
 class Message(db.Model):
     __tablename__ = 'messages'
