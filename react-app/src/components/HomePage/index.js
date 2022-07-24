@@ -116,7 +116,7 @@ function HomePage() {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    // setEdit(false);
+    setEdit(false);
     history.push("/home");
   };
 
@@ -158,7 +158,6 @@ function HomePage() {
               <div
                 onContextMenu={(e) => {
                   handleContextMenu(e);
-                  console.log(e.target.value);
                   setSelectedServerId(e.target.value);
                   setLocation({ x: e.pageX, y: e.pageY });
                 }}
@@ -224,13 +223,8 @@ function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-              <button>Edit</button>
-              <button
-                onClick={handleCancel}
-                disabled={!!validationErrors.length}
-              >
-                Cancel
-              </button>
+              <button disabled={!!validationErrors.length}>Edit</button>
+              <button onClick={handleCancel}>Cancel</button>
             </form>
           </div>
         )}
