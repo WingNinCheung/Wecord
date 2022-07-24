@@ -80,11 +80,13 @@ function HomePage() {
     setShow(true);
   };
 
-  //
+  // left click anywhere will make the right-click menu disappear
   useEffect(() => {
     const handleClick = () => setShow(false);
     window.addEventListener("click", handleClick);
-  });
+
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
 
   useEffect(() => {
     const errors = [];
