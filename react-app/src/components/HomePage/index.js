@@ -75,10 +75,11 @@ function HomePage() {
       const payload = {
         name,
       };
-      console.log(name);
       await dispatch(updateServer(payload, selectedServerId));
       setName("");
       setMainServer(false);
+      setShow(false);
+      setEdit(false);
       history.push("/home");
     } else {
       setValidationErrors(["only master admin can edit public servers"]);
@@ -181,7 +182,12 @@ function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-              <button disabled={!!validationErrors.length}>Edit</button>
+              <button
+                // onClick={() => setEdit(false)}
+                disabled={!!validationErrors.length}
+              >
+                Edit
+              </button>
               <button onClick={handleCancel}>Cancel</button>
             </form>
           </div>
