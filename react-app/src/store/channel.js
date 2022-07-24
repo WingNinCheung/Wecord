@@ -15,7 +15,7 @@ export const getServerChannelsThunk = (serverId) => async(dispatch) => {
 
     if (res.ok) {
         const allChannels = await res.json()
-        console.log(allChannels)
+        console.log("thunk:", allChannels)
         dispatch(getServerChannels(allChannels))
         return res;
     }

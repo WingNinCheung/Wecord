@@ -35,6 +35,7 @@ function HomePage() {
     const [selectedServerId, setSelectedServerId] = useState(1)
     const [adminId, setAdminId] = useState(1)
     const [goToChannel, setGoToChannels] = useState(false)
+    console.log("------gotoChannel:", goToChannel)
     const [openChannels, setOpenChannels] = useState(false)
     const history = useHistory();
 
@@ -85,15 +86,25 @@ function HomePage() {
     // -------------------------------------------------
 
     // Read all channels of a server
+    const loadChannel = async () => {
+        if (goToChannel) {
+            const result = await dispatch(getServerChannelsThunk(selectedServerId))
+            console.log("result:", result)
+            setGoToChannels(false)
+        }
+    }
+
+
+    useEffect(() => {
+        loadChannel();
+    }, [dispatch, goToChannel])
+
     // const [goToChannel, setGoToChannels] = useState(false)
     // const [openChannels, setOpenChannels] = useState(false)
-    const allChannels = useSelector((state) => state.channels)
-    console.log(allChannels)
-    // const serverChannels = Object.values(allChannels)
-    if (goToChannel) {
-        const result = dispatch(getServerChannelsThunk(selectedServerId))
-        console.log("result:", result)
-    }
+    const allChannels = useSelector((state) => state.channel)
+    console.log("allChannels:", allChannels)
+    const serverChannels = Object.values(allChannels)
+
 
     return (
         <div className="outContainer">
@@ -174,12 +185,12 @@ function HomePage() {
             {openChannels ? (
                 <div>
                     <ul>
-                        {/* {serverChannels &&
+                        {serverChannels &&
                             serverChannels.map((channel) => (
                                 <li key={channel.id}>
                                     <button>{channel.title}</button>
                                 </li>
-                            ))} */}
+                            ))}
                     </ul>
                 </div>
             ) :
