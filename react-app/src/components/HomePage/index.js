@@ -120,7 +120,6 @@ function HomePage() {
 
       <div className="publicServers">
         <h3>Public</h3>
-        {/* <button oncontextmenu={handleContextMenu}>OK</button> */}
         <ul>
           {publicServers &&
             publicServers.map((server) => (
