@@ -58,6 +58,7 @@ function HomePage() {
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
+          backgroundColor: "gray",
         }}
       >
         <div>
@@ -113,6 +114,7 @@ function HomePage() {
 
   // }
 
+  // left click anywhere will make the right-click menu disappear
   useEffect(() => {
     const handleClick = () => setShow(false);
     window.addEventListener("click", handleClick);
@@ -179,23 +181,40 @@ function HomePage() {
           <ul className="publicServersDisplay">
             {publicServers &&
               publicServers.map((server) => (
-                <li key={server.id}>
-                  <button
-                    className="singleServerDisplay"
-                    onClick={() => {
-                      setMainServer(true);
-                      setSelectedServerId(server.id);
-                      setAdminId(server.master_admin);
-                      setOpenChannels(true);
-                      setGoToChannels(true);
-                      setGoToChannelsMessages(false);
-                      setShowChannelMessages(false);
-                    }}
-                  >
-                    {server.name}
-                  </button>
-                </li>
+                <div
+                  onContextMenu={(e) => {
+                    handleContextMenu(e);
+                    setMainServer(true);
+                    setSelectedServerId(server.id);
+                    setAdminId(server.master_admin);
+                    setOpenChannels(true);
+                    setGoToChannels(true);
+                    setGoToChannelsMessages(false);
+                    setShowChannelMessages(false);
+                    setEdit(false);
+                    setName(server.name);
+                    setLocation({ x: e.pageX, y: e.pageY });
+                  }}
+                >
+                  <li key={server.id}>
+                    <button
+                      className="singleServerDisplay"
+                      onClick={() => {
+                        setMainServer(true);
+                        setSelectedServerId(server.id);
+                        setAdminId(server.master_admin);
+                        setOpenChannels(true);
+                        setGoToChannels(true);
+                        setGoToChannelsMessages(false);
+                        setShowChannelMessages(false);
+                      }}
+                    >
+                      {server.name}
+                    </button>
+                  </li>
+                </div>
               ))}
+            {show && <Menu x={location.y} y={location.x} />}
           </ul>
           {/* <ul>
                     {publicServers &&
@@ -218,6 +237,7 @@ function HomePage() {
                     onClick={() => {
                       setMainServer(true);
                       setSelectedServerId(server.id);
+                      setName(server.name);
                       setOpenChannels(true);
                       setGoToChannels(true);
                       setShowChannelMessages(false);
@@ -287,7 +307,7 @@ function HomePage() {
       </div>
 
       <div className="updateServerForm">
-        {mainServer ? (
+        {edit && (
           <div>
             <h3>Update Yout Server Here!</h3>
             <form onSubmit={handleSubmit}>
@@ -298,7 +318,7 @@ function HomePage() {
               </ul>
               <label>Name</label>
               <input
-                placeholder="Update Server Name"
+                placeholder={name}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
@@ -306,8 +326,6 @@ function HomePage() {
               <button onClick={handleCancel}>Cancel</button>
             </form>
           </div>
-        ) : (
-          <div> </div>
         )}
       </div>
     </div>
