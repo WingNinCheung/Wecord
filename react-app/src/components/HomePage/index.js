@@ -112,20 +112,23 @@ function HomePage() {
     console.log("channelMessages:",channelMessages)
     // const channelMessagesArr = Object.values(channelMessages)
 
-    // const handleChannelClick = async (e) => {
 
-    //     await dispatch(getChannelMessagesThunk(selectedServerId, channelId))
-    // }
+
+    // useEffect(() => {
+    //     dispatch(getChannelMessagesThunk(selectedChannelId))
+    // }, [dispatch, showChannelMessages, selectedChannelId])
+
+    const LoadChannelMessages = async() => {
+        if(goToChannelMessages){
+             const result = await dispatch(getChannelMessagesThunk(selectedChannelId))
+             console.log("frontend:", result)
+             setGoToChannelsMessages(false)
+        }
+    }
 
     useEffect(() => {
-        dispatch(getChannelMessagesThunk(selectedChannelId))
-    }, [dispatch, showChannelMessages, selectedChannelId])
-
-    // const LoadChannelMessages = async(e) => {
-    //     if(goToChannelMessages){
-
-    //     }
-    // }
+        LoadChannelMessages()
+    },[dispatch, goToChannelMessages])
 
 
 

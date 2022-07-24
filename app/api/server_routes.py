@@ -140,9 +140,10 @@ def delete_channel(channelId):
 @server_routes.route("/channels/<int:id>")
 @login_required
 def get_channel_messages(id):
+    print("banana")
     print("----------------")
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
     print("backend target channel:")
-    # print(target_channel["messages"])
-    # return {target_channel["messages"]}
+    print(target_channel["messages"])
+    return {"messages": target_channel["messages"]}
