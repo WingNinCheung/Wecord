@@ -53,7 +53,7 @@ function App() {
           <CreateForm />
         </ProtectedRoute>
         <ProtectedRoute path="/update-server" exact={true}>
-          <EditServerForm />
+          {/* <EditServerForm /> */}
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

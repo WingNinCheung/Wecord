@@ -5,33 +5,10 @@ import { getAllServers, updateServer } from "../../store/servers";
 
 import "./HomePage.css";
 
-// const Menu = ({ x, y }) => {
-//   return (
-//     <div
-//       style={{
-//         borderRadius: "4px",
-//         padding: "10px",
-//         border: "1px solid black",
-//         boxSizing: "border-box",
-//         width: "200px",
-//         position: "absolute",
-//         top: `${x}px`,
-//         left: `${y}px`,
-//       }}
-//     >
-//       <div>
-//         <button>Edit</button>
-//       </div>
-//       <div>
-//         <button>Delete</button>
-//       </div>
-//     </div>
-//   );
-// };
-
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const loggedInUserId = sessionUser.id;
   const allServers = useSelector((state) => state.servers);
 
   const allServersArray = Object.values(allServers);
@@ -61,7 +38,7 @@ function HomePage() {
 
   const history = useHistory();
 
-  const Menu = ({ x, y, serverId, master_admin }) => {
+  const Menu = ({ x, y }) => {
     return (
       <div
         style={{
@@ -78,13 +55,9 @@ function HomePage() {
         <div>
           <button
             onClick={() => {
-              //   console.log(edit);
               setEdit(true);
-              //   setMainServer(true);
-              setSelectedServerId(serverId);
-              setAdminId(master_admin);
-              console.log(serverId, master_admin);
             }}
+            disabled={loggedInUserId !== adminId}
           >
             Edit
           </button>
@@ -122,7 +95,6 @@ function HomePage() {
 
   const handleContextMenu = (e) => {
     e.preventDefault();
-    console.log("OK1");
     setShow(true);
   };
 
@@ -156,34 +128,20 @@ function HomePage() {
           {publicServers &&
             publicServers.map((server) => (
               <div
+                key={server.id}
                 onContextMenu={(e) => {
                   handleContextMenu(e);
-                  setSelectedServerId(e.target.value);
+                  setSelectedServerId(server.id);
+                  setAdminId(server.master_admin);
                   setLocation({ x: e.pageX, y: e.pageY });
                 }}
               >
                 <li key={server.id}>
-                  <button
-                    onClick={() => {
-                      //   setMainServer(true);
-                      //   setSelectedServerId(server.id);
-                      //   setAdminId(server.master_admin);
-                    }}
-                    value={server.id}
-                  >
-                    {server.name}
-                  </button>
+                  <button onClick={() => {}}>{server.name}</button>
                 </li>
-                {show && (
-                  <Menu
-                    x={location.y}
-                    y={location.x}
-                    serverId={selectedServerId}
-                    master_admin={server.master_admin}
-                  />
-                )}
               </div>
             ))}
+          {show && <Menu x={location.y} y={location.x} />}
         </ul>
       </div>
 
