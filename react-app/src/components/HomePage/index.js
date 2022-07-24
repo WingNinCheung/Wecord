@@ -126,30 +126,31 @@ function HomePage() {
     // ------------------------------------------------
 
     return (
-        <div className="outContainer">
-            <NavLink to="/create-server">Add a Server</NavLink>
-            <div></div>
-            {/* <NavLink to="/update-server">Edit a Server</NavLink> */}
-            <div className="publicServers">
-                <h3>Public</h3>
-                <ul>
-                    {publicServers &&
-                        publicServers.map((server) => (
-                            <li key={server.id}>
-                                <button onClick={() => {
-                                    setMainServer(true)
-                                    setSelectedServerId(server.id)
-                                    setAdminId(server.master_admin)
-                                    setOpenChannels(true)
-                                    setGoToChannels(true)
-                                    setGoToChannelsMessages(false)
-                                    setShowChannelMessages(false)
+        <div>
+            <div className="outContainer">
+                <NavLink to="/create-server">Add a Server</NavLink>
 
-                                }}>{server.name}</button>
-                            </li>
-                        ))}
-                </ul>
-                {/* <ul>
+                {/* <NavLink to="/update-server">Edit a Server</NavLink> */}
+                <div className="publicServers">
+                    <h3>Public</h3>
+                    <ul className="publicServersDisplay">
+                        {publicServers &&
+                            publicServers.map((server) => (
+                                <li key={server.id}>
+                                    <button className="singleServerDisplay" onClick={() => {
+                                        setMainServer(true)
+                                        setSelectedServerId(server.id)
+                                        setAdminId(server.master_admin)
+                                        setOpenChannels(true)
+                                        setGoToChannels(true)
+                                        setGoToChannelsMessages(false)
+                                        setShowChannelMessages(false)
+
+                                    }}>{server.name}</button>
+                                </li>
+                            ))}
+                    </ul>
+                    {/* <ul>
                     {publicServers &&
                         publicServers.map((server) => (
                             <li key={server.id}>
@@ -157,96 +158,124 @@ function HomePage() {
                             </li>
                         ))}
                 </ul> */}
-            </div>
-            <div>----------------</div>
-            <div className="privateServers">
-                <h3>Private</h3>
-                <ul>
-                    {privateServers &&
-                        privateServers.map((server) => (
-                            <li key={server.id}>
-                                <button onClick={() => {
-                                    setMainServer(true)
-                                    setSelectedServerId(server.id)
-                                    setOpenChannels(true)
-                                    setGoToChannels(true)
-                                    setShowChannelMessages(false)
+                </div>
 
-                                }}>{server.name}</button>
-                            </li>
-                        ))}
-                </ul>
-            </div>
-            <div>------------------------</div>
-            <div>
-                {mainServer ? (
+                <div className="privateServers">
+                    <h3>Private</h3>
+                    <ul className="privateServersDisplay">
+                        {privateServers &&
+                            privateServers.map((server) => (
+                                <li key={server.id}>
+                                    <button className="singleServerDisplay" onClick={() => {
+                                        setMainServer(true)
+                                        setSelectedServerId(server.id)
+                                        setOpenChannels(true)
+                                        setGoToChannels(true)
+                                        setShowChannelMessages(false)
+
+                                    }}>{server.name}</button>
+                                </li>
+                            ))}
+                    </ul>
+                </div>
+
+                {/* <div className="updateServerForm">
+                    {mainServer ? (
+                        <div>
+                            <h3>Update Yout Server Here!</h3>
+                            <form onSubmit={handleSubmit}>
+                                <ul>
+                                    {validationErrors.map((error) => (
+                                        <li key={error}>only master admin can edit</li>
+                                    ))}
+                                </ul>
+                                <label>Name</label>
+                                <input
+                                    placeholder="Update Server Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                ></input>
+                                <button disabled={!!validationErrors.length}>Edit</button>
+                                <button onClick={handleCancel}>Cancel</button>
+                            </form>
+                        </div>
+                    ) :
+                        <div> </div>}
+                </div> */}
+
+                <div className="serverChannels"></div>
+                <h3>Channels</h3>
+                {openChannels ? (
                     <div>
-                        <h3>Update Yout Server Here!</h3>
-                        <form onSubmit={handleSubmit}>
-                            <ul>
-                                {validationErrors.map((error) => (
-                                    <li key={error}>only master admin can edit</li>
+                        <ul className="channelsDisplay">
+                            {serverChannels &&
+                                serverChannels.map((channel) => (
+                                    // <li key={channel.id}>
+                                    //     <button onClick={handleChannelClick}>{channel.title}</button>
+                                    // </li>
+                                    <li key={channel.id}>
+                                        <button className="singleServerDisplay" onClick={() => {
+                                            setSelectedChannelId(channel.id)
+                                            setShowChannelMessages(true)
+                                            setGoToChannelsMessages(true)
+
+                                        }}>{channel.title}</button>
+                                    </li>
                                 ))}
-                            </ul>
-                            <label>Name</label>
-                            <input
-                                placeholder="Update Server Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            ></input>
-                            <button disabled={!!validationErrors.length}>Edit</button>
-                            <button onClick={handleCancel}>Cancel</button>
-                        </form>
+                        </ul>
                     </div>
                 ) :
                     <div> </div>}
+
+
+                <div className="messages"></div>
+                <h3>messages</h3>
+                {showChannelMessages ? (
+                    <div>
+                        <ul className="messagesDisplay">
+                            {channelMessagesArr &&
+                                channelMessagesArr.map((message) => (
+                                    <li key={message.id}>
+                                        <button className="singleMessageDisplay"
+
+                                        >{message.message}</button>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                ) :
+                    <div> </div>}
+
+
+                <div className="userLists"></div>
             </div>
-            <div>------------------------</div>
-            <div className="serverChannels"></div>
-            <h3>Channels</h3>
-            {openChannels ? (
-                <div>
-                    <ul>
-                        {serverChannels &&
-                            serverChannels.map((channel) => (
-                                // <li key={channel.id}>
-                                //     <button onClick={handleChannelClick}>{channel.title}</button>
-                                // </li>
-                                <li key={channel.id}>
-                                    <button onClick={() => {
-                                        setSelectedChannelId(channel.id)
-                                        setShowChannelMessages(true)
-                                        setGoToChannelsMessages(true)
 
-                                    }}>{channel.title}</button>
-                                </li>
-                            ))}
-                    </ul>
+            <div className="updateServerForm">
+                    {mainServer ? (
+                        <div>
+                            <h3>Update Yout Server Here!</h3>
+                            <form onSubmit={handleSubmit}>
+                                <ul>
+                                    {validationErrors.map((error) => (
+                                        <li key={error}>only master admin can edit</li>
+                                    ))}
+                                </ul>
+                                <label>Name</label>
+                                <input
+                                    placeholder="Update Server Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                ></input>
+                                <button disabled={!!validationErrors.length}>Edit</button>
+                                <button onClick={handleCancel}>Cancel</button>
+                            </form>
+                        </div>
+                    ) :
+                        <div> </div>}
                 </div>
-            ) :
-                <div> </div>}
 
-            <div>-----------all channel messages------------------</div>
-            <div className="messages"></div>
-            {showChannelMessages ? (
-                <div>
-                    <ul>
-                        {channelMessagesArr &&
-                            channelMessagesArr.map((message) => (
-                                <li key={message.id}>
-                                    <button
-
-                                    >{message.message}</button>
-                                </li>
-                            ))}
-                    </ul>
-                </div>
-            ) :
-                <div> </div>}
-
-            <div>-----------all users-------------------</div>
-            <div className="userLists"></div>
         </div>
+
     );
 }
 

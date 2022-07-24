@@ -1,4 +1,120 @@
-/* .outContainer {
+.outContainer {
     display: flex;
+    flex-direction: row;
 
-} */
+}
+
+.publicServers{
+    margin-left:3rem;
+}
+
+.privateServers{
+    margin-left:3rem;
+}
+
+.updateServerForm{
+    margin-left:3rem;
+}
+
+.serverChannels{
+    margin-left:3rem;
+}
+
+.messages{
+    display:block;
+    /* flex-direction: column; */
+}
+
+
+
+
+.publicServersDisplay{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 8rem;
+    height: 35rem;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.privateServersDisplay{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 8rem;
+    height: 35rem;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+
+.channelsDisplay{
+    list-style-type: none;
+    margin-left:3rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 8rem;
+    height: 35rem;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+
+
+.messagesDisplay{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 18rem;
+    height: 35rem;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+
+.singleServerDisplay{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 2rem;
+    width: 5rem;
+    margin: 1rem;
+    background-color: white;
+    justify-content: space-evenly;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.singleMessageDisplay{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    height: 2rem;
+    width: 15rem;
+    margin: 1rem;
+    background-color: white;
+    justify-content: space-evenly;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
