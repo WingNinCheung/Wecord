@@ -81,20 +81,15 @@ function HomePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (adminId === sessionUser.id) {
-      const payload = {
-        name,
-      };
-      console.log(name);
-      await dispatch(updateServer(payload, selectedServerId));
-      setName("");
-      setMainServer(false);
-      history.push("/home");
-    } else {
-      setValidationErrors(["only master admin can edit public servers"]);
-      setName("");
-      history.push("/home");
-    }
+    const payload = {
+      name,
+    };
+
+    await dispatch(updateServer(payload, selectedServerId));
+    setName("");
+    setMainServer(false);
+    setEdit(false);
+    history.push("/home");
   };
 
   const handleCancel = (e) => {
@@ -313,7 +308,7 @@ function HomePage() {
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
-                  <li key={error}>only master admin can edit</li>
+                  <li key={error}>{error}</li>
                 ))}
               </ul>
               <label>Name</label>
