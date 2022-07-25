@@ -141,12 +141,40 @@ function HomePage() {
   const loadChannel = async () => {
     if (goToChannel) {
       // check if user is a member of this server already
-      const serverUsers = await dispatch(getAllServerUsers(selectedServerId))
-      // console.log("-----------", typeof serverUsers, serverUsers)
-      // if (serverUsers.includes(loggedInUserId))
+      let serverUsers = await dispatch(getAllServerUsers(selectedServerId))
+      serverUsers = serverUsers.server_users
 
-      const result = await dispatch(getServerChannelsThunk(selectedServerId));
-      console.log("result:", result);
+      let userInServer = false
+
+      serverUsers.forEach(su => {
+        console.log(su.userId)
+        console.log(loggedInUserId)
+        if (su.userId == loggedInUserId) {
+
+          userInServer = true
+        }
+      })
+      console.log(userInServer)
+
+      if (userInServer) {
+        dispatch(getServerChannelsThunk(selectedServerId));
+      }
+
+      else {
+        return (
+          <>
+            <p>You are not in this server, would you like to join?</p>
+            <button onClick={(e) => {
+              e.preventDefault()
+
+            }}>Join Server</button>
+          </>
+        )
+      }
+
+
+
+
       setGoToChannels(false);
     }
   };
@@ -260,6 +288,7 @@ function HomePage() {
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
+                {/* {loadChannel && loadChannel()} */}
                 {serverChannels &&
                   serverChannels.map((channel) => (
                     // <li key={channel.id}>
