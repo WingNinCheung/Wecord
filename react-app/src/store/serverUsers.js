@@ -31,10 +31,10 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
 
 export const addServerUser = (userId, serverId) => async (dispatch) => {
     // /api/server_users
-    const res = await fetch('/api/server_users', {
+    const res = await fetch('/api/server_users/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userId, serverId),
+        body: JSON.stringify({userId, serverId}),
     });
 
     if (res.ok) {

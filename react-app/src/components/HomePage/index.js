@@ -155,6 +155,7 @@ function HomePage() {
 
     if (userInServer) {
       dispatch(getServerChannelsThunk(selectedServerId));
+      setOpenChannels(true)
     }
 
     else {
@@ -163,27 +164,14 @@ function HomePage() {
       setOpenChannels(false)
       setGoToChannels(false);
       setShowChannelMessages(false)
-
-      return (
-        <>
-          <p>You are not in this server, would you like to join?</p>
-          <button className='testname' onClick={(e) => {
-            e.preventDefault()
-
-          }}>Join Server</button>
-        </>
-      )
       // }
-
-
-
-
     }
     setGoToChannels(false);
   };
 
   useEffect(() => {
-    loadChannel();
+      console.log("Entered loadChannel useEffect");
+      loadChannel();
   }, [dispatch, goToChannel]);
 
   const allChannels = useSelector((state) => state.channel);
@@ -292,7 +280,6 @@ function HomePage() {
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
-                {/* {loadChannel && loadChannel()} */}
                 {serverChannels.length &&
                   serverChannels.map((channel) => (
                     // <li key={channel.id}>
@@ -317,7 +304,16 @@ function HomePage() {
               </ul>
             </div>
           ) : (
-            <div> </div>
+            <div>
+              <button className="join-now button" onClick={async (e) => {
+                // Button to join a server if user is not in server
+                e.preventDefault()
+                await dispatch(addServerUser(loggedInUserId, selectedServerId))
+                await loadChannel()
+              }}>
+                Join Server
+              </button>
+            </div>
           )}
         </div>
 

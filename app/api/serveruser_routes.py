@@ -16,6 +16,7 @@ def all_server_users(id):
 @server_user_routes.route("/", methods=["POST"])
 @login_required
 def new_server_user():
+    print("********************", request.json)
     serverId = request.json["serverId"]
     userId = request.json["userId"]
 
