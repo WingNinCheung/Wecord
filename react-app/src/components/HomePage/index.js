@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
+import { getAllServerUsers, addServerUser } from "../../store/serverUsers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import "./HomePage.css";
@@ -139,6 +140,11 @@ function HomePage() {
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
     if (goToChannel) {
+      // check if user is a member of this server already
+      const serverUsers = await dispatch(getAllServerUsers(selectedServerId))
+      console.log("-----------", typeof serverUsers, serverUsers)
+      // if (serverUsers.includes(loggedInUserId))
+
       const result = await dispatch(getServerChannelsThunk(selectedServerId));
       console.log("result:", result);
       setGoToChannels(false);

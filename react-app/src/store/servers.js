@@ -5,7 +5,7 @@ const CREATE_SERVER = "servers/CREATE_SERVER";
 const UPDATE_SERVER = 'servers/UPDATE_SERVER'
 const DELETE_SERVER = "servers/DELETE_SERVER";
 
-const loadnewState = (servers) => {
+const loadAllServers = (servers) => {
   return {
     type: GET_ALL_SERVERS,
     servers,
@@ -42,12 +42,12 @@ const delServer = (serverToDelete) => {
 };
 
 // Get all
-export const getnewState = () => async (dispatch) => {
+export const getAllServers = () => async (dispatch) => {
   const res = await fetch("/api/servers");
 
   if (res.ok) {
-    const newState = await res.json();
-    dispatch(loadnewState(newState));
+    const allServers = await res.json();
+    dispatch(loadAllServers(allServers));
     return res;
   }
 };
@@ -77,7 +77,6 @@ export const createServer = (server) => async (dispatch) => {
 
 // Update
 export const updateServer = (name, id) => async (dispatch) => {
-  console.log("thunk:", name, id)
   const res = await fetch(`/api/servers/${id}/edit`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -90,7 +89,6 @@ export const updateServer = (name, id) => async (dispatch) => {
 
 // Delete
 export const deleteServer = (id) => async (dispatch) => {
-  console.log("thunk:", id)
   const res = await fetch(`/api/servers/${id}/delete`, {
     method: "DELETE"
   });
