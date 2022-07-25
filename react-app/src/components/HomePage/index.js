@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
+import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 
 function HomePage() {
@@ -31,7 +32,7 @@ function HomePage() {
   const [name, setName] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [mainServer, setMainServer] = useState(false);
-  const [selectedServerId, setSelectedServerId] = useState(1);
+  const [selectedServerId, setSelectedServerId] = useState("");
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
@@ -151,6 +152,7 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
+  console.log("serverChannels:", serverChannels)
 
   //----------------------------------------------------
 
@@ -170,6 +172,10 @@ function HomePage() {
   }, [dispatch, goToChannelMessages]);
 
   // ------------------------------------------------
+
+
+  // create a channel
+
 
   return (
     <div>
@@ -251,6 +257,9 @@ function HomePage() {
 
         <div className="serverChannels">
           <h3>Channels</h3>
+          {selectedServerId && <NavLink to={`/${selectedServerId}/channels/create`}>create a channel</NavLink>}
+
+
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
@@ -259,7 +268,7 @@ function HomePage() {
                     // <li key={channel.id}>
                     //     <button onClick={handleChannelClick}>{channel.title}</button>
                     // </li>
-                    <li key={channel.id}>
+                    <li key={channel.id} value={channel.serverId}>
                       <div>
                         <i class="fa-solid fa-hashtag"></i>
                       </div>
@@ -273,6 +282,7 @@ function HomePage() {
                       >
                         {channel.title}
                       </button>
+
                     </li>
                   ))}
               </ul>
