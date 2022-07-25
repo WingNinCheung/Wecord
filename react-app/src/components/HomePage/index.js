@@ -155,6 +155,31 @@ function HomePage() {
 
     if (userInServer) {
       dispatch(getServerChannelsThunk(selectedServerId));
+      return (
+        <>
+          {serverChannels.length &&
+            serverChannels.map((channel) => (
+              // <li key={channel.id}>
+              //     <button onClick={handleChannelClick}>{channel.title}</button>
+              // </li>
+              <li key={channel.id}>
+                <div>
+                  <i className="fa-solid fa-hashtag"></i>
+                </div>
+                <button
+                  className="singleChannelDisplay"
+                  onClick={() => {
+                    setSelectedChannelId(channel.id);
+                    setShowChannelMessages(true);
+                    setGoToChannelsMessages(true);
+                  }}
+                >
+                  {channel.title}
+                </button>
+              </li>
+            ))}
+        </>
+      )
     }
 
     else {
@@ -203,9 +228,9 @@ function HomePage() {
     }
   };
 
-  useEffect(() => {
-    LoadChannelMessages();
-  }, [dispatch, goToChannelMessages]);
+  // useEffect(() => {
+  //   LoadChannelMessages();
+  // }, [dispatch, goToChannelMessages]);
 
   // ------------------------------------------------
 
@@ -292,8 +317,8 @@ function HomePage() {
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
-                {/* {loadChannel && loadChannel()} */}
-                {serverChannels.length &&
+                {loadChannel()}
+                {/* {serverChannels.length &&
                   serverChannels.map((channel) => (
                     // <li key={channel.id}>
                     //     <button onClick={handleChannelClick}>{channel.title}</button>
@@ -313,7 +338,7 @@ function HomePage() {
                         {channel.title}
                       </button>
                     </li>
-                  ))}
+                  ))} */}
               </ul>
             </div>
           ) : (
