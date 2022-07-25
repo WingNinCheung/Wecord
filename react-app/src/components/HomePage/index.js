@@ -111,12 +111,6 @@ function HomePage() {
     e.preventDefault();
     setShow(true);
   };
-  // const handleUserClick = (e) => {
-  //     e.preventDefault();
-  //     setAdminId(server.master_admin)
-  //     console.log(adminId)
-
-  // }
 
   // left click anywhere will make the right-click menu disappear
   useEffect(() => {
@@ -152,7 +146,7 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
-  console.log("serverChannels:", serverChannels)
+  console.log("serverChannels:", serverChannels);
 
   //----------------------------------------------------
 
@@ -173,9 +167,7 @@ function HomePage() {
 
   // ------------------------------------------------
 
-
   // create a channel
-
 
   return (
     <div>
@@ -221,14 +213,6 @@ function HomePage() {
               ))}
             {show && <Menu x={location.y} y={location.x} />}
           </ul>
-          {/* <ul>
-                    {publicServers &&
-                        publicServers.map((server) => (
-                            <li key={server.id}>
-                                <button onClick={handleUserClick}>{server.name}</button>
-                            </li>
-                        ))}
-                </ul> */}
         </div>
 
         <div className="privateServers">
@@ -257,8 +241,11 @@ function HomePage() {
 
         <div className="serverChannels">
           <h3>Channels</h3>
-          {selectedServerId && <NavLink to={`/${selectedServerId}/channels/create`}>create a channel</NavLink>}
-
+          {adminId === loggedInUserId && selectedServerId && (
+            <NavLink to={`/${selectedServerId}/channels/create`}>
+              create a channel
+            </NavLink>
+          )}
 
           {openChannels ? (
             <div>
@@ -282,7 +269,6 @@ function HomePage() {
                       >
                         {channel.title}
                       </button>
-
                     </li>
                   ))}
               </ul>

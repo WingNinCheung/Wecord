@@ -10,18 +10,15 @@ export default function CreateChannel() {
   const sessionUser = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log("------------------------------------")
 
-  const {serverId} = useParams()
-
+  const { serverId } = useParams();
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     const data = {
       title,
-      serverId
+      serverId,
     };
 
     const newChannel = await dispatch(createChannel(data, serverId));
