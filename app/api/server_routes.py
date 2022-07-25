@@ -92,8 +92,7 @@ def get_server_channels(id):
 # create a new channel in a server
 @server_routes.route("/<int:serverId>/channels/create", methods=["post"])
 @login_required
-def create_channels():
-    print('*************************')
+def create_channels(serverId):
 
     newChannel = Channel(
         title=request.json["title"],
