@@ -27,7 +27,7 @@ class Server(db.Model):
     picture = db.Column(db.Text)
 
     # relationships
-    users = relationship('Server_User', back_populates='server')
+    users = relationship('Server_User', back_populates='server', cascade="all, delete")
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
 

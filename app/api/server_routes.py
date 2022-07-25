@@ -63,9 +63,11 @@ def edit_server(id):
     return server.to_dict()
 
 # DELETE /api/servers/:serverId - delete a server
-@server_routes.route('/<int:id>', methods=['DELETE'])
+@server_routes.route('/<int:id>/delete', methods=['DELETE'])
 def delete_server(id):
-    server = db.Server.query.get(id)
+    print(id)
+    print(current_user.get_id())
+    server = Server.query.get(id)
     # Verify that this current_user.id method works
     if current_user.id == server.master_admin:
         db.session.delete(server)

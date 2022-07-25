@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAllServers, updateServer } from "../../store/servers";
+import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import "./HomePage.css";
@@ -45,6 +45,12 @@ function HomePage() {
   const [location, setLocation] = useState({ x: 0, y: 0 });
   const [edit, setEdit] = useState(false);
 
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    await dispatch(deleteServer(selectedServerId))
+    await dispatch(getAllServers())
+  }
+
   // Right click menu
   const Menu = ({ x, y }) => {
     return (
@@ -72,9 +78,9 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button>Delete</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
-      </div>
+      </div >
     );
   };
 
@@ -176,7 +182,7 @@ function HomePage() {
           <ul className="publicServersDisplay">
             {publicServers &&
               publicServers.map((server) => (
-                <div
+                <div key={server.id}
                   onContextMenu={(e) => {
                     handleContextMenu(e);
                     setSelectedServerId(server.id);
@@ -186,7 +192,7 @@ function HomePage() {
                     setLocation({ x: e.pageX, y: e.pageY });
                   }}
                 >
-                  <li key={server.id}>
+                  <li>
                     <button
                       className="singleServerDisplay"
                       onClick={() => {

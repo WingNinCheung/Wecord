@@ -21,7 +21,7 @@ const addServer = (server) => {
 const editServer = (serverName) => {
   return {
     type: UPDATE_SERVER,
-    payload:serverName
+    payload: serverName
 
   }
 }
@@ -34,13 +34,11 @@ const delServer = (serverToDelete) => {
 };
 
 // Get all
-
 export const getAllServers = () => async (dispatch) => {
   const res = await fetch("/api/servers");
 
   if (res.ok) {
     const allServers = await res.json();
-    // console.log(allServers);
     dispatch(loadAllServers(allServers));
     return res;
   }
@@ -65,12 +63,11 @@ export const createServer = (server) => async (dispatch) => {
 };
 
 // Update
-
-export const updateServer = (name, id) => async(dispatch) => {
+export const updateServer = (name, id) => async (dispatch) => {
   console.log("thunk:", name, id)
   const res = await fetch(`/api/servers/${id}/edit`, {
     method: "PUT",
-    headers:{"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(name)
   });
 
@@ -79,8 +76,8 @@ export const updateServer = (name, id) => async(dispatch) => {
 }
 
 // Delete
-export const deleteServer = (name, id) => async(dispatch) => {
-  console.log("thunk:", name, id)
+export const deleteServer = (id) => async (dispatch) => {
+  console.log("thunk:", id)
   const res = await fetch(`/api/servers/${id}/delete`, {
     method: "DELETE"
   });
@@ -97,7 +94,7 @@ export const deleteServer = (name, id) => async(dispatch) => {
 const servers = (state = {}, action) => {
 
   let allServers = {};
-
+  let newState = {};
   switch (action.type) {
 
     case GET_ALL_SERVERS:
@@ -119,7 +116,7 @@ const servers = (state = {}, action) => {
       };
       return allServers;
     case UPDATE_SERVER:
-      const newState = {...state, [action.payload.id]: action.payload}
+      newState = { ...state, [action.payload.id]: action.payload }
       return newState;
     case DELETE_SERVER:
       newState = { ...state };
