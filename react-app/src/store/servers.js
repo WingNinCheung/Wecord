@@ -5,7 +5,7 @@ const CREATE_SERVER = "servers/CREATE_SERVER";
 const UPDATE_SERVER = 'servers/UPDATE_SERVER'
 const DELETE_SERVER = "servers/DELETE_SERVER";
 
-const loadAllServers = (servers) => {
+const loadnewState = (servers) => {
   return {
     type: GET_ALL_SERVERS,
     servers,
@@ -42,12 +42,12 @@ const delServer = (serverToDelete) => {
 };
 
 // Get all
-export const getAllServers = () => async (dispatch) => {
+export const getnewState = () => async (dispatch) => {
   const res = await fetch("/api/servers");
 
   if (res.ok) {
-    const allServers = await res.json();
-    dispatch(loadAllServers(allServers));
+    const newState = await res.json();
+    dispatch(loadnewState(newState));
     return res;
   }
 };
@@ -106,28 +106,27 @@ export const deleteServer = (id) => async (dispatch) => {
 // ------------------- REDUCER ------------------
 const servers = (state = {}, action) => {
 
-  let allServers = {};
   let newState = {};
   switch (action.type) {
 
     case GET_ALL_SERVERS:
       action.servers.servers.forEach((server) => {
-        allServers[server.id] = server;
+        newState[server.id] = server;
       });
-      return allServers;
+      return newState;
     case CREATE_SERVER:
       if (!state[action.server.id]) {
-        allServers = { ...state, [action.server.id]: action.server };
-        return allServers;
+        newState = { ...state, [action.server.id]: action.server };
+        return newState;
       }
-      allServers = {
+      newState = {
         ...state,
         [action.server.id]: {
           ...state[action.server.id],
           ...action.server,
         },
       };
-      return allServers;
+      return newState;
     case UPDATE_SERVER:
       newState = { ...state, [action.payload.id]: action.payload }
       return newState;

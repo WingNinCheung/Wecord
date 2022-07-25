@@ -1,3 +1,4 @@
+from email.policy import default
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.schema import Column, ForeignKey, Table
 from sqlalchemy.types import Integer, String, Boolean
@@ -10,11 +11,20 @@ class Server_User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     serverId = Column(Integer, db.ForeignKey('servers.id'), nullable=False)
     userId = Column(Integer, db.ForeignKey('users.id'), nullable=False)
-    adminStatus = Column(Boolean)
-    muted = Column(Boolean)
+    adminStatus = Column(Boolean, default=False)
+    muted = Column(Boolean, default=False)
 
     server = relationship("Server", back_populates='users')
     user = relationship("User", back_populates='server')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "serverId": self.serverId,
+            "userId": self.userId,
+            "adminStatus": self.adminStatus,
+            "muted": self.muted
+        }
 
 
 class Server(db.Model):
