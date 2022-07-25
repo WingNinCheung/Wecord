@@ -1,6 +1,7 @@
 // actions
 const ADD_SERVERUSER = "serverusers/ADD_SERVERUSER";
 const GET_ALL_SERVERUSERS = "serverusers/GET_ALL_SERVERUSERS";
+const LEAVE_SERVER = 'serverusers/LEAVE_SERVER'
 
 const getServerUsers = (serverUsers) => {
     return {
@@ -12,6 +13,13 @@ const getServerUsers = (serverUsers) => {
 const addUserToServer = (serverUser) => {
     return {
         type: ADD_SERVERUSER,
+        serverUser
+    }
+}
+
+const deleteUserInServer = (serverUser) => {
+    return {
+        type: LEAVE_SERVER,
         serverUser
     }
 }
@@ -34,7 +42,7 @@ export const addServerUser = (userId, serverId) => async (dispatch) => {
     const res = await fetch('/api/server_users/', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({userId, serverId}),
+        body: JSON.stringify({ userId, serverId }),
     });
 
     if (res.ok) {
@@ -45,6 +53,23 @@ export const addServerUser = (userId, serverId) => async (dispatch) => {
     }
 }
 
+export const leaveServer = (userId, serverId) => async (dispatch) => {
+    // /api/server_users/:serverId
+
+    const res = await fetch(`api/server_users/${serverId}/${userId}`, {
+        method: 'DELETE'
+    })
+    console.log('from del thunk ----------------------------', res)
+
+    if (res.ok) {
+        const data = await res.json()
+        console.log('from del thunk for data ----------------------------', data)
+
+        dispatch(deleteUserInServer(data))
+        return data
+    }
+}
+
 
 const serverUsers = (state = {}, action) => {
     let newState = {};
@@ -52,7 +77,7 @@ const serverUsers = (state = {}, action) => {
     switch (action.type) {
         case GET_ALL_SERVERUSERS:
             action.serverUsers.server_users.forEach(serverUser => {
-                newState[serverUser.id]= serverUser
+                newState[serverUser.id] = serverUser
             });
             return newState;
         case ADD_SERVERUSER:
@@ -61,6 +86,10 @@ const serverUsers = (state = {}, action) => {
                 [action.serverUser.id]: action.serverUser
             }
             return newState;
+        case LEAVE_SERVER:
+            newState = { ...state }
+            delete newState[action.serverUser]
+            return newState
         default:
             return state;
     }

@@ -1,7 +1,11 @@
 from flask import Blueprint, request, redirect
 from flask.json import dumps, jsonify
 from flask_login import login_required, current_user
+from sqlalchemy import delete
 from ..models.db import Server_User, db, Server, Channel
+
+
+
 
 server_user_routes = Blueprint("server_user_routes", __name__)
 
@@ -29,3 +33,13 @@ def new_server_user():
     db.session.commit()
 
     return server_user.to_dict()
+
+@server_user_routes.route("/<int:serverId>/<int:userId>", methods=["DELETE"])
+@login_required
+def leave_server(serverId, userId):
+    print('we hit this route ------------------------------------------------')
+    serverUser = Server_User.query.filter(Server_User.serverId == serverId and Server_User.userId == userId)
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', serverUser)
+    db.session.delete(serverUser)
+    db.session.commit()
+    return {serverUser.to_dict()}

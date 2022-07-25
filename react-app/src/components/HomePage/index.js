@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
-import { getAllServerUsers, addServerUser } from "../../store/serverUsers";
+import { getAllServerUsers, addServerUser, leaveServer } from "../../store/serverUsers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import "./HomePage.css";
@@ -170,8 +170,8 @@ function HomePage() {
   };
 
   useEffect(() => {
-      console.log("Entered loadChannel useEffect");
-      loadChannel();
+    console.log("Entered loadChannel useEffect");
+    loadChannel();
   }, [dispatch, goToChannel]);
 
   const allChannels = useSelector((state) => state.channel);
@@ -302,6 +302,10 @@ function HomePage() {
                     </li>
                   ))}
               </ul>
+              <button onClick={async (e) => {
+                e.preventDefault()
+                await dispatch(leaveServer(loggedInUserId, selectedServerId))
+              }}>Leave Server</button>
             </div>
           ) : (
             <div>
