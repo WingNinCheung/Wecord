@@ -139,44 +139,47 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
-    if (goToChannel) {
-      // check if user is a member of this server already
-      let serverUsers = await dispatch(getAllServerUsers(selectedServerId))
-      serverUsers = serverUsers.server_users
+    // if (goToChannel) {
+    // check if user is a member of this server already
+    let serverUsers = await dispatch(getAllServerUsers(selectedServerId))
+    serverUsers = serverUsers.server_users
 
-      let userInServer = false
+    let userInServer = false
 
-      serverUsers.forEach(su => {
-        console.log(su.userId)
-        console.log(loggedInUserId)
-        if (su.userId == loggedInUserId) {
+    serverUsers.forEach(su => {
+      if (su.userId == loggedInUserId) {
 
-          userInServer = true
-        }
-      })
-      console.log(userInServer)
-
-      if (userInServer) {
-        dispatch(getServerChannelsThunk(selectedServerId));
+        userInServer = true
       }
+    })
 
-      else {
-        return (
-          <>
-            <p>You are not in this server, would you like to join?</p>
-            <button onClick={(e) => {
-              e.preventDefault()
-
-            }}>Join Server</button>
-          </>
-        )
-      }
-
-
-
-
-      setGoToChannels(false);
+    if (userInServer) {
+      dispatch(getServerChannelsThunk(selectedServerId));
     }
+
+    else {
+
+      // dispatch(getServerChannelsThunk(0));
+      setOpenChannels(false)
+      setGoToChannels(false);
+      setShowChannelMessages(false)
+
+      return (
+        <>
+          <p>You are not in this server, would you like to join?</p>
+          <button className='testname' onClick={(e) => {
+            e.preventDefault()
+
+          }}>Join Server</button>
+        </>
+      )
+      // }
+
+
+
+
+    }
+    setGoToChannels(false);
   };
 
   useEffect(() => {
@@ -185,6 +188,7 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
+  console.log(serverChannels)
 
   //----------------------------------------------------
 
@@ -289,7 +293,7 @@ function HomePage() {
             <div>
               <ul className="channelsDisplay">
                 {/* {loadChannel && loadChannel()} */}
-                {serverChannels &&
+                {serverChannels.length &&
                   serverChannels.map((channel) => (
                     // <li key={channel.id}>
                     //     <button onClick={handleChannelClick}>{channel.title}</button>
