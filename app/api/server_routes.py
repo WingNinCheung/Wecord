@@ -4,8 +4,6 @@ from ..models.db import Server_User, db, Server, Channel
 
 server_routes = Blueprint("server_routes", __name__)
 
-# NOTE: Might want to add jsonify for the return statements so that the responses have the correct headers
-
 # GET /api/servers/:serverId - read a single server
 # @server_routes.route('/<int:id>')
 # def single_server(id):
@@ -64,17 +62,17 @@ def edit_server(id):
     db.session.commit()
     return server.to_dict()
 
-# # DELETE /api/servers/:serverId - delete a server
-# @server_routes.route('/<int:id>', methods=['DELETE'])
-# def delete_server(id):
-#     server = db.Server.query.get(id)
-#     # Verify that this current_user.id method works
-#     if current_user.id == server.master_admin:
-#         db.session.delete(server)
-#         db.session.commit()
-#         return server.to_dict()
-#     else:
-#         return jsonify({"Only the server admin may delete this server"})
+# DELETE /api/servers/:serverId - delete a server
+@server_routes.route('/<int:id>', methods=['DELETE'])
+def delete_server(id):
+    server = db.Server.query.get(id)
+    # Verify that this current_user.id method works
+    if current_user.id == server.master_admin:
+        db.session.delete(server)
+        db.session.commit()
+        return server.to_dict()
+    else:
+        return jsonify({"Only the server admin may delete this server"})
 
 
 
@@ -104,7 +102,7 @@ def create_channels():
 
 
 # edit a channel
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["put"])
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["PUT"])
 @login_required
 def channels_edit(channelId):
     title = request.json["title"]
@@ -114,7 +112,7 @@ def channels_edit(channelId):
     return channel.to_dict()
 
 # delete a channel
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["delete"])
+@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["DELETE"])
 @login_required
 def delete_channel(channelId):
     target_channel = Channel.query.filter_by(id=channelId)
