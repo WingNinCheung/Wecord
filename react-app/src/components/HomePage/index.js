@@ -46,10 +46,10 @@ function HomePage() {
   const [edit, setEdit] = useState(false);
 
   const handleDelete = async (e) => {
-    e.preventDefault()
-    await dispatch(deleteServer(selectedServerId))
-    await dispatch(getAllServers())
-  }
+    e.preventDefault();
+    await dispatch(deleteServer(selectedServerId));
+    await dispatch(getAllServers());
+  };
 
   // Right click menu
   const Menu = ({ x, y }) => {
@@ -78,9 +78,11 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleDelete}>Delete</button>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+            Delete
+          </button>
         </div>
-      </div >
+      </div>
     );
   };
 
@@ -182,7 +184,8 @@ function HomePage() {
           <ul className="publicServersDisplay">
             {publicServers &&
               publicServers.map((server) => (
-                <div key={server.id}
+                <div
+                  key={server.id}
                   onContextMenu={(e) => {
                     handleContextMenu(e);
                     setSelectedServerId(server.id);
