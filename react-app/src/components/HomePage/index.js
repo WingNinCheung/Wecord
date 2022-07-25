@@ -6,6 +6,7 @@ import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
+import EditChannel from "./Channel/editChannel";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function HomePage() {
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
-  const [selectedChannelId, setSelectedChannelId] = useState(1);
+  const [selectedChannelId, setSelectedChannelId] = useState("");
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const history = useHistory();
@@ -44,7 +45,10 @@ function HomePage() {
   // right-click menu section
   const [show, setShow] = useState(false);
   const [location, setLocation] = useState({ x: 0, y: 0 });
+
+  // the server edit
   const [edit, setEdit] = useState(false);
+  const [editChannel, setEditChannel] = useState(false);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -69,14 +73,27 @@ function HomePage() {
         }}
       >
         <div>
-          <button
-            onClick={() => {
-              setEdit(true);
-            }}
-            disabled={loggedInUserId !== adminId}
-          >
-            Edit Name
-          </button>
+          {selectedChannelId ? (
+            <button
+              onClick={() => {
+                // setEditChannel(true);
+                setEditChannel(true);
+              }}
+              disabled={loggedInUserId !== adminId}
+            >
+              Edit Channel
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                // setEditChannel(true);
+                setEdit(true);
+              }}
+              disabled={loggedInUserId !== adminId}
+            >
+              Edit Server
+            </button>
+          )}
         </div>
         <div>
           <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
@@ -246,35 +263,48 @@ function HomePage() {
               create a channel
             </NavLink>
           )}
-
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
                 {serverChannels &&
                   serverChannels.map((channel) => (
-                    // <li key={channel.id}>
-                    //     <button onClick={handleChannelClick}>{channel.title}</button>
-                    // </li>
-                    <li key={channel.id} value={channel.serverId}>
-                      <div>
-                        <i class="fa-solid fa-hashtag"></i>
-                      </div>
-                      <button
-                        className="singleChannelDisplay"
-                        onClick={() => {
-                          setSelectedChannelId(channel.id);
-                          setShowChannelMessages(true);
-                          setGoToChannelsMessages(true);
-                        }}
-                      >
-                        {channel.title}
-                      </button>
-                    </li>
+                    <div
+                      onContextMenu={(e) => {
+                        handleContextMenu(e);
+                        setEdit(false);
+                        setLocation({ x: e.pageX, y: e.pageY });
+                        setSelectedChannelId(channel.id);
+                      }}
+                    >
+                      <li key={channel.id} value={channel.serverId}>
+                        <div>
+                          <i class="fa-solid fa-hashtag"></i>
+                        </div>
+
+                        <button
+                          className="singleChannelDisplay"
+                          onClick={() => {
+                            setSelectedChannelId(channel.id);
+                            setShowChannelMessages(true);
+                            setGoToChannelsMessages(true);
+                          }}
+                        >
+                          {channel.title}
+                        </button>
+                      </li>
+                    </div>
                   ))}
               </ul>
             </div>
           ) : (
             <div> </div>
+          )}
+          {editChannel && (
+            <EditChannel
+              serverId={selectedServerId}
+              channelId={selectedChannelId}
+              setEdit={setEditChannel}
+            />
           )}
         </div>
 
