@@ -305,6 +305,7 @@ function HomePage() {
               <button onClick={async (e) => {
                 e.preventDefault()
                 await dispatch(leaveServer(loggedInUserId, selectedServerId))
+                await loadChannel()
               }}>Leave Server</button>
             </div>
           ) : (

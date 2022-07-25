@@ -38,8 +38,11 @@ def new_server_user():
 @login_required
 def leave_server(serverId, userId):
     print('we hit this route ------------------------------------------------')
-    serverUser = Server_User.query.filter(Server_User.serverId == serverId and Server_User.userId == userId)
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', serverUser)
-    db.session.delete(serverUser)
+    serverUser = Server_User.query.filter(Server_User.serverId == serverId, Server_User.userId == userId).all()
+    # hello = filter(serverUser, lambda e: e.userId == userId and e.serverId == serverId)
+    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', serverUser[0])
+    # print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', hello)
+    su = serverUser[0]
+    db.session.delete(su)
     db.session.commit()
-    return {serverUser.to_dict()}
+    return su.to_dict()
