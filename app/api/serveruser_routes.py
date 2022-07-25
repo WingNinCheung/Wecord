@@ -1,4 +1,5 @@
-from flask import Blueprint, jsonify, request, redirect
+from flask import Blueprint, request, redirect
+from flask.json import dumps, jsonify
 from flask_login import login_required, current_user
 from ..models.db import Server_User, db, Server, Channel
 
@@ -8,8 +9,7 @@ server_user_routes = Blueprint("server_user_routes", __name__)
 @server_user_routes.route("/<int:id>")
 @login_required
 def all_server_users(id):
-    print("ID-------------------: ", id)
-    server_users = list(Server_User.query.filter(Server_User.serverId == id))
+    server_users = Server_User.query.filter(Server_User.serverId == id).all()
     return {"server_users": [server_user.to_dict() for server_user in server_users]}
 
 # CREATE /api/server_users - read all servers

@@ -142,7 +142,7 @@ function HomePage() {
     if (goToChannel) {
       // check if user is a member of this server already
       const serverUsers = await dispatch(getAllServerUsers(selectedServerId))
-      console.log("-----------", typeof serverUsers, serverUsers)
+      // console.log("-----------", typeof serverUsers, serverUsers)
       // if (serverUsers.includes(loggedInUserId))
 
       const result = await dispatch(getServerChannelsThunk(selectedServerId));
@@ -267,7 +267,7 @@ function HomePage() {
                     // </li>
                     <li key={channel.id}>
                       <div>
-                        <i class="fa-solid fa-hashtag"></i>
+                        <i className="fa-solid fa-hashtag"></i>
                       </div>
                       <button
                         className="singleChannelDisplay"
