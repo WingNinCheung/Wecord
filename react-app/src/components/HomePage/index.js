@@ -40,10 +40,12 @@ function HomePage() {
   const [selectedChannelId, setSelectedChannelId] = useState("");
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
+  const [channelName, setChannelName] = useState("");
   const history = useHistory();
 
   // right-click menu section
   const [show, setShow] = useState(false);
+  const [channelShow, setChannelShow] = useState(false);
   const [location, setLocation] = useState({ x: 0, y: 0 });
 
   // the server edit
@@ -56,7 +58,10 @@ function HomePage() {
     await dispatch(getAllServers());
   };
 
-  // Right click menu
+  console.log("show is", show);
+  console.log("channelShow is ", channelShow);
+
+  // Right click server menu
   const Menu = ({ x, y }) => {
     return (
       <div
@@ -73,27 +78,48 @@ function HomePage() {
         }}
       >
         <div>
-          {selectedChannelId ? (
-            <button
-              onClick={() => {
-                // setEditChannel(true);
-                setEditChannel(true);
-              }}
-              disabled={loggedInUserId !== adminId}
-            >
-              Edit Channel
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                // setEditChannel(true);
-                setEdit(true);
-              }}
-              disabled={loggedInUserId !== adminId}
-            >
-              Edit Server
-            </button>
-          )}
+          <button
+            onClick={() => {
+              setEdit(true);
+            }}
+            disabled={loggedInUserId !== adminId}
+          >
+            Edit Server
+          </button>
+        </div>
+        <div>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+            Delete
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const ChannelMenu = ({ x, y }) => {
+    return (
+      <div
+        style={{
+          borderRadius: "4px",
+          padding: "10px",
+          border: "1px solid black",
+          boxSizing: "border-box",
+          width: "200px",
+          position: "absolute",
+          top: `${x}px`,
+          left: `${y}px`,
+          backgroundColor: "gray",
+        }}
+      >
+        <div>
+          <button
+            onClick={() => {
+              setEditChannel(true);
+            }}
+            disabled={loggedInUserId !== adminId}
+          >
+            Edit Channel
+          </button>
         </div>
         <div>
           <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
@@ -127,11 +153,22 @@ function HomePage() {
   const handleContextMenu = (e) => {
     e.preventDefault();
     setShow(true);
+    setChannelShow(false);
+  };
+
+  const handleContextMenuChannel = (e) => {
+    e.preventDefault();
+    setChannelShow(true);
+    setShow(false);
   };
 
   // left click anywhere will make the right-click menu disappear
   useEffect(() => {
-    const handleClick = () => setShow(false);
+    const handleClick = () => {
+      setShow(false);
+      setChannelShow(false);
+    };
+
     window.addEventListener("click", handleClick);
 
     return () => window.removeEventListener("click", handleClick);
@@ -270,10 +307,10 @@ function HomePage() {
                   serverChannels.map((channel) => (
                     <div
                       onContextMenu={(e) => {
-                        handleContextMenu(e);
-                        setEdit(false);
+                        handleContextMenuChannel(e);
                         setLocation({ x: e.pageX, y: e.pageY });
                         setSelectedChannelId(channel.id);
+                        setChannelName(channel.title);
                       }}
                     >
                       <li key={channel.id} value={channel.serverId}>
@@ -294,16 +331,19 @@ function HomePage() {
                       </li>
                     </div>
                   ))}
+                {channelShow && <ChannelMenu x={location.y} y={location.x} />}
               </ul>
             </div>
           ) : (
             <div> </div>
           )}
+
           {editChannel && (
             <EditChannel
               serverId={selectedServerId}
               channelId={selectedChannelId}
               setEdit={setEditChannel}
+              channelTitle={channelName}
             />
           )}
         </div>

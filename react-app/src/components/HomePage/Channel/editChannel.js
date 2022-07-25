@@ -4,7 +4,12 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { updateChannel } from "../../../store/channel";
 
-export default function EditChannel({ serverId, channelId, setEdit }) {
+export default function EditChannel({
+  serverId,
+  channelId,
+  setEdit,
+  channelTitle,
+}) {
   const [title, setTitle] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
 
@@ -47,7 +52,7 @@ export default function EditChannel({ serverId, channelId, setEdit }) {
         </ul>
         <label>Title</label>
         <input
-          placeholder={title}
+          placeholder={channelTitle}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
