@@ -32,7 +32,7 @@ function HomePage() {
   const [validationErrors, setValidationErrors] = useState([]);
   const [mainServer, setMainServer] = useState(false);
   const [selectedServerId, setSelectedServerId] = useState(1);
-  const [adminId, setAdminId] = useState(1);
+  const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
   const [selectedChannelId, setSelectedChannelId] = useState(1);

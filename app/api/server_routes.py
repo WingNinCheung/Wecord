@@ -4,10 +4,11 @@ from ..models.db import Server_User, db, Server, Channel
 
 server_routes = Blueprint("server_routes", __name__)
 
-# GET /api/servers/:serverId - read a single server
+# # GET /api/servers/:serverId - read a single server
 # @server_routes.route('/<int:id>')
 # def single_server(id):
-#     server = db.Server.query.get(id)
+#     print(id)
+#     server = Server.query.get(id)
 #     return server.to_dict()
 
 # GET /api/servers - read all servers
