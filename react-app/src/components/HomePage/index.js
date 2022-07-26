@@ -8,6 +8,7 @@ import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
 import { getAllServerUsers } from "../../store/serverUser";
+import Member from "../../components/HomePage/member";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -382,7 +383,10 @@ function HomePage() {
           )}
         </div>
 
-        <div className="userLists"></div>
+        <div className="userLists">
+          <h3>Members</h3>
+          <Member serverId={selectedServerId} />
+        </div>
       </div>
 
       <div className="updateServerForm">
