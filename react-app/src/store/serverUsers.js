@@ -74,7 +74,9 @@ const serverUsers = (state = {}, action) => {
 
     switch (action.type) {
         case GET_ALL_SERVERUSERS:
-            newState = { ...action.serverUsers }
+            for (let user in action.serverUsers) {
+                newState[user] = action.serverUsers[user];
+            }
             return newState;
         case ADD_SERVERUSER:
             newState = {
