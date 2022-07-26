@@ -17,11 +17,23 @@ def all_server_users(id):
     #                     server_users.append({
     #                         "id": data[0]
     #                     })
+    '''
+    server_user:
+    id
+    userid
+    serverid
+    adminstatus
+    muted
 
+    user:
+    id
+    username
+    '''
     server = Server.query.get(id)
+    server_users_data = Server_User.query.filter(Server_User.serverId == id).all()
     server_users = dict()
     for user in server.users:
-        server_users.update({user.user.id: user.user.username})
+        server_users.update({user.user.id: user.user.username, "server_user_data": server_users_data})
     print(server_users)
 
     return server_users
