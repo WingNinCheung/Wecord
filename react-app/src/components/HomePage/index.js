@@ -7,7 +7,7 @@ import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
-import { getAllServerUsers, addServerUser } from "../../store/serverUser";
+import { getAllServerUsers, addServerUser, leaveServer } from "../../store/serverUser";
 import Member from "../../components/HomePage/member";
 
 function HomePage() {
@@ -50,6 +50,7 @@ function HomePage() {
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
+  const [userIsInServer, setUserIsInServer] = useState(false)
   const history = useHistory();
 
   // right-click menu section
@@ -70,7 +71,7 @@ function HomePage() {
   // console.log("react here", selectedServerId);
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
-    console.log(data)
+    // console.log(data)
     let userInServer = false;
 
     for (let i of data) {
@@ -79,17 +80,22 @@ function HomePage() {
       }
     }
 
-    console.log("userInServer", userInServer);
+    // console.log("userInServer", userInServer);
     if (userInServer) {
       setOpenChannels(true);
       setGoToChannels(true);
       setGoToChannelsMessages(false);
       setShowChannelMessages(false);
+      setUserIsInServer(true)
+      return true
     } else {
       setOpenChannels(false);
       setGoToChannels(false);
       setGoToChannelsMessages(false);
       setShowChannelMessages(false);
+      setUserIsInServer(false)
+
+      return false
     }
   };
 
@@ -125,9 +131,14 @@ function HomePage() {
             Delete
           </button>
         </div>
+        <div>
+          <button onClick={handleLeave} disabled={!userIsInServer || loggedInUserId == adminId}>Leave Server</button>
+        </div>
       </div>
     );
   };
+
+
 
   const ChannelMenu = ({ x, y }) => {
     return (
@@ -257,24 +268,17 @@ function HomePage() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   const handleJoin = async (e) => {
     e.preventDefault()
     await dispatch(addServerUser(loggedInUserId, selectedServerId))
     checkUserinServer(selectedServerId)
   }
 
-
+  const handleLeave = async (e) => {
+    e.preventDefault()
+    await dispatch(leaveServer(loggedInUserId, selectedServerId))
+    checkUserinServer(selectedServerId)
+  }
 
 
 
@@ -322,10 +326,6 @@ function HomePage() {
                         setMainServer(true);
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
-                        // setOpenChannels(true);
-                        // setGoToChannels(true);
-                        // setGoToChannelsMessages(false);
-                        // setShowChannelMessages(false);
                         checkUserinServer(server.id);
                       }}
                     >

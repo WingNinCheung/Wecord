@@ -76,7 +76,7 @@ const serverUsers = (state = {}, action) => {
       return newState;
     case LEAVE_SERVER:
       newState = { ...state };
-      delete newState[action.serverUser];
+      delete newState[action.serverUser.user.id];
       return newState;
     default:
       return state;

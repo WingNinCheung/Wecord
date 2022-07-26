@@ -54,6 +54,7 @@ def leave_server(serverId, userId):
     ).all()
     # su is session user btw
     su = serverUser[0]
+    print(su)
     db.session.delete(su)
     db.session.commit()
-    return su.to_dict()
+    return {"server": su.to_dict(), "user": su.user.to_dict()}
