@@ -6,20 +6,22 @@ export default function DisplayServerUsers({ serverId }) {
 
     const serverUsers = useSelector(state => state.serverUsers)
 
-    if (serverUsers) {
-        console.log("SERVER USERS displayServerUserse component: ", serverUsers)
-        console.log(Object.values(serverUsers)[0]);
+    if (serverId) {
+        console.log("SERVER ID: ", serverId)
     }
 
     const mapServerUsers = () => {
-        {serverUsers && Object.values(serverUsers).map(userInfo => {
-            <li key = {userInfo.id}>
-                {userInfo.userId}
+        return serverUsers && Object.entries(serverUsers).map(user =>
+            <li key = {user[0]}>
+                {user[1]}
             </li>
-        })}
+        )
     }
 
+
+
     if (!serverId) return <p>"Loading users"</p>
+    console.log("map server users: ", mapServerUsers())
   return (
     <div>
         { serverId &&

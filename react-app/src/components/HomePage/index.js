@@ -360,6 +360,7 @@ function HomePage() {
           <h3>Members</h3>
             <DisplayServerUsers serverId = {selectedServerId} />
         </div>
+
       </div>
 
       <div className="updateServerForm">
