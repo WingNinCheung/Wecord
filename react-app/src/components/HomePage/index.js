@@ -69,7 +69,28 @@ function HomePage() {
 
   // console.log("react here", selectedServerId);
   const checkUserinServer = async (serverId) => {
-    await dispatch(getAllServerUsers(serverId));
+    const data = await dispatch(getAllServerUsers(serverId));
+
+    let userInServer = false;
+
+    for (let i of data) {
+      if (i.user.id == loggedInUserId) {
+        userInServer = true;
+      }
+    }
+
+    console.log("userInServer", userInServer);
+    if (userInServer) {
+      setOpenChannels(true);
+      setGoToChannels(true);
+      setGoToChannelsMessages(false);
+      setShowChannelMessages(false);
+    } else {
+      setOpenChannels(false);
+      setGoToChannels(false);
+      setGoToChannelsMessages(false);
+      setShowChannelMessages(false);
+    }
   };
 
   // Right click server menu
@@ -267,10 +288,10 @@ function HomePage() {
                         setMainServer(true);
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
-                        setOpenChannels(true);
-                        setGoToChannels(true);
-                        setGoToChannelsMessages(false);
-                        setShowChannelMessages(false);
+                        // setOpenChannels(true);
+                        // setGoToChannels(true);
+                        // setGoToChannelsMessages(false);
+                        // setShowChannelMessages(false);
                         checkUserinServer(server.id);
                       }}
                     >
@@ -350,7 +371,9 @@ function HomePage() {
               </ul>
             </div>
           ) : (
-            <div></div>
+            <div>
+              <button>Join Server</button>
+            </div>
           )}
 
           {editChannel && (

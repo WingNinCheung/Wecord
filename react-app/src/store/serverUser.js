@@ -31,7 +31,7 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
     const data = await res.json();
     // console.log("I'm ok", data.serverUser);
     dispatch(getServerUsers(data.serverUser));
-    return data;
+    return data.serverUser;
   }
 };
 export const addServerUser = (userId, serverId) => async (dispatch) => {
