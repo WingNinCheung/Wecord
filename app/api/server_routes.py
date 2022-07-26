@@ -64,14 +64,16 @@ def edit_server(id):
     return server.to_dict()
 
 
+#TODO: Fix front end route for this
 # DELETE /api/servers/:serverId - delete a server
-@server_routes.route("/<int:id>/delete", methods=["DELETE"])
-def delete_server(id):
-    print(id)
-    print(current_user.get_id())
-    server = Server.query.get(id)
-    # Verify that this current_user.id method works
-    if current_user.id == server.master_admin:
+@server_routes.route("/<int:serverId>/<int:userId>/delete", methods=["DELETE"])
+def delete_server(serverId, userId):
+    # userId is the id of the user submitting this request
+
+
+    server = Server.query.get(serverId)
+    # Check that the user submitting request is the master admin
+    if userId == server.master_admin:
         db.session.delete(server)
         db.session.commit()
         return server.to_dict()
