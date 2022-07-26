@@ -7,6 +7,7 @@ import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
+import { getAllServerUsers } from "../../store/serverUser";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ function HomePage() {
     (server) => server.private === false
   );
 
+  let defaultSelectedServerId = publicServers[0];
+  if (defaultSelectedServerId) {
+    defaultSelectedServerId = defaultSelectedServerId.id;
+  }
+  // console.log("public server ", defaultSelectedServerId);
   const privateServers = allServersArray.filter(
     (server) =>
       server.private === true && server.master_admin === sessionUser.id
@@ -33,7 +39,9 @@ function HomePage() {
   const [name, setName] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [mainServer, setMainServer] = useState(false);
-  const [selectedServerId, setSelectedServerId] = useState("");
+  const [selectedServerId, setSelectedServerId] = useState(
+    defaultSelectedServerId
+  );
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
@@ -58,8 +66,10 @@ function HomePage() {
     await dispatch(getAllServers());
   };
 
-  console.log("show is", show);
-  console.log("channelShow is ", channelShow);
+  // console.log("react here", selectedServerId);
+  const checkUserinServer = async (serverId) => {
+    await dispatch(getAllServerUsers(serverId));
+  };
 
   // Right click server menu
   const Menu = ({ x, y }) => {
@@ -260,6 +270,7 @@ function HomePage() {
                         setGoToChannels(true);
                         setGoToChannelsMessages(false);
                         setShowChannelMessages(false);
+                        checkUserinServer(server.id);
                       }}
                     >
                       {server.name}
@@ -338,7 +349,7 @@ function HomePage() {
               </ul>
             </div>
           ) : (
-            <div> </div>
+            <div></div>
           )}
 
           {editChannel && (
@@ -377,7 +388,7 @@ function HomePage() {
       <div className="updateServerForm">
         {edit && (
           <div>
-            <h3>Update Yout Server Here!</h3>
+            <h3>Update Your Server Here!</h3>
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
