@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
+
 import CreateChannel from "./Channel/createChannel";
-import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
+import {Menu, ChannelMenu} from "./rightClick";
+
+import "./HomePage.css";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -61,76 +65,8 @@ function HomePage() {
   console.log("show is", show);
   console.log("channelShow is ", channelShow);
 
-  // Right click server menu
-  const Menu = ({ x, y }) => {
-    return (
-      <div
-        style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "200px",
-          position: "absolute",
-          top: `${x}px`,
-          left: `${y}px`,
-          backgroundColor: "gray",
-        }}
-      >
-        <div>
-          <button
-            onClick={() => {
-              setEdit(true);
-              setEditChannel(false);
-            }}
-            disabled={loggedInUserId !== adminId}
-          >
-            Edit Server
-          </button>
-        </div>
-        <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
-            Delete
-          </button>
-        </div>
-      </div>
-    );
-  };
 
-  const ChannelMenu = ({ x, y }) => {
-    return (
-      <div
-        style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "200px",
-          position: "absolute",
-          top: `${x}px`,
-          left: `${y}px`,
-          backgroundColor: "gray",
-        }}
-      >
-        <div>
-          <button
-            onClick={() => {
-              setEditChannel(true);
-              setEdit(false);
-            }}
-            disabled={loggedInUserId !== adminId}
-          >
-            Edit Channel
-          </button>
-        </div>
-        <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
-            Delete
-          </button>
-        </div>
-      </div>
-    );
-  };
+  // <RightClick setEdit = {setEdit} setEditChannel = {setEditChannel} handleDelete = {handleDelete} loggedInUserId = {loggedInUserId} adminId = {adminId} />
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -267,7 +203,7 @@ function HomePage() {
                   </li>
                 </div>
               ))}
-            {show && <Menu x={location.y} y={location.x} />}
+            {show && <Menu x={location.y} y={location.x} setEdit = {setEdit} setEditChannel = {setEditChannel} handleDelete = {handleDelete} loggedInUserId = {loggedInUserId} adminId = {adminId} />}
           </ul>
         </div>
 
@@ -334,7 +270,7 @@ function HomePage() {
                       </li>
                     </div>
                   ))}
-                {channelShow && <ChannelMenu x={location.y} y={location.x} />}
+                {channelShow && <ChannelMenu x={location.y} y={location.x} setEdit = {setEdit} setEditChannel = {setEditChannel} handleDelete = {handleDelete} loggedInUserId = {loggedInUserId} adminId = {adminId} />}
               </ul>
             </div>
           ) : (
