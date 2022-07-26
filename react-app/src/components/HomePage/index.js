@@ -70,7 +70,7 @@ function HomePage() {
   // console.log("react here", selectedServerId);
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
-
+    console.log(data)
     let userInServer = false;
 
     for (let i of data) {
@@ -271,6 +271,7 @@ function HomePage() {
   const handleJoin = async (e) => {
     e.preventDefault()
     await dispatch(addServerUser(loggedInUserId, selectedServerId))
+    checkUserinServer(selectedServerId)
   }
 
 

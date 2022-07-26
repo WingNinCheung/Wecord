@@ -71,7 +71,7 @@ const serverUsers = (state = {}, action) => {
     case ADD_SERVERUSER:
       newState = {
         ...state,
-        [action.serverUser.id]: action.serverUser,
+        [action.serverUser.user.id]: action.serverUser,
       };
       return newState;
     case LEAVE_SERVER:
