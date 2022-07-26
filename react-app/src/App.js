@@ -56,9 +56,9 @@ function App() {
         <ProtectedRoute path="/:serverId/channels/create" exact={true}>
           <CreateChannel />
         </ProtectedRoute>
-        <ProtectedRoute path="/update-server" exact={true}>
+        {/* <ProtectedRoute path="/update-server" exact={true}>
           <EditServerForm />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );

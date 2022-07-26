@@ -4,15 +4,12 @@ import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
+
+import EditChannel from "./Channel/editChannel";
+import CreateMessageForm from "./message";
 import CreateChannel from "./Channel/createChannel";
 
 import "./HomePage.css";
-import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./message";
-
-
-
-
 
 
 function HomePage() {
@@ -335,7 +332,7 @@ function HomePage() {
                     >
                       <li key={channel.id} value={channel.serverId}>
                         <div>
-                          <i class="fa-solid fa-hashtag"></i>
+                          <i className="fa-solid fa-hashtag"></i>
                         </div>
 
                         <button
@@ -384,14 +381,16 @@ function HomePage() {
                     ))}
                 </ul>
               </div>
+              <div className="message-form form">
+                <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk}/>
+              </div>
 
             </div>
           ) : (
-            <div> </div>
+            <div>"No messages"</div>
           )}
         </div>
 
-        <createMessageForm channelId={selectedChannelId}/>
 
         <div className="userLists"></div>
       </div>

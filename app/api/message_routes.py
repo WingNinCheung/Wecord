@@ -1,4 +1,3 @@
-from email import message
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
 from ..models.db import Server_User, db, Server, Channel, Message
@@ -14,6 +13,10 @@ message_routes = Blueprint("message_routes", __name__)
 @message_routes.route("/", methods=["POST"])
 @login_required
 def create_message():
+    print("YO YO OYOYO YOYOYO ***************!@@@@@@@38u49283252")
+    print(request.json)
+
+
     newMessage = Message(
         userId=request.json["userId"],
         channelId=request.json["channelId"],

@@ -37,7 +37,7 @@ const deleteChannelMessage = (message) => {
 
 //get
 export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
-    console.log("thunk id:", channelId)
+
     const res = await fetch(`/api/servers/channels/${channelId}`)
     // const res = await fetch(`/api/servers/${serverId}/${channelId}`)
 
@@ -52,13 +52,14 @@ export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
 // Create
 export const createMessage = (message) => async (dispatch) => {
 
+    console.log("MESSAGES in create thunk: ", message);
     const res = await fetch("/api/messages/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(message),
     });
 
-    console.log(res);
+    console.log("RES from createMessages thunk: ", res);
     if (res.ok) {
         const data = await res.json;
 
