@@ -29,7 +29,7 @@ def all_server_users(id):
     # return {"server_users": [server_user.to_dict() for server_user in server_users]}
 
 
-# CREATE /api/server_users - read all servers
+# CREATE /api/server_users
 @server_user_routes.route("/", methods=["POST"])
 @login_required
 def new_server_user():

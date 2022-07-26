@@ -145,23 +145,17 @@ function HomePage() {
     return dispatch(getAllServerUsers(selectedServerId))
   }
 
-  // const getServerUsers = async () => {
-  //   return await dispatch(getAllServerUsers(selectedServerId))
-  // }
-
-
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
     // if (goToChannel) {
     // check if user is a member of this server already
     let serverUsers = getServerUsers();
-    serverUsers = serverUsers.server_users;
 
     let userInServer = false;
 
     if (serverUsers) {
-      serverUsers.forEach(su => {
-        if (su.userId == loggedInUserId) {
+      Object.keys(serverUsers).forEach(userId => {
+        if (userId == loggedInUserId) {
           userInServer = true;
         }
       });
@@ -173,12 +167,9 @@ function HomePage() {
     }
 
     else {
-
-      // dispatch(getServerChannelsThunk(0));
       setOpenChannels(false)
       setGoToChannels(false);
       setShowChannelMessages(false)
-      // }
     }
     setGoToChannels(false);
   };
