@@ -51,7 +51,7 @@ export const createChannel = (channel, serverId) => async (dispatch) => {
 
 // EDIT A CHANNEL
 
-const UPDATE_CHANNEL = "servers/UPDATE_CHANNEL";
+const UPDATE_CHANNEL = "channels/UPDATE_CHANNEL";
 
 const editChannel = (channel) => {
   return {
@@ -78,6 +78,33 @@ export const updateChannel =
 
 // DELETE A CHANNEL
 
+const DELETE_CHANNEL = "channels/DELETE_CHANNEL"
+
+const deleteChannel = (channel) => {
+  return {
+    type: DELETE_CHANNEL,
+    channel
+  }
+}
+
+export const deleteChannelThunk = (serverId, channelId) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/servers/${serverId}/channels/${channelId}/delete`,
+    {
+      method: "DELETE"
+    });
+
+    console.log("delete thunk:", res)
+
+    if (res.ok) {
+      const data = await res.json()
+      dispatch(deleteChannel(data))
+    }
+  }
+
+
+
+
 // ---------------------- REDUCER --------------------------
 const channels = (state = {}, action) => {
   let allChannels = {};
@@ -100,6 +127,10 @@ const channels = (state = {}, action) => {
         },
       };
       return allChannels;
+    case DELETE_CHANNEL:
+      let newState = { ...state };
+      delete newState[action.channel];
+      return newState;
     default:
       return state;
   }

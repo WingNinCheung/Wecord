@@ -117,14 +117,15 @@ def channels_edit(id, channelId):
 
 
 # delete a channel
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["DELETE"])
+@server_routes.route("/<int:serverId>/channels/<int:channelId>/delete", methods=["DELETE"])
 @login_required
-def delete_channel(channelId):
+def delete_channel(serverId, channelId):
+    print("********************backend delete")
     target_channel = Channel.query.filter_by(id=channelId)
     target_channel.delete()
     db.session.commit()
-    return jsonify({"Already deleted"})
-    # return jsonify(channelId)
+    # return jsonify({"Already deleted"})
+    return jsonify(channelId)
 
 
 # ------------------------- Routes for messages -------------------------------------
