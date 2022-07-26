@@ -40,7 +40,12 @@ export default function EditChannel({
     }
   };
 
-  const handleCancel = () => {};
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setEdit(false);
+    history.push("/home");
+  };
+
   return (
     <div>
       <h3>Update Yout Channel Here!</h3>
@@ -56,7 +61,7 @@ export default function EditChannel({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <button disabled={validationErrors.length > 0}>Edit</button>
+        <button disabled={validationErrors.length > 0}>Edit server</button>
         <button onClick={handleCancel}>Cancel</button>
       </form>
     </div>

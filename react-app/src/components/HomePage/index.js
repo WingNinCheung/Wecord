@@ -81,6 +81,7 @@ function HomePage() {
           <button
             onClick={() => {
               setEdit(true);
+              setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
           >
@@ -115,6 +116,7 @@ function HomePage() {
           <button
             onClick={() => {
               setEditChannel(true);
+              setEdit(false);
             }}
             disabled={loggedInUserId !== adminId}
           >
@@ -306,6 +308,7 @@ function HomePage() {
                 {serverChannels &&
                   serverChannels.map((channel) => (
                     <div
+                      key={channel.id}
                       onContextMenu={(e) => {
                         handleContextMenuChannel(e);
                         setLocation({ x: e.pageX, y: e.pageY });

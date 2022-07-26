@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { createChannel } from "../../../store/channel";
+import { getServerChannelsThunk } from "../../../store/channel";
+import { useLocation } from "react-router-dom";
 
 export default function CreateChannel() {
   const [title, setTitle] = useState("");
