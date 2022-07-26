@@ -9,29 +9,15 @@ server_user_routes = Blueprint("server_user_routes", __name__)
 @server_user_routes.route("/<int:serverId>")
 @login_required
 def all_server_users(serverId):
-    # server_users = []
-    # for data in db.session.query(User.id, User.username, Server_User).\
-    #                  filter(User.id==Server_User.userId).\
-    #                  filter(Server_User.serverId == id).all():
-    #                     server_users.append({
-    #                         "id": data[0]
-    #                     })
 
-    # servers = Server.query.get(id)
     servers = Server_User.query.filter(Server_User.serverId == serverId).all()
     server_users = [
         {"server": server.to_dict(), "user": server.user.to_dict()}
         for server in servers
     ]
-    # print("********", {"serverUser": server_users})
     return {"serverUser": server_users}
 
-    # for user in server.users:
-    #     server_users.update({user.user.id: user.user.username})
-    # print(server_users)
-    # return server_users
-    # return {{}for i in range(len(server_users))}
-    # return {"server_users": [server_user.to_dict() for server_user in server_users]}
+
 
 
 # CREATE /api/server_users

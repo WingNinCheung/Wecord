@@ -26,7 +26,7 @@ function HomePage() {
   if (defaultSelectedServerId) {
     defaultSelectedServerId = defaultSelectedServerId.id;
   }
-  // console.log("public server ", defaultSelectedServerId);
+
   const privateServers = allServersArray.filter(
     (server) =>
       server.private === true && server.master_admin === sessionUser.id
@@ -45,13 +45,14 @@ function HomePage() {
   );
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
-  const [openChannels, setOpenChannels] = useState(false);
+  const [openChannels, setOpenChannels] = useState(true);
   const [selectedChannelId, setSelectedChannelId] = useState("");
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false)
   const history = useHistory();
+
 
   // right-click menu section
   const [show, setShow] = useState(false);
@@ -68,10 +69,8 @@ function HomePage() {
     await dispatch(getAllServers());
   };
 
-  // console.log("react here", selectedServerId);
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
-    // console.log(data)
     let userInServer = false;
 
     for (let i of data) {
@@ -80,7 +79,6 @@ function HomePage() {
       }
     }
 
-    // console.log("userInServer", userInServer);
     if (userInServer) {
       setOpenChannels(true);
       setGoToChannels(true);
@@ -234,7 +232,6 @@ function HomePage() {
   const loadChannel = async () => {
     if (goToChannel) {
       const result = await dispatch(getServerChannelsThunk(selectedServerId));
-      console.log("result:", result);
       setGoToChannels(false);
     }
   };
@@ -245,7 +242,6 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
-  console.log("serverChannels:", serverChannels);
 
   //----------------------------------------------------
 
