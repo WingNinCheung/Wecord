@@ -30,7 +30,7 @@ def all_server_users(id):
 
 
 # CREATE /api/server_users
-@server_user_routes.route("/", methods=["POST"])
+@server_user_routes.route("/post", methods=["POST"])
 @login_required
 def new_server_user():
     serverId = request.json["serverId"]
@@ -40,7 +40,6 @@ def new_server_user():
         serverId= serverId,
         userId= userId
     )
-
     db.session.add(server_user)
     db.session.commit()
 

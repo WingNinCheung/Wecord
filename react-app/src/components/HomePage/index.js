@@ -45,6 +45,11 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const history = useHistory();
 
+  useEffect(() => {
+    console.log('goToChannel: ', goToChannel, 'openChannel: ', openChannels, 'selectedChannelId: ', selectedChannelId, 'showChannelMessages: ', showChannelMessages, 'goToChannelMessages', goToChannelMessages)
+
+  })
+
   // right-click menu section
   const [show, setShow] = useState(false);
   const [location, setLocation] = useState({ x: 0, y: 0 });
@@ -141,16 +146,16 @@ function HomePage() {
 
   // -------------------------------------------------
 
-  const getServerUsers = () => {
-    return dispatch(getAllServerUsers(selectedServerId))
+  const getServerUsers = async () => {
+    return await dispatch(getAllServerUsers(selectedServerId))
   }
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
     // if (goToChannel) {
     // check if user is a member of this server already
-    let serverUsers = getServerUsers();
-
+    let serverUsers = await getServerUsers();
+    console.log('-------------------------------------', serverUsers)
     let userInServer = false;
 
     if (serverUsers) {
@@ -164,6 +169,8 @@ function HomePage() {
     if (userInServer) {
       dispatch(getServerChannelsThunk(selectedServerId));
       setOpenChannels(true)
+      setGoToChannels(true);
+      setShowChannelMessages(false);
     }
 
     else {
@@ -176,7 +183,7 @@ function HomePage() {
 
   useEffect(() => {
     console.log("Entered loadChannel useEffect");
-    loadChannel();
+    // loadChannel();
   }, [dispatch, goToChannel]);
 
   const allChannels = useSelector((state) => state.channel);
@@ -233,10 +240,11 @@ function HomePage() {
                         setMainServer(true);
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
-                        setOpenChannels(true);
-                        setGoToChannels(true);
-                        setGoToChannelsMessages(false);
-                        setShowChannelMessages(false);
+                        // setOpenChannels(true);
+                        // setGoToChannels(true);
+                        // setGoToChannelsMessages(false);
+                        // setShowChannelMessages(false);
+                        loadChannel()
                       }}
                     >
                       {server.name}
@@ -268,9 +276,11 @@ function HomePage() {
                       setMainServer(true);
                       setSelectedServerId(server.id);
                       setName(server.name);
-                      setOpenChannels(true);
-                      setGoToChannels(true);
-                      setShowChannelMessages(false);
+                      // setOpenChannels(true);
+                      // setGoToChannels(true);
+                      // setShowChannelMessages(false);
+                      // setGoToChannels(!goToChannel)
+                      loadChannel()
                     }}
                   >
                     {server.name}
@@ -319,7 +329,7 @@ function HomePage() {
                 // Button to join a server if user is not in server
                 e.preventDefault()
                 await dispatch(addServerUser(loggedInUserId, selectedServerId))
-                await loadChannel()
+                // await setGoToChannels(!goToChannel)
               }}>
                 Join Server
               </button>
@@ -349,7 +359,7 @@ function HomePage() {
 
         <div className="userLists">
           <h3>Members</h3>
-            <DisplayServerUsers serverId = {selectedServerId} />
+          <DisplayServerUsers serverId={selectedServerId} />
         </div>
 
       </div>

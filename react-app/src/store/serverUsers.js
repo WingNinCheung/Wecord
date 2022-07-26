@@ -31,7 +31,7 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
         const data = await res.json();
 
         console.log("data from getAllServerUsers thunk------", data);
-
+        console.log('getallserversthunk,-----------', data)
         dispatch(getServerUsers(data));
         return data;
     }
@@ -39,7 +39,7 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
 
 export const addServerUser = (userId, serverId) => async (dispatch) => {
     // /api/server_users
-    const res = await fetch('/api/server_users/', {
+    const res = await fetch('/api/server_users/post', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, serverId }),
@@ -47,7 +47,7 @@ export const addServerUser = (userId, serverId) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-
+        console.log('addserverthunk----------', data)
         dispatch(addUserToServer(data));
         return data;
     }
