@@ -1,6 +1,8 @@
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, session, redirect
+from sqlalchemy.orm import contains_eager, joinedload, Load
 from flask_login import login_required
-from ..models.db import Server_User, db
+from ..models.db import Server_User, Server, db
+from ..models.user import User
 
 server_user_routes = Blueprint("server_user_routes", __name__)
 
@@ -8,8 +10,24 @@ server_user_routes = Blueprint("server_user_routes", __name__)
 @server_user_routes.route("/<int:id>")
 @login_required
 def all_server_users(id):
-    server_users = Server_User.query.filter(Server_User.serverId == id).all()
-    return {"server_users": [server_user.to_dict() for server_user in server_users]}
+    # server_users = []
+    # for data in db.session.query(User.id, User.username, Server_User).\
+    #                  filter(User.id==Server_User.userId).\
+    #                  filter(Server_User.serverId == id).all():
+    #                     server_users.append({
+    #                         "id": data[0]
+    #                     })
+
+    server = Server.query.get(id)
+    server_users = dict()
+    for user in server.users:
+        server_users.update({user.user.id: user.user.username})
+    print(server_users)
+
+    return server_users
+    # return {{}for i in range(len(server_users))}
+    # return {"server_users": [server_user.to_dict() for server_user in server_users]}
+
 
 # CREATE /api/server_users - read all servers
 @server_user_routes.route("/", methods=["POST"])

@@ -30,7 +30,7 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
 
-        // console.log("data from getAllServerUsers------", data);
+        console.log("data from getAllServerUsers thunk------", data);
 
         dispatch(getServerUsers(data));
         return data;
@@ -59,11 +59,9 @@ export const leaveServer = (userId, serverId) => async (dispatch) => {
     const res = await fetch(`api/server_users/${serverId}/${userId}`, {
         method: 'DELETE'
     })
-    console.log('from del thunk ----------------------------', res)
 
     if (res.ok) {
         const data = await res.json()
-        console.log('from del thunk for data ----------------------------', data)
 
         dispatch(deleteUserInServer(data))
         return data
@@ -76,9 +74,7 @@ const serverUsers = (state = {}, action) => {
 
     switch (action.type) {
         case GET_ALL_SERVERUSERS:
-            action.serverUsers.server_users.forEach(serverUser => {
-                newState[serverUser.id] = serverUser
-            });
+            newState = { ...action.serverUsers }
             return newState;
         case ADD_SERVERUSER:
             newState = {

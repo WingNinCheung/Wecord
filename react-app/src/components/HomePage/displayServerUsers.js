@@ -4,10 +4,19 @@ import { useHistory } from "react-router-dom";
 
 export default function DisplayServerUsers({ serverId }) {
 
-    const serverUsers = useSelector(state => state.serverUsers.server_users)
+    const serverUsers = useSelector(state => state.serverUsers)
 
     if (serverUsers) {
-        console.log("SERVER USERS displayServerUserse component: ", serverUsers.server_users)
+        console.log("SERVER USERS displayServerUserse component: ", serverUsers)
+        console.log(Object.values(serverUsers)[0]);
+    }
+
+    const mapServerUsers = () => {
+        {serverUsers && Object.values(serverUsers).map(userInfo => {
+            <li key = {userInfo.id}>
+                {userInfo.userId}
+            </li>
+        })}
     }
 
     if (!serverId) return <p>"Loading users"</p>
@@ -15,12 +24,7 @@ export default function DisplayServerUsers({ serverId }) {
     <div>
         { serverId &&
         <ul>
-            {serverUsers && Object.values(serverUsers).map(user => {
-                <li key = {user.userId}>
-                    {user}
-                </li>
-
-            })}
+            {mapServerUsers()}
         </ul>
         }
     </div>

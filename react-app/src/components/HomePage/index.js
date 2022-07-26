@@ -356,9 +356,10 @@ function HomePage() {
           )}
         </div>
 
-        <div className="userLists"></div>
+        <div className="userLists">
           <h3>Members</h3>
             <DisplayServerUsers serverId = {selectedServerId} />
+        </div>
       </div>
 
       <div className="updateServerForm">
