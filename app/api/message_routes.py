@@ -26,16 +26,21 @@ def create_message():
 
 
 # edit message
-@message_routes.route("/<int:messageId>/edit", methods=["PUT"])
+@message_routes.route("/<int:userId>/<int:messageId>/edit", methods=["PUT"])
 @login_required
-def channels_edit(messageId):
+def channels_edit(userId, messageId):
 
     message = Message.query.get(messageId)
-    message.message = request.json["message"]
 
-    db.session.commit()
-    return message.to_dict()
+    if userId == message.userId:
+        message.message = request.json["message"]
+        db.session.commit()
+        return message.to_dict()
+    else:
+        return jsonify({"Only the message author may edit this message"})
 
+
+# delete message
 @message_routes.route("/<int:userId>/<int:messageId>/delete", methods=["DELETE"])
 def delete_server(userId, messageId):
     # userId is the id of the user submitting this request

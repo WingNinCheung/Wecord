@@ -5,10 +5,18 @@ import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
+
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
+import CreateMessageForm from "./message";
+
+
+
+
+
 
 function HomePage() {
+
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -229,7 +237,10 @@ function HomePage() {
 
   // ------------------------------------------------
 
-  // create a channel
+  // create a message
+
+  const [message, setMessage] = useState("")
+
 
   return (
     <div>
@@ -361,21 +372,26 @@ function HomePage() {
           <h3>messages</h3>
           {showChannelMessages ? (
             <div>
-              <ul className="messagesDisplay">
-                {channelMessagesArr &&
-                  channelMessagesArr.map((message) => (
-                    <li key={message.id}>
-                      <button className="singleMessageDisplay">
-                        {message.message}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
+              <div>
+                <ul className="messagesDisplay">
+                  {channelMessagesArr &&
+                    channelMessagesArr.map((message) => (
+                      <li key={message.id}>
+                        <button className="singleMessageDisplay">
+                          {message.message}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+
             </div>
           ) : (
             <div> </div>
           )}
         </div>
+
+        <createMessageForm channelId={selectedChannelId}/>
 
         <div className="userLists"></div>
       </div>

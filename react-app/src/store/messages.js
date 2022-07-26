@@ -36,12 +36,12 @@ const deleteChannelMessage = (message) => {
 }
 
 //get
-export const getChannelMessagesThunk = (channelId) => async(dispatch) => {
-    console.log("thunk id:", channelId )
+export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
+    console.log("thunk id:", channelId)
     const res = await fetch(`/api/servers/channels/${channelId}`)
     // const res = await fetch(`/api/servers/${serverId}/${channelId}`)
 
-    if(res.ok){
+    if (res.ok) {
         const channelMessages = await res.json()
         console.log("thunk:", channelMessages)
         dispatch(getChannelMessages(channelMessages))
@@ -52,31 +52,74 @@ export const getChannelMessagesThunk = (channelId) => async(dispatch) => {
 // Create
 export const createMessage = (message) => async (dispatch) => {
 
-    const res = await fetch("/api/servers/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(server),
+    const res = await fetch("/api/messages/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message),
     });
 
     console.log(res);
     if (res.ok) {
-      const data = await res.json;
+        const data = await res.json;
 
-      dispatch(addServer(data));
-      return data;
+        dispatch(createChannelMessage(data));
+        return data;
     }
 };
 
+// EDIT MESSGAE THUNK
+export const editMessage = (userId, messageId, message) => async(dispatch) => {
+    const res = await fetch(`/api/messages/${userId}/${messageId}/edit`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message)
+      });
+
+      const data = await res.json()
+      dispatch(editChannelMessage(data))
+}
+
+//DELETE THUNK
+export const deleteMessage = (userId, messageId) => async (dispatch) => {
+
+    const res = await fetch(`/api/messages/${userId}/${messageId}/delete`, {
+      method: "DELETE"
+    });
+
+    if (res.ok) {
+      const data = await res.json()
+      dispatch(deleteChannelMessage(data))
+    }
+
+  }
+
 
 // ------------------------- REDUCER -----------------------------
-const messages = (state={}, action) => {
+const messages = (state = {}, action) => {
     let messages = {}
-    switch(action.type){
+    switch (action.type) {
         case GET_CHANNEL_MESSAGES:
             console.log("in the reducer", action.messages.messages)
             action.messages.messages.forEach((message) => {
                 messages[message.id] = message
             })
+            return messages;
+        case MAKE_NEW_MESSAGE:
+            if (!state[action.message.id]) {
+                messages = { ...state, [action.message.id]: action.message };
+                return messages;
+            }
+            messages = {
+                ...state,
+                [action.message.id]: {
+                    ...state[action.message.id],
+                    ...action.message,
+                },
+            };
+            return messages;
+        case DELETE_MESSAGE:
+            messages = { ...state };
+            delete messages[action.message];
             return messages;
         default:
             return state;
