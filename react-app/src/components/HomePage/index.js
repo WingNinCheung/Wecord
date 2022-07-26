@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
+import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
+import EditChannel from "./Channel/editChannel";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -31,19 +33,24 @@ function HomePage() {
   const [name, setName] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [mainServer, setMainServer] = useState(false);
-  const [selectedServerId, setSelectedServerId] = useState(1);
+  const [selectedServerId, setSelectedServerId] = useState("");
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
-  const [selectedChannelId, setSelectedChannelId] = useState(1);
+  const [selectedChannelId, setSelectedChannelId] = useState("");
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
+  const [channelName, setChannelName] = useState("");
   const history = useHistory();
 
   // right-click menu section
   const [show, setShow] = useState(false);
+  const [channelShow, setChannelShow] = useState(false);
   const [location, setLocation] = useState({ x: 0, y: 0 });
+
+  // the server edit
   const [edit, setEdit] = useState(false);
+  const [editChannel, setEditChannel] = useState(false);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -51,7 +58,10 @@ function HomePage() {
     await dispatch(getAllServers());
   };
 
-  // Right click menu
+  console.log("show is", show);
+  console.log("channelShow is ", channelShow);
+
+  // Right click server menu
   const Menu = ({ x, y }) => {
     return (
       <div
@@ -71,10 +81,46 @@ function HomePage() {
           <button
             onClick={() => {
               setEdit(true);
+              setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
           >
-            Edit Name
+            Edit Server
+          </button>
+        </div>
+        <div>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+            Delete
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const ChannelMenu = ({ x, y }) => {
+    return (
+      <div
+        style={{
+          borderRadius: "4px",
+          padding: "10px",
+          border: "1px solid black",
+          boxSizing: "border-box",
+          width: "200px",
+          position: "absolute",
+          top: `${x}px`,
+          left: `${y}px`,
+          backgroundColor: "gray",
+        }}
+      >
+        <div>
+          <button
+            onClick={() => {
+              setEditChannel(true);
+              setEdit(false);
+            }}
+            disabled={loggedInUserId !== adminId}
+          >
+            Edit Channel
           </button>
         </div>
         <div>
@@ -109,17 +155,22 @@ function HomePage() {
   const handleContextMenu = (e) => {
     e.preventDefault();
     setShow(true);
+    setChannelShow(false);
   };
-  // const handleUserClick = (e) => {
-  //     e.preventDefault();
-  //     setAdminId(server.master_admin)
-  //     console.log(adminId)
 
-  // }
+  const handleContextMenuChannel = (e) => {
+    e.preventDefault();
+    setChannelShow(true);
+    setShow(false);
+  };
 
   // left click anywhere will make the right-click menu disappear
   useEffect(() => {
-    const handleClick = () => setShow(false);
+    const handleClick = () => {
+      setShow(false);
+      setChannelShow(false);
+    };
+
     window.addEventListener("click", handleClick);
 
     return () => window.removeEventListener("click", handleClick);
@@ -151,6 +202,7 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
+  console.log("serverChannels:", serverChannels);
 
   //----------------------------------------------------
 
@@ -170,6 +222,8 @@ function HomePage() {
   }, [dispatch, goToChannelMessages]);
 
   // ------------------------------------------------
+
+  // create a channel
 
   return (
     <div>
@@ -215,14 +269,6 @@ function HomePage() {
               ))}
             {show && <Menu x={location.y} y={location.x} />}
           </ul>
-          {/* <ul>
-                    {publicServers &&
-                        publicServers.map((server) => (
-                            <li key={server.id}>
-                                <button onClick={handleUserClick}>{server.name}</button>
-                            </li>
-                        ))}
-                </ul> */}
         </div>
 
         <div className="privateServers">
@@ -251,34 +297,57 @@ function HomePage() {
 
         <div className="serverChannels">
           <h3>Channels</h3>
+          {adminId === loggedInUserId && selectedServerId && (
+            <NavLink to={`/${selectedServerId}/channels/create`}>
+              create a channel
+            </NavLink>
+          )}
           {openChannels ? (
             <div>
               <ul className="channelsDisplay">
                 {serverChannels &&
                   serverChannels.map((channel) => (
-                    // <li key={channel.id}>
-                    //     <button onClick={handleChannelClick}>{channel.title}</button>
-                    // </li>
-                    <li key={channel.id}>
-                      <div>
-                        <i class="fa-solid fa-hashtag"></i>
-                      </div>
-                      <button
-                        className="singleChannelDisplay"
-                        onClick={() => {
-                          setSelectedChannelId(channel.id);
-                          setShowChannelMessages(true);
-                          setGoToChannelsMessages(true);
-                        }}
-                      >
-                        {channel.title}
-                      </button>
-                    </li>
+                    <div
+                      key={channel.id}
+                      onContextMenu={(e) => {
+                        handleContextMenuChannel(e);
+                        setLocation({ x: e.pageX, y: e.pageY });
+                        setSelectedChannelId(channel.id);
+                        setChannelName(channel.title);
+                      }}
+                    >
+                      <li key={channel.id} value={channel.serverId}>
+                        <div>
+                          <i class="fa-solid fa-hashtag"></i>
+                        </div>
+
+                        <button
+                          className="singleChannelDisplay"
+                          onClick={() => {
+                            setSelectedChannelId(channel.id);
+                            setShowChannelMessages(true);
+                            setGoToChannelsMessages(true);
+                          }}
+                        >
+                          {channel.title}
+                        </button>
+                      </li>
+                    </div>
                   ))}
+                {channelShow && <ChannelMenu x={location.y} y={location.x} />}
               </ul>
             </div>
           ) : (
             <div> </div>
+          )}
+
+          {editChannel && (
+            <EditChannel
+              serverId={selectedServerId}
+              channelId={selectedChannelId}
+              setEdit={setEditChannel}
+              channelTitle={channelName}
+            />
           )}
         </div>
 

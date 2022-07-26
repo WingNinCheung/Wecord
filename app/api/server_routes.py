@@ -50,21 +50,22 @@ def new_server():
 # # TODO: copy/paste public version once that's debugged
 
 # PUT /api/servers/:serverId - update server info
-@server_routes.route('/<int:id>/edit', methods= ['PUT'])
+@server_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_server(id):
     server = Server.query.get(id)
     data = request.json
-    print('data')
+    print("data")
     # server.master_admin = current_user.id
-    server.name = data['name']
+    server.name = data["name"]
     # server.private skip for now
     # server.picture = data['picture']
     db.session.commit()
     return server.to_dict()
 
+
 # DELETE /api/servers/:serverId - delete a server
-@server_routes.route('/<int:id>/delete', methods=['DELETE'])
+@server_routes.route("/<int:id>/delete", methods=["DELETE"])
 def delete_server(id):
     print(id)
     print(current_user.get_id())
@@ -78,8 +79,6 @@ def delete_server(id):
         return jsonify({"Only the server admin may delete this server"})
 
 
-
-
 # ------------------------- Routes for channels -------------------------------------
 # read all channels of a single server
 @server_routes.route("/<int:id>/channels")
@@ -89,15 +88,13 @@ def get_server_channels(id):
     serverchannels = server.to_dict()
     return {"channels": serverchannels["channels"]}
 
-# create a new channel in a server
-@server_routes.route("/channels/create", methods=["post"])
-@login_required
-def create_channels():
 
-    newChannel = Channel(
-        title=request.json["title"],
-        serverId=request.json["serverId"]
-    )
+# create a new channel in a server
+@server_routes.route("/<int:serverId>/channels/create", methods=["post"])
+@login_required
+def create_channels(serverId):
+
+    newChannel = Channel(title=request.json["title"], serverId=request.json["serverId"])
 
     db.session.add(newChannel)
     db.session.commit()
@@ -105,14 +102,19 @@ def create_channels():
 
 
 # edit a channel
-@server_routes.route("/<int:id>/channels/<int:channelId>", methods=["PUT"])
+@server_routes.route("/<int:id>/channels/<int:channelId>/edit", methods=["PUT"])
 @login_required
-def channels_edit(channelId):
-    title = request.json["title"]
+def channels_edit(id, channelId):
+
+    # channel = Channel.query.filter(Channel.id == channelId).all()
     channel = Channel.query.get(channelId)
+    title = request.json["title"]
+    print((channel))
     channel.title = title
+    db.session.add(channel)
     db.session.commit()
     return channel.to_dict()
+
 
 # delete a channel
 @server_routes.route("/<int:id>/channels/<int:channelId>", methods=["DELETE"])
@@ -123,7 +125,6 @@ def delete_channel(channelId):
     db.session.commit()
     return jsonify({"Already deleted"})
     # return jsonify(channelId)
-
 
 
 # ------------------------- Routes for messages -------------------------------------
@@ -137,6 +138,7 @@ def delete_channel(channelId):
 #     print("backend target channel:")
 #     print(target_channel["messages"])
 #     return {target_channel["messages"]}
+
 
 @server_routes.route("/channels/<int:id>")
 @login_required
