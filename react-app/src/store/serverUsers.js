@@ -30,7 +30,7 @@ export const getAllServerUsers = (serverId) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
 
-        console.log("data from getAllServerUsers------", data);
+        // console.log("data from getAllServerUsers------", data);
 
         dispatch(getServerUsers(data));
         return data;

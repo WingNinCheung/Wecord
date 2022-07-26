@@ -5,7 +5,11 @@ import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getAllServerUsers, addServerUser, leaveServer } from "../../store/serverUsers";
 import { getServerChannelsThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
+
+import DisplayServerUsers from "./displayServerUsers";
+
 import "./HomePage.css";
+
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -137,21 +141,31 @@ function HomePage() {
 
   // -------------------------------------------------
 
+  const getServerUsers = () => {
+    return dispatch(getAllServerUsers(selectedServerId))
+  }
+
+  // const getServerUsers = async () => {
+  //   return await dispatch(getAllServerUsers(selectedServerId))
+  // }
+
+
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
     // if (goToChannel) {
     // check if user is a member of this server already
-    let serverUsers = await dispatch(getAllServerUsers(selectedServerId))
-    serverUsers = serverUsers.server_users
+    let serverUsers = getServerUsers();
+    serverUsers = serverUsers.server_users;
 
-    let userInServer = false
+    let userInServer = false;
 
-    serverUsers.forEach(su => {
-      if (su.userId == loggedInUserId) {
-
-        userInServer = true
-      }
-    })
+    if (serverUsers) {
+      serverUsers.forEach(su => {
+        if (su.userId == loggedInUserId) {
+          userInServer = true;
+        }
+      });
+    }
 
     if (userInServer) {
       dispatch(getServerChannelsThunk(selectedServerId));
@@ -338,11 +352,13 @@ function HomePage() {
               </ul>
             </div>
           ) : (
-            <div> </div>
+            <div>"No messages :("</div>
           )}
         </div>
 
         <div className="userLists"></div>
+          <h3>Members</h3>
+            <DisplayServerUsers serverId = {selectedServerId} />
       </div>
 
       <div className="updateServerForm">

@@ -1,11 +1,6 @@
 from flask import Blueprint, request, redirect
-from flask.json import dumps, jsonify
-from flask_login import login_required, current_user
-from sqlalchemy import delete
-from ..models.db import Server_User, db, Server, Channel
-
-
-
+from flask_login import login_required
+from ..models.db import Server_User, db
 
 server_user_routes = Blueprint("server_user_routes", __name__)
 
@@ -20,7 +15,6 @@ def all_server_users(id):
 @server_user_routes.route("/", methods=["POST"])
 @login_required
 def new_server_user():
-    print("********************", request.json)
     serverId = request.json["serverId"]
     userId = request.json["userId"]
 
@@ -37,11 +31,8 @@ def new_server_user():
 @server_user_routes.route("/<int:serverId>/<int:userId>", methods=["DELETE"])
 @login_required
 def leave_server(serverId, userId):
-    print('we hit this route ------------------------------------------------')
     serverUser = Server_User.query.filter(Server_User.serverId == serverId, Server_User.userId == userId).all()
-    # hello = filter(serverUser, lambda e: e.userId == userId and e.serverId == serverId)
-    print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', serverUser[0])
-    # print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++', hello)
+    # su is session user btw
     su = serverUser[0]
     db.session.delete(su)
     db.session.commit()

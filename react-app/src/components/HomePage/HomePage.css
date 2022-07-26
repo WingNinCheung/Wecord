@@ -7,7 +7,9 @@
 
 }
 
-.publicServers{
+.publicServers,
+.privateServers,
+.userLists {
     color:white;
     display: flex;
     width: 15%;
@@ -19,7 +21,7 @@
     min-height: 0;
 }
 
-.privateServers{
+/* .privateServers{
     color:white;
     display: flex;
     width: 15%;
@@ -29,7 +31,7 @@
     background-color: #202225;
     overflow: hidden;
     min-height: 0;
-}
+} */
 
 .updateServerForm{
     margin-left:3rem;
