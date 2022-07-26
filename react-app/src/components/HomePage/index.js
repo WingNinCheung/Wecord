@@ -7,7 +7,7 @@ import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
-import { getAllServerUsers } from "../../store/serverUser";
+import { getAllServerUsers, addServerUser } from "../../store/serverUser";
 import Member from "../../components/HomePage/member";
 
 function HomePage() {
@@ -255,6 +255,39 @@ function HomePage() {
 
   // ------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleJoin = async (e) => {
+    e.preventDefault()
+    await dispatch(addServerUser(loggedInUserId, selectedServerId))
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // create a channel
 
   return (
@@ -372,7 +405,7 @@ function HomePage() {
             </div>
           ) : (
             <div>
-              <button>Join Server</button>
+              <button onClick={handleJoin}>Join Server</button>
             </div>
           )}
 

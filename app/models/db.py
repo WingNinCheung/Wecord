@@ -11,8 +11,8 @@ class Server_User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     serverId = Column(Integer, db.ForeignKey("servers.id"), nullable=False)
     userId = Column(Integer, db.ForeignKey("users.id"), nullable=False)
-    adminStatus = Column(Boolean)
-    muted = Column(Boolean)
+    adminStatus = Column(Boolean, default=False)
+    muted = Column(Boolean, default=False)
 
     server = relationship("Server", back_populates="users")
     user = relationship("User", back_populates="server")

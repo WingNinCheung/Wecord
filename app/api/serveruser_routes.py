@@ -43,7 +43,7 @@ def new_server_user():
     server_user = Server_User(serverId=serverId, userId=userId)
     db.session.add(server_user)
     db.session.commit()
-    return server_user.to_dict()
+    return {"server": server_user.to_dict(), "user": server_user.user.to_dict()}
 
 
 @server_user_routes.route("/<int:serverId>/<int:userId>", methods=["DELETE"])
