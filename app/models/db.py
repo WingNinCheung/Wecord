@@ -60,7 +60,7 @@ class Channel(db.Model):
     title = Column(String(30), nullable=False)
 
     # relationships
-    server = relationship("Server", back_populates="channels", cascade="all, delete")
+    server = relationship("Server", back_populates="channels")
     messages = relationship("Message", back_populates="channel", cascade="all, delete")
 
     def to_dict(self):

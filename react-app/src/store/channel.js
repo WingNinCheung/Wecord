@@ -77,6 +77,30 @@ export const updateChannel =
   };
 
 // DELETE A CHANNEL
+const DELETE_CHANNEL = "channels/DELETE_CHANNEL"
+
+const deleteChannel = (channel) => {
+  return {
+    type: DELETE_CHANNEL,
+    channel
+  }
+}
+
+export const deleteChannelThunk = (serverId, channelId) =>
+  async (dispatch) => {
+    const res = await fetch(`/api/servers/${serverId}/channels/${channelId}/delete`,
+      {
+        method: "DELETE"
+      });
+
+    console.log("delete thunk:", res)
+
+    if (res.ok) {
+      const data = await res.json()
+      dispatch(deleteChannel(data))
+    }
+  }
+
 
 // ---------------------- REDUCER --------------------------
 const channels = (state = {}, action) => {

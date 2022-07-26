@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
-import { getServerChannelsThunk } from "../../store/channel";
+import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
@@ -63,10 +63,16 @@ function HomePage() {
   const [edit, setEdit] = useState(false);
   const [editChannel, setEditChannel] = useState(false);
 
+
   const handleDelete = async (e) => {
     e.preventDefault();
-    await dispatch(deleteServer(selectedServerId));
-    await dispatch(getAllServers());
+    await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId))
+    await loadChannel()
+  };
+  const handleDeleteServer = async (e) => {
+    e.preventDefault();
+    await dispatch(deleteServer(selectedServerId))
+    await dispatch(getAllServers())
   };
 
   const checkUserinServer = async (serverId) => {
@@ -125,7 +131,7 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+          <button onClick={handleDeleteServer} disabled={loggedInUserId !== adminId}>
             Delete
           </button>
         </div>
@@ -230,10 +236,10 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
-    if (goToChannel) {
-      const result = await dispatch(getServerChannelsThunk(selectedServerId));
-      setGoToChannels(false);
-    }
+
+    const result = await dispatch(getServerChannelsThunk(selectedServerId));
+    setGoToChannels(false);
+
   };
 
   useEffect(() => {
@@ -361,9 +367,26 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-            <NavLink to={`/${selectedServerId}/channels/create`}>
-              create a channel
-            </NavLink>
+
+            // <NavLink to={`/${selectedServerId}/channels/create`}>
+            //   create a channel
+            // </NavLink>
+
+            <CreateChannel props={{ serverId: selectedServerId, loadChannel }} />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           )}
           {openChannels ? (
             <div>
