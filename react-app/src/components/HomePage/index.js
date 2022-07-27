@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { getAllUsers } from "../../store/user";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import {
   getServerChannelsThunk,
@@ -29,6 +29,14 @@ import "./HomePage.css";
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
+  const allUsers = useSelector((state) => state.users);
+  // const allUserArr = Object.values(allUsers);
+  console.log("all user ", allUsers);
 
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
@@ -283,6 +291,7 @@ function HomePage() {
   // READ ALL MESSAGES OF A SINGLE CHANNEL
   const channelMessages = useSelector((state) => state.messages);
   const channelMessagesArr = Object.values(channelMessages);
+  console.log("channel msg are ", channelMessages);
 
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
@@ -469,7 +478,8 @@ function HomePage() {
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
                       <div key={message.id} className="singleMessageDisplay">
-                        {message.message}
+                        {sessionUser.username}
+                        <div>{message.message}</div>
                         <span
                           onClick={() => {
                             setMessageId(message.id);
