@@ -399,7 +399,7 @@ function HomePage() {
                 <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} />
               </div>
 
-              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id}/>)}
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} />)}
 
             </div>
           ) : (

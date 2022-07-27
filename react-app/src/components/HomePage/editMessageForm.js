@@ -4,7 +4,7 @@ import { createMessage, getChannelMessagesThunk} from "../../store/messages";
 import { editMessageThunk } from "../../store/messages";
 import { useHistory } from "react-router-dom";
 
-export default function EditMessageForm({ messageId, userId }) {
+export default function EditMessageForm({ messageId, userId, setShow }) {
 
     console.log("chlid:", messageId, userId)
 
@@ -22,23 +22,13 @@ export default function EditMessageForm({ messageId, userId }) {
             message:editMessage
         };
 
-        console.log("Message data--------------: ", data)
-
         await dispatch(editMessageThunk(userId, messageId, data));
-
-        // if (newMessage) {
-        //     // dynamically load messages again
-        //     await dispatch(getMessages(channelId));
-        // }
-
-        // if (updatedMessage) {
-        //     history.push("/home");
-        //   }
 
     }
 
     const handleCancel = (e) => {
         e.preventDefault();
+        setShow(false)
         history.push("/home");
       };
 
