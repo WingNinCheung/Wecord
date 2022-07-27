@@ -97,7 +97,6 @@ function HomePage() {
     setSelectedServerId("");
     setOpenChannels(false);
     checkUserinServer(selectedServerId);
-    setOpenChannels(true);
   };
 
   const checkUserinServer = async (serverId) => {
@@ -443,10 +442,12 @@ function HomePage() {
                 {channelShow && <ChannelMenu x={location.y} y={location.x} />}
               </ul>
             </div>
-          ) : (
+          ) : selectedServerId ? (
             <div>
               <button onClick={handleJoin}>Join Server</button>
             </div>
+          ) : (
+            <div></div>
           )}
 
           {editChannel && (
