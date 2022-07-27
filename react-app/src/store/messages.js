@@ -130,7 +130,7 @@ const messages = (state = {}, action) => {
             // messages = { ...state };
             // delete messages[action.message];
             // return messages;
-            console.log("in the reducer:", state.messages)
+            console.log("in the reducer:", state)
             return state.messages.filter(message => (
                 message.id != action.message
             ))

@@ -58,7 +58,7 @@ def delete_server(userId, messageId):
     if userId == message.userId:
         db.session.delete(message)
         db.session.commit()
-    return jsonify(messageId)
+        return jsonify(messageId)
     # return message.to_dict()
     else:
         return jsonify({"Only the message author may delete this message"})
