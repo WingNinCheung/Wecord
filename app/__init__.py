@@ -5,6 +5,8 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
+from .websocket import socketio
+
 from .models import User
 from .models.db import db
 from .api.user_routes import user_routes
@@ -43,6 +45,9 @@ app.register_blueprint(server_user_routes, url_prefix="/api/server_users")
 db.init_app(app)
 Migrate(app, db)
 
+# initialize our app with our socketio instance
+socketio.init_app(app)
+
 # Application Security
 CORS(app)
 
@@ -79,3 +84,8 @@ def react_root(path):
     if path == "favicon.ico":
         return app.send_static_file("favicon.ico")
     return app.send_static_file("index.html")
+
+
+# run our chat app
+if __name__ == '__main__':
+    socketio.run(app)
