@@ -468,31 +468,26 @@ function HomePage() {
                 <div className="messagesDisplay">
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
-                      <div key={message.id}>
-                        <button
-                          className="singleMessageDisplay"
-                          onClick={() => setMessageId(message.id)}
+                      <div key={message.id} className="singleMessageDisplay">
+                        {message.message}
+                        <span
+                          onClick={() => {
+                            setMessageId(message.id);
+                            setOpenEditForm(true);
+                            setMessageUserId(message.userId);
+                          }}
                         >
-                          {message.message}
-                          <div
-                            onClick={() => {
-                              setMessageId(message.id);
-                              setOpenEditForm(true);
-                              setMessageUserId(message.userId);
-                            }}
-                          >
-                            <i className="fa-solid fa-pen-to-square"></i>
-                          </div>
-                          <div
-                            onClick={() => {
-                              setMessageId(message.id);
-                              setDeleteStatus(true);
-                              setMessageUserId(message.userId);
-                            }}
-                          >
-                            <i className="fa-solid fa-trash-can"></i>
-                          </div>
-                        </button>
+                          <i className="fa-solid fa-pen-to-square"></i>
+                        </span>
+                        <div
+                          onClick={() => {
+                            setMessageId(message.id);
+                            setDeleteStatus(true);
+                            setMessageUserId(message.userId);
+                          }}
+                        >
+                          <i className="fa-solid fa-trash-can"></i>
+                        </div>
                       </div>
                     ))}
                 </div>
