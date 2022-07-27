@@ -298,9 +298,6 @@ function HomePage() {
     }
   }
 
-  // console.log("all user ", allUserArr[0]);
-  // console.log("all msg ", channelMessagesArr[0].userId);
-
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
       const result = await dispatch(getChannelMessagesThunk(selectedChannelId));
@@ -477,34 +474,40 @@ function HomePage() {
         </div>
 
         <div className="messagesContainer">
-          <h3>messages</h3>
+          {/* <h3>Messages</h3> */}
 
           {showChannelMessages ? (
             <div>
-              <div>
+              <div className="container-message">
                 <div className="messagesDisplay">
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
                       <div key={message.id} className="singleMessageDisplay">
-                        {message.username}
-                        <div>{message.message}</div>
-                        <span
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setOpenEditForm(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-pen-to-square"></i>
-                        </span>
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setDeleteStatus(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
+                        <div className="username">
+                          <i className="fa-solid fa-user"></i>
+                          {message.username}
+                        </div>
+                        <div className="msg-body">
+                          {message.message}
+
+                          <span
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setOpenEditForm(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </span>
+                          <span
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setDeleteStatus(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
+                          </span>
                         </div>
                       </div>
                     ))}
