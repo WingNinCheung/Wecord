@@ -5,8 +5,10 @@ import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 
+
 import EditChannel from "./Channel/editChannel";
 import CreateMessageForm from "./message";
+import EditMessageForm from "./editMessageForm";
 import CreateChannel from "./Channel/createChannel";
 
 import "./HomePage.css";
@@ -234,9 +236,11 @@ function HomePage() {
 
   // ------------------------------------------------
 
-  // create a message
+  // Edit a message
 
-  const [message, setMessage] = useState("")
+  const [openEditForm, setOpenEditForm] = useState(false)
+  const [messageId, setMessageId] = useState("")
+
 
 
   return (
@@ -367,6 +371,7 @@ function HomePage() {
 
         <div className="messagesContainer">
           <h3>messages</h3>
+
           {showChannelMessages ? (
             <div>
               <div>
@@ -374,16 +379,27 @@ function HomePage() {
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
                       <li key={message.id}>
-                        <button className="singleMessageDisplay">
+                        <button className="singleMessageDisplay"
+                          onClick={() => setMessageId(message.id)}
+
+                        >
                           {message.message}
                         </button>
+                        <div onClick={() => {
+                          setMessageId(message.id);
+                          setOpenEditForm(true)
+                        }}>
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
                       </li>
                     ))}
                 </ul>
               </div>
               <div className="message-form form">
-                <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk}/>
+                <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} />
               </div>
+
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id}/>)}
 
             </div>
           ) : (
@@ -392,7 +408,11 @@ function HomePage() {
         </div>
 
 
-        <div className="userLists"></div>
+
+
+        <div className="userLists">
+
+        </div>
       </div>
 
       <div className="updateServerForm">

@@ -20,12 +20,12 @@ const createChannelMessage = (message) => {
 }
 
 // update
-const editChannelMessage = (message) => {
-    return {
-        type: EDIT_MESSAGE,
-        message
-    }
-}
+// const editChannelMessage = (message) => {
+//     return {
+//         type: EDIT_MESSAGE,
+//         message
+//     }
+// }
 
 // delete
 const deleteChannelMessage = (message) => {
@@ -68,16 +68,24 @@ export const createMessage = (message) => async (dispatch) => {
     }
 };
 
+// ---------------------------------------------
+const editChannelMessage = (message) => {
+    return {
+        type: EDIT_MESSAGE,
+        message
+    }
+}
 // EDIT MESSGAE THUNK
-export const editMessage = (userId, messageId, message) => async(dispatch) => {
+export const editMessageThunk = (userId, messageId, message) => async(dispatch) => {
+    console.log("in the thunk:", userId, messageId, message)
     const res = await fetch(`/api/messages/${userId}/${messageId}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(message)
+        body: JSON.stringify(message),
       });
 
       const data = await res.json()
-      dispatch(editChannelMessage(data))
+      dispatch(createChannelMessage(data))
 }
 
 //DELETE THUNK
