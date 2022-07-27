@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { getAllUsers } from "../../store/user";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import {
   getServerChannelsThunk,
@@ -25,10 +25,15 @@ import {
 import Member from "../../components/HomePage/member";
 
 import "./HomePage.css";
+import "./message.css";
 
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
@@ -284,6 +289,16 @@ function HomePage() {
   const channelMessages = useSelector((state) => state.messages);
   const channelMessagesArr = Object.values(channelMessages);
 
+  const allUsers = useSelector((state) => state.users);
+  const allUserArr = Object.values(allUsers);
+
+  for (let i = 0; i < channelMessagesArr.length; i++) {
+    for (let j = 0; j < allUserArr.length; j++) {
+      if (channelMessagesArr[i].userId == allUserArr[j].id)
+        channelMessagesArr[i]["username"] = allUserArr[j].username;
+    }
+  }
+
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
       const result = await dispatch(getChannelMessagesThunk(selectedChannelId));
@@ -401,10 +416,6 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-            // <NavLink to={`/${selectedServerId}/channels/create`}>
-            //   create a channel
-            // </NavLink>
-
             <CreateChannel
               props={{ serverId: selectedServerId, loadChannel }}
             />
@@ -424,20 +435,19 @@ function HomePage() {
                       }}
                     >
                       <li key={channel.id} value={channel.serverId}>
-                        <div>
+                        <span>
                           <i className="fa-solid fa-hashtag"></i>
-                        </div>
-
-                        <button
-                          className="singleChannelDisplay"
-                          onClick={() => {
-                            setSelectedChannelId(channel.id);
-                            setShowChannelMessages(true);
-                            setGoToChannelsMessages(true);
-                          }}
-                        >
-                          {channel.title}
-                        </button>
+                          <button
+                            className="singleChannelDisplay"
+                            onClick={() => {
+                              setSelectedChannelId(channel.id);
+                              setShowChannelMessages(true);
+                              setGoToChannelsMessages(true);
+                            }}
+                          >
+                            {channel.title}
+                          </button>
+                        </span>
                       </li>
                     </div>
                   ))}
@@ -464,44 +474,44 @@ function HomePage() {
         </div>
 
         <div className="messagesContainer">
-          <h3>messages</h3>
+          {/* <h3>Messages</h3> */}
 
           {showChannelMessages ? (
             <div>
-              <div>
-                <ul className="messagesDisplay">
+              <div className="container-message">
+                <div className="messagesDisplay">
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
-                      <li key={message.id}>
-                        <button
-                          className="singleMessageDisplay"
-                          onClick={() => setMessageId(message.id)}
-                        >
-                          {message.message}
-                        </button>
-
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setOpenEditForm(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-pen-to-square"></i>
+                      <div key={message.id} className="singleMessageDisplay">
+                        <div className="username">
+                          <i className="fa-solid fa-user"></i>
+                          {message.username}
                         </div>
+                        <div className="msg-body">
+                          <span className="message">{message.message}</span>
 
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setDeleteStatus(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
+                          <span
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setOpenEditForm(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </span>
+                          <span
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setDeleteStatus(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
+                          </span>
                         </div>
-                      </li>
+                      </div>
                     ))}
-                </ul>
+                </div>
               </div>
               <div className="message-form form">
                 <CreateMessageForm

@@ -1,29 +1,29 @@
 .navbarcontainer {
-    color:white;
-    background-color:  #2F3136;
-    margin: 0;
+  color: white;
+  background-color: #2f3136;
+  margin: 0;
 }
 
 #splash-logo {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .navlink,
 #splash-logo,
 .navbarli {
-    color:white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .navbarli {
-    margin-top: 1.3rem;
+  margin-top: 1.3rem;
 }
 
 .navbarlist {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 65px;
-
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 65px;
+  margin: 0;
 }

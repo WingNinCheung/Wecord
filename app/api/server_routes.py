@@ -126,7 +126,7 @@ def channels_edit(id, channelId):
 )
 @login_required
 def delete_channel(serverId, channelId):
-    print("********************backend delete")
+
     target_channel = Channel.query.filter_by(id=channelId)
     channel = Channel.query.filter(Channel.id == channelId).all()
     print("******", channel[0])
