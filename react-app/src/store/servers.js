@@ -89,9 +89,9 @@ export const updateServer = (name, id) => async (dispatch) => {
 }
 
 // Delete
-export const deleteServer = (id) => async (dispatch) => {
+export const deleteServer = (id, userId) => async (dispatch) => {
   console.log("thunk:", id)
-  const res = await fetch(`/api/servers/${id}/delete`, {
+  const res = await fetch(`/api/servers/${id}/${userId}/delete`, {
     method: "DELETE"
   });
 
