@@ -6,7 +6,7 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(sessionUser);
+
   return (
     <nav className="navbarcontainer">
       <ul className="navbarlist">
@@ -15,22 +15,25 @@ const NavBar = () => {
             Wecord
           </NavLink>
         </li>
-        { sessionUser &&
-        <>
-          <li className="navbarli">
-            <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
-              Home
-            </NavLink>
-          </li>
-          <li className="navbarli">
-            <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
-              Users
-            </NavLink>
-          </li>
-          <li className="navbarli">
-            <LogoutButton />
-          </li>
-        </>
+        {sessionUser &&
+          <>
+            <li className="navbarli">
+              <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
+                Home
+              </NavLink>
+            </li>
+            <li className="navbarli">
+              <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
+                Users
+              </NavLink>
+            </li>
+            <li className="navbarli">
+              <NavLink className="navlink" to='/friends'>Friends </NavLink>
+            </li>
+            <li className="navbarli">
+              <LogoutButton />
+            </li>
+          </>
         }
         {!sessionUser && (
           <>
