@@ -11,6 +11,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.message_routes import message_routes
+from .api.serveruser_routes import server_user_routes
 
 from .seeds import seed_commands
 
@@ -20,7 +21,7 @@ app = Flask(__name__)
 
 # Setup login manager
 login = LoginManager(app)
-login.login_view = 'auth.unauthorized'
+login.login_view = "auth.unauthorized"
 
 
 @login.user_loader
@@ -32,10 +33,13 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(server_routes, url_prefix='/api/servers')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
+app.register_blueprint(server_user_routes, url_prefix="/api/server_users")
+
 db.init_app(app)
 Migrate(app, db)
 
@@ -50,9 +54,9 @@ CORS(app)
 # Well.........
 @app.before_request
 def https_redirect():
-    if os.environ.get('FLASK_ENV') == 'production':
-        if request.headers.get('X-Forwarded-Proto') == 'http':
-            url = request.url.replace('http://', 'https://', 1)
+    if os.environ.get("FLASK_ENV") == "production":
+        if request.headers.get("X-Forwarded-Proto") == "http":
+            url = request.url.replace("http://", "https://", 1)
             code = 301
             return redirect(url, code=code)
 
@@ -60,18 +64,18 @@ def https_redirect():
 @app.after_request
 def inject_csrf_token(response):
     response.set_cookie(
-        'csrf_token',
+        "csrf_token",
         generate_csrf(),
-        secure=True if os.environ.get('FLASK_ENV') == 'production' else False,
-        samesite='Strict' if os.environ.get(
-            'FLASK_ENV') == 'production' else None,
-        httponly=True)
+        secure=True if os.environ.get("FLASK_ENV") == "production" else False,
+        samesite="Strict" if os.environ.get("FLASK_ENV") == "production" else None,
+        httponly=True,
+    )
     return response
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
 def react_root(path):
-    if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
-    return app.send_static_file('index.html')
+    if path == "favicon.ico":
+        return app.send_static_file("favicon.ico")
+    return app.send_static_file("index.html")

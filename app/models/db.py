@@ -5,20 +5,30 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
+
 class Server_User(db.Model):
     __tablename__ = "serverusers"
     id = db.Column(db.Integer, primary_key=True)
-    serverId = Column(Integer, db.ForeignKey('servers.id'), nullable=False)
-    userId = Column(Integer, db.ForeignKey('users.id'), nullable=False)
-    adminStatus = Column(Boolean)
-    muted = Column(Boolean)
+    serverId = Column(Integer, db.ForeignKey("servers.id"), nullable=False)
+    userId = Column(Integer, db.ForeignKey("users.id"), nullable=False)
+    adminStatus = Column(Boolean, default=False)
+    muted = Column(Boolean, default=False)
 
-    server = relationship("Server", back_populates='users')
-    user = relationship("User", back_populates='server')
+    server = relationship("Server", back_populates="users")
+    user = relationship("User", back_populates="server")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "serverId": self.serverId,
+            "userId": self.userId,
+            "adminStatus": self.adminStatus,
+            "muted": self.muted,
+        }
 
 
 class Server(db.Model):
-    __tablename__ = 'servers'
+    __tablename__ = "servers"
 
     id = db.Column(db.Integer, primary_key=True)
     master_admin = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -27,30 +37,30 @@ class Server(db.Model):
     picture = db.Column(db.Text)
 
     # relationships
-    users = relationship('Server_User', back_populates='server', cascade="all, delete")
+    users = relationship("Server_User", back_populates="server", cascade="all, delete")
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
 
     def to_dict(self):
         return {
-            "id":self.id,
-            "master_admin":self.master_admin,
-            "name":self.name,
-            "private":self.private,
-            "picture":self.picture,
-            "channels":[channel.to_dict() for channel in self.channels]
+            "id": self.id,
+            "master_admin": self.master_admin,
+            "name": self.name,
+            "private": self.private,
+            "picture": self.picture,
+            "channels": [channel.to_dict() for channel in self.channels],
         }
 
 
 class Channel(db.Model):
-    __tablename__ = 'channels'
+    __tablename__ = "channels"
 
     id = Column(Integer, primary_key=True)
     serverId = Column(Integer, ForeignKey("servers.id"), nullable=False)
     title = Column(String(30), nullable=False)
 
     # relationships
-    server = relationship("Server", back_populates="channels", cascade="all, delete")
+    server = relationship("Server", back_populates="channels")
     messages = relationship("Message", back_populates="channel", cascade="all, delete")
 
     def to_dict(self):
@@ -58,12 +68,12 @@ class Channel(db.Model):
             "id": self.id,
             "title": self.title,
             "serverId": self.serverId,
-            "messages": [message.to_dict() for message in self.messages]
+            "messages": [message.to_dict() for message in self.messages],
         }
 
 
 class Message(db.Model):
-    __tablename__ = 'messages'
+    __tablename__ = "messages"
 
     id = Column(Integer, primary_key=True)
     userId = Column(Integer, ForeignKey("users.id"), nullable=False)
@@ -79,5 +89,5 @@ class Message(db.Model):
             "id": self.id,
             "userId": self.userId,
             "channelId": self.channelId,
-            "message": self.message
+            "message": self.message,
         }

@@ -129,7 +129,6 @@ def delete_channel(serverId, channelId):
     # return jsonify({"Already deleted"})
     return jsonify(channelId)
 
-
 # ------------------------- Routes for messages -------------------------------------
 
 # read all messages of a single channel
