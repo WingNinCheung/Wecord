@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .websocket import socketio
+from .socket import socketio
 
 from .models import User
 from .models.db import db

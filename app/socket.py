@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO
-from .__init__ import os
+from . import os
 
 # set CORS for security
 if os.environ.get("FLASK_ENV") == "production":

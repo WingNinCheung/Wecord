@@ -32,6 +32,10 @@ export default function Chat() {
         })
     }, []);
 
+    const updateChatInput = (e) => {
+        setChatInput(e.target.value)
+    };
+
     const sendChat = (e) => {
         e.preventDefault();
         // emit a message
