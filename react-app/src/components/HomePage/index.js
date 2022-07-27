@@ -76,7 +76,14 @@ function HomePage() {
   // NOTE: this may not work loll test it
   useEffect(() => {
     if (!editMode) return
-    setEditMode(true)
+
+    const cancelEdit = () => {
+      setEditMode(false);
+    }
+
+    document.addEventListener('click', cancelEdit);
+
+    return () => document.removeEventListener("click", cancelEdit);
   }, [editMode])
 
   const history = useHistory();

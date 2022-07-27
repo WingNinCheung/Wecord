@@ -12,11 +12,11 @@ export default function MessageForm({ channelId, userId, handleSubmit, message, 
 
     // set messageText if there is any (for editing, on load)
     // Note: May not work if form loads slowly? possibly this will run before text is loaded
-    useEffect(() => {
-        if (message) {
-            setMessage(message)
-        }
-    }, [message])
+    // useEffect(() => {
+    //     if (message) {
+    //         setMessage(message)
+    //     }
+    // }, [message])
 
     const history = useHistory();
 
@@ -34,6 +34,20 @@ export default function MessageForm({ channelId, userId, handleSubmit, message, 
         setValidationErrors(errors);
     }, [message]);
 
+    const onKeyDown = (e) => {
+        if (e.key === "Enter" || e.key === "Escape") {
+            e.target.blur();
+        }
+    }
+
+    const onBlur = (e) => {
+        if (e.target.value.trim() === "") {
+            setMessage(message);
+        } else {
+            setMessage(e.target.value);
+        }
+    }
+
 
     if (!userId || !channelId ) return <p className="loading">"Loading..."</p>
     return (
@@ -46,8 +60,10 @@ export default function MessageForm({ channelId, userId, handleSubmit, message, 
                 </ul>
                 <textarea
                     className="message-text"
-                    placeholder={message}
+                    rows={1}
                     value={message}
+                    onBlur={onBlur}
+                    onKeyDown={onKeyDown}
                     onChange={(e) => setMessage(e.target.value)}
                 />
                 <button disabled={validationErrors.length > 0}>Create</button>
