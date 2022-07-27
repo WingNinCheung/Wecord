@@ -15,12 +15,23 @@ const NavBar = () => {
             Wecord
           </NavLink>
         </li>
-        <li className="navbarli">
-          <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-
+        { sessionUser &&
+        <>
+          <li className="navbarli">
+            <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
+              Home
+            </NavLink>
+          </li>
+          <li className="navbarli">
+            <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
+              Users
+            </NavLink>
+          </li>
+          <li className="navbarli">
+            <LogoutButton />
+          </li>
+        </>
+        }
         {!sessionUser && (
           <>
             <li className="navbarli">
@@ -35,14 +46,6 @@ const NavBar = () => {
             </li>
           </>
         )}
-        <li className="navbarli">
-          <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
-            Users
-          </NavLink>
-        </li>
-        <li className="navbarli">
-          <LogoutButton />
-        </li>
       </ul>
     </nav>
   );
