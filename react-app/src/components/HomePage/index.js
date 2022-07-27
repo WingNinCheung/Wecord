@@ -290,6 +290,7 @@ function HomePage() {
 
   const [openEditForm, setOpenEditForm] = useState(false)
   const [messageId, setMessageId] = useState("")
+  const [messageUserId, setMessageUserId] = useState("")
 
   // Delete a message
 
@@ -468,7 +469,8 @@ function HomePage() {
                         </button>
                         <div onClick={() => {
                           setMessageId(message.id);
-                          setOpenEditForm(true)
+                          setOpenEditForm(true);
+                          setMessageUserId(message.userId)
                         }}>
                           <i class="fa-solid fa-pen-to-square"></i>
 
@@ -487,7 +489,7 @@ function HomePage() {
                 <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} />
               </div>
 
-              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} />)}
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} msgUserId={messageUserId}/>)}
 
             </div>
           ) : (
