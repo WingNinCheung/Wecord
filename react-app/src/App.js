@@ -13,6 +13,7 @@ import CreateForm from "./components/HomePage/createServer";
 import EditServerForm from "./components/HomePage/updateServer";
 import CreateChannel from "./components/HomePage/Channel/createChannel";
 import Splash from "./components/Splash/splash";
+import FriendsList from "./components/friends/friends";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/:serverId/channels/create" exact={true}>
           <CreateChannel />
+        </ProtectedRoute>
+        <ProtectedRoute path="/friends" exact={true}>
+          <FriendsList />
         </ProtectedRoute>
         {/* <ProtectedRoute path="/update-server" exact={true}>
           <EditServerForm />
