@@ -48,11 +48,17 @@ def channels_edit(userId, messageId):
 def delete_server(userId, messageId):
     # userId is the id of the user submitting this request
 
+    # message= Message.query.filter_by(id=messageId)
+
     message = Message.query.get(messageId)
+    print("backend delete testing:__________________")
+    print(message)
+    print(messageId)
     # check if the user submitting this request is the message author
     if userId == message.userId:
         db.session.delete(message)
         db.session.commit()
-        return message.to_dict()
+    return jsonify(messageId)
+    # return message.to_dict()
     else:
         return jsonify({"Only the message author may delete this message"})

@@ -5,9 +5,7 @@ import { useHistory } from "react-router-dom";
 
 export default function CreateMessageForm({ channelId, userId, getMessages}) {
 
-    if (channelId) {
-        console.log("channelID from create message form",channelId)
-    }
+    
     const [message, setMessage] = useState("")
     const [validationErrors, setValidationErrors] = useState([]);
 

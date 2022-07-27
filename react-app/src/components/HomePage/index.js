@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
 import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
-import { getChannelMessagesThunk } from "../../store/messages";
+import { getChannelMessagesThunk, deleteMessageThunk } from "../../store/messages";
 
 
 import EditChannel from "./Channel/editChannel";
@@ -70,10 +70,6 @@ function HomePage() {
     await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId))
 
   }
-
-  console.log("show is", show);
-  console.log("channelShow is ", channelShow);
-
   // Right click server menu
   const Menu = ({ x, y }) => {
     return (
@@ -204,7 +200,7 @@ function HomePage() {
   const loadChannel = async () => {
     if (goToChannel) {
       const result = await dispatch(getServerChannelsThunk(selectedServerId));
-      console.log("result:", result);
+      // console.log("result:", result);
       setGoToChannels(false);
     }
   };
@@ -215,7 +211,7 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
-  console.log("serverChannels:", serverChannels);
+
 
   //----------------------------------------------------
 
@@ -241,6 +237,25 @@ function HomePage() {
   const [openEditForm, setOpenEditForm] = useState(false)
   const [messageId, setMessageId] = useState("")
 
+  // Delete a message
+
+  const [deleteStatus, setDeleteStatus] = useState(false)
+
+  // const handleMessageDelete = async(e) => {
+
+  //   e.preventDefault();
+  //   console.log("messageId:", messageId)
+  //   // await dispatch(deleteMessageThunk(loggedInUserId))
+
+  // }
+
+  useEffect(() => {
+    console.log("messageId", messageId)
+    console.log("deleteStatus:", deleteStatus)
+    if(deleteStatus){
+      dispatch(deleteMessageThunk(loggedInUserId, messageId))
+    }
+  }, [dispatch, deleteStatus])
 
 
   return (
@@ -390,6 +405,13 @@ function HomePage() {
                           setOpenEditForm(true)
                         }}>
                           <i class="fa-solid fa-pen-to-square"></i>
+
+                        </div>
+                        <div onClick={() => {
+                          setMessageId(message.id)
+                          setDeleteStatus(true)
+                          }}>
+                          <i class="fa-solid fa-trash-can"></i>
                         </div>
                       </li>
                     ))}

@@ -89,7 +89,7 @@ export const editMessageThunk = (userId, messageId, message) => async(dispatch) 
 }
 
 //DELETE THUNK
-export const deleteMessage = (userId, messageId) => async (dispatch) => {
+export const deleteMessageThunk = (userId, messageId) => async (dispatch) => {
 
     const res = await fetch(`/api/messages/${userId}/${messageId}/delete`, {
       method: "DELETE"
@@ -97,7 +97,7 @@ export const deleteMessage = (userId, messageId) => async (dispatch) => {
 
     if (res.ok) {
       const data = await res.json()
-      dispatch(deleteChannelMessage(data))
+      dispatch(deleteChannelMessage(Number(data)))
     }
 
   }
@@ -127,9 +127,14 @@ const messages = (state = {}, action) => {
             };
             return messages;
         case DELETE_MESSAGE:
-            messages = { ...state };
-            delete messages[action.message];
-            return messages;
+            // messages = { ...state };
+            // delete messages[action.message];
+            // return messages;
+            console.log("in the reducer:", state.messages)
+            return state.messages.filter(message => (
+                message.id != action.message
+            ))
+
         default:
             return state;
     }

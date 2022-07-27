@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export default function EditMessageForm({ messageId, userId, setShow }) {
 
-    console.log("chlid:", messageId, userId)
+
 
 
     const [validationErrors, setValidationErrors] = useState([]);
