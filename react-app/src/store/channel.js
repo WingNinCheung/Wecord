@@ -14,7 +14,6 @@ export const getServerChannelsThunk = (serverId) => async (dispatch) => {
 
   if (res.ok) {
     const allChannels = await res.json();
-    console.log("thunk:-----------", allChannels);
     dispatch(getServerChannels(allChannels));
     return res;
   }
@@ -77,29 +76,28 @@ export const updateChannel =
   };
 
 // DELETE A CHANNEL
-const DELETE_CHANNEL = "channels/DELETE_CHANNEL"
+const DELETE_CHANNEL = "channels/DELETE_CHANNEL";
 
 const deleteChannel = (channel) => {
   return {
     type: DELETE_CHANNEL,
-    channel
-  }
-}
+    channel,
+  };
+};
 
-export const deleteChannelThunk = (serverId, channelId) =>
-  async (dispatch) => {
-    const res = await fetch(`/api/servers/${serverId}/channels/${channelId}/delete`,
-      {
-        method: "DELETE"
-      });
-
-    if (res.ok) {
-      const data = await res.json()
-      dispatch(deleteChannel(data))
+export const deleteChannelThunk = (serverId, channelId) => async (dispatch) => {
+  const res = await fetch(
+    `/api/servers/${serverId}/channels/${channelId}/delete`,
+    {
+      method: "DELETE",
     }
+  );
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteChannel(data));
   }
-
-
+};
 
 // ---------------------- REDUCER --------------------------
 const channels = (state = {}, action) => {
