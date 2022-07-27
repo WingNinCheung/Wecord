@@ -2,12 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
-import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
+import {
+  getServerChannelsThunk,
+  deleteChannelThunk,
+} from "../../store/channel";
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
-import { getAllServerUsers, addServerUser, leaveServer } from "../../store/serverUser";
+import {
+  getAllServerUsers,
+  addServerUser,
+  leaveServer,
+} from "../../store/serverUser";
 import Member from "../../components/HomePage/member";
 
 function HomePage() {
@@ -50,9 +57,8 @@ function HomePage() {
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
-  const [userIsInServer, setUserIsInServer] = useState(false)
+  const [userIsInServer, setUserIsInServer] = useState(false);
   const history = useHistory();
-
 
   // right-click menu section
   const [show, setShow] = useState(false);
@@ -63,16 +69,16 @@ function HomePage() {
   const [edit, setEdit] = useState(false);
   const [editChannel, setEditChannel] = useState(false);
 
-
   const handleDelete = async (e) => {
     e.preventDefault();
-    await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId))
-    await loadChannel()
+    await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId));
+    await loadChannel();
   };
   const handleDeleteServer = async (e) => {
     e.preventDefault();
-    await dispatch(deleteServer(selectedServerId))
-    await dispatch(getAllServers())
+    await dispatch(deleteServer(selectedServerId));
+    await dispatch(getAllServers());
+    // await loadChannel();
   };
 
   const checkUserinServer = async (serverId) => {
@@ -90,16 +96,16 @@ function HomePage() {
       setGoToChannels(true);
       setGoToChannelsMessages(false);
       setShowChannelMessages(false);
-      setUserIsInServer(true)
-      return true
+      setUserIsInServer(true);
+      return true;
     } else {
       setOpenChannels(false);
       setGoToChannels(false);
       setGoToChannelsMessages(false);
       setShowChannelMessages(false);
-      setUserIsInServer(false)
+      setUserIsInServer(false);
 
-      return false
+      return false;
     }
   };
 
@@ -131,18 +137,24 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleDeleteServer} disabled={loggedInUserId !== adminId}>
+          <button
+            onClick={handleDeleteServer}
+            disabled={loggedInUserId !== adminId}
+          >
             Delete
           </button>
         </div>
         <div>
-          <button onClick={handleLeave} disabled={!userIsInServer || loggedInUserId == adminId}>Leave Server</button>
+          <button
+            onClick={handleLeave}
+            disabled={!userIsInServer || loggedInUserId == adminId}
+          >
+            Leave Server
+          </button>
         </div>
       </div>
     );
   };
-
-
 
   const ChannelMenu = ({ x, y }) => {
     return (
@@ -236,10 +248,8 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
-
     const result = await dispatch(getServerChannelsThunk(selectedServerId));
     setGoToChannels(false);
-
   };
 
   useEffect(() => {
@@ -268,32 +278,17 @@ function HomePage() {
 
   // ------------------------------------------------
 
-
-
   const handleJoin = async (e) => {
-    e.preventDefault()
-    await dispatch(addServerUser(loggedInUserId, selectedServerId))
-    checkUserinServer(selectedServerId)
-  }
+    e.preventDefault();
+    await dispatch(addServerUser(loggedInUserId, selectedServerId));
+    checkUserinServer(selectedServerId);
+  };
 
   const handleLeave = async (e) => {
-    e.preventDefault()
-    await dispatch(leaveServer(loggedInUserId, selectedServerId))
-    checkUserinServer(selectedServerId)
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
+    e.preventDefault();
+    await dispatch(leaveServer(loggedInUserId, selectedServerId));
+    checkUserinServer(selectedServerId);
+  };
 
   // create a channel
 
@@ -367,26 +362,13 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-
             // <NavLink to={`/${selectedServerId}/channels/create`}>
             //   create a channel
             // </NavLink>
 
-            <CreateChannel props={{ serverId: selectedServerId, loadChannel }} />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <CreateChannel
+              props={{ serverId: selectedServerId, loadChannel }}
+            />
           )}
           {openChannels ? (
             <div>
