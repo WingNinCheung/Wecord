@@ -401,10 +401,6 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-            // <NavLink to={`/${selectedServerId}/channels/create`}>
-            //   create a channel
-            // </NavLink>
-
             <CreateChannel
               props={{ serverId: selectedServerId, loadChannel }}
             />
@@ -469,39 +465,37 @@ function HomePage() {
           {showChannelMessages ? (
             <div>
               <div>
-                <ul className="messagesDisplay">
+                <div className="messagesDisplay">
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
-                      <li key={message.id}>
+                      <div key={message.id}>
                         <button
                           className="singleMessageDisplay"
                           onClick={() => setMessageId(message.id)}
                         >
                           {message.message}
+                          <div
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setOpenEditForm(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </div>
+                          <div
+                            onClick={() => {
+                              setMessageId(message.id);
+                              setDeleteStatus(true);
+                              setMessageUserId(message.userId);
+                            }}
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
+                          </div>
                         </button>
-
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setOpenEditForm(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-pen-to-square"></i>
-                        </div>
-
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setDeleteStatus(true);
-                            setMessageUserId(message.userId);
-                          }}
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
-                        </div>
-                      </li>
+                      </div>
                     ))}
-                </ul>
+                </div>
               </div>
               <div className="message-form form">
                 <CreateMessageForm
