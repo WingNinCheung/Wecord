@@ -127,13 +127,14 @@ const messages = (state = {}, action) => {
             };
             return messages;
         case DELETE_MESSAGE:
-            // messages = { ...state };
-            // delete messages[action.message];
-            // return messages;
             console.log("in the reducer:", state)
-            return state.messages.filter(message => (
-                message.id != action.message
-            ))
+            messages = { ...state };
+            delete messages[action.message.id];
+            return messages;
+
+            // return state.messages.filter(message => (
+            //     message.id != action.message
+            // ))
 
         default:
             return state;

@@ -241,20 +241,16 @@ function HomePage() {
 
   const [deleteStatus, setDeleteStatus] = useState(false)
 
-  // const handleMessageDelete = async(e) => {
 
-  //   e.preventDefault();
-  //   console.log("messageId:", messageId)
-  //   // await dispatch(deleteMessageThunk(loggedInUserId))
-
-  // }
 
   useEffect(() => {
-    console.log("messageId", messageId)
-    console.log("deleteStatus:", deleteStatus)
+
     if(deleteStatus){
-      dispatch(deleteMessageThunk(loggedInUserId, messageId))
+      dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() => dispatch(getChannelMessagesThunk(selectedChannelId)))
+
     }
+    setDeleteStatus(false)
+    history.push('/home')
   }, [dispatch, deleteStatus])
 
 
