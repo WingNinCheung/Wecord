@@ -298,14 +298,17 @@ function HomePage() {
 
   // Edit a message
 
+
   const [openEditForm, setOpenEditForm] = useState(false);
   const [messageId, setMessageId] = useState("");
+  const [messageUserId, setMessageUserId] = useState("")
 
   // Delete a message
 
   const [deleteStatus, setDeleteStatus] = useState(false);
 
-  useEffect(() => {
+
+
     if (deleteStatus) {
       dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() =>
         dispatch(getChannelMessagesThunk(selectedChannelId))
@@ -477,20 +480,23 @@ function HomePage() {
                         >
                           {message.message}
                         </button>
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setOpenEditForm(true);
-                          }}
-                        >
+
+
+                        <div onClick={() => {
+                          setMessageId(message.id);
+                          setOpenEditForm(true);
+                          setMessageUserId(message.userId)
+                        }}>
+
                           <i class="fa-solid fa-pen-to-square"></i>
                         </div>
-                        <div
-                          onClick={() => {
-                            setMessageId(message.id);
-                            setDeleteStatus(true);
-                          }}
-                        >
+
+                        <div onClick={() => {
+                          setMessageId(message.id)
+                          setDeleteStatus(true)
+                          setMessageUserId(message.userId)
+                        }}>
+
                           <i class="fa-solid fa-trash-can"></i>
                         </div>
                       </li>
@@ -505,13 +511,9 @@ function HomePage() {
                 />
               </div>
 
-              {openEditForm && (
-                <EditMessageForm
-                  messageId={messageId}
-                  userId={sessionUser.id}
-                  setShow={setOpenEditForm}
-                />
-              )}
+
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} msgUserId={messageUserId}/>)}
+
             </div>
           ) : (
             <div>"No messages"</div>

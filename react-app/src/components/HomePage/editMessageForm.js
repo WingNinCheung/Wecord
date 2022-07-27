@@ -4,7 +4,7 @@ import { createMessage, getChannelMessagesThunk} from "../../store/messages";
 import { editMessageThunk } from "../../store/messages";
 import { useHistory } from "react-router-dom";
 
-export default function EditMessageForm({ messageId, userId, setShow }) {
+export default function EditMessageForm({ messageId, userId, setShow, msgUserId }) {
 
 
 
@@ -36,6 +36,10 @@ export default function EditMessageForm({ messageId, userId, setShow }) {
 
     useEffect(() => {
         const errors = [];
+
+        if(msgUserId !== userId){
+            errors.push("only people who created it can delete message")
+        }
 
         if (!editMessage.length) {
             errors.push("Message cannot be empty!");
