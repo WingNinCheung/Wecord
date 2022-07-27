@@ -34,10 +34,6 @@ function HomePage() {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const allUsers = useSelector((state) => state.users);
-  // const allUserArr = Object.values(allUsers);
-  console.log("all user ", allUsers);
-
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
   const allServersArray = Object.values(allServers);
@@ -291,7 +287,19 @@ function HomePage() {
   // READ ALL MESSAGES OF A SINGLE CHANNEL
   const channelMessages = useSelector((state) => state.messages);
   const channelMessagesArr = Object.values(channelMessages);
-  console.log("channel msg are ", channelMessages);
+
+  const allUsers = useSelector((state) => state.users);
+  const allUserArr = Object.values(allUsers);
+
+  for (let i = 0; i < channelMessagesArr.length; i++) {
+    for (let j = 0; j < allUserArr.length; j++) {
+      if (channelMessagesArr[i].userId == allUserArr[j].id)
+        channelMessagesArr[i]["username"] = allUserArr[j].username;
+    }
+  }
+
+  // console.log("all user ", allUserArr[0]);
+  // console.log("all msg ", channelMessagesArr[0].userId);
 
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
@@ -478,7 +486,7 @@ function HomePage() {
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
                       <div key={message.id} className="singleMessageDisplay">
-                        {sessionUser.username}
+                        {message.username}
                         <div>{message.message}</div>
                         <span
                           onClick={() => {
