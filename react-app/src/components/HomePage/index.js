@@ -290,14 +290,24 @@ function HomePage() {
 
   const [openEditForm, setOpenEditForm] = useState(false)
   const [messageId, setMessageId] = useState("")
+  const [messageUserId, setMessageUserId] = useState("")
 
   // Delete a message
 
   const [deleteStatus, setDeleteStatus] = useState(false)
+  const [alertStatus, setAlertStatus] = useState(false)
+
+  // if(alertStatus){
+  //   windows.alert("only master admin can delete message")
+  // }
 
 
 
   useEffect(() => {
+
+    if(messageUserId !== loggedInUserId){
+      alert("only master admin can delete message")
+    }
 
     if (deleteStatus) {
       dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() => dispatch(getChannelMessagesThunk(selectedChannelId)))
@@ -468,7 +478,8 @@ function HomePage() {
                         </button>
                         <div onClick={() => {
                           setMessageId(message.id);
-                          setOpenEditForm(true)
+                          setOpenEditForm(true);
+                          setMessageUserId(message.userId)
                         }}>
                           <i class="fa-solid fa-pen-to-square"></i>
 
@@ -476,6 +487,8 @@ function HomePage() {
                         <div onClick={() => {
                           setMessageId(message.id)
                           setDeleteStatus(true)
+                          setMessageUserId(message.userId)
+                          setAlertStatus(true)
                         }}>
                           <i class="fa-solid fa-trash-can"></i>
                         </div>
@@ -487,7 +500,7 @@ function HomePage() {
                 <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} />
               </div>
 
-              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} />)}
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} msgUserId={messageUserId}/>)}
 
             </div>
           ) : (
