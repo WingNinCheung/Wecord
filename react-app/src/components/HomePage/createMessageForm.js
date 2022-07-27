@@ -23,8 +23,6 @@ export default function CreateMessageForm({ channelId, userId, getMessages}) {
             channelId
         };
 
-        console.log("Message data from messages.js: ", data)
-
         const newMessage = await dispatch(createMessage(data));
 
         if (newMessage) {
@@ -32,10 +30,13 @@ export default function CreateMessageForm({ channelId, userId, getMessages}) {
             await dispatch(getMessages(channelId));
         }
 
+        setMessage("")
+
     }
 
     const handleCancel = (e) => {
         e.preventDefault();
+        setMessage("")
         history.push("/home");
       };
 
@@ -61,7 +62,7 @@ export default function CreateMessageForm({ channelId, userId, getMessages}) {
                 </ul>
                 <textarea
                     className="create-message"
-                    placeholder={message}
+                    placeholder="create messages here"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                 ></textarea>

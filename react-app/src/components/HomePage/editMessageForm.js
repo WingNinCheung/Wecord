@@ -23,6 +23,7 @@ export default function EditMessageForm({ messageId, userId, setShow }) {
         };
 
         await dispatch(editMessageThunk(userId, messageId, data));
+        setEditMessage("")
 
     }
 

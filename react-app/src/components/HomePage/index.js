@@ -7,7 +7,7 @@ import { getChannelMessagesThunk } from "../../store/messages";
 
 
 import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./message";
+import CreateMessageForm from "./createMessageForm";
 import EditMessageForm from "./editMessageForm";
 import CreateChannel from "./Channel/createChannel";
 
