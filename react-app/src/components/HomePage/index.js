@@ -308,7 +308,7 @@ function HomePage() {
   const [deleteStatus, setDeleteStatus] = useState(false);
 
 
-
+  useEffect(() => {
     if (deleteStatus) {
       dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() =>
         dispatch(getChannelMessagesThunk(selectedChannelId))
@@ -512,7 +512,7 @@ function HomePage() {
               </div>
 
 
-              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} msgUserId={messageUserId}/>)}
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} msgUserId={messageUserId} />)}
 
             </div>
           ) : (
