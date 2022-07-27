@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
+import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
+import { getChannelMessagesThunk, deleteMessageThunk } from "../../store/messages";
 
-import {
-  getServerChannelsThunk,
-  deleteChannelThunk,
-} from "../../store/channel";
-
-import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
-import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
+import CreateMessageForm from "./createMessageForm";
+import EditMessageForm from "./editMessageForm";
+
 import {
   getAllServerUsers,
   addServerUser,
@@ -19,7 +18,11 @@ import {
 } from "../../store/serverUser";
 import Member from "../../components/HomePage/member";
 
+import "./HomePage.css";
+
+
 function HomePage() {
+
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -86,7 +89,8 @@ function HomePage() {
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
     let userInServer = false;
-
+  }
+  
     for (let i of data) {
       if (i.user.id == loggedInUserId) {
         userInServer = true;
@@ -110,7 +114,6 @@ function HomePage() {
       return false;
     }
   };
-
 
   // Right click server menu
   const Menu = ({ x, y }) => {
@@ -251,8 +254,10 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
+  
     const result = await dispatch(getServerChannelsThunk(selectedServerId));
     setGoToChannels(false);
+    
   };
 
   useEffect(() => {
@@ -280,6 +285,27 @@ function HomePage() {
   }, [dispatch, goToChannelMessages]);
 
   // ------------------------------------------------
+
+  // Edit a message
+
+  const [openEditForm, setOpenEditForm] = useState(false)
+  const [messageId, setMessageId] = useState("")
+
+  // Delete a message
+
+  const [deleteStatus, setDeleteStatus] = useState(false)
+
+
+
+  useEffect(() => {
+
+    if(deleteStatus){
+      dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() => dispatch(getChannelMessagesThunk(selectedChannelId)))
+
+    }
+    setDeleteStatus(false)
+    history.push('/home')
+  }, [dispatch, deleteStatus])
 
   const handleJoin = async (e) => {
     e.preventDefault();
@@ -389,7 +415,7 @@ function HomePage() {
                     >
                       <li key={channel.id} value={channel.serverId}>
                         <div>
-                          <i class="fa-solid fa-hashtag"></i>
+                          <i className="fa-solid fa-hashtag"></i>
                         </div>
 
                         <button
@@ -426,27 +452,53 @@ function HomePage() {
 
         <div className="messagesContainer">
           <h3>messages</h3>
+
           {showChannelMessages ? (
             <div>
-              <ul className="messagesDisplay">
-                {channelMessagesArr &&
-                  channelMessagesArr.map((message) => (
-                    <li key={message.id}>
-                      <button className="singleMessageDisplay">
-                        {message.message}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
+              <div>
+                <ul className="messagesDisplay">
+                  {channelMessagesArr &&
+                    channelMessagesArr.map((message) => (
+                      <li key={message.id}>
+                        <button className="singleMessageDisplay"
+                          onClick={() => setMessageId(message.id)}
+
+                        >
+                          {message.message}
+                        </button>
+                        <div onClick={() => {
+                          setMessageId(message.id);
+                          setOpenEditForm(true)
+                        }}>
+                          <i class="fa-solid fa-pen-to-square"></i>
+
+                        </div>
+                        <div onClick={() => {
+                          setMessageId(message.id)
+                          setDeleteStatus(true)
+                          }}>
+                          <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              <div className="message-form form">
+                <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} />
+              </div>
+
+              {openEditForm && (<EditMessageForm messageId={messageId} userId={sessionUser.id} setShow={setOpenEditForm} />)}
+
             </div>
           ) : (
-            <div> </div>
+            <div>"No messages"</div>
           )}
         </div>
 
         <div className="userLists">
           <h3>Members</h3>
           <Member serverId={selectedServerId} />
+          
         </div>
       </div>
 
