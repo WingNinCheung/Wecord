@@ -69,7 +69,7 @@ def edit_server(id):
 @server_routes.route("/<int:serverId>/<int:userId>/delete", methods=["DELETE"])
 def delete_server(serverId, userId):
     # userId is the id of the user submitting this request
-
+    print('----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-inside---------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------')
 
     server = Server.query.get(serverId)
     # Check that the user submitting request is the master admin

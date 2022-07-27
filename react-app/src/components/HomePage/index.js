@@ -81,7 +81,7 @@ function HomePage() {
   };
   const handleDeleteServer = async (e) => {
     e.preventDefault();
-    await dispatch(deleteServer(selectedServerId));
+    await dispatch(deleteServer(selectedServerId, loggedInUserId));
     await dispatch(getAllServers());
     // await loadChannel();
   };
@@ -89,8 +89,8 @@ function HomePage() {
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
     let userInServer = false;
-  }
-  
+
+
     for (let i of data) {
       if (i.user.id == loggedInUserId) {
         userInServer = true;
@@ -189,7 +189,7 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleChannelDelete} disabled={loggedInUserId !== adminId}>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
             Delete
           </button>
         </div>
@@ -254,10 +254,10 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
-  
+
     const result = await dispatch(getServerChannelsThunk(selectedServerId));
     setGoToChannels(false);
-    
+
   };
 
   useEffect(() => {
@@ -299,7 +299,7 @@ function HomePage() {
 
   useEffect(() => {
 
-    if(deleteStatus){
+    if (deleteStatus) {
       dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() => dispatch(getChannelMessagesThunk(selectedChannelId)))
 
     }
@@ -476,7 +476,7 @@ function HomePage() {
                         <div onClick={() => {
                           setMessageId(message.id)
                           setDeleteStatus(true)
-                          }}>
+                        }}>
                           <i class="fa-solid fa-trash-can"></i>
                         </div>
                       </li>
@@ -498,7 +498,7 @@ function HomePage() {
         <div className="userLists">
           <h3>Members</h3>
           <Member serverId={selectedServerId} />
-          
+
         </div>
       </div>
 
