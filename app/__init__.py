@@ -5,8 +5,6 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .socket import socketio
-
 from .models import User
 from .models.db import db
 from .api.user_routes import user_routes
@@ -14,6 +12,8 @@ from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
 from .api.message_routes import message_routes
 from .api.serveruser_routes import server_user_routes
+
+from .socket import socketio
 
 from .seeds import seed_commands
 

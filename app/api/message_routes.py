@@ -13,9 +13,6 @@ message_routes = Blueprint("message_routes", __name__)
 @message_routes.route("/", methods=["POST"])
 @login_required
 def create_message():
-    print("YO YO OYOYO YOYOYO ***************!@@@@@@@38u49283252")
-    print(request.json)
-
 
     newMessage = Message(
         userId=request.json["userId"],

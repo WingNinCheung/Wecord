@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
+import { getChannelMessagesThunk, editMessageThunk, createMessage } from '../../../store/messages';
 
 // initialize socket variable
 let socket;
@@ -10,10 +11,26 @@ export default function Chat() {
     //TODO: double check that this is the user
     const user = useSelector(state => state.session.user)
 
+    const dispatch = useDispatch();
+
     // user messages
     const [messages, setMessages] = useState([]);
     // controlled form input
     const [chatInput, setChatInput] = useState("");
+
+    // FOR TESTING ONLY:
+    const channelId = 1;
+    const channelName = "Biscuits";
+
+    // load all channel messages
+    // Note: we use channelId but it is probably more secure to use the socket.io sessionId
+    const loadAllMessages = async () => {
+        await dispatch(getChannelMessagesThunk(channelId));
+    }
+
+    const createMessage = async (message) => {
+        await dispatch(createMessage(message));
+    }
 
     useEffect(() => {
 
@@ -25,6 +42,14 @@ export default function Chat() {
             // when we receive a chat, add to our messages array in state
             setMessages(messages => [...messages, chat])
         })
+
+        // test joining a chat room
+        // socket.on("join", (room) => {
+        //     // not sure if "channelId" needs to be string or int
+        //     room = { "username": user.username, "channelId": channelId }
+        //     room.join(channelName);
+        //     loadAllMessages();
+        // })
 
         // disconnect upon component unmount
         return (() => {
@@ -39,7 +64,11 @@ export default function Chat() {
     const sendChat = (e) => {
         e.preventDefault();
         // emit a message
-        socket.emit("chat", { user: user.username, msg: chatInput });
+        if (chatInput !== "") {
+            socket.emit("chat", { user: user.username, msg: chatInput, userId: user.id, channelId: channelId });
+        }
+        // either: do a dispatch to create a message in the database
+        // or: socket does something weird to create a message on the backend
         // clear input field after message is sent
         setChatInput("")
     }
