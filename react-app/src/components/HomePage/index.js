@@ -87,7 +87,17 @@ function HomePage() {
     e.preventDefault();
     await dispatch(deleteServer(selectedServerId, loggedInUserId));
     await dispatch(getAllServers());
-    // await loadChannel();
+
+    // let defaultSelectedServerId = publicServers[0];
+    // setOpenChannels(false);
+    setGoToChannels(false);
+    setGoToChannelsMessages(false);
+    setShowChannelMessages(false);
+    setUserIsInServer(false);
+    setSelectedServerId("");
+    setOpenChannels(false);
+    checkUserinServer(selectedServerId);
+    setOpenChannels(true);
   };
 
   const checkUserinServer = async (serverId) => {
