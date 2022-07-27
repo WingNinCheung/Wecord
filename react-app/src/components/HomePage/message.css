@@ -1,0 +1,63 @@
+.messagesContainer {
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  background-color: #3a3c42;
+}
+
+.messagesDisplay {
+  list-style-type: none;
+  width: 250px;
+  height: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  /* align-items: center; */
+  /* background-color: #2f3136; */
+}
+
+.singleMessageDisplay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 68rem;
+  margin: 1rem;
+  /* background-color: #2f3136; */
+  /* justify-content: space-evenly; */
+  border: solid transparent 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.username {
+  margin: 10px;
+  padding: 5px;
+}
+
+.fa-user {
+  margin-right: 5px;
+}
+
+.msg-body {
+  margin-left: 20px;
+}
+
+.fa-pen-to-square {
+  position: sticky;
+  left: 96%;
+  z-index: 3;
+}
+
+.fa-trash-can {
+  position: sticky;
+  left: 99%;
+}
+
+.createMessageForm {
+  color: red;
+  /* position: fixed; */
+}

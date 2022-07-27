@@ -25,6 +25,7 @@ import {
 import Member from "../../components/HomePage/member";
 
 import "./HomePage.css";
+import "./message.css";
 
 function HomePage() {
   const dispatch = useDispatch();
