@@ -82,6 +82,7 @@ function HomePage() {
     e.preventDefault();
     await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId));
     await loadChannel();
+    setShowChannelMessages(false);
   };
   const handleDeleteServer = async (e) => {
     e.preventDefault();
