@@ -64,12 +64,14 @@ def edit_server(id):
     return server.to_dict()
 
 
-#TODO: Fix front end route for this
+# TODO: Fix front end route for this
 # DELETE /api/servers/:serverId - delete a server
 @server_routes.route("/<int:serverId>/<int:userId>/delete", methods=["DELETE"])
 def delete_server(serverId, userId):
     # userId is the id of the user submitting this request
-    print('----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-inside---------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------')
+    print(
+        "----%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-inside---------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%------"
+    )
 
     server = Server.query.get(serverId)
     # Check that the user submitting request is the master admin
@@ -119,15 +121,21 @@ def channels_edit(id, channelId):
 
 
 # delete a channel
-@server_routes.route("/<int:serverId>/channels/<int:channelId>/delete", methods=["DELETE"])
+@server_routes.route(
+    "/<int:serverId>/channels/<int:channelId>/delete", methods=["DELETE"]
+)
 @login_required
 def delete_channel(serverId, channelId):
     print("********************backend delete")
     target_channel = Channel.query.filter_by(id=channelId)
-    target_channel.delete()
+    channel = Channel.query.filter(Channel.id == channelId).all()
+    print("******", channel[0])
+    db.session.delete(channel[0])
+    # target_channel.delete()
     db.session.commit()
     # return jsonify({"Already deleted"})
     return jsonify(channelId)
+
 
 # ------------------------- Routes for messages -------------------------------------
 
