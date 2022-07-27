@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import CreateForm from "./components/HomePage/createServer";
 import EditServerForm from "./components/HomePage/updateServer";
 import CreateChannel from "./components/HomePage/Channel/createChannel";
+import Splash from "./components/Splash/splash";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,6 +33,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path="/" exact={true}>
+          <Splash />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
@@ -44,9 +48,6 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/" exact={true}>
-          <h1>Splash page</h1>
-        </Route>
         <ProtectedRoute path="/home" exact={true}>
           <HomePage />
         </ProtectedRoute>

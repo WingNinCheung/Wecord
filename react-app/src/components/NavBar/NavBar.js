@@ -11,6 +11,11 @@ const NavBar = () => {
     <nav className="navbarcontainer">
       <ul className="navbarlist">
         <li className="navbarli">
+          <NavLink id="splash-logo" to="/" exact={true}>
+            Wecord
+          </NavLink>
+        </li>
+        <li className="navbarli">
           <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
             Home
           </NavLink>
@@ -18,24 +23,24 @@ const NavBar = () => {
 
         {!sessionUser && (
           <>
-            <li>
+            <li className="navbarli">
               <NavLink className="navlink" to="/login" exact={true} activeClassName="active">
                 Login
               </NavLink>
             </li>
-            <li>
+            <li className="navbarli">
               <NavLink className="navlink" to="/sign-up" exact={true} activeClassName="active">
                 Sign Up
               </NavLink>
             </li>
           </>
         )}
-        <li>
-          <NavLink className="navbarli" to="/users" exact={true} activeClassName="active">
+        <li className="navbarli">
+          <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
             Users
           </NavLink>
         </li>
-        <li>
+        <li className="navbarli">
           <LogoutButton />
         </li>
       </ul>
