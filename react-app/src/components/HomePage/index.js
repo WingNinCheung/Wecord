@@ -295,10 +295,19 @@ function HomePage() {
   // Delete a message
 
   const [deleteStatus, setDeleteStatus] = useState(false)
+  const [alertStatus, setAlertStatus] = useState(false)
+
+  // if(alertStatus){
+  //   windows.alert("only master admin can delete message")
+  // }
 
 
 
   useEffect(() => {
+
+    if(messageUserId !== loggedInUserId){
+      alert("only master admin can delete message")
+    }
 
     if (deleteStatus) {
       dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() => dispatch(getChannelMessagesThunk(selectedChannelId)))
@@ -478,6 +487,8 @@ function HomePage() {
                         <div onClick={() => {
                           setMessageId(message.id)
                           setDeleteStatus(true)
+                          setMessageUserId(message.userId)
+                          setAlertStatus(true)
                         }}>
                           <i class="fa-solid fa-trash-can"></i>
                         </div>
