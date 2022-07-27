@@ -6,7 +6,7 @@ import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel"
 import { getChannelMessagesThunk } from "../../store/messages";
 
 import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./message";
+import { CreateMessageForm, EditMessageForm } from "./Forms/messages";
 import CreateChannel from "./Channel/createChannel";
 
 import "./HomePage.css";
@@ -37,15 +37,48 @@ function HomePage() {
   // EDIT SERVER - may use modal to refactor it  ------working
   const [name, setName] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
+
   const [mainServer, setMainServer] = useState(false);
   const [selectedServerId, setSelectedServerId] = useState("");
   const [adminId, setAdminId] = useState();
+
   const [goToChannel, setGoToChannels] = useState(false);
   const [openChannels, setOpenChannels] = useState(false);
   const [selectedChannelId, setSelectedChannelId] = useState("");
+  const [channelName, setChannelName] = useState("");
+
+  const [selectedMessageId, setSelectedMessageId] = useState("");
+  const [showMessageDropdown, setShowMessageDropdown] = useState(false);
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
-  const [channelName, setChannelName] = useState("");
+  const [editMode, setEditMode] = useState(false); // for individual message
+
+  // function to open messsage edit button menu
+  const openMessageMenu = () => {
+    if (showMessageDropdown) return;
+    setShowMessageDropdown(true);
+  }
+
+  // useEffect to close message edit button menu
+  useEffect(() => {
+    if (!showMessageDropdown) return;
+
+    const closeMessageMenu = () => {
+      setShowMessageDropdown(false);
+    }
+
+    document.addEventListener('click', closeMessageMenu);
+
+    return () => document.removeEventListener("click", closeMessageMenu);
+  }, [showMessageDropdown]);
+
+  // useEffect to set edit mode for messages
+  // NOTE: this may not work loll test it
+  useEffect(() => {
+    if (!editMode) return
+    setEditMode(true)
+  }, [editMode])
+
   const history = useHistory();
 
   // right-click menu section
@@ -234,11 +267,6 @@ function HomePage() {
 
   // ------------------------------------------------
 
-  // create a message
-
-  const [message, setMessage] = useState("")
-
-
   return (
     <div>
       <div className="addServerLinkContainer">
@@ -369,21 +397,29 @@ function HomePage() {
           <h3>messages</h3>
           {showChannelMessages ? (
             <div>
-              <div>
-                <ul className="messagesDisplay">
+              <div className="messagesDisplay">
                   {channelMessagesArr &&
                     channelMessagesArr.map((message) => (
-                      <li key={message.id}>
-                        <button className="singleMessageDisplay">
-                          {message.message}
-                        </button>
-                      </li>
+                      <div key={message.id} id={message.id} className="singleMessageDisplay">
+                        { !editMode ?
+                          <p>{message.message}</p>
+                          :
+                          <EditMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk} messageId={message.id} message={message.message} />
+                        }
+                          <button onClick={openMessageMenu}>
+                            <i className="fa-light fa-ellipsis"></i>
+                          </button>
+                          {showMessageDropdown && (
+                            <ul className="message-dropdown">
+                              <li onClick={setEdit(true)}>Edit Message</li>
+                              <li>Delete Message</li>
+                            </ul>
+                          )}
+                      </div>
                     ))}
-                </ul>
               </div>
-              <div className="message-form form">
-                <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk}/>
-              </div>
+
+              <CreateMessageForm channelId={selectedChannelId} userId={sessionUser.id} getMessages={getChannelMessagesThunk}/>
 
             </div>
           ) : (
