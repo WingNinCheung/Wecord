@@ -2,10 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
+
 import {
   getServerChannelsThunk,
   deleteChannelThunk,
 } from "../../store/channel";
+
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
@@ -109,6 +111,7 @@ function HomePage() {
     }
   };
 
+
   // Right click server menu
   const Menu = ({ x, y }) => {
     return (
@@ -183,7 +186,7 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+          <button onClick={handleChannelDelete} disabled={loggedInUserId !== adminId}>
             Delete
           </button>
         </div>
