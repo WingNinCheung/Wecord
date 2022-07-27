@@ -9,6 +9,7 @@ export default function EditChannel({
   channelId,
   setEdit,
   channelTitle,
+  loadChannel,
 }) {
   const [title, setTitle] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
@@ -33,8 +34,9 @@ export default function EditChannel({
       serverId,
       title,
     };
-    const newChannel = await dispatch(updateChannel(data, serverId, channelId));
 
+    const newChannel = await dispatch(updateChannel(data, serverId, channelId));
+    await loadChannel();
     setEdit(false);
     // history.push("/home");
   };
