@@ -12,6 +12,7 @@ export default function EditChannel({
 }) {
   const [title, setTitle] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
+  // const [hidden, setHidden] = useState(true);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,10 +35,8 @@ export default function EditChannel({
     };
     const newChannel = await dispatch(updateChannel(data, serverId, channelId));
 
-    if (newChannel) {
-      setEdit(false);
-      history.push("/home");
-    }
+    setEdit(false);
+    // history.push("/home");
   };
 
   const handleCancel = (e) => {
@@ -48,7 +47,7 @@ export default function EditChannel({
 
   return (
     <div>
-      <h3>Update Yout Channel Here!</h3>
+      <h3>Update Your Channel Here!</h3>
       <form onSubmit={handleSubmit}>
         <ul>
           {validationErrors.map((error) => (

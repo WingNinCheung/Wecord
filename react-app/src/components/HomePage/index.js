@@ -2,11 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllServers, updateServer, deleteServer } from "../../store/servers";
-import { getServerChannelsThunk, deleteChannelThunk } from "../../store/channel";
+
+import {
+  getServerChannelsThunk,
+  deleteChannelThunk,
+} from "../../store/channel";
+
 import { getChannelMessagesThunk } from "../../store/messages";
 import CreateChannel from "./Channel/createChannel";
 import "./HomePage.css";
 import EditChannel from "./Channel/editChannel";
+import {
+  getAllServerUsers,
+  addServerUser,
+  leaveServer,
+} from "../../store/serverUser";
+import Member from "../../components/HomePage/member";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -19,6 +30,11 @@ function HomePage() {
   const publicServers = allServersArray.filter(
     (server) => server.private === false
   );
+
+  let defaultSelectedServerId = publicServers[0];
+  if (defaultSelectedServerId) {
+    defaultSelectedServerId = defaultSelectedServerId.id;
+  }
 
   const privateServers = allServersArray.filter(
     (server) =>
@@ -33,14 +49,17 @@ function HomePage() {
   const [name, setName] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [mainServer, setMainServer] = useState(false);
-  const [selectedServerId, setSelectedServerId] = useState("");
+  const [selectedServerId, setSelectedServerId] = useState(
+    defaultSelectedServerId
+  );
   const [adminId, setAdminId] = useState();
   const [goToChannel, setGoToChannels] = useState(false);
-  const [openChannels, setOpenChannels] = useState(false);
+  const [openChannels, setOpenChannels] = useState(true);
   const [selectedChannelId, setSelectedChannelId] = useState("");
   const [showChannelMessages, setShowChannelMessages] = useState(false);
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
+  const [userIsInServer, setUserIsInServer] = useState(false);
   const history = useHistory();
 
   // right-click menu section
@@ -54,18 +73,44 @@ function HomePage() {
 
   const handleDelete = async (e) => {
     e.preventDefault();
+    await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId));
+    await loadChannel();
+  };
+  const handleDeleteServer = async (e) => {
+    e.preventDefault();
     await dispatch(deleteServer(selectedServerId));
     await dispatch(getAllServers());
+    // await loadChannel();
   };
 
-  const handleChannelDelete = async (e) => {
-    e.preventDefault();
-    await dispatch(deleteChannelThunk(selectedServerId, selectedChannelId))
+  const checkUserinServer = async (serverId) => {
+    const data = await dispatch(getAllServerUsers(serverId));
+    let userInServer = false;
 
-  }
+    for (let i of data) {
+      if (i.user.id == loggedInUserId) {
+        userInServer = true;
+      }
+    }
 
-  console.log("show is", show);
-  console.log("channelShow is ", channelShow);
+    if (userInServer) {
+      setOpenChannels(true);
+      setGoToChannels(true);
+      setGoToChannelsMessages(false);
+      setShowChannelMessages(false);
+      setUserIsInServer(true);
+      return true;
+    } else {
+      setOpenChannels(false);
+      setGoToChannels(false);
+      setGoToChannelsMessages(false);
+      setShowChannelMessages(false);
+      setUserIsInServer(false);
+
+      return false;
+    }
+  };
+
 
   // Right click server menu
   const Menu = ({ x, y }) => {
@@ -95,8 +140,19 @@ function HomePage() {
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+          <button
+            onClick={handleDeleteServer}
+            disabled={loggedInUserId !== adminId}
+          >
             Delete
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleLeave}
+            disabled={!userIsInServer || loggedInUserId == adminId}
+          >
+            Leave Server
           </button>
         </div>
       </div>
@@ -195,11 +251,8 @@ function HomePage() {
 
   // Read all channels of a server  ------ working
   const loadChannel = async () => {
-    if (goToChannel) {
-      const result = await dispatch(getServerChannelsThunk(selectedServerId));
-      console.log("result:", result);
-      setGoToChannels(false);
-    }
+    const result = await dispatch(getServerChannelsThunk(selectedServerId));
+    setGoToChannels(false);
   };
 
   useEffect(() => {
@@ -208,7 +261,6 @@ function HomePage() {
 
   const allChannels = useSelector((state) => state.channel);
   const serverChannels = Object.values(allChannels);
-  console.log("serverChannels:", serverChannels);
 
   //----------------------------------------------------
 
@@ -228,6 +280,18 @@ function HomePage() {
   }, [dispatch, goToChannelMessages]);
 
   // ------------------------------------------------
+
+  const handleJoin = async (e) => {
+    e.preventDefault();
+    await dispatch(addServerUser(loggedInUserId, selectedServerId));
+    checkUserinServer(selectedServerId);
+  };
+
+  const handleLeave = async (e) => {
+    e.preventDefault();
+    await dispatch(leaveServer(loggedInUserId, selectedServerId));
+    checkUserinServer(selectedServerId);
+  };
 
   // create a channel
 
@@ -262,10 +326,7 @@ function HomePage() {
                         setMainServer(true);
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
-                        setOpenChannels(true);
-                        setGoToChannels(true);
-                        setGoToChannelsMessages(false);
-                        setShowChannelMessages(false);
+                        checkUserinServer(server.id);
                       }}
                     >
                       {server.name}
@@ -304,9 +365,13 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-            <NavLink to={`/${selectedServerId}/channels/create`}>
-              create a channel
-            </NavLink>
+            // <NavLink to={`/${selectedServerId}/channels/create`}>
+            //   create a channel
+            // </NavLink>
+
+            <CreateChannel
+              props={{ serverId: selectedServerId, loadChannel }}
+            />
           )}
           {openChannels ? (
             <div>
@@ -344,7 +409,9 @@ function HomePage() {
               </ul>
             </div>
           ) : (
-            <div> </div>
+            <div>
+              <button onClick={handleJoin}>Join Server</button>
+            </div>
           )}
 
           {editChannel && (
@@ -377,13 +444,16 @@ function HomePage() {
           )}
         </div>
 
-        <div className="userLists"></div>
+        <div className="userLists">
+          <h3>Members</h3>
+          <Member serverId={selectedServerId} />
+        </div>
       </div>
 
       <div className="updateServerForm">
         {edit && (
           <div>
-            <h3>Update Yout Server Here!</h3>
+            <h3>Update Your Server Here!</h3>
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
