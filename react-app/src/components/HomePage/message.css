@@ -1,11 +1,13 @@
 .messagesContainer {
   color: white;
   width: 100%;
-  height: 100%;
+  height: 88vh;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   background-color: #3a3c42;
+
+  /* overflow: hidden; */
 }
 
 .messagesDisplay {
@@ -25,8 +27,6 @@
   height: auto;
   width: 68rem;
   margin: 1rem;
-  /* background-color: #2f3136; */
-  /* justify-content: space-evenly; */
   border: solid transparent 1px;
   /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
   overflow: hidden;
@@ -59,5 +59,24 @@
 
 .createMessageForm {
   color: red;
-  /* position: fixed; */
+  position: fixed;
+  bottom: 0;
+}
+
+.create-message {
+  width: 62vw;
+  height: 5vh;
+  overflow-y: scroll;
+  background-color: #393a3e;
+  color: white;
+}
+
+.send-button {
+  /* color: aqua; */
+  /* background-color: red; */
+  position: sticky;
+  right: 9%;
+  bottom: 2%;
+  background-color: white;
+  width: 30px;
 }

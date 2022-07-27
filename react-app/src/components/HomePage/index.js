@@ -435,20 +435,19 @@ function HomePage() {
                       }}
                     >
                       <li key={channel.id} value={channel.serverId}>
-                        <div>
+                        <span>
                           <i className="fa-solid fa-hashtag"></i>
-                        </div>
-
-                        <button
-                          className="singleChannelDisplay"
-                          onClick={() => {
-                            setSelectedChannelId(channel.id);
-                            setShowChannelMessages(true);
-                            setGoToChannelsMessages(true);
-                          }}
-                        >
-                          {channel.title}
-                        </button>
+                          <button
+                            className="singleChannelDisplay"
+                            onClick={() => {
+                              setSelectedChannelId(channel.id);
+                              setShowChannelMessages(true);
+                              setGoToChannelsMessages(true);
+                            }}
+                          >
+                            {channel.title}
+                          </button>
+                        </span>
                       </li>
                     </div>
                   ))}

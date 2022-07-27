@@ -48,6 +48,7 @@ export default function CreateMessageForm({ channelId, userId, getMessages }) {
   return (
     <div className="createMessageForm">
       <h3>Create a message</h3>
+
       <form onSubmit={handleMessageSubmit}>
         <ul>
           {validationErrors.map((error) => (
@@ -56,11 +57,14 @@ export default function CreateMessageForm({ channelId, userId, getMessages }) {
         </ul>
         <textarea
           className="create-message"
-          placeholder="create messages here"
+          placeholder="Write messages here"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         ></textarea>
-        <button disabled={validationErrors.length > 0}>Send</button>
+
+        <button disabled={validationErrors.length > 0} className="send-button">
+          <i className="fas fa-paper-plane"></i>
+        </button>
         {/* <button onClick={handleCancel}>Cancel</button> */}
       </form>
     </div>
