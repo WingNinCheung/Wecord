@@ -10,6 +10,7 @@ export default function Chat() {
 
     //TODO: double check that this is the user
     const user = useSelector(state => state.session.user)
+    const oldMessages = useSelector(state => state.messages);
 
     const dispatch = useDispatch();
 
@@ -26,6 +27,8 @@ export default function Chat() {
     // Note: we use channelId but it is probably more secure to use the socket.io sessionId
     const loadAllMessages = async () => {
         await dispatch(getChannelMessagesThunk(channelId));
+        // await setMessages(Object.values(newMessages));
+        console.log("the messages state in loadAllMessages after thunk ", oldMessages);
     }
 
     const createMessage = async (message) => {
@@ -34,6 +37,10 @@ export default function Chat() {
 
     useEffect(() => {
 
+        // let newMessages = loadAllMessages();
+        // setMessages(Object.values(newMessages))
+        loadAllMessages();
+        console.log("the messages: ", messages)
         // create websocket/connect
         socket = io();
 
@@ -48,7 +55,7 @@ export default function Chat() {
         //     // not sure if "channelId" needs to be string or int
         //     room = { "username": user.username, "channelId": channelId }
         //     room.join(channelName);
-        //     loadAllMessages();
+        //     // loadAllMessages();
         // })
 
         // disconnect upon component unmount
@@ -65,20 +72,20 @@ export default function Chat() {
         e.preventDefault();
         // emit a message
         if (chatInput !== "") {
-            socket.emit("chat", { user: user.username, msg: chatInput, userId: user.id, channelId: channelId });
+            socket.emit("chat", { user: user.username, message: chatInput, userId: user.id, channelId: channelId });
         }
         // either: do a dispatch to create a message in the database
         // or: socket does something weird to create a message on the backend
         // clear input field after message is sent
         setChatInput("")
     }
-
+    if (!oldMessages) return <p className="loading">Loading</p>
   return (
     <>
         <div className="messagesDisplay">
             {messages.map((message, i) => (
                 <div key={i}>
-                    {`${message.user}: ${message.msg}`}
+                    {`${message.user}: ${message.message}`}
                 </div>
             ))}
         </div>

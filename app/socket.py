@@ -27,7 +27,7 @@ def handle_chat(data):
     message = Message(
         userId=data["userId"],
         channelId=data["channelId"],
-        message=data["msg"]
+        message=data["message"]
     )
 
     db.session.add(message)
@@ -43,6 +43,11 @@ def on_join(data):
     join_room(room)
     # to=room means that only someone connected to this room can see what's happening here
     socketio.send(username + "has entered the room", to=room)
+
+# test to see if we can have a connection event
+# @socketio.on('connect')
+# def test_connect(auth):
+#     socketio.emit('my response', {'data': 'Connected'})
 
 # leave a chatroom
 @socketio.on('leave')
