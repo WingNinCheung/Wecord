@@ -188,5 +188,21 @@
 }
 
 .msg-body {
-  display: flex;
+  /* display: flex; */
+  margin-left: 20px;
+}
+/* .message {
+  margin-right: 80%;
+} */
+
+.fa-pen-to-square {
+  position: sticky;
+  left: 95%;
+  z-index: 3;
+}
+
+.fa-trash-can {
+  position: sticky;
+  left: 99%;
+  /* z-index: 3; */
 }

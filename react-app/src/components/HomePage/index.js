@@ -488,7 +488,7 @@ function HomePage() {
                           {message.username}
                         </div>
                         <div className="msg-body">
-                          {message.message}
+                          <span className="message">{message.message}</span>
 
                           <span
                             onClick={() => {
