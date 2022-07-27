@@ -15,7 +15,7 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-# handle chat
+# connect to chat
 @socketio.on("chat")
 def handle_chat(data):
     socketio.emit("chat", data, broadcast=True)
