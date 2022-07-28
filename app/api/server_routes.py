@@ -12,11 +12,16 @@ server_routes = Blueprint("server_routes", __name__)
 #     return server.to_dict()
 
 # GET /api/servers - read all servers
-@server_routes.route("/")
+@server_routes.route("/yourServers/<int:userId>")
 # @login_required
-def all_servers():
+def all_servers(userId):
+    serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
+    print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
+    print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
+
+   
     servers = Server.query.all()
-    return {"servers": [server.to_dict() for server in servers]}
+    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers]}
 
 
 # POST /api/servers - create a new public server
@@ -83,11 +88,14 @@ def delete_server(serverId, userId):
         return jsonify({"Only the server admin may delete this server"})
 
 
-@server_routes.route('/private/<int:userId>/<int:serverId>')
-def checkUserInServer(userId, serverId):
-    server = Server.query.get(serverId)
-    print('$$$$$$$$$$$$$$$$$$$############',server.users)
-    return server.to_dict()
+@server_routes.route('/private/<int:userId>')
+def checkUserInServer(userId):
+    serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
+    print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
+    print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
+
+    return {'yourservers': [server.server.to_dict() for server in serverUsers]}
+ 
 
 
 # ------------------------- Routes for channels -------------------------------------
