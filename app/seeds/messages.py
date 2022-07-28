@@ -21,18 +21,13 @@ def seed_messages():
         userId = 1, channelId = 6, message = "kiwi")
     message9 = Message(
         userId = 1, channelId = 7, message = "strawberry")
-    message10 = Message(
-        userId = 1, channelId = 8, message = "Hello whatever")
-    message11 = Message(
-        userId = 1, channelId = 9, message = "Hello whatever")
-    message12 = Message(
-        userId = 1, channelId = 10, message = "Hello whatever")
+   
     message13 = Message(
-        userId = 2, channelId = 11, message = "Hello whatever")
+        userId = 2, channelId = 8, message = "Hello whatever")
     message14 = Message(
-        userId = 3, channelId = 12, message = "Hello whatever")
+        userId = 3, channelId = 9, message = "Hello whatever")
     message15 = Message(
-        userId = 3, channelId = 12, message = "Hello whatever")
+        userId = 3, channelId = 9, message = "Hello whatever")
 
     db.session.add(message1)
     db.session.add(message2)
@@ -43,9 +38,7 @@ def seed_messages():
     db.session.add(message7)
     db.session.add(message8)
     db.session.add(message9)
-    db.session.add(message10)
-    db.session.add(message11)
-    db.session.add(message12)
+
     db.session.add(message13)
     db.session.add(message14)
     db.session.add(message15)

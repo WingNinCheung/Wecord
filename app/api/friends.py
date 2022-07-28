@@ -81,5 +81,26 @@ def unfriend(userId, friendId):
         print(friend)
         db.session.delete(friend)
     db.session.commit()
-    
+    servers = Server.query.filter(Server.private == True).all()
+    user1 = User.query.get(userId)
+    user2 = User.query.get(friendId)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(servers)
+    for server in servers:
+        print('@#@#@#@#@#@#@##@#@@#@#@#@#@#@#@#',server)
+        serverusers = server.users
+        print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', serverusers)
+        print(serverusers[0].user, serverusers[1].user)
+        print('wth1###########################', serverusers[0].user == user2 and serverusers[1] == user1)
+        if (serverusers[0].user == user1 or serverusers[0].user == user2) and (serverusers[1].user == user1 or serverusers[1].user == user2):
+            db.session.delete(server)
+        # for serveruser in serverusers:
+        #     sev = serveruser.user
+        #     print('IS THIS THE SAME USER', user1, user2)
+        #     print('#######################################', sev)
+    db.session.commit()
+
+    # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',servers)
     return person[0]

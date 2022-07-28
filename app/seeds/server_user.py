@@ -15,18 +15,13 @@ def seed_server_users():
         serverId = 2, userId = 2, adminStatus = False, muted = False )
     server_users6 = Server_User(
         serverId = 3, userId = 1, adminStatus = True, muted = False )
-    server_users7 = Server_User(
-        serverId = 4, userId = 1, adminStatus = True, muted = False )
-    server_users8 = Server_User(
-        serverId = 4, userId = 3, adminStatus = False, muted = False )
-    server_users9 = Server_User(
-        serverId = 5, userId = 1, adminStatus = True, muted = False )
+    
     server_users10 = Server_User(
-        serverId = 6, userId = 2, adminStatus = True, muted = False )
+        serverId = 4, userId = 2, adminStatus = True, muted = False )
     server_users11 = Server_User(
-        serverId = 6, userId = 3, adminStatus = False, muted = False )
+        serverId = 4, userId = 3, adminStatus = False, muted = False )
     server_users12 = Server_User(
-        serverId = 7, userId = 3, adminStatus = True, muted = False )
+        serverId = 5, userId = 3, adminStatus = True, muted = False )
 
 
 
@@ -38,9 +33,7 @@ def seed_server_users():
     db.session.add(server_users4)
     db.session.add(server_users5)
     db.session.add(server_users6)
-    db.session.add(server_users7)
-    db.session.add(server_users8)
-    db.session.add(server_users9)
+
     db.session.add(server_users10)
     db.session.add(server_users11)
     db.session.add(server_users12)
