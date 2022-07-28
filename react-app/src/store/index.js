@@ -5,7 +5,9 @@ import servers from "./servers";
 import channel from "./channel";
 import messages from "./messages";
 import serverUsers from "./serverUser";
+import users from "./user";
 import friendsReducer from "./friends";
+
 
 const rootReducer = combineReducers({
   session,
@@ -13,6 +15,7 @@ const rootReducer = combineReducers({
   channel,
   messages,
   serverUsers,
+  users,
   friends: friendsReducer
 });
 

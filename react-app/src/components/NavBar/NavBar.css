@@ -1,29 +1,53 @@
 .navbarcontainer {
-    color:white;
-    background-color:  #2F3136;
-    margin: 0;
+  color: white;
+  background-color: #2f3136;
+  /* background-color: rgb(74, 87, 225); */
+  margin: 0;
 }
 
 #splash-logo {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
 }
 
 .navlink,
 #splash-logo,
 .navbarli {
-    color:white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .navbarli {
-    margin-top: 1.3rem;
+  margin-top: 1.3rem;
 }
 
 .navbarlist {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 65px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 65px;
+  margin: 0;
+}
 
+.auth-button {
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.login-button,
+.signup-button {
+  padding: 7px 16px;
+  border-radius: 40px;
+  margin-right: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 24px;
+  color: rgb(83, 78, 78);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.login-button:hover,
+.signup-button:hover {
+  color: rgb(92, 92, 226);
 }

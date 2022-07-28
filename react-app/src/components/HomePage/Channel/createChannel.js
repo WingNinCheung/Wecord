@@ -7,13 +7,11 @@ import { useLocation } from "react-router-dom";
 
 export default function CreateChannel({ props }) {
   const [title, setTitle] = useState("");
-  const [hidden, setHidden] = useState(true)
+  const [hidden, setHidden] = useState(true);
   const [validationErrors, setValidationErrors] = useState([]);
   const sessionUser = useSelector((state) => state.session.user.id);
   const dispatch = useDispatch();
   const history = useHistory();
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,13 +22,14 @@ export default function CreateChannel({ props }) {
     };
 
     const newChannel = await dispatch(createChannel(data, props.serverId));
-    await props.loadChannel()
-    setTitle('')
-    setHidden(true)
+    await props.loadChannel();
+    setTitle("");
+    setHidden(true);
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
+    setHidden(true);
     history.push("/home");
   };
   useEffect(() => {
@@ -44,9 +43,13 @@ export default function CreateChannel({ props }) {
 
   return (
     <>
-      <button onClick={() => {
-        setHidden(false)
-      }}>Create a Channel</button>
+      <button
+        onClick={() => {
+          setHidden(false);
+        }}
+      >
+        Create a Channel
+      </button>
       <form hidden={hidden} onSubmit={handleSubmit}>
         <ul>
           {validationErrors.map((error) => (

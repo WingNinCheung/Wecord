@@ -1,24 +1,29 @@
 .outContainer {
-    width: 100%;
-    height: 103vh;
-    display: flex;
-    flex: 1 1 auto;
-    margin: 0px;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex: 1 1 auto;
+  margin: 0px;
+}
 
+body {
+  background-color: #202225;
+  margin: 0px;
+  height: 100vh;
 }
 
 .publicServers,
 .privateServers,
 .userLists {
-    color:white;
-    display: flex;
-    width: 15%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    background-color: #202225;
-    overflow: hidden;
-    min-height: 0;
+  color: white;
+  display: flex;
+  width: 12%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: #202225;
+  overflow: hidden;
+  min-height: 0;
 }
 
 /* .message-form {
@@ -41,153 +46,105 @@
     min-height: 0;
 } */
 
-.updateServerForm{
-    margin-left:3rem;
+.updateServerForm {
+  margin-left: 3rem;
 }
 
-.serverChannels{
-    color:white;
-    width: 15%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #2F3136;
-
+.serverChannels {
+  color: white;
+  width: 15%;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2b2d32;
 }
-
-.messagesContainer{
-    color:white;
-    width: 55%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #2F3136;
-}
-
 
 .publicServersDisplay {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    width: 8rem;
-    height: 100%;
-    border: solid transparent 1px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
-    border-radius: 5px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  width: 8rem;
+  height: 100%;
+  border: solid transparent 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
-.privateServersDisplay{
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    width: 8rem;
-    height: 100%;
-    border: solid transparent 1px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
-    border-radius: 5px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
+.privateServersDisplay {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  width: 8rem;
+  height: 100%;
+  border: solid transparent 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
-
-.channelsDisplay{
-    list-style-type: none;
-    width: 250px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #2F3136;
-    margin-left: 8.5rem;
-
+.channelsDisplay {
+  list-style-type: none;
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2f3136;
+  margin-left: 8.5rem;
 }
 
-
-
-.messagesDisplay{
-    list-style-type: none;
-    width: 250px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #2F3136;
+.singleServerDisplay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 2rem;
+  width: 6rem;
+  margin: 1rem;
+  background-color: #202225;
+  justify-content: space-evenly;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-
-.singleServerDisplay{
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 2rem;
-    width: 6rem;
-    margin: 1rem;
-    background-color:  #202225;
-    justify-content: space-evenly;
-    border:none;
-    overflow: hidden;
-    cursor: pointer;
+.singleServerDisplay:hover {
+  text-decoration: underline;
+  font-size: large;
 }
 
-.singleServerDisplay:hover{
-    text-decoration: underline;
-    font-size: large;
-
+.singleChannelDisplay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem;
+  background-color: #2f3136;
+  justify-content: space-evenly;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-
-.singleChannelDisplay{
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 2rem;
-    width: 5rem;
-    margin: 1rem;
-    background-color:  #2F3136;
-    justify-content: space-evenly;
-    border:none;
-    overflow: hidden;
-    cursor: pointer;
-
+.singleChannelDisplay:hover {
+  text-decoration: underline;
+  font-size: large;
 }
 
-.singleChannelDisplay:hover{
-    text-decoration: underline;
-    font-size: large;
-
+.channelList {
+  display: flex;
+  flex-direction: row;
 }
 
-
-
-.singleMessageDisplay{
-    color:white;
-    display: flex;
-    flex-direction: column;
-    height: 3rem;
-    width: 35rem;
-    margin: 1rem;
-    background-color: #2F3136;
-    justify-content: space-evenly;
-    border: solid transparent 1px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.channelList{
-    display:flex;
-    flex-direction: row;
-}
-
-.addServerLinkContainer{
-    color:white;
-    background-color: #2F3136;
-    height:3rem;
-    text-decoration: none;
+.addServerLinkContainer {
+  color: white;
+  background-color: #2f3136;
+  height: 3rem;
+  text-decoration: none;
 }
