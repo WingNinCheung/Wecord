@@ -4,6 +4,7 @@ import LogoutButton from "../auth/LogoutButton";
 import { useSelector } from "react-redux";
 import "./NavBar.css";
 import LoginFormModal from "../auth/LoginFormModal";
+import SignUpFormModal from "../auth/SignupFormModal";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -57,14 +58,15 @@ const NavBar = () => {
               <LoginFormModal />
             </li>
             <li className="navbarli">
-              <NavLink
+              {/* <NavLink
                 className="navlink"
                 to="/sign-up"
                 exact={true}
                 activeClassName="active"
               >
                 Sign Up
-              </NavLink>
+              </NavLink> */}
+              <SignUpFormModal />
             </li>
           </>
         )}

@@ -42,9 +42,9 @@ function App() {
           <LoginForm />
         </Route> */}
         {/* <LoginFormModal /> */}
-        <Route path="/sign-up" exact={true}>
+        {/* <Route path="/sign-up" exact={true}>
           <SignUpForm />
-        </Route>
+        </Route> */}
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
