@@ -1,0 +1,61 @@
+.friendslistdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #202225;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
+    color: whitesmoke;
+    /* height: 100%; */
+}
+
+
+.ulforfriends {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 1px; */
+    width: 50%;
+    /* background-color: #202225; */
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.liforfriends {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 90%;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #2F3136;
+    padding: 2px;
+
+
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    padding: 2px;
+    text-decoration: none;
+
+}
+
+.link:hover {
+    background-color: black;
+    border-radius: 5px;
+    font-size: 22px;
+}

@@ -25,6 +25,7 @@ const NavBar = () => {
                 <SignUpFormModal />
               </span>
             </div>
+
           </>
         )}
       </div>
