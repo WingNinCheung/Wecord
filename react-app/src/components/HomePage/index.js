@@ -432,7 +432,7 @@ function HomePage() {
           )}
           {openChannels ? (
             <div>
-              <ul className="channelsDisplay">
+              <ul className="channelsDisplay" >
                 {serverChannels &&
                   serverChannels.map((channel) => (
                     <div
@@ -443,10 +443,11 @@ function HomePage() {
                         setSelectedChannelId(channel.id);
                         setChannelName(channel.title);
                       }}
+
                     >
                       <li key={channel.id} value={channel.serverId}>
                         <span>
-                          <i className="fa-solid fa-hashtag"></i>
+                          {/* <i className="fa-solid fa-hashtag"></i> */}
                           <button
                             className="singleChannelDisplay"
                             onClick={() => {
@@ -523,7 +524,7 @@ function HomePage() {
                     ))}
                 </div>
               </div>
-              <div className="message-form form">
+              <div>
                 <CreateMessageForm
                   channelId={selectedChannelId}
                   userId={sessionUser.id}
@@ -541,7 +542,7 @@ function HomePage() {
               )}
             </div>
           ) : (
-            <div>"No messages"</div>
+            <div className="noMsg">"No messages"</div>
           )}
         </div>
 

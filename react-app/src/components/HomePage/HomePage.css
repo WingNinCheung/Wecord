@@ -13,10 +13,13 @@ body {
 }
 
 .joinServerBtn{
-  background-color: white;
+  height:2rem;
+  border:none;
+  color:white;
   border-radius: 9px;
   cursor: pointer;
   font-family: 'Quicksand', sans-serif;
+  background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
 }
 
 .addServerLinkContainer.addServerLink{
@@ -49,6 +52,14 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
+.noMsg{
+  margin-top: 1.2rem;;
+  font-family: 'Quicksand', sans-serif;
+  justify-content: center;
+  text-align: center;
+
+}
+
 /* .message-form {
 
 } */
@@ -75,7 +86,7 @@ body {
 
 .serverChannels {
   color: white;
-  width: 15%;
+  width: 18%;
   height: 88vh;
   display: flex;
   flex-direction: column;
@@ -116,13 +127,13 @@ body {
 
 .channelsDisplay {
   list-style-type: none;
-  width: 250px;
+  width: 10%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #2f3136;
-  margin-left: 8.5rem;
+  margin-left: 4rem;
 }
 
 .singleServerDisplay {
@@ -176,4 +187,17 @@ body {
   background-color: #2f3136;
   height: 3rem;
   text-decoration: none;
+}
+
+.inputChannel{
+  border-radius: 8px;
+  height:1.7rem;
+}
+
+.createChannelBtn{
+  color:white;
+  border-radius: 8px;
+  height:2rem;
+  border: none;
+  background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
 }
