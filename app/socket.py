@@ -1,4 +1,5 @@
 from flask_socketio import SocketIO, join_room, leave_room
+from flask import request
 import os
 from .models.db import db, Message
 
@@ -16,6 +17,12 @@ else:
 # The logger argument controls logging related to the Socket.IO protocol
 # engineio_logger controls logs that originate in the low-level Engine.IO transport
 socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
+
+# do stuff on connect - I wanna load our messages
+@socketio.on("connect")
+def test_connect():
+    s = request.sid
+    socketio.emit("IS THIS WORKING?!?!!! AHH!!!-------", s)
 
 
 # connect to chat
