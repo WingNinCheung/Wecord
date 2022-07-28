@@ -19,6 +19,32 @@ export default function Splash() {
           </p>
         </div>
       </div>
+      <div className="footer">
+        <section className="dev-info">
+          <div>Ricky Cheung</div>
+          <div>
+            <i class="fa-brands fa-github"></i>
+          </div>
+        </section>
+        <section className="dev-info">
+          <div>Krista Strucke</div>
+          <div>
+            <i class="fa-brands fa-github"></i>
+          </div>
+        </section>
+        <section className="dev-info">
+          <div>Brendan Lau</div>
+          <div>
+            <i class="fa-brands fa-github"></i>
+          </div>
+        </section>
+        <section className="dev-info">
+          <div>Qiaoyi Liu </div>
+          <div>
+            <i class="fa-brands fa-github"></i>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
