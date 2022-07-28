@@ -8,7 +8,8 @@
 
 body {
   background-color: #202225;
-  margin: 0;
+  margin: 0px;
+  height: 100vh;
 }
 
 .publicServers,
