@@ -9,10 +9,8 @@ def seed_servers():
         master_admin = 1, name = "example2", private=False, picture=None)
     server3 = Server(
         master_admin = 1, name = "example3", private=False, picture=None)
-    server4 = Server(
-        master_admin = 1, name = "example4", private=True, picture=None)
-    server5 = Server(
-        master_admin = 1, name = "example5", private=True, picture=None)
+
+
     server6 = Server(
         master_admin = 2, name = "example6", private=False, picture=None)
     server7 = Server(
@@ -21,8 +19,6 @@ def seed_servers():
     db.session.add(server1)
     db.session.add(server2)
     db.session.add(server3)
-    db.session.add(server4)
-    db.session.add(server5)
     db.session.add(server6)
     db.session.add(server7)
 

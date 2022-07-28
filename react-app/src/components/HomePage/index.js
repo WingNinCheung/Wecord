@@ -30,6 +30,7 @@ import "./message.css";
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const loggedInUserId = sessionUser.id;
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -37,24 +38,32 @@ function HomePage() {
 
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
-  const allServersArray = Object.values(allServers);
-  const loggedInUserId = sessionUser.id;
-  const publicServers = allServersArray.filter(
-    (server) => server.private === false
-  );
-
-  let defaultSelectedServerId = publicServers[0];
-  if (defaultSelectedServerId) {
-    defaultSelectedServerId = defaultSelectedServerId.id;
+  let allServersArray;
+  if (allServers.allServers) allServersArray = Object.values(allServers.allServers);
+  let publicServers
+  if (allServersArray) {
+    publicServers = allServersArray.filter(
+      (server) => server.private === false
+    );
+  }
+  let defaultSelectedServerId
+  if (publicServers) {
+    defaultSelectedServerId = publicServers[0];
+    if (defaultSelectedServerId) {
+      defaultSelectedServerId = defaultSelectedServerId.id;
+    }
   }
 
-  const privateServers = allServersArray.filter(
-    (server) =>
-      server.private === true && server.master_admin === sessionUser.id
-  );
-
+  let privateServers
+  if (allServers.yourServers) {
+    privateServers = allServers.yourServers.filter(
+      (server) => {
+        if (server.private === true) return server
+      }
+    );
+  }
   useEffect(() => {
-    dispatch(getAllServers());
+    dispatch(getAllServers(loggedInUserId));
   }, [dispatch]);
 
   // EDIT SERVER - may use modal to refactor it  ------working
@@ -94,8 +103,7 @@ function HomePage() {
     await dispatch(deleteServer(selectedServerId, loggedInUserId));
     await dispatch(getAllServers());
 
-    // let defaultSelectedServerId = publicServers[0];
-    // setOpenChannels(false);
+
     setGoToChannels(false);
     setGoToChannelsMessages(false);
     setShowChannelMessages(false);
@@ -401,9 +409,7 @@ function HomePage() {
                       setMainServer(true);
                       setSelectedServerId(server.id);
                       setName(server.name);
-                      setOpenChannels(true);
-                      setGoToChannels(true);
-                      setShowChannelMessages(false);
+                      checkUserinServer(server.id);
                     }}
                   >
                     {server.name}
