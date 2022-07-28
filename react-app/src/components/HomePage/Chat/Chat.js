@@ -27,7 +27,7 @@ export default function Chat() {
     // Note: we use channelId but it is probably more secure to use the socket.io sessionId
     const loadAllMessages = async () => {
         await dispatch(getChannelMessagesThunk(channelId));
-        // await setMessages(Object.values(newMessages));
+        await setMessages(Object.values(oldMessages));
         console.log("the messages state in loadAllMessages after thunk ", oldMessages);
     }
 
