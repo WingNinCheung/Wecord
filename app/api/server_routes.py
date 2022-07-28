@@ -161,6 +161,6 @@ def get_channel_messages(id):
     target_channel = channel.to_dict()
     # use a for loop to append the corresponding username and photo to each message
     for i, message in enumerate(target_channel["messages"]):
-        message["username"] = channel.messages[i].user.username
+        message["user"] = channel.messages[i].user.username
         message["userPhoto"] = channel.messages[i].user.photo
     return {"messages": target_channel["messages"]}

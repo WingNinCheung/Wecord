@@ -74,18 +74,19 @@ export default function Chat() {
         if (chatInput !== "") {
             socket.emit("chat", { user: user.username, message: chatInput, userId: user.id, channelId: channelId });
         }
-        // either: do a dispatch to create a message in the database
-        // or: socket does something weird to create a message on the backend
-        // clear input field after message is sent
+
         setChatInput("")
     }
-    if (!oldMessages) return <p className="loading">Loading</p>
+    if (!oldMessages || !channelId || !socket) return <p className="loading">Loading</p>
   return (
     <>
         <div className="messagesDisplay">
             {messages.map((message, i) => (
                 <div key={i}>
-                    {`${message.user}: ${message.message}`}
+                    <>
+                        <img src={message.userPhoto} alt="userpic" />
+                        {`${message.user}: ${message.message}`}
+                    </>
                 </div>
             ))}
         </div>
@@ -99,3 +100,8 @@ export default function Chat() {
     </>
   )
 }
+// TODO:
+// debug the race condition here. so sometimes the messages are loading,
+// sometimes the page loads nothing
+// the messages are taking HELLA LONG to load.
+// load userphoto next to user.
