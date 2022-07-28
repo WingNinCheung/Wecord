@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     messages = relationship("Message", back_populates="user", cascade= "all, delete")
     servers = relationship("Server", back_populates="masterAdmin", cascade="all, delete")
     server = relationship('Server_User', back_populates='user')
+    friends = relationship("Friend", back_populates="user")
 
 
     @property

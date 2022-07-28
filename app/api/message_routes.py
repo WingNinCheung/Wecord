@@ -17,8 +17,8 @@ def create_message():
     newMessage = Message(
         userId=request.json["userId"],
         channelId=request.json["channelId"],
-        message=request.json["message"]
-        )
+        message=request.json["message"],
+    )
 
     db.session.add(newMessage)
     db.session.commit()

@@ -5,6 +5,23 @@ from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
+class Friend(db.Model):
+    __tablename__ = "friends"
+    id = db.Column(db.Integer, primary_key=True)
+    userId = Column(Integer, nullable=False)
+    friendId = Column(Integer, db.ForeignKey("users.id"), nullable=False)
+    accepted = Column(Boolean, default=False)
+
+    user = relationship("User", back_populates="friends")
+
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "userId": self.userId,
+            "friendId": self.friendId,
+            "accepted": self.accepted,
+        }
+
 
 class Server_User(db.Model):
     __tablename__ = "serverusers"
