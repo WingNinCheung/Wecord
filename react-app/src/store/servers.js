@@ -116,6 +116,7 @@ export const deleteServer = (id, userId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
+    console.log(data)
     dispatch(delServer(data));
   }
 };

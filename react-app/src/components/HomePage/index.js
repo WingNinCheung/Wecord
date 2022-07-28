@@ -102,7 +102,7 @@ function HomePage() {
   const handleDeleteServer = async (e) => {
     e.preventDefault();
     await dispatch(deleteServer(selectedServerId, loggedInUserId));
-    await dispatch(getAllServers());
+    await dispatch(getAllServers(loggedInUserId));
 
 
     setGoToChannels(false);
