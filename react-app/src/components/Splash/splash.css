@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 85vh;
+  height: 100vh;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
@@ -35,6 +35,18 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background: rgb(62, 3, 62);
+  /* background: linear-gradient(
+    90deg,
+    rgb(78, 72, 197) 0%,
+    rgb(133, 26, 113) 56%,
+    rgb(18, 120, 140) 100%
+  ); */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  margin-bottom: 0;
 }
 
 .profile-pic {
@@ -51,7 +63,6 @@
 }
 
 .git-in {
-  /* margin-left: 2px; */
   margin-top: 15%;
 }
 
@@ -59,7 +70,7 @@
 .fa-linkedin-in,
 .fa-envelope {
   margin: 7px;
-  color: black;
+  color: white;
 }
 
 .name {

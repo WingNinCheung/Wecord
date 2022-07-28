@@ -66,8 +66,8 @@ export default function Splash() {
         <section className="dev-info">
           {/* <img
             className="profile-pic"
-            src="https://media-exp1.licdn.com/dms/image/C5603AQGWk2Gqsts5JA/profile-displayphoto-shrink_800_800/0/1563818007698?e=1664409600&v=beta&t=vVd1pvvenK9aSpDCYrZI9CSI6NZHXnAa4b6rjRPlnUk"
-            alt="Ricky"
+            src=""
+            alt="Brendan"
           ></img> */}
           <div className="profile-section">
             <div className="name">Brendan Lau</div>
@@ -88,7 +88,7 @@ export default function Splash() {
         <section className="dev-info">
           {/* <img
             className="profile-pic"
-            src="https://media-exp1.licdn.com/dms/image/C5603AQGWk2Gqsts5JA/profile-displayphoto-shrink_800_800/0/1563818007698?e=1664409600&v=beta&t=vVd1pvvenK9aSpDCYrZI9CSI6NZHXnAa4b6rjRPlnUk"
+            src=""
             alt="Joyce"
           ></img> */}
           <div className="profile-section">
