@@ -35,6 +35,7 @@
   background-color: rgb(63, 63, 186);
   color: white;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .submit-btn:hover {
