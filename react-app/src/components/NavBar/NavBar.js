@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { useSelector } from "react-redux";
 import "./NavBar.css";
+import LoginFormModal from "../auth/LoginFormModal";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,35 +16,53 @@ const NavBar = () => {
             Wecord
           </NavLink>
         </li>
-        {sessionUser &&
+        {sessionUser && (
           <>
             <li className="navbarli">
-              <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
+              <NavLink
+                className="navlink"
+                to="/home"
+                exact={true}
+                activeClassName="active"
+              >
                 Home
               </NavLink>
             </li>
             <li className="navbarli">
-              <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
+              <NavLink
+                className="navlink"
+                to="/users"
+                exact={true}
+                activeClassName="active"
+              >
                 Users
               </NavLink>
             </li>
             <li className="navbarli">
-              <NavLink className="navlink" to='/friends'>Friends </NavLink>
+              <NavLink className="navlink" to="/friends">
+                Friends{" "}
+              </NavLink>
             </li>
             <li className="navbarli">
               <LogoutButton />
             </li>
           </>
-        }
+        )}
         {!sessionUser && (
           <>
             <li className="navbarli">
-              <NavLink className="navlink" to="/login" exact={true} activeClassName="active">
+              {/* <NavLink className="navlink" to="/login" exact={true} activeClassName="active">
                 Login
-              </NavLink>
+              </NavLink> */}
+              <LoginFormModal />
             </li>
             <li className="navbarli">
-              <NavLink className="navlink" to="/sign-up" exact={true} activeClassName="active">
+              <NavLink
+                className="navlink"
+                to="/sign-up"
+                exact={true}
+                activeClassName="active"
+              >
                 Sign Up
               </NavLink>
             </li>

@@ -14,6 +14,7 @@ import EditServerForm from "./components/HomePage/updateServer";
 import CreateChannel from "./components/HomePage/Channel/createChannel";
 import Splash from "./components/Splash/splash";
 import FriendsList from "./components/friends/friends";
+import LoginFormModal from "./components/auth/LoginFormModal";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,9 +38,10 @@ function App() {
         <Route path="/" exact={true}>
           <Splash />
         </Route>
-        <Route path="/login" exact={true}>
+        {/* <Route path="/login" exact={true}>
           <LoginForm />
-        </Route>
+        </Route> */}
+        {/* <LoginFormModal /> */}
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
