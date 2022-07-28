@@ -33,6 +33,7 @@ const FriendsList = () => {
                 {friendsList.length > 0 && friendsList.map(friend => (
                     <li><NavLink to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
                 ))}
+                {friendsList.length === 0 && <li>Sorry, you have no friends</li>}
 
             </ul>
         </>
