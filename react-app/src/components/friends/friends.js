@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFriendsThunk } from "../../store/friends";
 import { NavLink } from 'react-router-dom';
-
+import './friends.css'
 
 const FriendsList = () => {
     const dispatch = useDispatch()
@@ -27,16 +27,16 @@ const FriendsList = () => {
     }, [dispatch])
 
     return (
-        <>
+        <div className='friendslistdiv'>
             <h1>Friends List</h1>
-            <ul>
+            <ul className="ulforfriends">
                 {friendsList.length > 0 && friendsList.map(friend => (
-                    <li><NavLink to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
+                    <li className="liforfriends"><NavLink className='link' to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
                 ))}
                 {friendsList.length === 0 && <li>Sorry, you have no friends</li>}
 
             </ul>
-        </>
+        </div>
     )
 }
 export default FriendsList
