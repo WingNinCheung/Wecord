@@ -92,13 +92,13 @@ export default function Splash() {
             alt="Joyce"
           ></img> */}
           <div className="profile-section">
-            <div className="name">Qiaoyi Lau</div>
+            <div className="name">Qiaoyi Liu</div>
 
             <div className="git-in">
-              <a href="" target="popup">
+              <a href="https://github.com/dalishuishou668" target="popup">
                 <i class="fa-brands fa-github"></i>
               </a>
-              <a href="" target="popup">
+              <a href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/" target="popup">
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
               <a href="">
