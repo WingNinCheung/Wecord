@@ -135,6 +135,7 @@ const servers = (state = {}, action) => {
         allServers.allServers[server.id] = server;
       });
       allServers['yourServers'] = action.servers.yourservers
+      allServers['notIn'] = action.servers.serversnotin
       return allServers;
     case CREATE_SERVER:
       if (!state[action.server.id]) {
