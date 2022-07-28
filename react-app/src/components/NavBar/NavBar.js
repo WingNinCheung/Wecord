@@ -50,25 +50,14 @@ const NavBar = () => {
           </>
         )}
         {!sessionUser && (
-          <>
-            <li className="navbarli">
-              {/* <NavLink className="navlink" to="/login" exact={true} activeClassName="active">
-                Login
-              </NavLink> */}
+          <div className="auth-button">
+            <span>
               <LoginFormModal />
-            </li>
-            <li className="navbarli">
-              {/* <NavLink
-                className="navlink"
-                to="/sign-up"
-                exact={true}
-                activeClassName="active"
-              >
-                Sign Up
-              </NavLink> */}
+            </span>
+            <span className="">
               <SignUpFormModal />
-            </li>
-          </>
+            </span>
+          </div>
         )}
       </ul>
     </nav>

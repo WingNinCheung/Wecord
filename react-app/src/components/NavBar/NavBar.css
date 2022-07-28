@@ -27,3 +27,23 @@
   height: 65px;
   margin: 0;
 }
+
+.auth-button {
+  padding: 20px;
+}
+
+.login-button,
+.signup-button {
+  padding: 7px 16px;
+  border-radius: 40px;
+  margin-right: 20px;
+  font-size: 15px;
+  cursor: pointer;
+  line-height: 24px;
+  color: rgb(83, 78, 78);
+}
+
+.login-button:hover,
+.signup-button:hover {
+  color: rgb(92, 92, 226);
+}
