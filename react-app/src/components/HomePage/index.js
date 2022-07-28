@@ -14,8 +14,8 @@ import {
 
 import CreateChannel from "./Channel/createChannel";
 import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./createMessageForm";
-import EditMessageForm from "./editMessageForm";
+import CreateMessageForm from "./Chat/createMessageForm";
+import EditMessageForm from "./Chat/editMessageForm";
 
 import {
   getAllServerUsers,

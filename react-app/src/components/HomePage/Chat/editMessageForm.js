@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createMessage, getChannelMessagesThunk} from "../../store/messages";
-import { editMessageThunk } from "../../store/messages";
+import { createMessage, getChannelMessagesThunk} from "../../../store/messages";
+import { editMessageThunk } from "../../../store/messages";
 import { useHistory } from "react-router-dom";
 
 export default function EditMessageForm({ messageId, userId, setShow, msgUserId }) {

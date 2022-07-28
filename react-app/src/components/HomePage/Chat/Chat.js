@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { getChannelMessagesThunk, editMessageThunk, createMessage, deleteMessageThunk } from '../../../store/messages';
-import CreateMessageForm from '../createMessageForm';
-import EditMessageForm from '../editMessageForm';
+import CreateMessageForm from './createMessageForm';
+import EditMessageForm from './editMessageForm';
 
 // initialize socket variable
 let socket;
@@ -22,6 +22,9 @@ export default function Chat({ channelId }) {
     const [messages, setMessages] = useState([]);
     // controlled form input
     const [chatInput, setChatInput] = useState("");
+    const [isConnected, setIsConnected] = useState(false);
+
+    const [validationErrors, setValidationErrors] = useState([]);
 
     const [openEditForm, setOpenEditForm] = useState(false);
     const [messageId, setMessageId] = useState("");
@@ -39,9 +42,6 @@ export default function Chat({ channelId }) {
         history.push("/home");
       }, [dispatch, deleteStatus]);
 
-    // FOR TESTING ONLY:
-    // const channelId = 1;
-    const channelName = "Biscuits";
 
     const createMessage = async (message) => {
         await dispatch(createMessage(message));
@@ -84,7 +84,7 @@ export default function Chat({ channelId }) {
         return (() => {
             socket.disconnect()
         })
-    }, []);
+    }, [channelId]);
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value)
@@ -134,11 +134,24 @@ export default function Chat({ channelId }) {
             ))}
         </div>
         <div className="message-form form">
-            <CreateMessageForm
-                channelId={channelId}
-                userId={user.id}
-                getMessages={getChannelMessagesThunk}
-            />
+            <div className="createMessageForm">
+                <form onSubmit={sendChat}>
+                    <ul>
+                        {validationErrors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                    <textarea
+                        className="create-message"
+                        placeholder="Write messages here"
+                        value={chatInput}
+                        onChange={updateChatInput}
+                    />
+                    <button type="Submit" disabled={validationErrors.length > 0} className="send-button">
+                        <i className="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
             {/* edit message form should be moved later to be where message is */}
             {openEditForm && (
                 <EditMessageForm
@@ -149,13 +162,13 @@ export default function Chat({ channelId }) {
                 />
             )}
         </div>
-        <form onSubmit={sendChat}>
+        {/* <form onSubmit={sendChat}>
             <input
                 value={chatInput}
                 onChange={updateChatInput}
             />
             <button type="submit">Send</button>
-        </form>
+        </form> */}
     </div>
   )
 }

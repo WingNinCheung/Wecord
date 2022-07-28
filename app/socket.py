@@ -22,8 +22,12 @@ socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=T
 @socketio.on("connect")
 def test_connect():
     s = request.sid
-    socketio.emit("IS THIS WORKING?!?!!! AHH!!!-------", s)
+    socketio.emit("-------WE HAVE CONNECTED!-------", s)
 
+# see when we disconnect
+@socketio.on("disconnect")
+def test_disconnect():
+    socketio.emit("----WE HAVE DISCONNECTED!!!-------")
 
 # connect to chat
 @socketio.on("chat")
