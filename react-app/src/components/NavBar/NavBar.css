@@ -1,24 +1,45 @@
 .navbarcontainer {
   color: white;
   background-color: #2f3136;
-  background-color: rgb(74, 87, 225);
+  /* background-color: rgb(74, 87, 225); */
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.splash-nav {
+  background-color: rgb(74, 87, 225);
+  display: flex;
+  justify-content: space-between;
+}
+
+.wecord {
+  margin-top: 1.3rem;
+  margin-left: 5%;
 }
 
 #splash-logo {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 30px;
-}
-
-.navlink,
-#splash-logo,
-.navbarli {
   color: white;
   text-decoration: none;
 }
 
+#splash-nav {
+  color: white;
+  text-decoration: none;
+}
+
+.navlink {
+  color: white;
+  /* background-color: white; */
+}
+
 .navbarli {
   margin-top: 1.3rem;
+  color: red;
+  /* background-color: red; */
 }
 
 .navbarlist {
@@ -44,6 +65,7 @@
   cursor: pointer;
   line-height: 24px;
   color: rgb(83, 78, 78);
+  background-color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
