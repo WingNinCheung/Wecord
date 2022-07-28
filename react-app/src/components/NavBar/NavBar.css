@@ -6,6 +6,7 @@
 
 #splash-logo {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
 }
 
 .navlink,
@@ -30,6 +31,7 @@
 
 .auth-button {
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .login-button,
@@ -37,10 +39,11 @@
   padding: 7px 16px;
   border-radius: 40px;
   margin-right: 20px;
-  font-size: 15px;
+  font-size: 18px;
   cursor: pointer;
   line-height: 24px;
   color: rgb(83, 78, 78);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .login-button:hover,
