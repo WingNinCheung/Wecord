@@ -58,22 +58,25 @@
 
 .inputarea{
     padding-left: 30px;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .Err{
     color:black;
     list-style-type: none;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .Title{
-    /* border: black 2px solid; */
+    font-family: 'Quicksand', sans-serif;
     margin-top: 5rem;
-    margin-left: 8rem;
+    margin-left: 6.5rem;
     color: black;
     font-size: x-large;
 }
 
 .createButton{
+    font-family: 'Quicksand', sans-serif;
     background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
     width: 20rem;
     border: 0;

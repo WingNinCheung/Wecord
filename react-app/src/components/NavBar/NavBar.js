@@ -21,7 +21,7 @@ const NavBar = () => {
           <>
             <li className="navbarli">
               <NavLink
-                className="navlink"
+                className="navlink navlink1"
                 to="/home"
                 exact={true}
                 activeClassName="active"
@@ -31,7 +31,7 @@ const NavBar = () => {
             </li>
             <li className="navbarli">
               <NavLink
-                className="navlink"
+                className="navlink navlink1"
                 to="/users"
                 exact={true}
                 activeClassName="active"
@@ -44,7 +44,7 @@ const NavBar = () => {
                 Friends{" "}
               </NavLink>
             </li>
-            <li className="navbarli">
+            <li className="navbarli logoutBtn">
               <LogoutButton />
             </li>
           </>
