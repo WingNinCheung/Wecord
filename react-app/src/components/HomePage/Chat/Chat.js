@@ -162,13 +162,6 @@ export default function Chat({ channelId }) {
                 />
             )}
         </div>
-        {/* <form onSubmit={sendChat}>
-            <input
-                value={chatInput}
-                onChange={updateChatInput}
-            />
-            <button type="submit">Send</button>
-        </form> */}
     </div>
   )
 }
