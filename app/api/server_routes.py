@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
 from ..models.db import Server_User, db, Server, Channel
+from ..models.user import User
 
 server_routes = Blueprint("server_routes", __name__)
 
@@ -18,10 +19,20 @@ def all_servers(userId):
     serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
     print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
     print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
-
-   
+    user = User.query.get(userId)
     servers = Server.query.all()
-    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers]}
+    notIn = []
+    serverspub = Server.query.filter(Server.private == False).all()
+    for server in serverspub:
+        bool = True
+        for use in server.users:
+            print(use.user, user)
+            if user == use.user:
+                bool = False
+        if bool:
+            notIn.append(server)
+    print('allnotin@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',notIn)
+    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers], 'serversnotin': [server.to_dict() for server in notIn]}
 
 
 # POST /api/servers - create a new public server

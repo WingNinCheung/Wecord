@@ -5,7 +5,7 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
+import UsersList from "./components/ServerList";
 import User from "./components/User";
 import HomePage from "./components/HomePage";
 import { authenticate } from "./store/session";
@@ -44,8 +44,9 @@ function App() {
         {/* <LoginFormModal /> */}
         {/* <Route path="/sign-up" exact={true}>
           <SignUpForm />
+        </Route>
+        <ProtectedRoute path="/publicservers" exact={true}>
         </Route> */}
-        <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
