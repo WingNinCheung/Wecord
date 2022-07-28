@@ -31,7 +31,7 @@ const FriendsList = () => {
             <h1>Friends List</h1>
             <ul className="ulforfriends">
                 {friendsList.length > 0 && friendsList.map(friend => (
-                    <li className="liforfriends"><NavLink className='link' to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
+                    <li className="liforfriends"><NavLink className='linkforfriends' to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
                 ))}
                 {friendsList.length === 0 && <li>Sorry, you have no friends</li>}
 
