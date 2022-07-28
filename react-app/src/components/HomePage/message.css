@@ -80,3 +80,20 @@
   background-color: white;
   width: 30px;
 }
+
+.memberli{
+  list-style-type: none;
+  cursor: pointer;
+  margin-right: 2rem;
+
+}
+
+.memberli1{
+  color:white
+}
+
+.memberli1:hover{
+  font-size: x-large;
+}
+
+

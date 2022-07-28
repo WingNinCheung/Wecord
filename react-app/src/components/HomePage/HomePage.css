@@ -12,6 +12,28 @@ body {
   height: 100vh;
 }
 
+.joinServerBtn{
+  background-color: white;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.addServerLinkContainer.addServerLink{
+  color:white;
+  font-family: 'Quicksand', sans-serif;
+  text-decoration: none;
+  margin-left: 2.7rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+
+}
+
+.addServerLinkContainer.addServerLink:hover{
+  font-size: large;
+}
+
+
 .publicServers,
 .privateServers,
 .userLists {
@@ -24,6 +46,7 @@ body {
   background-color: #202225;
   overflow: hidden;
   min-height: 0;
+  font-family: 'Quicksand', sans-serif;
 }
 
 /* .message-form {
@@ -58,6 +81,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #2b2d32;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .publicServersDisplay {
@@ -72,9 +96,11 @@ body {
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .privateServersDisplay {
+  font-family: 'Quicksand', sans-serif;
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -100,6 +126,7 @@ body {
 }
 
 .singleServerDisplay {
+  font-family: 'Quicksand', sans-serif;
   color: white;
   display: flex;
   flex-direction: column;
@@ -136,6 +163,8 @@ body {
   text-decoration: underline;
   font-size: large;
 }
+
+
 
 .channelList {
   display: flex;

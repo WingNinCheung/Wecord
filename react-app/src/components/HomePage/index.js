@@ -357,7 +357,7 @@ function HomePage() {
   return (
     <div>
       <div className="addServerLinkContainer">
-        <NavLink className="addServerLinkContainer" to="/create-server">
+        <NavLink className="addServerLinkContainer addServerLink" to="/create-server" >
           Add a Server
         </NavLink>
       </div>
@@ -399,24 +399,28 @@ function HomePage() {
 
         <div className="privateServers">
           <h3>Private</h3>
-          <ul className="privateServersDisplay">
-            {privateServers &&
-              privateServers.map((server) => (
-                <li key={server.id}>
-                  <button
-                    className="singleServerDisplay"
-                    onClick={() => {
-                      setMainServer(true);
-                      setSelectedServerId(server.id);
-                      setName(server.name);
-                      checkUserinServer(server.id);
-                    }}
-                  >
-                    {server.name}
-                  </button>
-                </li>
-              ))}
-          </ul>
+          <div className="serverContainer">
+            <ul className="privateServersDisplay">
+              {privateServers &&
+                privateServers.map((server) => (
+                  <li key={server.id}>
+                    <button
+                      className="singleServerDisplay"
+                      onClick={() => {
+                        setMainServer(true);
+                        setSelectedServerId(server.id);
+                        setName(server.name);
+                        checkUserinServer(server.id);
+                      }}
+                    >
+                      {server.name}
+                    </button>
+                  </li>
+                ))}
+            </ul>
+
+          </div>
+
         </div>
 
         <div className="serverChannels">
@@ -462,7 +466,7 @@ function HomePage() {
             </div>
           ) : selectedServerId ? (
             <div>
-              <button onClick={handleJoin}>Join Server</button>
+              <button onClick={handleJoin} className="joinServerBtn">Join Server</button>
             </div>
           ) : (
             <div></div>
