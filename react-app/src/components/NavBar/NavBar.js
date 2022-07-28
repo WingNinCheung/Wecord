@@ -48,8 +48,8 @@ const NavBar = () => {
             </NavLink>
           </span>
           <span className="navbarli">
-            <NavLink id="splash-nav" to="/users" exact={true}>
-              Users
+            <NavLink id="splash-nav" to="/publicservers" exact={true}>
+              Public Servers
             </NavLink>
           </span>
           <span className="navbarli">
