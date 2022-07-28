@@ -43,9 +43,13 @@ function HomePage() {
     defaultSelectedServerId = defaultSelectedServerId.id;
   }
 
+  const checkInPrivate = async (serverId) => {
+    fetch(`/api/servers/private/${loggedInUserId}/${serverId}`)
+  }
+
   const privateServers = allServersArray.filter(
     (server) =>
-      server.private === true && server.master_admin === sessionUser.id
+      server.private === true && checkInPrivate(server.id)
   );
 
   useEffect(() => {
@@ -386,9 +390,7 @@ function HomePage() {
                       setMainServer(true);
                       setSelectedServerId(server.id);
                       setName(server.name);
-                      setOpenChannels(true);
-                      setGoToChannels(true);
-                      setShowChannelMessages(false);
+                      checkUserinServer(server.id);
                     }}
                   >
                     {server.name}
@@ -401,10 +403,6 @@ function HomePage() {
         <div className="serverChannels">
           <h3>Channels</h3>
           {adminId === loggedInUserId && selectedServerId && (
-            // <NavLink to={`/${selectedServerId}/channels/create`}>
-            //   create a channel
-            // </NavLink>
-
             <CreateChannel
               props={{ serverId: selectedServerId, loadChannel }}
             />

@@ -83,6 +83,13 @@ def delete_server(serverId, userId):
         return jsonify({"Only the server admin may delete this server"})
 
 
+@server_routes.route('/private/<int:userId>/<int:serverId>')
+def checkUserInServer(userId, serverId):
+    server = Server.query.get(serverId)
+    print('$$$$$$$$$$$$$$$$$$$############',server.users)
+    return server.to_dict()
+
+
 # ------------------------- Routes for channels -------------------------------------
 # read all channels of a single server
 @server_routes.route("/<int:id>/channels")
