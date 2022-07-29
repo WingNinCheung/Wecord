@@ -14,8 +14,6 @@ import {
 
 import CreateChannel from "./Channel/createChannel";
 import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./Chat/createMessageForm";
-import EditMessageForm from "./Chat/editMessageForm";
 
 import {
   getAllServerUsers,
@@ -455,12 +453,8 @@ function HomePage() {
         </div>
 
         <div className="messagesContainer">
-          {/* <h3>Messages</h3> */}
-
-          {showChannelMessages ? (
+          {showChannelMessages && (
             <Chat channelId={selectedChannelId} />
-          ) : (
-            <div>"No messages"</div>
           )}
         </div>
 
