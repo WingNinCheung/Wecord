@@ -24,6 +24,7 @@
   font-size: 30px;
   color: white;
   text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 #splash-nav {
@@ -40,6 +41,10 @@
   margin-top: 1.3rem;
   color: red;
   /* background-color: red; */
+}
+
+.navlink.navlink1{
+  color:white;
 }
 
 .navbarlist {

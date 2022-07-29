@@ -36,28 +36,38 @@ const NavBar = () => {
             <NavLink
               id="splash-logo"
               className="wecord"
-              to="/home"
+              to="/"
               exact={true}
             >
               Wecord
             </NavLink>
           </span>
           <span className="navbarli">
-            <NavLink id="splash-nav" to="/home" exact={true}>
+            <NavLink
+              className="navlink navlink1"
+              to="/home"
+              exact={true}
+              activeClassName="active"
+            >
               Home
             </NavLink>
           </span>
           <span className="navbarli">
-            <NavLink id="splash-nav" to="/publicservers" exact={true}>
+            <NavLink
+              className="navlink navlink1"
+              to="/publicservers"
+              exact={true}
+              activeClassName="active"
+            >
               Public Servers
             </NavLink>
           </span>
           <span className="navbarli">
-            <NavLink id="splash-nav" to="/friends">
+            <NavLink id="splash-nav" className="navlink" to="/friends">
               Friends{" "}
             </NavLink>
           </span>
-          <span className="navbarli">
+          <span className="navbarli logoutBtn">
             <LogoutButton />
           </span>
         </nav>

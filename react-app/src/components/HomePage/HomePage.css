@@ -12,6 +12,41 @@ body {
   height: 100vh;
 }
 
+.joinServerBtn {
+  height: 2rem;
+  border: none;
+  color: white;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+}
+
+.addServerLinkContainer.addServerLink {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  text-decoration: none;
+  margin-left: 2.7rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+
+}
+
+.addServerLinkContainer.addServerLink:hover {
+  font-size: large;
+}
+
+.editBtn {
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  height:2rem;
+  margin:2px;
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+}
+
 .publicServers,
 .privateServers,
 .userLists {
@@ -24,6 +59,16 @@ body {
   background-color: #202225;
   overflow: hidden;
   min-height: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.noMsg {
+  margin-top: 1.2rem;
+  ;
+  font-family: 'Quicksand', sans-serif;
+  justify-content: center;
+  text-align: center;
+
 }
 
 /* .message-form {
@@ -47,17 +92,19 @@ body {
 } */
 
 .updateServerForm {
-  margin-left: 3rem;
+  /* margin-left: 3rem; */
+  background-color: #2b2d32;
 }
 
 .serverChannels {
   color: white;
-  width: 15%;
+  width: 18%;
   height: 88vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #2b2d32;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .publicServersDisplay {
@@ -72,9 +119,11 @@ body {
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .privateServersDisplay {
+  font-family: 'Quicksand', sans-serif;
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -82,7 +131,6 @@ body {
   width: 8rem;
   height: 100%;
   border: solid transparent 1px;
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -90,16 +138,17 @@ body {
 
 .channelsDisplay {
   list-style-type: none;
-  width: 250px;
+  width: 10%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #2f3136;
-  margin-left: 8.5rem;
+  margin-left: 4rem;
 }
 
 .singleServerDisplay {
+  font-family: 'Quicksand', sans-serif;
   color: white;
   display: flex;
   flex-direction: column;
@@ -137,6 +186,8 @@ body {
   font-size: large;
 }
 
+
+
 .channelList {
   display: flex;
   flex-direction: row;
@@ -147,4 +198,30 @@ body {
   background-color: #2f3136;
   height: 3rem;
   text-decoration: none;
+}
+
+.inputChannel {
+  border-radius: 8px;
+  height: 1.7rem;
+}
+
+.createChannelBtn {
+  color: white;
+  border-radius: 8px;
+  height: 2rem;
+  border: none;
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+}
+
+.inputUpdateServer {
+  border-radius: 8px;
+  height: 1.7rem;
+  margin:2px;
+
+
+}
+
+.editServerBtn2{
+  border-radius: 5px;
+  border: none;
 }
