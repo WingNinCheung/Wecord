@@ -10,11 +10,9 @@ def seed_channels():
     channel5 = Channel(serverId = 2, title = "channel5")
     channel6 = Channel(serverId = 3, title = "channel6")
     channel7 = Channel(serverId = 3, title = "channel7")
-    channel8 = Channel(serverId = 4, title = "channel8")
-    channel9 = Channel(serverId = 4, title = "channel9")
-    channel10 = Channel(serverId = 5, title = "channel10")
-    channel11 = Channel(serverId = 6, title = "channel11")
-    channel12 = Channel(serverId = 7, title = "channel12")
+   
+    channel11 = Channel(serverId = 4, title = "channel11")
+    channel12 = Channel(serverId = 5, title = "channel12")
 
     db.session.add(channel1)
     db.session.add(channel2)
@@ -23,9 +21,7 @@ def seed_channels():
     db.session.add(channel5)
     db.session.add(channel6)
     db.session.add(channel7)
-    db.session.add(channel8)
-    db.session.add(channel9)
-    db.session.add(channel10)
+
     db.session.add(channel11)
     db.session.add(channel12)
 

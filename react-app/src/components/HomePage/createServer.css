@@ -1,0 +1,90 @@
+.inputarea {
+    outline: 0;
+    background: #f2f2f2;
+    width: 20rem;
+    border: 0;
+    /* margin: 0 0 15px; */
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: .2rem;
+    color:black
+}
+
+.createServerPage{
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    bottom: 10rem;
+    color: white;
+    margin-top: 18rem;
+    flex-flow: column;
+    background-color: transparent;
+    width: 30rem;
+    padding-left: 9.9rem;
+}
+
+.form{
+    border:2px solid red;
+    width:25rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border-radius: 20px;
+    border: solid transparent 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(163,175,243,1) 0%, rgba(220,182,232,1) 100.2% );
+}
+
+.create-form{
+    border:2px solid red;
+    margin-left:15rem;
+    display:flex;
+    flex-direction: column;
+    /* background: #f2f2f2; */
+    width: 75%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-top: 15px;
+    border-radius: .2rem;
+}
+
+.inputarea{
+    padding-left: 30px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.Err{
+    color:black;
+    list-style-type: none;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.Title{
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 5rem;
+    margin-left: 6.5rem;
+    color: black;
+    font-size: x-large;
+}
+
+.createButton{
+    font-family: 'Quicksand', sans-serif;
+    background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
+    width: 20rem;
+    border: 0;
+    border-radius: .2rem;
+    padding: 13px;
+    color: white;
+    font-size: 14px;
+    margin-top: 1rem;
+    margin-left: 20px;
+
+}

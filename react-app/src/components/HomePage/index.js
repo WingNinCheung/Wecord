@@ -29,6 +29,7 @@ import Chat from "./Chat/Chat";
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const loggedInUserId = sessionUser.id;
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -36,24 +37,32 @@ function HomePage() {
 
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
-  const allServersArray = Object.values(allServers);
-  const loggedInUserId = sessionUser.id;
-  const publicServers = allServersArray.filter(
-    (server) => server.private === false
-  );
-
-  let defaultSelectedServerId = publicServers[0];
-  if (defaultSelectedServerId) {
-    defaultSelectedServerId = defaultSelectedServerId.id;
+  let allServersArray;
+  if (allServers.allServers) allServersArray = Object.values(allServers.allServers);
+  let publicServers
+  let defaultSelectedServerId
+  if (publicServers) {
+    defaultSelectedServerId = publicServers[0];
+    if (defaultSelectedServerId) {
+      defaultSelectedServerId = defaultSelectedServerId.id;
+    }
   }
 
-  const privateServers = allServersArray.filter(
-    (server) =>
-      server.private === true && server.master_admin === sessionUser.id
-  );
-
+  let privateServers
+  if (allServers.yourServers) {
+    privateServers = allServers.yourServers.filter(
+      (server) => {
+        if (server.private === true) return server
+      }
+    );
+  }
+  if (allServersArray) {
+    publicServers = allServers.yourServers.filter(
+      (server) => server.private === false
+    );
+  }
   useEffect(() => {
-    dispatch(getAllServers());
+    dispatch(getAllServers(loggedInUserId));
   }, [dispatch]);
 
   // EDIT SERVER - may use modal to refactor it  ------working
@@ -71,6 +80,7 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false);
+  const [puborpriv, setpuborpriv] = useState(true)
   const history = useHistory();
 
   // right-click menu section
@@ -91,10 +101,9 @@ function HomePage() {
   const handleDeleteServer = async (e) => {
     e.preventDefault();
     await dispatch(deleteServer(selectedServerId, loggedInUserId));
-    await dispatch(getAllServers());
+    await dispatch(getAllServers(loggedInUserId));
 
-    // let defaultSelectedServerId = publicServers[0];
-    // setOpenChannels(false);
+
     setGoToChannels(false);
     setGoToChannelsMessages(false);
     setShowChannelMessages(false);
@@ -106,6 +115,7 @@ function HomePage() {
 
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
+    await dispatch(getServerChannelsThunk(serverId))
     let userInServer = false;
 
     for (let i of data) {
@@ -141,7 +151,7 @@ function HomePage() {
           padding: "10px",
           border: "1px solid black",
           boxSizing: "border-box",
-          width: "200px",
+          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
@@ -155,6 +165,7 @@ function HomePage() {
               setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Edit Server
           </button>
@@ -163,6 +174,7 @@ function HomePage() {
           <button
             onClick={handleDeleteServer}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Delete
           </button>
@@ -171,6 +183,7 @@ function HomePage() {
           <button
             onClick={handleLeave}
             disabled={!userIsInServer || loggedInUserId == adminId}
+            className="editServerBtn2"
           >
             Leave Server
           </button>
@@ -187,7 +200,7 @@ function HomePage() {
           padding: "10px",
           border: "1px solid black",
           boxSizing: "border-box",
-          width: "200px",
+          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
@@ -201,12 +214,13 @@ function HomePage() {
               setEdit(false);
             }}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Edit Channel
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId} className="editServerBtn2">
             Delete
           </button>
         </div>
@@ -225,7 +239,8 @@ function HomePage() {
     setName("");
     setMainServer(false);
     setEdit(false);
-    history.push("/home");
+    await dispatch(getAllServers(loggedInUserId))
+    // history.push("/home");
   };
 
   const handleCancel = (e) => {
@@ -320,7 +335,9 @@ function HomePage() {
   const handleLeave = async (e) => {
     e.preventDefault();
     await dispatch(leaveServer(loggedInUserId, selectedServerId));
-    checkUserinServer(selectedServerId);
+    await checkUserinServer(selectedServerId);
+    // await dispatch(getAllServers(loggedInUserId));
+
   };
 
   // create a channel
@@ -328,12 +345,39 @@ function HomePage() {
   return (
     <div>
       <div className="addServerLinkContainer">
-        <NavLink className="addServerLinkContainer" to="/create-server">
+        <NavLink className="addServerLinkContainer addServerLink" to="/create-server" >
           Add a Server
         </NavLink>
+        {puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+        {!puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+      </div>
+      <div className="updateServerForm">
+        {edit && (
+          <div>
+            <div className="updateTitle">
+              <h3>Update Your Server Here!</h3>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <ul>
+                {validationErrors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+              <input
+                placeholder={name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="inputUpdateServer"
+              ></input>
+              <button disabled={validationErrors.length > 0} className="editBtn">Edit</button>
+              <button onClick={handleCancel} className="editBtn">Cancel</button>
+            </form>
+          </div>
+        )}
       </div>
       <div className="outContainer">
-        <div className="publicServers">
+
+        {puborpriv && <div className="publicServers">
           <h3>Public</h3>
           <ul className="publicServersDisplay">
             {publicServers &&
@@ -366,31 +410,32 @@ function HomePage() {
               ))}
             {show && <Menu x={location.y} y={location.x} />}
           </ul>
-        </div>
+        </div>}
 
-        <div className="privateServers">
+        {!puborpriv && <div className="privateServers">
+
           <h3>Private</h3>
-          <ul className="privateServersDisplay">
-            {privateServers &&
-              privateServers.map((server) => (
-                <li key={server.id}>
-                  <button
-                    className="singleServerDisplay"
-                    onClick={() => {
-                      setMainServer(true);
-                      setSelectedServerId(server.id);
-                      setName(server.name);
-                      setOpenChannels(true);
-                      setGoToChannels(true);
-                      setShowChannelMessages(false);
-                    }}
-                  >
-                    {server.name}
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
+          <div className="serverContainer">
+            <ul className="privateServersDisplay">
+              {privateServers &&
+                privateServers.map((server) => (
+                  <li key={server.id}>
+                    <button
+                      className="singleServerDisplay"
+                      onClick={() => {
+                        setMainServer(true);
+                        setSelectedServerId(server.id);
+                        setName(server.name);
+                        checkUserinServer(server.id);
+                      }}
+                    >
+                      {server.name}
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>}
 
         <div className="serverChannels">
           <h3>Channels</h3>
@@ -401,7 +446,7 @@ function HomePage() {
           )}
           {openChannels ? (
             <div>
-              <ul className="channelsDisplay">
+              <ul className="channelsDisplay" >
                 {serverChannels &&
                   serverChannels.map((channel) => (
                     <div
@@ -412,10 +457,11 @@ function HomePage() {
                         setSelectedChannelId(channel.id);
                         setChannelName(channel.title);
                       }}
+
                     >
                       <li key={channel.id} value={channel.serverId}>
                         <span>
-                          <i className="fa-solid fa-hashtag"></i>
+                          {/* <i className="fa-solid fa-hashtag"></i> */}
                           <button
                             className="singleChannelDisplay"
                             onClick={() => {
@@ -435,7 +481,7 @@ function HomePage() {
             </div>
           ) : selectedServerId ? (
             <div>
-              <button onClick={handleJoin}>Join Server</button>
+              <button onClick={handleJoin} className="joinServerBtn">Join Server</button>
             </div>
           ) : (
             <div></div>
@@ -453,6 +499,7 @@ function HomePage() {
         </div>
 
         <div className="messagesContainer">
+
           {showChannelMessages && (
             <Chat channelId={selectedChannelId} />
           )}
@@ -464,7 +511,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="updateServerForm">
+      {/* <div className="updateServerForm">
         {edit && (
           <div>
             <h3>Update Your Server Here!</h3>
@@ -485,7 +532,7 @@ function HomePage() {
             </form>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

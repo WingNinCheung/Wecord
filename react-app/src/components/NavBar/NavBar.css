@@ -1,22 +1,50 @@
 .navbarcontainer {
   color: white;
   background-color: #2f3136;
+  /* background-color: rgb(74, 87, 225); */
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.splash-nav {
+  background-color: rgb(74, 87, 225);
+  display: flex;
+  justify-content: space-between;
+}
+
+.wecord {
+  margin-top: 1.3rem;
+  margin-left: 5%;
 }
 
 #splash-logo {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  color: white;
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.navlink,
-#splash-logo,
-.navbarli {
+#splash-nav {
   color: white;
   text-decoration: none;
 }
 
+.navlink {
+  color: white;
+  /* background-color: white; */
+}
+
 .navbarli {
   margin-top: 1.3rem;
+  color: red;
+  /* background-color: red; */
+}
+
+.navlink.navlink1{
+  color:white;
 }
 
 .navbarlist {
@@ -26,4 +54,27 @@
   justify-content: space-between;
   height: 65px;
   margin: 0;
+}
+
+.auth-button {
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.login-button,
+.signup-button {
+  padding: 7px 16px;
+  border-radius: 40px;
+  margin-right: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 24px;
+  color: rgb(83, 78, 78);
+  background-color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.login-button:hover,
+.signup-button:hover {
+  color: rgb(92, 92, 226);
 }

@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createServer } from "../../store/servers";
 import { useHistory } from "react-router-dom";
+import './createServer.css'
 
 export default function CreateForm() {
   const [name, setName] = useState("");
@@ -41,19 +42,27 @@ export default function CreateForm() {
   }, [name]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {validationErrors.map((error) => (
-          <li key={error}>{error}</li>
-        ))}
-      </ul>
-      <label>Name</label>
-      <input
-        placeholder="Server Name"
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <button>Create</button>
-      <button onClick={handleCancel}>Cancel</button>
-    </form>
-  );
+    <div className="createServerPage">
+
+      <div className="form">
+        <h3 className="Title">Create a server</h3>
+        <form onSubmit={handleSubmit} className='create-form'>
+          <ul className='Err'>
+            {validationErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+          <input
+            placeholder="Server Name"
+            onChange={(e) => setName(e.target.value)}
+            className="inputarea"
+          ></input>
+          <button className='createButton'>Create</button>
+          <button  className='createButton' onClick={handleCancel}>Cancel</button>
+        </form>
+
+      </div>
+
+    </div>)
+
 }

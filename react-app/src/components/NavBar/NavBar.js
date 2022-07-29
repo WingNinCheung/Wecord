@@ -3,54 +3,76 @@ import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import { useSelector } from "react-redux";
 import "./NavBar.css";
+import LoginFormModal from "../auth/LoginFormModal";
+import SignUpFormModal from "../auth/SignupFormModal";
 
 const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <nav className="navbarcontainer">
-      <ul className="navbarlist">
-        <li className="navbarli">
-          <NavLink id="splash-logo" to="/" exact={true}>
-            Wecord
-          </NavLink>
-        </li>
-        {sessionUser &&
-          <>
-            <li className="navbarli">
-              <NavLink className="navlink" to="/home" exact={true} activeClassName="active">
-                Home
-              </NavLink>
-            </li>
-            <li className="navbarli">
-              <NavLink className="navlink" to="/users" exact={true} activeClassName="active">
-                Users
-              </NavLink>
-            </li>
-            <li className="navbarli">
-              <NavLink className="navlink" to='/friends'>Friends </NavLink>
-            </li>
-            <li className="navbarli">
-              <LogoutButton />
-            </li>
-          </>
-        }
+    <>
+      <div className="splash-nav">
         {!sessionUser && (
           <>
-            <li className="navbarli">
-              <NavLink className="navlink" to="/login" exact={true} activeClassName="active">
-                Login
-              </NavLink>
-            </li>
-            <li className="navbarli">
-              <NavLink className="navlink" to="/sign-up" exact={true} activeClassName="active">
-                Sign Up
-              </NavLink>
-            </li>
+            <NavLink id="splash-logo" className="wecord" to="/" exact={true}>
+              Wecord
+            </NavLink>
+            <div className="auth-button">
+              <span>
+                <LoginFormModal />
+              </span>
+              <span className="">
+                <SignUpFormModal />
+              </span>
+            </div>
+
           </>
         )}
-      </ul>
-    </nav>
+      </div>
+
+      {sessionUser && (
+        <nav className="navbarcontainer">
+          <span className="navbarli">
+            <NavLink
+              id="splash-logo"
+              className="wecord"
+              to="/"
+              exact={true}
+            >
+              Wecord
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink
+              className="navlink navlink1"
+              to="/home"
+              exact={true}
+              activeClassName="active"
+            >
+              Home
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink
+              className="navlink navlink1"
+              to="/publicservers"
+              exact={true}
+              activeClassName="active"
+            >
+              Public Servers
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink id="splash-nav" className="navlink" to="/friends">
+              Friends{" "}
+            </NavLink>
+          </span>
+          <span className="navbarli logoutBtn">
+            <LogoutButton />
+          </span>
+        </nav>
+      )}
+    </>
   );
 };
 

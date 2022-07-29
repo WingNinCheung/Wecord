@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
+
 from ..models.db import Server_User, db, Server, Channel, Message
 from ..models.user import User
 
@@ -13,11 +14,26 @@ server_routes = Blueprint("server_routes", __name__)
 #     return server.to_dict()
 
 # GET /api/servers - read all servers
-@server_routes.route("/")
+@server_routes.route("/yourServers/<int:userId>")
 # @login_required
-def all_servers():
+def all_servers(userId):
+    serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
+    print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
+    print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
+    user = User.query.get(userId)
     servers = Server.query.all()
-    return {"servers": [server.to_dict() for server in servers]}
+    notIn = []
+    serverspub = Server.query.filter(Server.private == False).all()
+    for server in serverspub:
+        bool = True
+        for use in server.users:
+            print(use.user, user)
+            if user == use.user:
+                bool = False
+        if bool:
+            notIn.append(server)
+    print('allnotin@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',notIn)
+    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers], 'serversnotin': [server.to_dict() for server in notIn]}
 
 
 # POST /api/servers - create a new public server
@@ -82,6 +98,16 @@ def delete_server(serverId, userId):
         return server.to_dict()
     else:
         return jsonify({"Only the server admin may delete this server"})
+
+
+@server_routes.route('/private/<int:userId>')
+def checkUserInServer(userId):
+    serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
+    print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
+    print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
+
+    return {'yourservers': [server.server.to_dict() for server in serverUsers]}
+ 
 
 
 # ------------------------- Routes for channels -------------------------------------
