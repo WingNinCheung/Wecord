@@ -12,18 +12,18 @@ body {
   height: 100vh;
 }
 
-.joinServerBtn{
-  height:2rem;
-  border:none;
-  color:white;
+.joinServerBtn {
+  height: 2rem;
+  border: none;
+  color: white;
   border-radius: 9px;
   cursor: pointer;
   font-family: 'Quicksand', sans-serif;
-  background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
 }
 
-.addServerLinkContainer.addServerLink{
-  color:white;
+.addServerLinkContainer.addServerLink {
+  color: white;
   font-family: 'Quicksand', sans-serif;
   text-decoration: none;
   margin-left: 2.7rem;
@@ -32,10 +32,20 @@ body {
 
 }
 
-.addServerLinkContainer.addServerLink:hover{
+.addServerLinkContainer.addServerLink:hover {
   font-size: large;
 }
 
+.editBtn {
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  height:2rem;
+  margin:2px;
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+}
 
 .publicServers,
 .privateServers,
@@ -52,8 +62,9 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
-.noMsg{
-  margin-top: 1.2rem;;
+.noMsg {
+  margin-top: 1.2rem;
+  ;
   font-family: 'Quicksand', sans-serif;
   justify-content: center;
   text-align: center;
@@ -81,7 +92,8 @@ body {
 } */
 
 .updateServerForm {
-  margin-left: 3rem;
+  /* margin-left: 3rem; */
+  background-color: #2b2d32;
 }
 
 .serverChannels {
@@ -119,7 +131,6 @@ body {
   width: 8rem;
   height: 100%;
   border: solid transparent 1px;
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -189,15 +200,27 @@ body {
   text-decoration: none;
 }
 
-.inputChannel{
+.inputChannel {
   border-radius: 8px;
-  height:1.7rem;
+  height: 1.7rem;
 }
 
-.createChannelBtn{
-  color:white;
+.createChannelBtn {
+  color: white;
   border-radius: 8px;
-  height:2rem;
+  height: 2rem;
   border: none;
-  background-image: radial-gradient( circle 732px at 96.2% 89.9%,  rgba(70,66,159,1) 0%, rgba(187,43,107,1) 92% );
+  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
 }
+
+.inputUpdateServer {
+  border-radius: 8px;
+  height: 1.7rem;
+  margin:2px;
+
+
+}
+
+/* .updateServerForm{
+  background-color: #2b2d32;
+} */

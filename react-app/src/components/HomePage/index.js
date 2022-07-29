@@ -361,6 +361,30 @@ function HomePage() {
           Add a Server
         </NavLink>
       </div>
+      <div className="updateServerForm">
+        {edit && (
+          <div>
+            <div className="updateTitle">
+              <h3>Update Your Server Here!</h3>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <ul>
+                {validationErrors.map((error) => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+              <input
+                placeholder={name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="inputUpdateServer"
+              ></input>
+              <button disabled={validationErrors.length > 0} className="editBtn">Edit</button>
+              <button onClick={handleCancel} className="editBtn">Cancel</button>
+            </form>
+          </div>
+        )}
+      </div>
       <div className="outContainer">
         <div className="publicServers">
           <h3>Public</h3>
@@ -552,7 +576,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="updateServerForm">
+      {/* <div className="updateServerForm">
         {edit && (
           <div>
             <h3>Update Your Server Here!</h3>
@@ -573,7 +597,7 @@ function HomePage() {
             </form>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
