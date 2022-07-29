@@ -10,8 +10,18 @@
   background-position: bottom;
 }
 
-.splash-nav-items {
+/* .splash-nav-items {
   margin-top: .8em;
+} */
+
+#splash-logged-out {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-top: .8em;
+  margin-right: 2em;
+  justify-content: space-between;
 }
 
 .splash-nav {
@@ -19,13 +29,13 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 1.3em;
+  width: 100%;
 }
 
 .background-partition {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
 
   background: var(--partition);
@@ -48,6 +58,7 @@
   background-repeat: no-repeat;
   background-position: right, left bottom;
   position: relative;
+  margin-top: 10vh;
 }
 
 #splash-title {
