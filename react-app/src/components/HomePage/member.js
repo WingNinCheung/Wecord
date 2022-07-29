@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./message.css"
+import "./member.css"
 
 export default function Member({ serverId }) {
   const serverUsers = useSelector((state) => state.serverUsers);
