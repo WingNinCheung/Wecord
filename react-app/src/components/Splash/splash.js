@@ -58,6 +58,7 @@ export default function Splash() {
             friends.
           </p>
         </div>
+        <div className="bg-image-partition"></div>
         <div className="footer">
           <section className="dev-info">
             <img
