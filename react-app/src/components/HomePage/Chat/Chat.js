@@ -28,6 +28,11 @@ export default function Chat({ channelId }) {
 
     const [deleteStatus, setDeleteStatus] = useState(false);
 
+    const loadAllMessages = async () => {
+        await dispatch(getChannelMessagesThunk(channelId));
+        await setMessages(Object.values(oldMessages));
+    }
+
     useEffect(() => {
         if (deleteStatus) {
           dispatch(deleteMessageThunk(user.id, messageId))
@@ -39,13 +44,12 @@ export default function Chat({ channelId }) {
     // Run messages load here on page load:
     useEffect(() => {
         if (oldMessages) {
-            (async () => {
-                await dispatch(getChannelMessagesThunk(channelId));
-                await setMessages(Object.values(oldMessages));
-            })();
+            loadAllMessages();
+            // dispatch(getChannelMessagesThunk(channelId));
+            // setMessages(Object.values(oldMessages));
         }
         console.log("the messages: ", messages)
-    }, [socket])
+    }, [socket, openEditForm])
 
 
     // Run socket stuff (so connect/disconnect ) whenever channelId changes
@@ -68,15 +72,14 @@ export default function Chat({ channelId }) {
         socket.on("edit", (updatedMessages) => {
             // when we receive a chat, add to our messages array in state
 
-            // step 1: load all of the updatedMessage's channel messages (if they aren't already there)
-            // step 2: find the updatedMessage's old version in the messages array
-            // step 3: replace the old version with the new version
-            // step 4: setMessages
+            // right now we either get updatedMessages &
+            // it works dynamically BUT the comments display out of order
 
-            // or
+            // OR
 
-            // step 1: after updating the message, have a useEffect reload all the messages
-            // step 2: setMessage
+            // we take the comments from state in order BUT
+            // for whatever reason it decides to load a dif channel of messages
+            // and redirets us there!
 
 
             // THIS SOLUTION WORKS but changes the comment order.
@@ -85,24 +88,50 @@ export default function Chat({ channelId }) {
             // });
             // setMessages([...filtered])
 
-
-            // this is so ghetto lool
-            const filtered = [];
-            for (let i = 0; i < updatedMessages.messages.length; i++) {
-                let message = updatedMessages.messages[i];
-                if (message && message.channelId === channelId) {
-                    filtered.push(message)
-                }
-            }
+            // setMessages(Object.values(oldMessages));
+            // console.log("fresh messages from state: ", messages)
+            // // this is so ghetto lool
+            // const filtered = [];
+            // for (let i = 0; i < messages.length; i++) {
+            //     let message = messages[i];
+            //     if (message && message.channelId === channelId) {
+            //         console.log("message in loop: ", message)
+            //         filtered.push(message)
+            //     }
+            // }
             // updatedMessages.messages.forEach((message) => {
             //     if (message.channelId === channelId) {
             //         messages[message.id] = message;
             //     }
             // });
 
-            console.log(filtered);
-            setMessages([...filtered])
-            console.log(messages)
+            // trigger rerender useeffect
+            setOpenEditForm(false);
+
+            if (oldMessages.length) {
+                console.log(Object.values(oldMessages));
+                setMessages(Object.values(oldMessages));
+            }
+            // console.log("filtered", filtered);
+            // setMessages([...filtered])
+            // setMessages(...[
+            //         {
+            //           "id": 5,
+            //           "userId": 1,
+            //           "channelId": 3,
+            //           "message": "apple",
+            //           "user": "Demo",
+            //           "userPhoto": null
+            //         },
+            //         {
+            //           "id": 42,
+            //           "userId": 1,
+            //           "channelId": 3,
+            //           "message": "Penith",
+            //           "user": "Demo",
+            //           "userPhoto": null
+            //         }])
+            // console.log(messages)
 
             // filtered example
             // [
@@ -141,59 +170,6 @@ export default function Chat({ channelId }) {
             //   ]
 
 
-
-
-            // if (messages.length) {
-
-            //     console.log("Is anything even printing here in edit");
-            //     // replace the old message w updated one
-            //     // console.log("Messages in general over here: ", messages)
-            //     //NOTE: The error here is that messages comes out being from the wrong channel. not the current one
-            //     async function updateMessages() {
-            //         await dispatch(getChannelMessagesThunk(channelId));
-            //         await setMessages(Object.values(oldMessages));
-            //     };
-
-            //     updateMessages();
-
-            //     // FIND THE ID OF THE UPDATED MESSAGE
-            //     // INSIDE OF THE EXISTING MESSAGES
-
-            //     const getIndexOfUpdatedMessage = (updatedMessage) => {
-            //         if (oldMessages) {
-            //             for (let i = 0; i < oldMessages.length; i++) {
-            //                 console.log("In function: actual messages", oldMessages);
-            //                 console.log("In function: channel ID: ", channelId)
-            //                 console.log("In function: the updated Message: ", updatedMessage)
-            //                 console.log("in function: updatedMessage[messageId]: ", updatedMessage["messageId"])
-            //                 if (messages[i].id == updatedMessage["messageId"]) {
-            //                     console.log("Channel of these messages rn: ", messages[i].channelId)
-            //                     return i;
-            //                 }
-            //             }
-
-            //         }
-            //     };
-
-            //     let updatedMessages = [...messages];
-            //     let index = getIndexOfUpdatedMessage(updatedMessage);
-            //     console.log("edited message index in messages ", index) // returns undefined
-            //     console.log("actual messages state: ", messages);
-            //     console.log("updated messages state: ", updatedMessages);
-
-            //     // if message Index was found, then we can change that position in the state w new value
-            //     if (index) {
-            //         console.log("we edited the message in the local state!")
-            //         updatedMessages[index] = updatedMessage;
-            //     }
-
-
-            //     // const updatedMessages = [...messages];
-            //     // testing this to see if it updates state dynamically
-            //     console.log("Updated messages before we set them: ", [...updatedMessages])
-            //     // setMessages([...updatedMessages]);
-
-            // }
         })
 
         // disconnect upon component unmount
@@ -222,6 +198,7 @@ export default function Chat({ channelId }) {
                 if (messageId) { //need messageId or edit gets messed up
                     socket.emit("edit", { user: user.username, message: chatInput, userId: user.id, channelId: channelId, messageId: messageId, messageUserId: messageUserId });
                 }
+
             } else {
                 socket.emit("chat", { user: user.username, message: chatInput, userId: user.id, channelId: channelId});
             }
