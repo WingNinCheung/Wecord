@@ -59,14 +59,11 @@ export default function Chat({ channelId }) {
     setDeleteStatus(false);
   }, [dispatch, deleteStatus]);
 
-  // Run messages load here on page load:
+  //   Run messages load here on page load:
   useEffect(() => {
     if (oldMessages) {
       loadAllMessages();
-      // dispatch(getChannelMessagesThunk(channelId));
-      // setMessages(Object.values(oldMessages));
     }
-    console.log("the messages: ", messages);
   }, [socket, openEditForm]);
 
   // Run socket stuff (so connect/disconnect ) whenever channelId changes
@@ -156,7 +153,11 @@ export default function Chat({ channelId }) {
     setChatInput(e.target.value);
   };
 
-  const sendChat = (e) => {
+  console.log("messages are ", messages);
+  console.log("redux msg is ", oldMessages);
+
+  const sendChat = async (e) => {
+    console.log("enter 1st");
     e.preventDefault();
     // emit a message
 
@@ -174,7 +175,6 @@ export default function Chat({ channelId }) {
             messageUserId: messageUserId,
           });
         }
-        // setShow(false)
       } else {
         socket.emit("chat", {
           user: user.username,
@@ -185,12 +185,14 @@ export default function Chat({ channelId }) {
       }
       // we seem to be grabbing the correct info
     }
-
+    setOpenEditForm(false);
     setChatInput("");
   };
 
-  if (!oldMessages || !channelId || !socket)
+  if (!oldMessages || !channelId || !socket) {
     return <p className="loading">Loading</p>;
+  }
+
   return (
     <div className="container-message">
       <div className="messagesDisplay">

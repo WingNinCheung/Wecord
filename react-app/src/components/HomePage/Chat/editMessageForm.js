@@ -11,6 +11,7 @@ export default function EditMessageForm({
   chatInput,
   updateChatInput,
   sendChat,
+  setShowModal,
 }) {
   const [validationErrors, setValidationErrors] = useState([]);
 
@@ -20,6 +21,7 @@ export default function EditMessageForm({
   const handleCancel = (e) => {
     e.preventDefault();
     setShow(false);
+    setShowModal(true);
     history.push("/home");
   };
 

@@ -18,7 +18,7 @@ function EditFormModal({
       {/* <button className="login-button" onClick={() => setShowModal(true)}>
         Edit
       </button> */}
-      {showModal && (
+      {1 && (
         <Modal onClose={() => setShowModal(false)}>
           <EditMessageForm
             messageId={messageId}
@@ -28,6 +28,7 @@ function EditFormModal({
             chatInput={chatInput}
             updateChatInput={updateChatInput}
             sendChat={sendChat}
+            setShowModal={setShowModal}
           />
         </Modal>
       )}
