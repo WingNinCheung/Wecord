@@ -147,9 +147,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2f3136;
+  background-color: #2b2d32;
   margin-left: 4rem;
 }
+
+.singleChannelDisplay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem;
+  background-color: #2b2d32;
+  justify-content: space-evenly;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.singleChannelDisplay:hover {
+  text-decoration: underline;
+  font-size: large;
+}
+
 
 .singleServerDisplay {
   font-family: 'Quicksand', sans-serif;
@@ -170,26 +190,6 @@ body {
   text-decoration: underline;
   font-size: large;
 }
-
-.singleChannelDisplay {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 2rem;
-  width: 5rem;
-  margin: 1rem;
-  background-color: #2f3136;
-  justify-content: space-evenly;
-  border: none;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.singleChannelDisplay:hover {
-  text-decoration: underline;
-  font-size: large;
-}
-
 
 
 .channelList {
