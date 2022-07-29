@@ -82,13 +82,22 @@
 
 .send-button {
   /* color: aqua; */
-  /* background-color: red; */
+  background-color: red;
+  height: 30px;
   position: fixed;
-  top: 96%;
+  top: 95.5%;
   right: 10%;
   background-color: white;
+  cursor: pointer;
   width: 5%;
   z-index: 1;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.send-button:hover {
+  background-color: black;
+  color: white;
 }
 
 .memberli {

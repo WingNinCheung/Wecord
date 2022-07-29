@@ -250,7 +250,7 @@ export default function Chat({ channelId }) {
                 />
                 <button
                   type="Submit"
-                  disabled={validationErrors.length > 0}
+                  disabled={chatInput.length === 0}
                   className="send-button"
                 >
                   {/* <i className="fas fa-paper-plane"></i> */}
