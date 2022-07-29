@@ -345,11 +345,8 @@ function HomePage() {
   return (
     <div>
       <div className="addServerLinkContainer">
-        <NavLink className="addServerLinkContainer addServerLink" to="/create-server" >
-          Add a Server
-        </NavLink>
-        {puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
-        {!puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+
+
       </div>
       <div className="updateServerForm">
         {edit && (
@@ -378,8 +375,13 @@ function HomePage() {
       <div className="outContainer">
 
         {puborpriv && <div className="publicServers">
+          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
           <h3>Public</h3>
           <ul className="publicServersDisplay">
+            <NavLink className="addaserverbutt" to="/create-server" >
+              +
+            </NavLink>
             {publicServers &&
               publicServers.map((server) => (
                 <div
@@ -414,6 +416,8 @@ function HomePage() {
 
         {!puborpriv && <div className="privateServers">
 
+          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
           <h3>Private</h3>
           <div className="serverContainer">
             <ul className="privateServersDisplay">
