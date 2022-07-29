@@ -38,9 +38,9 @@ function UsersList() {
 
     return (
       <div className="friendslistdiv">
-        <h1>Public Servers: </h1>
+        <h1 className="pubserverTitle">Public Servers: </h1>
         <ul className="ulforfriends">{publicServers.map(server =>
-          <li classname="liforfriends">{server.name}<button onClick={async (e) => {
+          <li classname="liforfriends">{server.name}<button className="joinBtn1" onClick={async (e) => {
             e.preventDefault();
             await dispatch(addServerUser(loggedInUserId, server.id))
             await dispatch(getAllServers(loggedInUserId));

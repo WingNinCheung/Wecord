@@ -1,0 +1,16 @@
+.joinBtn1{
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 5px;
+    border:0;
+    height:2rem;
+    width:3.8rem;
+    color:white;
+    margin:10px;
+    background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+}
+
+.friendslistdiv > .pubserverTitle {
+    margin-top: 8rem;
+    /* font-family: 'Roboto', sans-serif; */
+}
