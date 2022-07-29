@@ -44,18 +44,18 @@ export default function Splash() {
           </div>
         </section>
         <section className="dev-info">
-          {/* <img className="profile-pic" src="" alt="Krista"></img> */}
+          <img className="profile-pic" src="https://media-exp1.licdn.com/dms/image/C5603AQGU_VDz-D81wg/profile-displayphoto-shrink_800_800/0/1622773943069?e=1664409600&v=beta&t=ksJ3ORRhPKG4qYtf8FdY6p9uhuRYOplJdrDSFfFEv_A" alt="Krista"></img>
           <div className="profile-section">
             <div className="name">Krista Strucke</div>
 
             <div className="git-in">
-              <a href="" target="popup">
+              <a href="https://github.com/kurikurichan" target="popup">
                 <i class="fa-brands fa-github"></i>
               </a>
-              <a href="" target="popup">
+              <a href="https://www.linkedin.com/in/krista-strucke-044b3369/" target="popup">
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="">
+              <a href="mailto:developerkrista@gmail.com">
                 <i class="fa-solid fa-envelope"></i>
               </a>
             </div>
