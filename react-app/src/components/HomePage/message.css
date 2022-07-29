@@ -1,13 +1,18 @@
 .messagesContainer {
   color: white;
   width: 100%;
-  height: 88vh;
+  height: 85vh;
+  /* 88 */
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   background-color: #3a3c42;
+  display: inline-grid;
+  overflow: scroll;
+}
 
-  /* overflow: hidden; */
+.container-message {
+  /* background-color: aqua; */
 }
 
 .messagesDisplay {
@@ -16,7 +21,7 @@
   height: 100%;
   /* display: flex; */
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
   /* background-color: #2f3136; */
 }
 
@@ -64,41 +69,43 @@
 }
 
 .create-message {
-  width: 62vw;
+  width: 70.3vw;
   height: 5vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   background-color: #393a3e;
   color: white;
+  /* position: sticky; */
+  z-index: 1;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .send-button {
   /* color: aqua; */
   /* background-color: red; */
-  position: sticky;
-  right: 9%;
-  bottom: 2%;
+  position: fixed;
+  top: 96%;
+  right: 10%;
   background-color: white;
-  width: 30px;
+  width: 5%;
+  z-index: 1;
 }
 
-.memberli{
+.memberli {
   list-style-type: none;
   cursor: pointer;
   margin-right: 2rem;
-  color:white;
-
+  color: white;
 }
 
-.memberli1{
-  color:white
+.memberli1 {
+  color: white;
 }
 
-.memberli1:hover{
+.memberli1:hover {
   font-size: x-large;
 }
 
-
-
-.updateTitle{
-  color:white;
+.updateTitle {
+  color: white;
 }
