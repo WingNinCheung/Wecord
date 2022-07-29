@@ -31,12 +31,11 @@
 
 .navlink {
   color: white;
-  /* background-color: white; */
+  text-decoration: none;
 }
 
 .navbarli {
   margin-top: 1.3rem;
-  /* color: red; */
   margin-left: 2.5%;
   margin-right: 2.5%;
   font-family: Quicksand, sans-serif;

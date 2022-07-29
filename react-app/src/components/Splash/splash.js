@@ -15,8 +15,7 @@ export default function Splash() {
     <>
       <div className="splash-nav">
         {sessionUser &&
-          <nav>
-            <span>
+          <nav id="splash-logged-out">
               <NavLink
                 id="splash-logo"
                 to="/home"
@@ -24,10 +23,7 @@ export default function Splash() {
               >
                 Go to Wecord
               </NavLink>
-            </span>
-            <span>
               <LogoutButton />
-            </span>
           </nav>
         }
         {!sessionUser && (
