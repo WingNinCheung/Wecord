@@ -29,16 +29,16 @@ export default function Splash() {
 
             <div className="git-in">
               <a href="https://github.com/WingNinCheung" target="popup">
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
               </a>
               <a
                 href="https://www.linkedin.com/in/wingnincheung/"
                 target="popup"
               >
-                <i class="fa-brands fa-linkedin-in"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
               </a>
               <a href="mailto:wingnin.cheung415@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope"></i>
               </a>
             </div>
           </div>
@@ -50,13 +50,13 @@ export default function Splash() {
 
             <div className="git-in">
               <a href="https://github.com/kurikurichan" target="popup">
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
               </a>
               <a href="https://www.linkedin.com/in/krista-strucke-044b3369/" target="popup">
-                <i class="fa-brands fa-linkedin-in"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
               </a>
               <a href="mailto:developerkrista@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope"></i>
               </a>
             </div>
           </div>
@@ -72,13 +72,13 @@ export default function Splash() {
 
             <div className="git-in">
               <a href="https://github.com/BrenLau" target="popup">
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
               </a>
               <a href="https://www.linkedin.com/in/brendan-lau-b6952919a/" target="popup">
-                <i class="fa-brands fa-linkedin-in"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
               </a>
               <a href="mailto:blau4000@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope"></i>
               </a>
             </div>
           </div>
@@ -94,13 +94,13 @@ export default function Splash() {
 
             <div className="git-in">
               <a href="https://github.com/dalishuishou668" target="popup">
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
               </a>
               <a href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/" target="popup">
-                <i class="fa-brands fa-linkedin-in"></i>
+                <i className="fa-brands fa-linkedin-in"></i>
               </a>
               <a href="https://media-exp1.licdn.com/dms/image/C4D03AQGk5rQvlCZ_yA/profile-displayphoto-shrink_400_400/0/1654710587613?e=1664409600&v=beta&t=ZDV4dpaekhMtnq8dTWBKs02sAcnUTE_frRgSbE8OI7o">
-                <i class="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope"></i>
               </a>
             </div>
           </div>

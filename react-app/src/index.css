@@ -1,1 +1,33 @@
 /* TODO Add site wide styles */
+:root {
+    --wecord-purple: rgb(74, 87, 225);
+    --dark-purple: rgb(62, 3, 62);
+    --partition: rgb(2, 0, 36);
+    --light-white: #f2f2f2;
+}
+
+/* button {
+    font-family: "Quicksand", sans-serif;
+    background-image: radial-gradient(
+        circle 732px at 96.2% 89.9%,
+        rgba(70, 66, 159, 1) 0%,
+        rgba(187, 43, 107, 1) 92%
+    );
+    width: 20rem;
+    border: 0;
+    border-radius: 0.2rem;
+    padding: 13px;
+    color: white;
+    font-size: 14px;
+    margin-top: 1rem;
+    margin-left: 20px;
+} */
+
+/* should add font family */
+
+
+.loading {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3em;
+    color: white;
+}

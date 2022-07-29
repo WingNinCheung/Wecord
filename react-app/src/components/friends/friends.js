@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFriendsThunk } from "../../store/friends";
 import { NavLink } from 'react-router-dom';
