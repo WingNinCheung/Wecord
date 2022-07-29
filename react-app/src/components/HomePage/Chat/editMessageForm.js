@@ -3,57 +3,62 @@ import { useDispatch } from "react-redux";
 import { editMessageThunk } from "../../../store/messages";
 import { useHistory } from "react-router-dom";
 
-export default function EditMessageForm({ messageId, userId, setShow, msgUserId, chatInput, updateChatInput, sendChat }) {
+export default function EditMessageForm({
+  messageId,
+  userId,
+  setShow,
+  msgUserId,
+  chatInput,
+  updateChatInput,
+  sendChat,
+  setShowModal,
+}) {
+  const [validationErrors, setValidationErrors] = useState([]);
 
-    const [validationErrors, setValidationErrors] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const dispatch = useDispatch();
-    const history = useHistory();
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setShow(false);
+    setShowModal(true);
+    history.push("/home");
+  };
 
-    const handleCancel = (e) => {
-        e.preventDefault();
-        setShow(false)
-        history.push("/home");
-      };
+  useEffect(() => {
+    const errors = [];
 
+    if (msgUserId !== userId) {
+      errors.push("only people who created it can delete message");
+    }
 
-    useEffect(() => {
-        const errors = [];
+    if (!chatInput.length) {
+      errors.push("Message cannot be empty!");
+    }
+    setValidationErrors(errors);
+  }, [chatInput]);
 
-        if(msgUserId !== userId){
-            errors.push("only people who created it can delete message")
-        }
+  // if (!userId) return <p className="loading">"Loading..."</p>
 
-        if (!chatInput.length) {
-            errors.push("Message cannot be empty!");
-        }
-        setValidationErrors(errors);
-    }, [chatInput]);
-
-    // if (!userId) return <p className="loading">"Loading..."</p>
-
-    return (
-        <div className="editMessageForm">
-            {/* <h3>Edit a message</h3> */}
-            <form onSubmit={sendChat}>
-                <ul>
-                    {validationErrors.map((error) => (
-                        <li key={error}>{error}</li>
-                    ))}
-                </ul>
-                <textarea
-                    className="create-message"
-                    value={chatInput}
-                    onChange={updateChatInput}
-                />
-                <button disabled={validationErrors.length > 0}>Update</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </form>
-
-
-        </div>
-
-    )
+  return (
+    <div className="editMessageForm">
+      {/* <h3>Edit a message</h3> */}
+      <form onSubmit={sendChat}>
+        <ul>
+          {validationErrors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+        <textarea
+          className="create-message"
+          value={chatInput}
+          onChange={updateChatInput}
+        />
+        <button disabled={validationErrors.length > 0}>Update</button>
+        <button onClick={handleCancel}>Cancel</button>
+      </form>
+    </div>
+  );
 }
 
 //TODO:
