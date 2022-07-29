@@ -116,6 +116,7 @@ function HomePage() {
 
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
+    await dispatch(getServerChannelsThunk(serverId))
     let userInServer = false;
 
     for (let i of data) {
@@ -239,7 +240,8 @@ function HomePage() {
     setName("");
     setMainServer(false);
     setEdit(false);
-    history.push("/home");
+    await dispatch(getAllServers(loggedInUserId))
+    // history.push("/home");
   };
 
   const handleCancel = (e) => {
