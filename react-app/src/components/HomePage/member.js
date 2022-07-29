@@ -7,7 +7,7 @@ import "./member.css"
 export default function Member({ serverId }) {
   const serverUsers = useSelector((state) => state.serverUsers);
 
-  if (!serverId) return <p>"Loading users"</p>;
+  if (!serverId) return <p></p>;
 
   return (
     <ul className="memberUl">
