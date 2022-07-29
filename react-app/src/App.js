@@ -13,7 +13,6 @@ import CreateForm from "./components/HomePage/createServer";
 import EditServerForm from "./components/HomePage/updateServer";
 import CreateChannel from "./components/HomePage/Channel/createChannel";
 import Splash from "./components/Splash/splash";
-import Chat from "./components/HomePage/Chat/Chat";
 import FriendsList from "./components/friends/friends";
 
 function App() {
@@ -44,9 +43,6 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/test-chat" exact={true}>
-          <Chat />
-        </ProtectedRoute>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>

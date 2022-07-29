@@ -7,7 +7,7 @@ import EditMessageForm from './editMessageForm';
 // initialize socket variable
 let socket;
 
-export default function Chat({ channelId, setShow }) {
+export default function Chat({ channelId }) {
 
     //TODO: double check that this is the user
     const user = useSelector(state => state.session.user)
@@ -33,19 +33,19 @@ export default function Chat({ channelId, setShow }) {
         await setMessages(Object.values(oldMessages));
     }
 
-    const getMessageText = (messageId) => {
-        return Object.values(oldMessages).filter(msg => {
-            return msg.id === messageId;
-        })
-    }
+    // const getMessageText = (messageId) => {
+    //     return Object.values(oldMessages).filter(msg => {
+    //         return msg.id === messageId;
+    //     })
+    // }
 
-    useEffect(() => {
-        if (messageId) {
-            let msgTxt = getMessageText(messageId);
-            console.log("msgText", msgTxt)
-            // setChatInput(msgTxt);
-        }
-    }, [setOpenEditForm])
+    // useEffect(() => {
+    //     if (messageId) {
+    //         let msgTxt = getMessageText(messageId);
+    //         console.log("msgText", msgTxt)
+    //         // setChatInput(msgTxt);
+    //     }
+    // }, [setOpenEditForm])
 
     useEffect(() => {
         if (deleteStatus) {
@@ -169,7 +169,7 @@ export default function Chat({ channelId, setShow }) {
                 if (messageId) { //need messageId or edit gets messed up
                     socket.emit("edit", { user: user.username, message: chatInput, userId: user.id, channelId: channelId, messageId: messageId, messageUserId: messageUserId });
                 }
-                setShow(false)
+                // setShow(false)
             } else {
                 socket.emit("chat", { user: user.username, message: chatInput, userId: user.id, channelId: channelId});
             }
@@ -221,8 +221,8 @@ export default function Chat({ channelId, setShow }) {
                         userId={user.id}
                         setShow={setOpenEditForm}
                         msgUserId={messageUserId}
-                        chatInput={getMessageText}
-                        updateChatInput={chatInput}
+                        chatInput={chatInput}
+                        updateChatInput={updateChatInput}
                         sendChat={sendChat}
                     />
                 ) : (
