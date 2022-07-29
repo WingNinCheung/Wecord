@@ -116,6 +116,7 @@ export const deleteServer = (id, userId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
+    console.log(data)
     dispatch(delServer(data));
   }
 };
@@ -131,6 +132,7 @@ const servers = (state = {}, action) => {
         allServers.allServers[server.id] = server;
       });
       allServers['yourServers'] = action.servers.yourservers
+      allServers['notIn'] = action.servers.serversnotin
       return allServers;
     case CREATE_SERVER:
       if (!state[action.server.id]) {

@@ -41,11 +41,6 @@ function HomePage() {
   let allServersArray;
   if (allServers.allServers) allServersArray = Object.values(allServers.allServers);
   let publicServers
-  if (allServersArray) {
-    publicServers = allServersArray.filter(
-      (server) => server.private === false
-    );
-  }
   let defaultSelectedServerId
   if (publicServers) {
     defaultSelectedServerId = publicServers[0];
@@ -60,6 +55,11 @@ function HomePage() {
       (server) => {
         if (server.private === true) return server
       }
+    );
+  }
+  if (allServersArray) {
+    publicServers = allServers.yourServers.filter(
+      (server) => server.private === false
     );
   }
   useEffect(() => {
@@ -81,6 +81,7 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false);
+  const [puborpriv, setpuborpriv] = useState(true)
   const history = useHistory();
 
   // right-click menu section
@@ -101,7 +102,7 @@ function HomePage() {
   const handleDeleteServer = async (e) => {
     e.preventDefault();
     await dispatch(deleteServer(selectedServerId, loggedInUserId));
-    await dispatch(getAllServers());
+    await dispatch(getAllServers(loggedInUserId));
 
 
     setGoToChannels(false);
@@ -353,7 +354,9 @@ function HomePage() {
   const handleLeave = async (e) => {
     e.preventDefault();
     await dispatch(leaveServer(loggedInUserId, selectedServerId));
-    checkUserinServer(selectedServerId);
+    await checkUserinServer(selectedServerId);
+    // await dispatch(getAllServers(loggedInUserId));
+
   };
 
   // create a channel
@@ -364,6 +367,8 @@ function HomePage() {
         <NavLink className="addServerLinkContainer addServerLink" to="/create-server" >
           Add a Server
         </NavLink>
+        {puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+        {!puborpriv && <button onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
       </div>
       <div className="updateServerForm">
         {edit && (
@@ -390,7 +395,8 @@ function HomePage() {
         )}
       </div>
       <div className="outContainer">
-        <div className="publicServers">
+
+        {puborpriv && <div className="publicServers">
           <h3>Public</h3>
           <ul className="publicServersDisplay">
             {publicServers &&
@@ -423,9 +429,10 @@ function HomePage() {
               ))}
             {show && <Menu x={location.y} y={location.x} />}
           </ul>
-        </div>
+        </div>}
 
-        <div className="privateServers">
+        {!puborpriv && <div className="privateServers">
+
           <h3>Private</h3>
           <div className="serverContainer">
             <ul className="privateServersDisplay">
@@ -446,10 +453,8 @@ function HomePage() {
                   </li>
                 ))}
             </ul>
-
           </div>
-
-        </div>
+        </div>}
 
         <div className="serverChannels">
           <h3>Channels</h3>

@@ -10,57 +10,69 @@ const NavBar = () => {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <nav className="navbarcontainer">
-      <ul className="navbarlist">
-        <li className="navbarli">
-          <NavLink id="splash-logo" to="/" exact={true}>
-            Wecord
-          </NavLink>
-        </li>
-        {sessionUser && (
+    <>
+      <div className="splash-nav">
+        {!sessionUser && (
           <>
-            <li className="navbarli">
-              <NavLink
-                className="navlink navlink1"
-                to="/home"
-                exact={true}
-                activeClassName="active"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className="navbarli">
-              <NavLink
-                className="navlink navlink1"
-                to="/users"
-                exact={true}
-                activeClassName="active"
-              >
-                Users
-              </NavLink>
-            </li>
-            <li className="navbarli">
-              <NavLink className="navlink" to="/friends">
-                Friends{" "}
-              </NavLink>
-            </li>
-            <li className="navbarli logoutBtn">
-              <LogoutButton />
-            </li>
+            <NavLink id="splash-logo" className="wecord" to="/" exact={true}>
+              Wecord
+            </NavLink>
+            <div className="auth-button">
+              <span>
+                <LoginFormModal />
+              </span>
+              <span className="">
+                <SignUpFormModal />
+              </span>
+            </div>
+
           </>
         )}
-        {!sessionUser && (
-          <div className="auth-button">
-            <span>
-              <LoginFormModal />
-            </span>
-            <span className="">
-              <SignUpFormModal />
-            </span>
-          </div>
-        )}
-      </ul>
-    </nav>
+      </div>
+
+      {sessionUser && (
+        <nav className="navbarcontainer">
+          <span className="navbarli">
+            <NavLink
+              id="splash-logo"
+              className="wecord"
+              to="/"
+              exact={true}
+            >
+              Wecord
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink
+              className="navlink navlink1"
+              to="/home"
+              exact={true}
+              activeClassName="active"
+            >
+              Home
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink
+              className="navlink navlink1"
+              to="/publicservers"
+              exact={true}
+              activeClassName="active"
+            >
+              Public Servers
+            </NavLink>
+          </span>
+          <span className="navbarli">
+            <NavLink id="splash-nav" className="navlink" to="/friends">
+              Friends{" "}
+            </NavLink>
+          </span>
+          <span className="navbarli logoutBtn">
+            <LogoutButton />
+          </span>
+        </nav>
+      )}
+    </>
   );
 };
 

@@ -4,20 +4,18 @@ import "./splash.css";
 export default function Splash() {
   return (
     <div className="splash-container">
-      <div id="splash-wrapper">
-        <div id="background-partition">
-          <h1 id="splash-title">Imagine a place...</h1>
-          <p id="splash-intro">
-            ...where you can belong to any school club, any gaming group, or a
-            worldwide art community.
-            <div></div>
-            <br />
-            Where just you and anyone can spend time together.
-            <div></div>
-            <br />A place where strangers can become acquaintances...or maybe
-            even friends.
-          </p>
-        </div>
+      <div className="background-partition">
+        <h1 id="splash-title">Imagine a place...</h1>
+        <p id="splash-intro">
+          ...where you can belong to any school club, any gaming group, or a
+          worldwide art community.
+          <div></div>
+          <br />
+          Where just you and anyone can spend time together.
+          <div></div>
+          <br />A place where strangers can become acquaintances...or maybe even
+          friends.
+        </p>
       </div>
       <div className="footer">
         <section className="dev-info">
@@ -64,22 +62,22 @@ export default function Splash() {
           </div>
         </section>
         <section className="dev-info">
-          {/* <img
+          <img
             className="profile-pic"
-            src=""
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQF0fmknzYk1rA/profile-displayphoto-shrink_200_200/0/1580893094660?e=1664409600&v=beta&t=7f9AE6QP-kp8pWoW34enfUdyeN6AGSNwOTZtc-khsUc"
             alt="Brendan"
-          ></img> */}
+          ></img>
           <div className="profile-section">
             <div className="name">Brendan Lau</div>
 
             <div className="git-in">
-              <a href="" target="popup">
+              <a href="https://github.com/BrenLau" target="popup">
                 <i class="fa-brands fa-github"></i>
               </a>
-              <a href="" target="popup">
+              <a href="https://www.linkedin.com/in/brendan-lau-b6952919a/" target="popup">
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="">
+              <a href="mailto:blau4000@gmail.com">
                 <i class="fa-solid fa-envelope"></i>
               </a>
             </div>
