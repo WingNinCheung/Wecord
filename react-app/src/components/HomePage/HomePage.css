@@ -147,9 +147,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2f3136;
+  background-color: #2b2d32;
   margin-left: 4rem;
 }
+
+.singleChannelDisplay {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem;
+  background-color: #2b2d32;
+  justify-content: space-evenly;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.singleChannelDisplay:hover {
+  text-decoration: underline;
+  font-size: large;
+}
+
 
 .singleServerDisplay {
   font-family: 'Quicksand', sans-serif;
@@ -170,26 +190,6 @@ body {
   text-decoration: underline;
   font-size: large;
 }
-
-.singleChannelDisplay {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 2rem;
-  width: 5rem;
-  margin: 1rem;
-  background-color: #2f3136;
-  justify-content: space-evenly;
-  border: none;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.singleChannelDisplay:hover {
-  text-decoration: underline;
-  font-size: large;
-}
-
 
 
 .channelList {
@@ -230,12 +230,20 @@ body {
   border: none;
 }
 
-.switchbutton {
-  background-color: whitesmoke;
-  border-radius: 4px;
-  margin: 2px;
-  font-family: 'Courier New', Courier, monospace;
-  height: 30px;
+.publicServers > .switchbutton {
+  margin-top: 1rem;;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 7px;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
+  cursor: pointer;
+  color:white;
+  border:0;
+  height:2.2rem;
+  width:5rem;
 }
 
 .addaserverbutt {
