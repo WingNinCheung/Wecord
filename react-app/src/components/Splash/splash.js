@@ -62,11 +62,11 @@ export default function Splash() {
           </div>
         </section>
         <section className="dev-info">
-          {/* <img
+          <img
             className="profile-pic"
-            src=""
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQF0fmknzYk1rA/profile-displayphoto-shrink_200_200/0/1580893094660?e=1664409600&v=beta&t=7f9AE6QP-kp8pWoW34enfUdyeN6AGSNwOTZtc-khsUc"
             alt="Brendan"
-          ></img> */}
+          ></img>
           <div className="profile-section">
             <div className="name">Brendan Lau</div>
 
