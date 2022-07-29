@@ -11,10 +11,10 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="splash-nav">
+      <div className="nav">
         {!sessionUser && (
           <>
-            <NavLink id="splash-logo" className="wecord" to="/" exact={true}>
+            <NavLink id="splash-logo" to="/" exact={true}>
               Wecord
             </NavLink>
             <div className="auth-button">
@@ -35,7 +35,6 @@ const NavBar = () => {
           <span className="navbarli">
             <NavLink
               id="splash-logo"
-              className="wecord"
               to="/"
               exact={true}
             >
@@ -67,7 +66,7 @@ const NavBar = () => {
               Friends{" "}
             </NavLink>
           </span>
-          <span className="navbarli logoutBtn">
+          <span className="navbarli">
             <LogoutButton />
           </span>
         </nav>

@@ -8,15 +8,11 @@
   align-items: center;
 }
 
-.splash-nav {
-  background-color: rgb(74, 87, 225);
+.nav {
+  background-color: #2f3136;
   display: flex;
   justify-content: space-between;
-}
-
-.wecord {
-  margin-top: 1.3rem;
-  margin-left: 5%;
+  padding-bottom: 1.3em;
 }
 
 #splash-logo {
@@ -25,6 +21,7 @@
   color: white;
   text-decoration: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-left: 2.5%;
 }
 
 #splash-nav {
@@ -39,8 +36,10 @@
 
 .navbarli {
   margin-top: 1.3rem;
-  color: red;
-  /* background-color: red; */
+  /* color: red; */
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  font-family: Quicksand, sans-serif;
 }
 
 .navlink.navlink1{
@@ -63,6 +62,7 @@
 
 .login-button,
 .signup-button {
+  margin-top: .8em;
   padding: 7px 16px;
   border-radius: 40px;
   margin-right: 20px;
@@ -72,6 +72,7 @@
   color: rgb(83, 78, 78);
   background-color: white;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border: 0;
 }
 
 .login-button:hover,
