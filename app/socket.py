@@ -3,18 +3,29 @@ from flask import request, jsonify
 import os
 from .models.db import db, Message, Channel
 from .api.server_routes import get_channel_messages
-origins = [
-    "http://wecord.herokuapp.com/",
-    "https://wecord.herokuapp.com/"
-]
+# origins = [
+#     "http://wecord.herokuapp.com/",
+#     "https://wecord.herokuapp.com/"
+# ]
 # set CORS for security
-if os.environ.get("FLASK_ENV") != "production":
-    origins="*"
+# if os.environ.get("FLASK_ENV") != "production":
+#     origins="*"
 
+if os.environ.get("FLASK_ENV") == "production":
+    origins = [
+        "http://wecord.herokuapp.com",
+        "https://wecord.herokuapp.com"
+    ]
+else:
+    origins = "*"
+
+
+# create your SocketIO instance
+# socketio = SocketIO(cors_allowed_origins=origins)
 # create SocketIO instance
 # The logger argument controls logging related to the Socket.IO protocol
 # engineio_logger controls logs that originate in the low-level Engine.IO transport
-socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
+socketio = SocketIO(cors_allowed_origins="*", logger=True, engineio_logger=True)
 
 # do stuff on connect - I wanna load our messages
 @socketio.on("connect")
