@@ -99,7 +99,7 @@ export default function Splash() {
               <a href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/" target="popup">
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="">
+              <a href="https://media-exp1.licdn.com/dms/image/C4D03AQGk5rQvlCZ_yA/profile-displayphoto-shrink_400_400/0/1654710587613?e=1664409600&v=beta&t=ZDV4dpaekhMtnq8dTWBKs02sAcnUTE_frRgSbE8OI7o">
                 <i class="fa-solid fa-envelope"></i>
               </a>
             </div>
