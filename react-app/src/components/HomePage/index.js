@@ -14,8 +14,6 @@ import {
 
 import CreateChannel from "./Channel/createChannel";
 import EditChannel from "./Channel/editChannel";
-import CreateMessageForm from "./createMessageForm";
-import EditMessageForm from "./editMessageForm";
 
 import {
   getAllServerUsers,
@@ -26,6 +24,7 @@ import Member from "../../components/HomePage/member";
 
 import "./HomePage.css";
 import "./message.css";
+import Chat from "./Chat/Chat";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -327,26 +326,6 @@ function HomePage() {
 
   // ------------------------------------------------
 
-  // Edit a message
-
-  const [openEditForm, setOpenEditForm] = useState(false);
-  const [messageId, setMessageId] = useState("");
-  const [messageUserId, setMessageUserId] = useState("");
-
-  // Delete a message
-
-  const [deleteStatus, setDeleteStatus] = useState(false);
-
-  useEffect(() => {
-    if (deleteStatus) {
-      dispatch(deleteMessageThunk(loggedInUserId, messageId)).then(() =>
-        dispatch(getChannelMessagesThunk(selectedChannelId))
-      );
-    }
-    setDeleteStatus(false);
-    history.push("/home");
-  }, [dispatch, deleteStatus]);
-
   const handleJoin = async (e) => {
     e.preventDefault();
     await dispatch(addServerUser(loggedInUserId, selectedServerId));
@@ -520,64 +499,9 @@ function HomePage() {
         </div>
 
         <div className="messagesContainer">
-          {/* <h3>Messages</h3> */}
 
-          {showChannelMessages ? (
-            <div>
-              <div className="container-message">
-                <div className="messagesDisplay">
-                  {channelMessagesArr &&
-                    channelMessagesArr.map((message) => (
-                      <div key={message.id} className="singleMessageDisplay">
-                        <div className="username">
-                          <i className="fa-solid fa-user"></i>
-                          {message.username}
-                        </div>
-                        <div className="msg-body">
-                          <span className="message">{message.message}</span>
-
-                          <span
-                            onClick={() => {
-                              setMessageId(message.id);
-                              setOpenEditForm(true);
-                              setMessageUserId(message.userId);
-                            }}
-                          >
-                            <i className="fa-solid fa-pen-to-square"></i>
-                          </span>
-                          <span
-                            onClick={() => {
-                              setMessageId(message.id);
-                              setDeleteStatus(true);
-                              setMessageUserId(message.userId);
-                            }}
-                          >
-                            <i className="fa-solid fa-trash-can"></i>
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
-              <div>
-                <CreateMessageForm
-                  channelId={selectedChannelId}
-                  userId={sessionUser.id}
-                  getMessages={getChannelMessagesThunk}
-                />
-              </div>
-
-              {openEditForm && (
-                <EditMessageForm
-                  messageId={messageId}
-                  userId={sessionUser.id}
-                  setShow={setOpenEditForm}
-                  msgUserId={messageUserId}
-                />
-              )}
-            </div>
-          ) : (
-            <div className="noMsg">"No messages"</div>
+          {showChannelMessages && (
+            <Chat channelId={selectedChannelId} />
           )}
         </div>
 

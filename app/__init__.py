@@ -14,6 +14,8 @@ from .api.message_routes import message_routes
 from .api.serveruser_routes import server_user_routes
 from .api.friends import friend_routes
 
+from .socket import socketio
+
 from .seeds import seed_commands
 
 from .config import Config
@@ -44,6 +46,9 @@ app.register_blueprint(friend_routes, url_prefix='/api/friends')
 
 db.init_app(app)
 Migrate(app, db)
+
+# initialize our app with our socketio instance
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -81,3 +86,8 @@ def react_root(path):
     if path == "favicon.ico":
         return app.send_static_file("favicon.ico")
     return app.send_static_file("index.html")
+
+
+# run our chat app
+if __name__ == '__main__':
+    socketio.run(app)

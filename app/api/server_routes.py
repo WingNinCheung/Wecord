@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from flask_login import login_required, current_user
-from ..models.db import Server_User, db, Server, Channel
+
+from ..models.db import Server_User, db, Server, Channel, Message
 from ..models.user import User
 
 server_routes = Blueprint("server_routes", __name__)
@@ -176,10 +177,16 @@ def delete_channel(serverId, channelId):
 #     return {target_channel["messages"]}
 
 
+# read all messages of a single channel
+# each message looks like:
+#  {'id': 2, 'userId': 1, 'channelId': 1, 'message': 'Who loves javascript'}
 @server_routes.route("/channels/<int:id>")
 @login_required
 def get_channel_messages(id):
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
-    print(target_channel["messages"])
+    # use a for loop to append the corresponding username and photo to each message
+    for i, message in enumerate(target_channel["messages"]):
+        message["user"] = channel.messages[i].user.username
+        message["userPhoto"] = channel.messages[i].user.photo
     return {"messages": target_channel["messages"]}
