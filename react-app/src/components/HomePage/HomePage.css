@@ -42,8 +42,8 @@ body {
   color: white;
   border: none;
   border-radius: 7px;
-  height:2rem;
-  margin:2px;
+  height: 2rem;
+  margin: 2px;
   background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
 }
 
@@ -120,6 +120,10 @@ body {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   font-family: 'Quicksand', sans-serif;
+  padding: 1px;
+  min-width: fit-content;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .privateServersDisplay {
@@ -153,10 +157,10 @@ body {
   display: flex;
   flex-direction: column;
   height: 2rem;
-  width: 6rem;
+  width: 100%;
   margin: 1rem;
   background-color: #202225;
-  justify-content: space-evenly;
+  justify-content: center;
   border: none;
   overflow: hidden;
   cursor: pointer;
@@ -216,12 +220,34 @@ body {
 .inputUpdateServer {
   border-radius: 8px;
   height: 1.7rem;
-  margin:2px;
+  margin: 2px;
 
 
 }
 
-.editServerBtn2{
+.editServerBtn2 {
   border-radius: 5px;
   border: none;
+}
+
+.switchbutton {
+  background-color: whitesmoke;
+  border-radius: 4px;
+  margin: 2px;
+  font-family: 'Courier New', Courier, monospace;
+  height: 30px;
+}
+
+.addaserverbutt {
+  background-color: whitesmoke;
+  border: solid 1px;
+  border-radius: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 2px;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
 }
