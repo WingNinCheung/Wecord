@@ -84,11 +84,11 @@ export default function Splash() {
           </div>
         </section>
         <section className="dev-info">
-          {/* <img
+          <img
             className="profile-pic"
-            src=""
+            src="https://media-exp1.licdn.com/dms/image/C4D03AQGk5rQvlCZ_yA/profile-displayphoto-shrink_400_400/0/1654710587613?e=1664409600&v=beta&t=ZDV4dpaekhMtnq8dTWBKs02sAcnUTE_frRgSbE8OI7o"
             alt="Joyce"
-          ></img> */}
+          ></img>
           <div className="profile-section">
             <div className="name">Qiaoyi Liu</div>
 
@@ -99,7 +99,7 @@ export default function Splash() {
               <a href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/" target="popup">
                 <i className="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="https://media-exp1.licdn.com/dms/image/C4D03AQGk5rQvlCZ_yA/profile-displayphoto-shrink_400_400/0/1654710587613?e=1664409600&v=beta&t=ZDV4dpaekhMtnq8dTWBKs02sAcnUTE_frRgSbE8OI7o">
+              <a href="">
                 <i className="fa-solid fa-envelope"></i>
               </a>
             </div>
