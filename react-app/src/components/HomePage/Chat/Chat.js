@@ -203,6 +203,7 @@ export default function Chat({ channelId }) {
               <span className="message">{message.message}</span>
             </div>
             <span
+              className="edit-del"
               onClick={() => {
                 setMessageId(message.id);
                 setOpenEditForm(true);
@@ -210,15 +211,15 @@ export default function Chat({ channelId }) {
               }}
             >
               <i className="fa-solid fa-pen-to-square"></i>
-            </span>
-            <span
-              onClick={() => {
-                setMessageId(message.id);
-                setDeleteStatus(true);
-                setMessageUserId(message.userId);
-              }}
-            >
-              <i className="fa-solid fa-trash-can"></i>
+              <span
+                onClick={() => {
+                  setMessageId(message.id);
+                  setDeleteStatus(true);
+                  setMessageUserId(message.userId);
+                }}
+              >
+                <i className="fa-solid fa-trash-can"></i>
+              </span>
             </span>
           </div>
         ))}
