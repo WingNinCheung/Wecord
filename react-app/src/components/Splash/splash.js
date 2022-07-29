@@ -71,13 +71,13 @@ export default function Splash() {
             <div className="name">Brendan Lau</div>
 
             <div className="git-in">
-              <a href="" target="popup">
+              <a href="https://github.com/BrenLau" target="popup">
                 <i class="fa-brands fa-github"></i>
               </a>
-              <a href="" target="popup">
+              <a href="https://www.linkedin.com/in/brendan-lau-b6952919a/" target="popup">
                 <i class="fa-brands fa-linkedin-in"></i>
               </a>
-              <a href="">
+              <a href="mailto:blau4000@gmail.com">
                 <i class="fa-solid fa-envelope"></i>
               </a>
             </div>
