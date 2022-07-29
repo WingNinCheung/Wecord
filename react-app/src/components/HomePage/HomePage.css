@@ -230,12 +230,20 @@ body {
   border: none;
 }
 
-.switchbutton {
-  background-color: whitesmoke;
-  border-radius: 4px;
-  margin: 2px;
-  font-family: 'Courier New', Courier, monospace;
-  height: 30px;
+.publicServers > .switchbutton {
+  margin-top: 1rem;;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 7px;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
+  cursor: pointer;
+  color:white;
+  border:0;
+  height:2.2rem;
+  width:5rem;
 }
 
 .addaserverbutt {
