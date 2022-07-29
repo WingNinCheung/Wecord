@@ -13,7 +13,7 @@ export default function Splash() {
 
   return (
     <>
-      <div>
+      <div className="splash-nav">
         {sessionUser &&
           <nav>
             <span>
@@ -25,23 +25,21 @@ export default function Splash() {
                 Go to Wecord
               </NavLink>
             </span>
-            <span className="logoutBtn">
+            <span>
               <LogoutButton />
             </span>
           </nav>
         }
-      </div>
-      <div>
         {!sessionUser && (
           <>
-            <NavLink id="splash-logo" to="/" exact={true}>
+            <NavLink id="splash-logo" className="splash-nav-items" to="/" exact={true}>
               Wecord
             </NavLink>
             <div>
-              <span>
+              <span className="splash-nav-items">
                 <LoginFormModal />
               </span>
-              <span className="">
+              <span className="splash-nav-items">
                 <SignUpFormModal />
               </span>
             </div>

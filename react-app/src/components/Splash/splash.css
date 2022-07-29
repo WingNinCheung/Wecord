@@ -10,6 +10,17 @@
   background-position: bottom;
 }
 
+.splash-nav-items {
+  margin-top: .8em;
+}
+
+.splash-nav {
+  background-color: rgb(74, 87, 225);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.3em;
+}
+
 .background-partition {
   display: flex;
   flex-direction: column;

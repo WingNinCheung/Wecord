@@ -1,8 +1,14 @@
-.logoutBtn{
-    height:23px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    /* border: blue 2px solid; */
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  }
+.logoutBtn {
+  font-family: "Quicksand", sans-serif;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
+  width: 120%;
+  border: 0;
+  border-radius: 0.2rem;
+  padding: 13px;
+  color: white;
+  font-size: 15px;
+}
