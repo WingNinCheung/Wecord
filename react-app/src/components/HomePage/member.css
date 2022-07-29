@@ -1,0 +1,21 @@
+.memberli > .memberli1 {
+    color:white;
+}
+
+.memberli{
+    list-style-type: none;
+    margin:1rem;
+}
+
+.memberli1{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.memberli1:hover{
+    font-size: larger;
+}
+
+.memberUl{
+    padding-left:0;
+}

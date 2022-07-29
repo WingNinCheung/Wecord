@@ -60,7 +60,7 @@ export default function CreateChannel({ props }) {
           ))}
         </ul>
         <input
-          placeholder="Update Channel Title Here"
+          placeholder="Careate Channel Here"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           className="inputChannel"

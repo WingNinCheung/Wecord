@@ -28,7 +28,7 @@ const FriendsList = () => {
 
     return (
         <div className='friendslistdiv'>
-            <h1>Friends List</h1>
+            <h1 className="FriendsListTitle">Friends List</h1>
             <ul className="ulforfriends">
                 {friendsList.length > 0 && friendsList.map(friend => (
                     <li className="liforfriends"><NavLink className='linkforfriends' to={`/users/${friend.id}`}>{friend.username}</NavLink></li>

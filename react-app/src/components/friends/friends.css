@@ -11,8 +11,13 @@
     /* height: 100%; */
 }
 
+.friendslistdiv > .FriendsListTitle{
+    margin-top: 8rem;
+}
+
 
 .ulforfriends {
+    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,10 +28,13 @@
     padding: 10px;
     border-radius: 5px;
     color: white;
+    list-style-type: none;
 
 }
 
 .liforfriends {
+    border:0;
+    font-family: 'Roboto', sans-serif;
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -43,7 +51,8 @@
 
 }
 
-.linkforfriends {
+.liforfriends > .linkforfriends {
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,13 +62,14 @@
     font-size: 20px;
     padding: 2px;
     text-decoration: none;
+    background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
 
 }
 
 .linkforfriends:hover {
     background-color: black;
     border-radius: 5px;
-    font-size: 22px;
+    font-size: 30px;
     color: white;
 
 }
