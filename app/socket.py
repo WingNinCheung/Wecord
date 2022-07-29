@@ -3,15 +3,14 @@ from flask import request, jsonify
 import os
 from .models.db import db, Message, Channel
 from .api.server_routes import get_channel_messages
-
-# set CORS for security
-if os.environ.get("FLASK_ENV") == "production":
-    origins = [
+origins = [
     "http://wecord.herokuapp.com/",
     "https://wecord.herokuapp.com/"
 ]
-else:
-    origins = "*"
+# set CORS for security
+if os.environ.get("FLASK_ENV") != "production":
+    origins="*"
+
 
 
 # create SocketIO instance
