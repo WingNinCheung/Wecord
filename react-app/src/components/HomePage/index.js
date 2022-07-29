@@ -150,7 +150,7 @@ function HomePage() {
           padding: "10px",
           border: "1px solid black",
           boxSizing: "border-box",
-          width: "200px",
+          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
@@ -164,6 +164,7 @@ function HomePage() {
               setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Edit Server
           </button>
@@ -172,6 +173,7 @@ function HomePage() {
           <button
             onClick={handleDeleteServer}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Delete
           </button>
@@ -180,6 +182,7 @@ function HomePage() {
           <button
             onClick={handleLeave}
             disabled={!userIsInServer || loggedInUserId == adminId}
+            className="editServerBtn2"
           >
             Leave Server
           </button>
@@ -196,7 +199,7 @@ function HomePage() {
           padding: "10px",
           border: "1px solid black",
           boxSizing: "border-box",
-          width: "200px",
+          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
@@ -210,12 +213,13 @@ function HomePage() {
               setEdit(false);
             }}
             disabled={loggedInUserId !== adminId}
+            className="editServerBtn2"
           >
             Edit Channel
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} disabled={loggedInUserId !== adminId}>
+          <button onClick={handleDelete} disabled={loggedInUserId !== adminId} className="editServerBtn2">
             Delete
           </button>
         </div>

@@ -221,6 +221,7 @@ body {
 
 }
 
-/* .updateServerForm{
-  background-color: #2b2d32;
-} */
+.editServerBtn2{
+  border-radius: 5px;
+  border: none;
+}
