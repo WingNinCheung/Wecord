@@ -3,7 +3,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: rgb(74, 87, 225);
+  background-color: var(--wecord-purple);
   background-image: url("./e6d57714479874c665b36c7adee76b1d.png");
 
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 
   width: 100%;
 
-  background: rgb(2, 0, 36);
+  background: var(--partition);
   /* background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
@@ -30,7 +30,7 @@
     rgb(44, 20, 183) 56%,
     rgb(13, 67, 78) 100%
   ); */
-  background-color: rgb(74, 87, 225);
+  background-color: var(--wecord-purple);
   background-image: url("./8a8375ab7908384e1fd6efe408284203.png"),
     url("./c40c84ca18d84633a9d86b4046a91437.png");
   background-size: contain;
@@ -56,7 +56,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: rgb(62, 3, 62);
+  background: var(--dark-purple);
   background-color: white;
   position: fixed;
   bottom: 0;
