@@ -11,10 +11,6 @@
   overflow: scroll;
 }
 
-.container-message {
-  /* background-color: aqua; */
-}
-
 .messagesDisplay {
   list-style-type: none;
   width: 250px;
@@ -88,6 +84,12 @@
   color: red;
   position: fixed;
   bottom: 0;
+}
+
+.edit-form {
+  width: 100px;
+  height: 100px;
+  /* position: fixed; */
 }
 
 .create-message {

@@ -8,6 +8,7 @@ import {
   deleteMessageThunk,
 } from "../../../store/messages";
 import EditMessageForm from "./editMessageForm";
+import EditFormModal from "../../auth/EditMessageModal";
 
 // initialize socket variable
 let socket;
@@ -227,7 +228,18 @@ export default function Chat({ channelId }) {
         <div className="message-form form">
           <div className="createMessageForm">
             {openEditForm ? (
-              <EditMessageForm
+              //   <div className="edit-form">
+              //     <EditMessageForm
+              // messageId={messageId}
+              // userId={user.id}
+              // setShow={setOpenEditForm}
+              // msgUserId={messageUserId}
+              // chatInput={chatInput}
+              // updateChatInput={updateChatInput}
+              // sendChat={sendChat}
+              //     />
+              //   </div>
+              <EditFormModal
                 messageId={messageId}
                 userId={user.id}
                 setShow={setOpenEditForm}
