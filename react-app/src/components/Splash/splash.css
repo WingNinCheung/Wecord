@@ -33,7 +33,7 @@
 }
 
 .bg-image-partition {
-  height: 80%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -47,7 +47,6 @@
   background-repeat: no-repeat;
   background-position: right, left bottom;
   position: relative;
-  margin-bottom: 5%;
   margin-top: 5%;
 }
 
