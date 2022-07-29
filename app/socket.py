@@ -11,8 +11,6 @@ origins = [
 if os.environ.get("FLASK_ENV") != "production":
     origins="*"
 
-
-
 # create SocketIO instance
 # The logger argument controls logging related to the Socket.IO protocol
 # engineio_logger controls logs that originate in the low-level Engine.IO transport
