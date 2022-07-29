@@ -15,7 +15,7 @@ export default function EditMessageForm({ messageId, userId, setShow, msgUserId,
         setShow(false)
         history.push("/home");
       };
-      
+
 
     useEffect(() => {
         const errors = [];

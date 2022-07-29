@@ -454,7 +454,7 @@ function HomePage() {
 
         <div className="messagesContainer">
           {showChannelMessages && (
-            <Chat channelId={selectedChannelId} />
+            <Chat channelId={selectedChannelId} setShow={setShow}/>
           )}
         </div>
 

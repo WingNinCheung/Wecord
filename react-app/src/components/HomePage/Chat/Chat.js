@@ -7,7 +7,7 @@ import EditMessageForm from './editMessageForm';
 // initialize socket variable
 let socket;
 
-export default function Chat({ channelId }) {
+export default function Chat({ channelId, setShow }) {
 
     //TODO: double check that this is the user
     const user = useSelector(state => state.session.user)
@@ -32,6 +32,20 @@ export default function Chat({ channelId }) {
         await dispatch(getChannelMessagesThunk(channelId));
         await setMessages(Object.values(oldMessages));
     }
+
+    const getMessageText = (messageId) => {
+        return Object.values(oldMessages).filter(msg => {
+            return msg.id === messageId;
+        })
+    }
+
+    useEffect(() => {
+        if (messageId) {
+            let msgTxt = getMessageText(messageId);
+            console.log("msgText", msgTxt)
+            // setChatInput(msgTxt);
+        }
+    }, [setOpenEditForm])
 
     useEffect(() => {
         if (deleteStatus) {
@@ -72,6 +86,14 @@ export default function Chat({ channelId }) {
         socket.on("edit", (updatedMessages) => {
             // when we receive a chat, add to our messages array in state
 
+            // trigger rerender useeffect
+            setOpenEditForm(false);
+
+            if (oldMessages.length) {
+                console.log(Object.values(oldMessages));
+                setMessages(Object.values(oldMessages));
+            }
+
             // right now we either get updatedMessages &
             // it works dynamically BUT the comments display out of order
 
@@ -105,13 +127,7 @@ export default function Chat({ channelId }) {
             //     }
             // });
 
-            // trigger rerender useeffect
-            setOpenEditForm(false);
 
-            if (oldMessages.length) {
-                console.log(Object.values(oldMessages));
-                setMessages(Object.values(oldMessages));
-            }
             // console.log("filtered", filtered);
             // setMessages([...filtered])
             // setMessages(...[
@@ -122,53 +138,8 @@ export default function Chat({ channelId }) {
             //           "message": "apple",
             //           "user": "Demo",
             //           "userPhoto": null
-            //         },
-            //         {
-            //           "id": 42,
-            //           "userId": 1,
-            //           "channelId": 3,
-            //           "message": "Penith",
-            //           "user": "Demo",
-            //           "userPhoto": null
             //         }])
             // console.log(messages)
-
-            // filtered example
-            // [
-            //     {
-            //       "id": 5,
-            //       "userId": 1,
-            //       "channelId": 3,
-            //       "message": "apple",
-            //       "user": "Demo",
-            //       "userPhoto": null
-            //     },
-            //     {
-            //       "id": 42,
-            //       "userId": 1,
-            //       "channelId": 3,
-            //       "message": "Penith",
-            //       "user": "Demo",
-            //       "userPhoto": null
-            //     },
-            //     {
-            //       "id": 50,
-            //       "userId": 1,
-            //       "channelId": 3,
-            //       "message": "instant!",
-            //       "user": "Demo",
-            //       "userPhoto": null
-            //     },
-            //     {
-            //       "id": 51,
-            //       "userId": 1,
-            //       "channelId": 3,
-            //       "message": "wrefgweg",
-            //       "user": "Demo",
-            //       "userPhoto": null
-            //     }
-            //   ]
-
 
         })
 
@@ -198,7 +169,7 @@ export default function Chat({ channelId }) {
                 if (messageId) { //need messageId or edit gets messed up
                     socket.emit("edit", { user: user.username, message: chatInput, userId: user.id, channelId: channelId, messageId: messageId, messageUserId: messageUserId });
                 }
-
+                setShow(false)
             } else {
                 socket.emit("chat", { user: user.username, message: chatInput, userId: user.id, channelId: channelId});
             }
@@ -250,8 +221,8 @@ export default function Chat({ channelId }) {
                         userId={user.id}
                         setShow={setOpenEditForm}
                         msgUserId={messageUserId}
-                        chatInput={chatInput}
-                        updateChatInput={updateChatInput}
+                        chatInput={getMessageText}
+                        updateChatInput={chatInput}
                         sendChat={sendChat}
                     />
                 ) : (
