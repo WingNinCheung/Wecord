@@ -42,7 +42,6 @@ body {
 }
 
 .publicServers,
-.privateServers,
 .userLists {
   color: white;
   display: flex;
@@ -55,6 +54,29 @@ body {
   min-height: 0;
   font-family: "Quicksand", sans-serif;
 }
+
+.privateServers {
+  color: white;
+  display: flex;
+  width: 22%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: #202225;
+  /* overflow: hidden; */
+  min-height: 0;
+  font-family: "Quicksand", sans-serif;
+}
+
+.privateServersDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .serverContainer {
+  text-align: center;
+} */
 
 .noMsg {
   margin-top: 1.2rem;
