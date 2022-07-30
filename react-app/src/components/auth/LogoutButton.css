@@ -12,3 +12,7 @@
   color: white;
   font-size: 15px;
 }
+
+.logoutBtn:hover {
+  border: var(--light-white) 1px solid;
+}

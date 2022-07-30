@@ -18,6 +18,7 @@ export default function Splash() {
           <nav id="splash-logged-out">
               <NavLink
                 id="splash-logo"
+                className="splash-logo"
                 to="/home"
                 exact={true}
               >

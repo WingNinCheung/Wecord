@@ -377,9 +377,9 @@ function HomePage() {
         {puborpriv && <div className="publicServers">
           {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
           {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
-          <h3>Public</h3>
+          <h3>Servers</h3>
           <ul className="publicServersDisplay">
-            <NavLink className="addaserverbutt" to="/create-server" >
+            <NavLink className="addaserverbutt" to="/create-server" alt="Create a Server">
               +
             </NavLink>
             {publicServers &&
@@ -418,7 +418,7 @@ function HomePage() {
 
           {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
           {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
-          <h3>Private</h3>
+          <h3>Direct Messages</h3>
           <div className="serverContainer">
             <ul className="privateServersDisplay">
               {privateServers &&
