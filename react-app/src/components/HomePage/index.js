@@ -378,56 +378,69 @@ function HomePage() {
         )}
       </div>
       <div className="outContainer">
-        {puborpriv && (
-          <div className="publicServers">
-            {puborpriv && (
-              <button
-                className="switchbutton"
-                onClick={() => setpuborpriv(!puborpriv)}
-              >
-                Friends
-              </button>
-            )}
-            {!puborpriv && (
-              <button
-                className="switchbutton"
-                onClick={() => setpuborpriv(!puborpriv)}
-              >
-                Servers
-              </button>
-            )}
-            <h3>Public</h3>
-            <ul className="publicServersDisplay">
-              <NavLink className="addaserverbutt" to="/create-server">
-                <div id="addserver">+</div>
-              </NavLink>
-              {publicServers &&
-                publicServers.map((server) => (
-                  <div
-                    key={server.id}
-                    onContextMenu={(e) => {
-                      handleContextMenu(e);
-                      setSelectedServerId(server.id);
-                      setAdminId(server.master_admin);
-                      setEdit(false);
-                      setName(server.name);
-                      setLocation({ x: e.pageX, y: e.pageY });
-                    }}
-                  >
-                    <li>
-                      <button
-                        className="singleServerDisplay"
-                        onClick={() => {
-                          setMainServer(true);
-                          setSelectedServerId(server.id);
-                          setAdminId(server.master_admin);
-                          checkUserinServer(server.id);
-                        }}
-                      >
-                        {server.name}
-                      </button>
-                    </li>
-                  </div>
+
+        {puborpriv && <div className="publicServers">
+          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+          <h3>Servers</h3>
+          <ul className="publicServersDisplay">
+            <NavLink className="addaserverbutt" to="/create-server" alt="Create a Server">
+              +
+            </NavLink>
+            {publicServers &&
+              publicServers.map((server) => (
+                <div
+                  key={server.id}
+                  onContextMenu={(e) => {
+                    handleContextMenu(e);
+                    setSelectedServerId(server.id);
+                    setAdminId(server.master_admin);
+                    setEdit(false);
+                    setName(server.name);
+                    setLocation({ x: e.pageX, y: e.pageY });
+                  }}
+                >
+                  <li>
+                    <button
+                      className="singleServerDisplay"
+                      onClick={() => {
+                        setMainServer(true);
+                        setSelectedServerId(server.id);
+                        setAdminId(server.master_admin);
+                        checkUserinServer(server.id);
+                      }}
+                    >
+                      {server.name}
+                    </button>
+                  </li>
+                </div>
+              ))}
+            {show && <Menu x={location.y} y={location.x} />}
+          </ul>
+        </div>}
+
+        {!puborpriv && <div className="privateServers">
+
+          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
+          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+          <h3>Direct Messages</h3>
+          <div className="serverContainer">
+            <ul className="privateServersDisplay">
+              {privateServers &&
+                privateServers.map((server) => (
+                  <li key={server.id}>
+                    <button
+                      className="singleServerDisplay"
+                      onClick={() => {
+                        setMainServer(true);
+                        setSelectedServerId(server.id);
+                        setName(server.name);
+                        checkUserinServer(server.id);
+                      }}
+                    >
+                      {server.name}
+                    </button>
+                  </li>
                 ))}
               {show && <Menu x={location.y} y={location.x} />}
             </ul>

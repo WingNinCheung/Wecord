@@ -255,19 +255,21 @@ body {
   background-color: whitesmoke;
 
   border: solid 1px;
-  border-radius: 30px;
-  font-family: "Courier New", Courier, monospace;
+  border-radius: 35px;
+  font-family: 'Courier New', Courier, monospace;
   margin: 2px;
   display: flex;
   text-decoration: none;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+
+  width: 35px;
+  height: 35px;
   font-weight: bold;
 }
 
 .addaserverbutt:hover {
   background-color: #202225;
   color: green;
+
 }
