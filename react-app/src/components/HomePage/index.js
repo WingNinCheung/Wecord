@@ -79,7 +79,8 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false);
-  const [puborpriv, setpuborpriv] = useState(true);
+   // true if we are in public view. false if we are looking @ private servers
+   const [isPublic, setIsPublic] = useState(true);
   const history = useHistory();
 
   // right-click menu section
@@ -378,9 +379,9 @@ function HomePage() {
       </div>
       <div className="outContainer">
 
-        {puborpriv && <div className="publicServers">
-          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
-          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+        {isPublic && <div className="publicServers">
+          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
+          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
           <h3>Servers</h3>
           <ul className="publicServersDisplay">
             <NavLink className="addaserverbutt" to="/create-server" alt="Create a Server">
@@ -418,10 +419,10 @@ function HomePage() {
           </ul>
       </div>}
 
-        {!puborpriv && <div className="privateServers">
+        {!isPublic && <div className="privateServers">
 
-          {puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Friends</button>}
-          {!puborpriv && <button className='switchbutton' onClick={() => setpuborpriv(!puborpriv)}>Servers</button>}
+          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
+          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
           <h3>Direct Messages</h3>
           <div className="serverContainer">
             <ul className="privateServersDisplay">
@@ -446,48 +447,6 @@ function HomePage() {
           </div>
         </div>
         }
-
-        {!puborpriv && (
-          <div className="privateServers">
-            {puborpriv && (
-              <button
-                className="switchbutton"
-                onClick={() => setpuborpriv(!puborpriv)}
-              >
-                Friends
-              </button>
-            )}
-            {!puborpriv && (
-              <button
-                className="switchbutton"
-                onClick={() => setpuborpriv(!puborpriv)}
-              >
-                Servers
-              </button>
-            )}
-            <h3>Private</h3>
-            <div className="serverContainer">
-              <ul className="privateServersDisplay">
-                {privateServers &&
-                  privateServers.map((server) => (
-                    <li key={server.id}>
-                      <button
-                        className="singleServerDisplay"
-                        onClick={() => {
-                          setMainServer(true);
-                          setSelectedServerId(server.id);
-                          setName(server.name);
-                          checkUserinServer(server.id);
-                        }}
-                      >
-                        {server.name}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-        )}
 
         <div className="serverChannels">
           <h3>Channels</h3>
