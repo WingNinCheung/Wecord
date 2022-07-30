@@ -473,7 +473,6 @@ function HomePage() {
                       >
                         <li key={channel.id} value={channel.serverId}>
                           <span>
-                            {/* <i className="fa-solid fa-hashtag"></i> */}
                             <button
                               className="singleChannelDisplay"
                               onClick={() => {
@@ -482,7 +481,7 @@ function HomePage() {
                                 setGoToChannelsMessages(true);
                               }}
                             >
-                              {channel.title}
+                              {`# ${channel.title}`}
                             </button>
                           </span>
                         </li>
