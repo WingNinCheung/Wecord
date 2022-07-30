@@ -53,7 +53,9 @@ def all_servers(userId):
         for user in users_in_each_server:
             if currentUser.username not in user.user.username:
                 yourServer["conversation_partners"].append(user.user.username)
-                yourservers.append(yourServer)
+
+        yourservers.append(yourServer)
+
 
 
 
