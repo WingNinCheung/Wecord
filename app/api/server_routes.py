@@ -15,25 +15,51 @@ server_routes = Blueprint("server_routes", __name__)
 
 # GET /api/servers - read all servers
 @server_routes.route("/yourServers/<int:userId>")
-# @login_required
+@login_required
 def all_servers(userId):
+    # get all server_user instances for a single user
     serverUsers = Server_User.query.filter(Server_User.userId == userId).all()
-    print('$$$$$$$$$$$$$$$$$$$############',serverUsers)
-    print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
-    user = User.query.get(userId)
+    #print('--------------------------------- server Users',serverUsers)
+    #print('$$$$$$$$$$$$$$$$$$$############ each server',{'server': [server.server.to_dict() for server in serverUsers]})
+    # Get user object for current user
+    currentUser = User.query.get(userId)
+    # get all servers, fill notIn with servers the user is not a member of
     servers = Server.query.all()
     notIn = []
     serverspub = Server.query.filter(Server.private == False).all()
     for server in serverspub:
         bool = True
         for use in server.users:
-            print(use.user, user)
-            if user == use.user:
+            print(use.user, currentUser)
+            if currentUser == use.user:
                 bool = False
         if bool:
             notIn.append(server)
+
+    # send the conversation partners of the current user- everyone else in the server
+    # send array of usernames
+
+    yourservers = []
+    # for each of the current user's servers
+    for server in serverUsers:
+        # yourServer is a server instance in dictionary format
+        yourServer = server.server.to_dict()
+        yourServer["conversation_partners"] = []
+
+        users_in_each_server = server.server.users
+
+        # get the users in each of those servers and put their names into a list.
+        # exclude the current user's name
+        for user in users_in_each_server:
+            if currentUser.username not in user.user.username:
+                yourServer["conversation_partners"].append(user.user.username)
+                yourservers.append(yourServer)
+
+
+
+    # we also want to send the server_users for each server to the state.
     print('allnotin@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',notIn)
-    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers], 'serversnotin': [server.to_dict() for server in notIn]}
+    return {"servers": [server.to_dict() for server in servers], 'yourservers': yourservers, 'serversnotin': [server.to_dict() for server in notIn]}
 
 
 # POST /api/servers - create a new public server
@@ -107,7 +133,7 @@ def checkUserInServer(userId):
     print('$$$$$$$$$$$$$$$$$$$############',{'server': [server.server.to_dict() for server in serverUsers]})
 
     return {'yourservers': [server.server.to_dict() for server in serverUsers]}
- 
+
 
 
 # ------------------------- Routes for channels -------------------------------------

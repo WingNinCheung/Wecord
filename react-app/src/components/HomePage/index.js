@@ -29,6 +29,8 @@ import Chat from "./Chat/Chat";
 function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  // use this for getting members for private convos
+  const serverUsers = useSelector(state => state.serverUsers);
   const loggedInUserId = sessionUser.id;
 
   useEffect(() => {
@@ -55,6 +57,8 @@ function HomePage() {
       if (server.private === true) return server;
     });
   }
+
+  console.log("private Servers: ", privateServers);
   if (allServersArray) {
     publicServers = allServers.yourServers.filter(
       (server) => server.private === false
@@ -342,6 +346,8 @@ function HomePage() {
     // await dispatch(getAllServers(loggedInUserId));
   };
 
+  // -----------------------------------------------
+
   // create a channel
 
   return (
@@ -436,7 +442,7 @@ function HomePage() {
                       checkUserinServer(server.id);
                     }}
                   >
-                    {server.name}
+                    {server.conversation_partners[0]}
                 </li>
               ))}
             {show && <Menu x={location.y} y={location.x} />}
