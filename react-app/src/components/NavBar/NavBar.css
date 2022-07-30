@@ -24,11 +24,10 @@
   padding: 13px;
 }
 
-#splash-logo:hover {
+.splash-logo:hover {
   background-color: rgba(62, 3, 62, .3);
   border-radius: 3px;
   border: var(--light-white) 1px solid;
-
 }
 
 #splash-nav {
