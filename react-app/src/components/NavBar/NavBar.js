@@ -11,24 +11,22 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="nav">
-        {!sessionUser && (
-          <>
-            <NavLink id="splash-logo" to="/" exact={true}>
-              Wecord
-            </NavLink>
-            <div className="auth-button">
-              <span>
-                <LoginFormModal />
-              </span>
-              <span className="">
-                <SignUpFormModal />
-              </span>
-            </div>
+      {!sessionUser && (
+        <>
+          <NavLink id="splash-logo" to="/" exact={true}>
+            Wecord
+          </NavLink>
+          <div className="auth-button">
+            <span>
+              <LoginFormModal />
+            </span>
+            <span className="">
+              <SignUpFormModal />
+            </span>
+          </div>
 
-          </>
-        )}
-      </div>
+        </>
+      )}
 
       {sessionUser && (
         <nav className="navbarcontainer">

@@ -345,7 +345,6 @@ function HomePage() {
 
   return (
     <div>
-      <div className="addServerLinkContainer"></div>
       <div className="updateServerForm">
         {edit && (
           <div>
@@ -363,7 +362,7 @@ function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="inputUpdateServer"
-              ></input>
+              />
               <button
                 disabled={validationErrors.length > 0}
                 className="editBtn"
@@ -417,7 +416,7 @@ function HomePage() {
               ))}
             {show && <Menu x={location.y} y={location.x} />}
           </ul>
-        </div>}
+      </div>}
 
         {!puborpriv && <div className="privateServers">
 
@@ -445,7 +444,8 @@ function HomePage() {
               {show && <Menu x={location.y} y={location.x} />}
             </ul>
           </div>
-        )}
+        </div>
+        }
 
         {!puborpriv && (
           <div className="privateServers">
@@ -560,29 +560,6 @@ function HomePage() {
           <Member serverId={selectedServerId} />
         </div>
       </div>
-
-      {/* <div className="updateServerForm">
-        {edit && (
-          <div>
-            <h3>Update Your Server Here!</h3>
-            <form onSubmit={handleSubmit}>
-              <ul>
-                {validationErrors.map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-              <label>Name</label>
-              <input
-                placeholder={name}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-              <button disabled={validationErrors.length > 0}>Edit</button>
-              <button onClick={handleCancel}>Cancel</button>
-            </form>
-          </div>
-        )}
-      </div> */}
     </div>
   );
 }

@@ -10,9 +10,10 @@
   position: relative;
 }
 
-/* .splash-nav-items {
-  margin-top: .8em;
-} */
+.splash-logo:hover {
+  background-color: rgba(62, 3, 62, .3);
+  border-radius: 3px;
+}
 
 #splash-logged-out {
   display: flex;
