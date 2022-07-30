@@ -202,8 +202,9 @@ body {
   border: none;
 }
 
-.publicServers > .switchbutton {
+.switchbutton {
   margin-top: 1rem;
+  padding: 0.8rem;
   font-family: "Roboto", sans-serif;
   border-radius: 7px;
   background-image: radial-gradient(
@@ -214,8 +215,6 @@ body {
   cursor: pointer;
   color: white;
   border: 0;
-  height: 2.2rem;
-  width: 5rem;
 }
 
 .addaserverbutt {
