@@ -1,18 +1,11 @@
 .navbarcontainer {
   color: white;
   background-color: #2f3136;
-  /* background-color: rgb(74, 87, 225); */
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.nav {
-  background-color: #2f3136;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1.3em;
+  height: 10vh;
 }
 
 #splash-logo {
@@ -41,7 +34,6 @@
 }
 
 .navbarli {
-  margin-top: 1.3rem;
   margin-left: 2.5%;
   margin-right: 2.5%;
   font-family: Quicksand, sans-serif;

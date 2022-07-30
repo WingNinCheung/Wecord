@@ -26,19 +26,6 @@ body {
   );
 }
 
-.addServerLinkContainer.addServerLink {
-  color: white;
-  font-family: "Quicksand", sans-serif;
-  text-decoration: none;
-  margin-left: 2.7rem;
-  margin-top: 2rem;
-  padding-top: 1rem;
-}
-
-.addServerLinkContainer.addServerLink:hover {
-  font-size: large;
-}
-
 .editBtn {
   font-family: "Roboto", sans-serif;
   cursor: pointer;
@@ -75,26 +62,6 @@ body {
   justify-content: center;
   text-align: center;
 }
-
-/* .message-form {
-
-} */
-
-/* .create-message {
-    TODO: Style so the box starts small and then overflows with each new line of text
-} */
-
-/* .privateServers{
-    color:white;
-    display: flex;
-    width: 15%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    background-color: #202225;
-    overflow: hidden;
-    min-height: 0;
-} */
 
 .updateServerForm {
   /* margin-left: 3rem; */
