@@ -18,18 +18,21 @@ body {
   color: white;
   border-radius: 9px;
   cursor: pointer;
-  font-family: 'Quicksand', sans-serif;
-  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+  font-family: "Quicksand", sans-serif;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
 }
 
 .addServerLinkContainer.addServerLink {
   color: white;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   text-decoration: none;
   margin-left: 2.7rem;
   margin-top: 2rem;
   padding-top: 1rem;
-
 }
 
 .addServerLinkContainer.addServerLink:hover {
@@ -37,14 +40,18 @@ body {
 }
 
 .editBtn {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   cursor: pointer;
   color: white;
   border: none;
   border-radius: 7px;
   height: 2rem;
   margin: 2px;
-  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
 }
 
 .publicServers,
@@ -59,16 +66,14 @@ body {
   background-color: #202225;
   overflow: hidden;
   min-height: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .noMsg {
   margin-top: 1.2rem;
-  ;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   justify-content: center;
   text-align: center;
-
 }
 
 /* .message-form {
@@ -104,7 +109,7 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #2b2d32;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 .publicServersDisplay {
@@ -119,7 +124,7 @@ body {
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   padding: 1px;
   min-width: fit-content;
   /* justify-content: center; */
@@ -127,7 +132,7 @@ body {
 }
 
 .privateServersDisplay {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -170,9 +175,8 @@ body {
   font-size: large;
 }
 
-
 .singleServerDisplay {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   color: white;
   display: flex;
   flex-direction: column;
@@ -190,7 +194,6 @@ body {
   text-decoration: underline;
   font-size: large;
 }
-
 
 .channelList {
   display: flex;
@@ -214,7 +217,11 @@ body {
   border-radius: 8px;
   height: 2rem;
   border: none;
-  background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
 }
 
 .inputUpdateServer {
@@ -229,8 +236,8 @@ body {
 }
 
 .publicServers > .switchbutton {
-  margin-top: 1rem;;
-  font-family: 'Roboto', sans-serif;
+  margin-top: 1rem;
+  font-family: "Roboto", sans-serif;
   border-radius: 7px;
   background-image: radial-gradient(
     circle 732px at 96.2% 89.9%,
@@ -238,17 +245,18 @@ body {
     rgba(187, 43, 107, 1) 92%
   );
   cursor: pointer;
-  color:white;
-  border:0;
-  height:2.2rem;
-  width:5rem;
+  color: white;
+  border: 0;
+  height: 2.2rem;
+  width: 5rem;
 }
 
 .addaserverbutt {
   background-color: whitesmoke;
+
   border: solid 1px;
   border-radius: 30px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   margin: 2px;
   display: flex;
   text-decoration: none;
@@ -256,4 +264,10 @@ body {
   align-items: center;
   width: 30px;
   height: 30px;
+  font-weight: bold;
+}
+
+.addaserverbutt:hover {
+  background-color: #202225;
+  color: green;
 }
