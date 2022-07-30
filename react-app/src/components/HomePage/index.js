@@ -447,68 +447,70 @@ function HomePage() {
           </div>
         </div>
         }
+        <>
+          {isPublic && <div className="serverChannels">
+            <h3>Channels</h3>
+            {adminId === loggedInUserId && selectedServerId && (
+              <CreateChannel
+                props={{ serverId: selectedServerId, loadChannel }}
+              />
+            )}
+            {openChannels ? (
+              <div>
+                <ul className="channelsDisplay">
+                  {serverChannels &&
+                    serverChannels.map((channel) => (
+                      <div
+                        key={channel.id}
+                        onContextMenu={(e) => {
+                          handleContextMenuChannel(e);
+                          setLocation({ x: e.pageX, y: e.pageY });
+                          setSelectedChannelId(channel.id);
+                          setChannelName(channel.title);
+                        }}
+                      >
+                        <li key={channel.id} value={channel.serverId}>
+                          <span>
+                            {/* <i className="fa-solid fa-hashtag"></i> */}
+                            <button
+                              className="singleChannelDisplay"
+                              onClick={() => {
+                                setSelectedChannelId(channel.id);
+                                setShowChannelMessages(true);
+                                setGoToChannelsMessages(true);
+                              }}
+                            >
+                              {channel.title}
+                            </button>
+                          </span>
+                        </li>
+                      </div>
+                    ))}
+                  {channelShow && <ChannelMenu x={location.y} y={location.x} />}
+                </ul>
+              </div>
+            ) : selectedServerId ? (
+              <div>
+                <button onClick={handleJoin} className="joinServerBtn">
+                  Join Server
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
 
-        <div className="serverChannels">
-          <h3>Channels</h3>
-          {adminId === loggedInUserId && selectedServerId && (
-            <CreateChannel
-              props={{ serverId: selectedServerId, loadChannel }}
-            />
-          )}
-          {openChannels ? (
-            <div>
-              <ul className="channelsDisplay">
-                {serverChannels &&
-                  serverChannels.map((channel) => (
-                    <div
-                      key={channel.id}
-                      onContextMenu={(e) => {
-                        handleContextMenuChannel(e);
-                        setLocation({ x: e.pageX, y: e.pageY });
-                        setSelectedChannelId(channel.id);
-                        setChannelName(channel.title);
-                      }}
-                    >
-                      <li key={channel.id} value={channel.serverId}>
-                        <span>
-                          {/* <i className="fa-solid fa-hashtag"></i> */}
-                          <button
-                            className="singleChannelDisplay"
-                            onClick={() => {
-                              setSelectedChannelId(channel.id);
-                              setShowChannelMessages(true);
-                              setGoToChannelsMessages(true);
-                            }}
-                          >
-                            {channel.title}
-                          </button>
-                        </span>
-                      </li>
-                    </div>
-                  ))}
-                {channelShow && <ChannelMenu x={location.y} y={location.x} />}
-              </ul>
-            </div>
-          ) : selectedServerId ? (
-            <div>
-              <button onClick={handleJoin} className="joinServerBtn">
-                Join Server
-              </button>
-            </div>
-          ) : (
-            <div></div>
-          )}
-
-          {editChannel && (
-            <EditChannel
-              serverId={selectedServerId}
-              channelId={selectedChannelId}
-              setEdit={setEditChannel}
-              channelTitle={channelName}
-              loadChannel={loadChannel}
-            />
-          )}
-        </div>
+            {editChannel && (
+              <EditChannel
+                serverId={selectedServerId}
+                channelId={selectedChannelId}
+                setEdit={setEditChannel}
+                channelTitle={channelName}
+                loadChannel={loadChannel}
+              />
+            )}
+          </div>
+        }
+        </>
 
         <div className="messagesContainer">
           {showChannelMessages && <Chat channelId={selectedChannelId} />}
