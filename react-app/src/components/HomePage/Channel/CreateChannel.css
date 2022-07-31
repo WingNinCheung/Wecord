@@ -46,3 +46,14 @@
   margin-left: 20px;
   cursor: pointer;
 }
+
+.edit-channel:disabled:hover,
+.edit-channel[disabled] {
+  /* border: 1px solid #999999; */
+  background-color: #cccccc;
+  color: #9e9797;
+}
+
+.edit-channel:hover {
+  color: black;
+}
