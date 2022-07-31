@@ -39,29 +39,28 @@ def all_servers(userId):
     # send the conversation partners of the current user- everyone else in the server
     # send array of usernames
 
-    yourservers = []
-    # for each of the current user's servers
-    for server in serverUsers:
-        # yourServer is a server instance in dictionary format
-        yourServer = server.server.to_dict()
-        yourServer["conversation_partners"] = []
+    # yourservers = []
+    # # for each of the current user's servers
+    # for server in serverUsers:
+    #     # yourServer is a server instance in dictionary format
+    #     yourServer = server.server.to_dict()
+    #     yourServer["conversation_partners"] = []
 
-        users_in_each_server = server.server.users
+    #     users_in_each_server = server.server.users
 
-        # get the users in each of those servers and put their names into a list.
-        # exclude the current user's name
-        for user in users_in_each_server:
-            if currentUser.username not in user.user.username:
-                yourServer["conversation_partners"].append(user.user.username)
-
-        yourservers.append(yourServer)
-
+    #     # get the users in each of those servers and put their names into a list.
+    #     # exclude the current user's name
+    #     for user in users_in_each_server:
+    #         if currentUser.username not in user.user.username:
+    #             yourServer["conversation_partners"].append(user.user.username)
+    #             yourservers.append(yourServer)
 
 
 
     # we also want to send the server_users for each server to the state.
     print('allnotin@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',notIn)
-    return {"servers": [server.to_dict() for server in servers], 'yourservers': yourservers, 'serversnotin': [server.to_dict() for server in notIn]}
+    # return {"servers": [server.to_dict() for server in servers], 'yourservers': yourservers, 'serversnotin': [server.to_dict() for server in notIn]}
+    return {"servers": [server.to_dict() for server in servers], 'yourservers': [server.server.to_dict() for server in serverUsers], 'serversnotin': [server.to_dict() for server in notIn]}
 
 
 # POST /api/servers - create a new public server

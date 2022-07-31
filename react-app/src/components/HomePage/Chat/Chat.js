@@ -205,42 +205,34 @@ export default function Chat({ channelId }) {
             <div className="msg-body">
               <span className="message">{message.message}</span>
             </div>
-            <span
-              className="edit-del"
-              onClick={() => {
-                setMessageId(message.id);
-                setOpenEditForm(true);
-                setMessageUserId(message.userId);
-              }}
-            >
-              <i className="fa-solid fa-pen-to-square"></i>
+            <div className="edit-del">
               <span
                 onClick={() => {
                   setMessageId(message.id);
-                  setDeleteStatus(true);
+                  setOpenEditForm(true);
                   setMessageUserId(message.userId);
                 }}
               >
-                <i className="fa-solid fa-trash-can"></i>
+                <i className="fa-solid fa-pen-to-square"></i>
               </span>
-            </span>
+              <span>
+                <span
+                  onClick={() => {
+                    setMessageId(message.id);
+                    setDeleteStatus(true);
+                    setMessageUserId(message.userId);
+                  }}
+                >
+                  <i className="fa-solid fa-trash-can"></i>
+                </span>
+              </span>
+            </div>
           </div>
         ))}
 
         <div className="message-form form">
           <div className="createMessageForm">
             {openEditForm ? (
-              //   <div className="edit-form">
-              //     <EditMessageForm
-              // messageId={messageId}
-              // userId={user.id}
-              // setShow={setOpenEditForm}
-              // msgUserId={messageUserId}
-              // chatInput={chatInput}
-              // updateChatInput={updateChatInput}
-              // sendChat={sendChat}
-              //     />
-              //   </div>
               <EditFormModal
                 messageId={messageId}
                 userId={user.id}

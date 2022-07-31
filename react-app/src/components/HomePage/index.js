@@ -30,7 +30,7 @@ function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   // use this for getting members for private convos
-  const serverUsers = useSelector(state => state.serverUsers);
+  // const serverUsers = useSelector((state) => state.serverUsers);
   const loggedInUserId = sessionUser.id;
 
   useEffect(() => {
@@ -63,6 +63,10 @@ function HomePage() {
       (server) => server.private === false
     );
   }
+
+  console.log("public is ", publicServers);
+  console.log("all is ", allServers);
+
   useEffect(() => {
     dispatch(getAllServers(loggedInUserId));
   }, [dispatch]);
@@ -82,8 +86,8 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false);
-   // true if we are in public view. false if we are looking @ private servers
-   const [isPublic, setIsPublic] = useState(true);
+  // true if we are in public view. false if we are looking @ private servers
+  const [isPublic, setIsPublic] = useState(true);
   const history = useHistory();
 
   // right-click menu section
@@ -112,7 +116,7 @@ function HomePage() {
     setUserIsInServer(false);
     setSelectedServerId("");
     setOpenChannels(false);
-    checkUserinServer(selectedServerId);
+    // checkUserinServer(selectedServerId);
   };
 
   const checkUserinServer = async (serverId) => {
@@ -148,16 +152,11 @@ function HomePage() {
   const Menu = ({ x, y }) => {
     return (
       <div
+        className="right-menu"
         style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
-          backgroundColor: "gray",
         }}
       >
         <div>
@@ -167,7 +166,7 @@ function HomePage() {
               setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Edit Server
           </button>
@@ -176,7 +175,7 @@ function HomePage() {
           <button
             onClick={handleDeleteServer}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Delete
           </button>
@@ -185,7 +184,7 @@ function HomePage() {
           <button
             onClick={handleLeave}
             disabled={!userIsInServer || loggedInUserId == adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Leave Server
           </button>
@@ -197,16 +196,11 @@ function HomePage() {
   const ChannelMenu = ({ x, y }) => {
     return (
       <div
+        className="right-menu"
         style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
-          backgroundColor: "gray",
         }}
       >
         <div>
@@ -216,7 +210,7 @@ function HomePage() {
               setEdit(false);
             }}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Edit Channel
           </button>
@@ -225,7 +219,7 @@ function HomePage() {
           <button
             onClick={handleDelete}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Delete
           </button>
@@ -319,6 +313,17 @@ function HomePage() {
     }
   }
 
+  if (privateServers) {
+    for (let i = 0; i < privateServers.length; i++) {
+      for (let j = 0; j < allUserArr.length; j++) {
+        if (privateServers[i].name == allUserArr[j].id)
+          privateServers[i]["username"] = allUserArr[j].username;
+      }
+    }
+  }
+
+  console.log("private Servers: ", privateServers);
+
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
       if (typeof selectedChannelId !== "string") {
@@ -392,7 +397,6 @@ function HomePage() {
         )}
       </div>
       <div className="outContainer">
-
         {isPublic && <div className="publicServers">
           {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
           {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
@@ -455,12 +459,12 @@ function HomePage() {
                       checkUserinServer(server.id);
                     }}
                   >
-                    {server.conversation_partners[0]}
-                </li>
-              ))}
-            {show && <Menu x={location.y} y={location.x} />}
-          </ul>
-        </div>
+                    {server.username}
+                  </li>
+                ))}
+              {show && <Menu x={location.y} y={location.x} />}
+            </ul>
+          </div>
         }
         <>
           <div className="serverChannels">
