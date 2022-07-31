@@ -45,11 +45,6 @@ def addAFriend():
         muted=False
     )
 
-    newChannel = Channel(
-        title='General Private',
-        serverId=newPrivateChat.id
-    )
-    db.session.add(newChannel)
     db.session.add(server_user)
     db.session.add(server_user2)
     db.session.commit()
