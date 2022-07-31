@@ -58,7 +58,6 @@ function HomePage() {
     });
   }
 
-  console.log("private Servers: ", privateServers);
   if (allServersArray) {
     publicServers = allServers.yourServers.filter(
       (server) => server.private === false
@@ -322,8 +321,10 @@ function HomePage() {
 
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
-      const result = await dispatch(getChannelMessagesThunk(selectedChannelId));
-      setGoToChannelsMessages(false);
+      if (typeof selectedChannelId !== "string") {
+        await dispatch(getChannelMessagesThunk(selectedChannelId));
+        setGoToChannelsMessages(false);
+      }
     }
   };
 
@@ -347,6 +348,13 @@ function HomePage() {
   };
 
   // -----------------------------------------------
+
+  // find the default channel to select when we click a server
+  // returns the channel id
+  const findDefaultChannel = (serverId) => {
+    // const defaultChannel = allChannels.filter(channel => channel)
+    console.log("all of the channels: ", serverChannels.title)
+  }
 
   // create a channel
 
@@ -414,6 +422,11 @@ function HomePage() {
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
                         checkUserinServer(server.id);
+
+                        setShowChannelMessages(true);
+                        setGoToChannelsMessages(true);
+                        {findDefaultChannel(server.id)}
+                        // setSelectedChannelId(channel.id);
                       }}
                     >
                       {server.name}
