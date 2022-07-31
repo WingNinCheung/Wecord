@@ -70,7 +70,7 @@
 .edit-del {
   display: flex;
   justify-content: end;
-  width: 100%;
+  width: 96%;
 }
 
 @media screen and (max-width: 1900px) {
@@ -93,7 +93,7 @@
 }
 
 .create-message {
-  width: 70.3vw;
+  width: 68vw;
   height: 5vh;
   /* overflow-y: scroll; */
   background-color: #393a3e;
@@ -110,7 +110,7 @@
   height: 30px;
   position: fixed;
   top: 95.5%;
-  right: 10%;
+  right: 13%;
   background-color: white;
   cursor: pointer;
   width: 5%;
