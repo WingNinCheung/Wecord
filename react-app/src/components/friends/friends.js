@@ -27,9 +27,10 @@ const FriendsList = () => {
     }, [dispatch])
 
     return (
-        <div className='friendslistdiv'>
-            <h1 className="FriendsListTitle">Friends List</h1>
-            <ul className="ulforfriends">
+        <div className='friends-list-div'>
+            <h1 className="friends-list-title">Friends List</h1>
+            <h3 className="friends-text">✨ Click on your friend to see their profile ✨</h3>
+            <ul className="friends-ul">
                 {friendsList.length > 0 && friendsList.map(friend => (
                     <li className="liforfriends"><NavLink className='linkforfriends' to={`/users/${friend.id}`}>{friend.username}</NavLink></li>
                 ))}
