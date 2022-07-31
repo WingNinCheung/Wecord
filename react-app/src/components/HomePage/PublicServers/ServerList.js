@@ -4,7 +4,6 @@ import { getAllServers } from "../../../store/servers";
 import { addServerUser } from "../../../store/serverUser"
 
 import './ServerList.css';
-import '../../friends/friends.css';
 
 function UsersList() {
   const dispatch = useDispatch();
@@ -41,8 +40,8 @@ function UsersList() {
         <h1 className="pub-server-title">Wecord servers you make like</h1>
         <h3 className="server-text">Click "join now" to become a member of any of these servers.
         <br/> Meet a new community.</h3>
-        <ul className="ulforfriends">{publicServers.map(server =>
-          <li classname="liforfriends">{server.name}<button className="joinBtn1" onClick={async (e) => {
+        <ul className="server-ul">{publicServers.map(server =>
+          <li classname="server-li">{server.name}<button className="joinBtn1" onClick={async (e) => {
             e.preventDefault();
             await dispatch(addServerUser(loggedInUserId, server.id))
             await dispatch(getAllServers(loggedInUserId));

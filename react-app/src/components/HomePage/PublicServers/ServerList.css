@@ -16,12 +16,15 @@
     font-size: 2.5em;
 }
 
-/* .server-text {
-
-} */
-
 .pub-server-title,
-.server-text {
+.server-text,
+.server-li {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.server-ul {
+    list-style: none;
     font-family: 'Roboto', sans-serif;
     color: white;
 }
