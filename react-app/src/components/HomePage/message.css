@@ -44,6 +44,7 @@
   padding: 5px;
   font-weight: bold;
   font-size: 17px;
+  font-family: "Quicksand", sans-serif;
 }
 
 .fa-user {
@@ -52,6 +53,7 @@
 
 .msg-body {
   margin-left: 20px;
+  font-family: "Quicksand", sans-serif;
 }
 
 .fa-pen-to-square {
