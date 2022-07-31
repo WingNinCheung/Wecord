@@ -3,7 +3,7 @@
   background-color: #2f3136;
   margin: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 10vh;
 }
@@ -28,9 +28,18 @@
 }
 
 .navbarli {
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+  height: 100%;
+  width: 100%;
+  /* margin-left: 2.5%;
+  margin-right: 2.5%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: Quicksand, sans-serif;
+}
+
+.active {
+  background-color: rgba(32, 34, 37, 0.4);
 }
 
 .navlink.navlink1{
