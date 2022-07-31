@@ -1,7 +1,7 @@
 # Wecord
 Wecord is a website clone, inspired by Discord. It allows you hang out with your friends and communities.
 
-Live site: 
+Live site: https://wecord.herokuapp.com/
 
 Documentation: https://github.com/WingNinCheung/Wecord/wiki
 
