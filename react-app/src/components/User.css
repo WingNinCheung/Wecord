@@ -68,9 +68,14 @@
     text-decoration: none;
     width: 30%;
     text-align: center;
+    cursor: pointer;
 }
 
 .friendBtn:hover {
     color: rgb(70, 66, 159);
     font-weight: bolder;
+}
+
+.friendBtn.goBackBtn{
+    cursor: pointer;
 }
