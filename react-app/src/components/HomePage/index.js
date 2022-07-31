@@ -322,8 +322,6 @@ function HomePage() {
     }
   }
 
-  console.log("private Servers: ", privateServers);
-
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
       if (typeof selectedChannelId !== "string") {
@@ -353,6 +351,15 @@ function HomePage() {
   };
 
   // -----------------------------------------------
+
+  // get server title for channel
+  const getServerTitle = (chanlId) => {
+    for (let server in allServers) {
+      if (server.id === chanlId) {
+        return server.name
+      }
+    }
+  }
 
   // create a channel
 
@@ -479,7 +486,7 @@ function HomePage() {
                         <li key={channel.id} value={channel.serverId}>
                           <span>
                             <button
-                              className="singleChannelDisplay"
+                              className="singleChannelDisplay highlight-dark"
                               onClick={() => {
                                 setSelectedChannelId(channel.id);
                                 setShowChannelMessages(true);

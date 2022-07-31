@@ -13,19 +13,29 @@
 
 
 .profileDiv {
-    border: 2px solid red;
-    width: 24rem;
-    height: 25rem;
+    padding: 8% 4% 10% 4%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     border-radius: 20px;
     border: solid transparent 1px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
     background-image: radial-gradient(circle farthest-corner at 10% 20%,
             rgba(163, 175, 243, 1) 0%,
             rgba(220, 182, 232, 1) 100.2%);
+
+}
+
+.userProfile1 {
+    width: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    padding: 5%;
+
 }
 
 .useLi1 {
@@ -34,28 +44,33 @@
     background-image: radial-gradient(circle 732px at 96.2% 89.9%,
             rgba(70, 66, 159, 1) 0%,
             rgba(187, 43, 107, 1) 92%);
-    width: 16rem;
     border: 0;
     border-radius: 5rem;
     padding: 13px;
     color: white;
     font-size: 14px;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     list-style-type: none;
+    text-align: center;
 
 }
 
 .profileDiv > .proTitle {
     font-family: "Quicksand", sans-serif;
-    margin-left: 7.5rem;
-    font-size: x-large;
+    font-size: 2.3rem;
 }
 
-.friendBtn{
-    margin-left:6.5rem;
-    margin-bottom: 2rem;
-    height:2rem;
+.friendBtn {
+    height: 2rem;
     border:0;
     border-radius: 5rem;
     font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+    width: 30%;
+    text-align: center;
+}
+
+.friendBtn:hover {
+    color: rgb(70, 66, 159);
+    font-weight: bolder;
 }
