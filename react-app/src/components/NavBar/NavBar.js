@@ -30,40 +30,37 @@ const NavBar = () => {
 
       {sessionUser && (
         <nav className="navbarcontainer">
-          <span className="navbarli">
             <NavLink
               id="splash-logo"
+              className="navbarli"
               to="/"
               exact={true}
             >
               Wecord
             </NavLink>
-          </span>
-          <span className="navbarli">
             <NavLink
-              className="navlink navlink1"
+              className="navlink navlink1 navbarli"
+              activeClassName="active"
               to="/home"
               exact={true}
-              activeClassName="active"
             >
               Home
             </NavLink>
-          </span>
-          <span className="navbarli">
             <NavLink
-              className="navlink navlink1"
+              className="navlink navlink1 navbarli"
+              activeClassName="active"
               to="/publicservers"
               exact={true}
-              activeClassName="active"
             >
-              Public Servers
+              Discover
             </NavLink>
-          </span>
-          <span className="navbarli">
-            <NavLink id="splash-nav" className="navlink" to="/friends">
-              Friends{" "}
+            <NavLink
+              id="splash-nav"
+              className="navlink navbarli"
+              activeClassName="active"
+              to="/friends">
+              My Friends{" "}
             </NavLink>
-          </span>
           <span className="navbarli">
             <LogoutButton />
           </span>

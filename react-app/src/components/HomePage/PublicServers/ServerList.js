@@ -37,15 +37,17 @@ function UsersList() {
   if (publicServers) {
 
     return (
-      <div className="friendslistdiv">
-        <h1 className="pubserverTitle">Public Servers: </h1>
+      <div className="servers-div">
+        <h1 className="pub-server-title">Wecord servers you make like</h1>
+        <h3 className="server-text">Click "join now" to become a member of any of these servers.
+        <br/> Meet a new community.</h3>
         <ul className="ulforfriends">{publicServers.map(server =>
           <li classname="liforfriends">{server.name}<button className="joinBtn1" onClick={async (e) => {
             e.preventDefault();
             await dispatch(addServerUser(loggedInUserId, server.id))
             await dispatch(getAllServers(loggedInUserId));
 
-          }}>Join</button></li>
+          }}>Join Now</button></li>
         )}
         </ul>
       </div>
