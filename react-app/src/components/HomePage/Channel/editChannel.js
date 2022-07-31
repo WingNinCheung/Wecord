@@ -50,7 +50,7 @@ export default function EditChannel({
   return (
     <div>
       <h3>Update Your Channel Here!</h3>
-      <form onSubmit={handleSubmit}>
+      <form className="create-form" onSubmit={handleSubmit}>
         <ul>
           {validationErrors.map((error) => (
             <li key={error}>{error}</li>
@@ -62,8 +62,12 @@ export default function EditChannel({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <button disabled={validationErrors.length > 0}>Edit server</button>
-        <button onClick={handleCancel}>Cancel</button>
+        <button className="edit-channel" disabled={validationErrors.length > 0}>
+          Edit channel
+        </button>
+        <button className="edit-channel" onClick={handleCancel}>
+          Cancel
+        </button>
       </form>
     </div>
   );
