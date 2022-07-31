@@ -38,20 +38,6 @@ export default function Chat({ channelId }) {
     await setMessages(Object.values(oldMessages));
   };
 
-  // const getMessageText = (messageId) => {
-  //     return Object.values(oldMessages).filter(msg => {
-  //         return msg.id === messageId;
-  //     })
-  // }
-
-  // useEffect(() => {
-  //     if (messageId) {
-  //         let msgTxt = getMessageText(messageId);
-  //         console.log("msgText", msgTxt)
-  //         // setChatInput(msgTxt);
-  //     }
-  // }, [setOpenEditForm])
-
   useEffect(() => {
     if (deleteStatus) {
       dispatch(deleteMessageThunk(user.id, messageId));
@@ -93,51 +79,6 @@ export default function Chat({ channelId }) {
         console.log(Object.values(oldMessages));
         setMessages(Object.values(oldMessages));
       }
-
-      // right now we either get updatedMessages &
-      // it works dynamically BUT the comments display out of order
-
-      // OR
-
-      // we take the comments from state in order BUT
-      // for whatever reason it decides to load a dif channel of messages
-      // and redirets us there!
-
-      // THIS SOLUTION WORKS but changes the comment order.
-      // const filtered = updatedMessages.messages.filter(message => {
-      //     return message && message.channelId === channelId
-      // });
-      // setMessages([...filtered])
-
-      // setMessages(Object.values(oldMessages));
-      // console.log("fresh messages from state: ", messages)
-      // // this is so ghetto lool
-      // const filtered = [];
-      // for (let i = 0; i < messages.length; i++) {
-      //     let message = messages[i];
-      //     if (message && message.channelId === channelId) {
-      //         console.log("message in loop: ", message)
-      //         filtered.push(message)
-      //     }
-      // }
-      // updatedMessages.messages.forEach((message) => {
-      //     if (message.channelId === channelId) {
-      //         messages[message.id] = message;
-      //     }
-      // });
-
-      // console.log("filtered", filtered);
-      // setMessages([...filtered])
-      // setMessages(...[
-      //         {
-      //           "id": 5,
-      //           "userId": 1,
-      //           "channelId": 3,
-      //           "message": "apple",
-      //           "user": "Demo",
-      //           "userPhoto": null
-      //         }])
-      // console.log(messages)
     });
 
     // disconnect upon component unmount

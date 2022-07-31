@@ -68,10 +68,6 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
-/* .serverContainer {
-  text-align: center;
-} */
-
 .noMsg {
   margin-top: 1.2rem;
   font-family: "Quicksand", sans-serif;
@@ -80,7 +76,6 @@ body {
 }
 
 .updateServerForm {
-  /* margin-left: 3rem; */
   background-color: #2b2d32;
 }
 
@@ -152,6 +147,12 @@ body {
 .singleChannelDisplay:hover {
   text-decoration: underline;
   font-size: large;
+}
+
+.highlight-dark:focus {
+  background-color: rgba(32, 34, 37, .4);
+  opacity: 2;
+
 }
 
 .singleServerDisplay {
