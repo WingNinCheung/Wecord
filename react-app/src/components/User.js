@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   getFriendsThunk,
   AddFriendThunk,
@@ -15,6 +15,8 @@ function User() {
   const [user, setUser] = useState({});
   const { userId } = useParams();
   console.log("freinds are ", friendsState);
+
+  let history = useHistory();
   //checking if current user is friends with current profile
   useEffect(() => {
     dispatch(getFriendsThunk(parseInt(userId)));
@@ -55,7 +57,7 @@ function User() {
       <div className="userPage">
         <div className="profileDiv">
           <h3 className="proTitle">User Profile</h3>
-          <ul className="userProfile1">
+
             {friendsState[yourId] == undefined &&
             yourId !== parseInt(userId) ? (
               <button onClick={addFriendButton} className="friendBtn">
@@ -69,6 +71,7 @@ function User() {
               )
             )}
 
+          <ul className="userProfile1">
             <li className="useLi1">
               <strong>User Id:</strong> {userId}
             </li>
@@ -81,6 +84,7 @@ function User() {
               <strong>Email:</strong> {user.email}
             </li>
           </ul>
+            <button className= "friendBtn goBackBtn" onClick={(e) => history.goBack()}>Go Back</button>
         </div>
       </div>
     );
