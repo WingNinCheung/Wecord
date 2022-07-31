@@ -83,20 +83,10 @@ def new_server():
     db.session.add(server)
     db.session.commit()
 
-    # server needs a default #general channel
-    # NOTE: ideally this will search by the server's id and not its name
-    newestServer = Server.query.filter(Server.name == name)
-    # newChannel = Channel(title="general", serverId=newestServer.id)
-
-    print("-----------------------------NEWEST SERVER: ", newestServer)
-    # if newestServer:
-    # print("--------------newChannel: ", newChannel)
-    # db.session.add(newChannel)
-    # db.session.commit()
-
     server_user = Server_User(
         serverId=server.id, userId=server.master_admin, adminStatus=True, muted=False
     )
+
     db.session.add(server_user)
     db.session.commit()
     return server.to_dict()

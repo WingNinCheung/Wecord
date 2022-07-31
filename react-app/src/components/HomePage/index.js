@@ -450,7 +450,7 @@ function HomePage() {
         </div>
         }
         <>
-          {isPublic && <div className="serverChannels">
+          <div className="serverChannels">
             <h3>Channels</h3>
             {adminId === loggedInUserId && selectedServerId && (
               <CreateChannel
@@ -510,7 +510,6 @@ function HomePage() {
               />
             )}
           </div>
-        }
         </>
 
         <div className="messagesContainer">
