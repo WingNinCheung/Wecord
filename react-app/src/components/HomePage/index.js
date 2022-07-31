@@ -354,13 +354,6 @@ function HomePage() {
 
   // -----------------------------------------------
 
-  // find the default channel to select when we click a server
-  // returns the channel id
-  const findDefaultChannel = (serverId) => {
-    // const defaultChannel = allChannels.filter(channel => channel)
-    console.log("all of the channels: ", serverChannels.title)
-  }
-
   // create a channel
 
   return (
@@ -426,11 +419,6 @@ function HomePage() {
                         setSelectedServerId(server.id);
                         setAdminId(server.master_admin);
                         checkUserinServer(server.id);
-
-                        setShowChannelMessages(true);
-                        setGoToChannelsMessages(true);
-                        {findDefaultChannel(server.id)}
-                        // setSelectedChannelId(channel.id);
                       }}
                     >
                       {server.name}
