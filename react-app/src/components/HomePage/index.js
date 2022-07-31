@@ -152,16 +152,11 @@ function HomePage() {
   const Menu = ({ x, y }) => {
     return (
       <div
+        className="right-menu"
         style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
-          backgroundColor: "gray",
         }}
       >
         <div>
@@ -171,7 +166,7 @@ function HomePage() {
               setEditChannel(false);
             }}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Edit Server
           </button>
@@ -180,7 +175,7 @@ function HomePage() {
           <button
             onClick={handleDeleteServer}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Delete
           </button>
@@ -189,7 +184,7 @@ function HomePage() {
           <button
             onClick={handleLeave}
             disabled={!userIsInServer || loggedInUserId == adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Leave Server
           </button>
@@ -201,16 +196,11 @@ function HomePage() {
   const ChannelMenu = ({ x, y }) => {
     return (
       <div
+        className="right-menu"
         style={{
-          borderRadius: "4px",
-          padding: "10px",
-          border: "1px solid black",
-          boxSizing: "border-box",
-          width: "122px",
           position: "absolute",
           top: `${x}px`,
           left: `${y}px`,
-          backgroundColor: "gray",
         }}
       >
         <div>
@@ -220,7 +210,7 @@ function HomePage() {
               setEdit(false);
             }}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Edit Channel
           </button>
@@ -229,7 +219,7 @@ function HomePage() {
           <button
             onClick={handleDelete}
             disabled={loggedInUserId !== adminId}
-            className="editServerBtn2"
+            className="edit-channel "
           >
             Delete
           </button>

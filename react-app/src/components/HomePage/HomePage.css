@@ -238,3 +238,15 @@ body {
   background-color: #202225;
   color: green;
 }
+
+.right-menu {
+  border-radius: 4px;
+  padding: 5px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
+}
