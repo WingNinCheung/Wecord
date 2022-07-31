@@ -1,16 +1,48 @@
-.createChannelBtn{
-    font-family: 'Roboto', sans-serif;
-    border-radius: 7px;
-    background-color: white;
-    cursor: pointer;
+.createChannelBtn {
+  font-family: "Roboto", sans-serif;
+  border-radius: 7px;
+  background-color: white;
+  cursor: pointer;
 }
 
-.err{
-    list-style-type: none;
-    font-size: small;
+.createChannelBtn {
+  color: white;
+  border-radius: 8px;
+  height: 2rem;
+  border: none;
+
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
 }
 
-/* .createChanneForm{
-    display: flex;
-    flex-direction: column;
-} */
+.err {
+  list-style-type: none;
+  font-size: small;
+}
+
+.createChanneForm {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.edit-channel {
+  font-family: "Quicksand", sans-serif;
+  background-image: radial-gradient(
+    circle 732px at 96.2% 89.9%,
+    rgba(70, 66, 159, 1) 0%,
+    rgba(187, 43, 107, 1) 92%
+  );
+  border: 0;
+  border-radius: 0.2rem;
+  padding: 2px;
+  color: white;
+  font-size: 14px;
+  margin-top: 0.5rem;
+  margin-left: 20px;
+  cursor: pointer;
+}

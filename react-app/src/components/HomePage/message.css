@@ -142,3 +142,29 @@
 .updateTitle {
   color: white;
 }
+
+.editMessageForm {
+  border: 2px solid red;
+  width: 25rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  border: solid transparent 1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(163, 175, 243, 1) 0%,
+    rgba(220, 182, 232, 1) 100.2%
+  );
+}
+
+.edit-message {
+  padding-left: 30px;
+  font-family: "Quicksand", sans-serif;
+}
+
+.form-body {
+  text-align: center;
+}

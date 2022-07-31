@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { createChannel } from "../../../store/channel";
 import { getServerChannelsThunk } from "../../../store/channel";
 import { useLocation } from "react-router-dom";
-import "./CreateChannel.css"
+import "./CreateChannel.css";
 
 export default function CreateChannel({ props }) {
   const [title, setTitle] = useState("");
@@ -48,15 +48,20 @@ export default function CreateChannel({ props }) {
         onClick={() => {
           setHidden(false);
         }}
-
         className="createChannelBtn"
       >
         Create a Channel
       </button>
-      <form hidden={hidden} onSubmit={handleSubmit} className="createChanneForm">
+      <form
+        hidden={hidden}
+        onSubmit={handleSubmit}
+        className="createChanneForm"
+      >
         <ul>
           {validationErrors.map((error) => (
-            <li key={error} className="err">{error}</li>
+            <li key={error} className="err">
+              {error}
+            </li>
           ))}
         </ul>
         <input
@@ -65,10 +70,13 @@ export default function CreateChannel({ props }) {
           value={title}
           className="inputChannel"
         ></input>
-        <button className="createChannelBtn">Create</button>
-        <button className="createChannelBtn" onClick={handleCancel}>Cancel</button>
+        <div>
+          <button className="createChannelBtn">Create</button>
+          <button className="createChannelBtn" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
       </form>
     </>
   );
-
 }

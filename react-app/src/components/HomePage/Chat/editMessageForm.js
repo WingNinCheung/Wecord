@@ -41,22 +41,31 @@ export default function EditMessageForm({
   // if (!userId) return <p className="loading">"Loading..."</p>
 
   return (
-    <div className="editMessageForm">
-      {/* <h3>Edit a message</h3> */}
-      <form onSubmit={sendChat}>
-        <ul>
-          {validationErrors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-        <textarea
-          className="create-message"
-          value={chatInput}
-          onChange={updateChatInput}
-        />
-        <button disabled={validationErrors.length > 0}>Update</button>
-        <button onClick={handleCancel}>Cancel</button>
-      </form>
+    <div className="">
+      <div className="create-serverform">
+        <h3 className="Title">Edit your message</h3>
+        <form className="form-body" onSubmit={sendChat}>
+          <ul className="Err">
+            {validationErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+          <textarea
+            className="inputarea"
+            value={chatInput}
+            onChange={updateChatInput}
+          />
+          <button
+            className="createButton"
+            disabled={validationErrors.length > 0}
+          >
+            Update
+          </button>
+          <button className="createButton" onClick={handleCancel}>
+            Cancel
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
