@@ -8,28 +8,32 @@ import SignUpFormModal from "../auth/SignupFormModal";
 import "./splash.css";
 
 export default function Splash() {
-
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <>
       <div className="splash-nav">
-        {sessionUser &&
+        {sessionUser && (
           <nav id="splash-logged-out">
-              <NavLink
-                id="splash-logo"
-                className="splash-logo"
-                to="/home"
-                exact={true}
-              >
-                Go to Wecord
-              </NavLink>
-              <LogoutButton />
+            <NavLink
+              id="splash-logo"
+              className="splash-logo"
+              to="/home"
+              exact={true}
+            >
+              Go to Wecord
+            </NavLink>
+            <LogoutButton />
           </nav>
-        }
+        )}
         {!sessionUser && (
           <>
-            <NavLink id="splash-logo" className="splash-nav-items" to="/" exact={true}>
+            <NavLink
+              id="splash-wecord"
+              className="splash-nav-items"
+              to="/"
+              exact={true}
+            >
               Wecord
             </NavLink>
             <div>
@@ -40,7 +44,6 @@ export default function Splash() {
                 <SignUpFormModal />
               </span>
             </div>
-
           </>
         )}
       </div>
@@ -55,8 +58,8 @@ export default function Splash() {
             <br />
             Where just you and anyone can spend time together.
             <div></div>
-            <br />A place where strangers can become acquaintances...or maybe even
-            friends.
+            <br />A place where strangers can become acquaintances...or maybe
+            even friends.
           </p>
         </div>
         <div className="bg-image-partition"></div>
@@ -87,7 +90,11 @@ export default function Splash() {
             </div>
           </section>
           <section className="dev-info">
-            <img className="profile-pic" src="https://media-exp1.licdn.com/dms/image/C5603AQGU_VDz-D81wg/profile-displayphoto-shrink_800_800/0/1622773943069?e=1664409600&v=beta&t=ksJ3ORRhPKG4qYtf8FdY6p9uhuRYOplJdrDSFfFEv_A" alt="Krista"></img>
+            <img
+              className="profile-pic"
+              src="https://media-exp1.licdn.com/dms/image/C5603AQGU_VDz-D81wg/profile-displayphoto-shrink_800_800/0/1622773943069?e=1664409600&v=beta&t=ksJ3ORRhPKG4qYtf8FdY6p9uhuRYOplJdrDSFfFEv_A"
+              alt="Krista"
+            ></img>
             <div className="profile-section">
               <div className="name">Krista Strucke</div>
 
@@ -95,7 +102,10 @@ export default function Splash() {
                 <a href="https://github.com/kurikurichan" target="popup">
                   <i className="fa-brands fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/krista-strucke-044b3369/" target="popup">
+                <a
+                  href="https://www.linkedin.com/in/krista-strucke-044b3369/"
+                  target="popup"
+                >
                   <i className="fa-brands fa-linkedin-in"></i>
                 </a>
                 <a href="mailto:developerkrista@gmail.com">
@@ -117,7 +127,10 @@ export default function Splash() {
                 <a href="https://github.com/BrenLau" target="popup">
                   <i className="fa-brands fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/brendan-lau-b6952919a/" target="popup">
+                <a
+                  href="https://www.linkedin.com/in/brendan-lau-b6952919a/"
+                  target="popup"
+                >
                   <i className="fa-brands fa-linkedin-in"></i>
                 </a>
                 <a href="mailto:blau4000@gmail.com">
@@ -139,7 +152,10 @@ export default function Splash() {
                 <a href="https://github.com/dalishuishou668" target="popup">
                   <i className="fa-brands fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/" target="popup">
+                <a
+                  href="https://www.linkedin.com/in/qiaoyi-joyce-liu-623204241/"
+                  target="popup"
+                >
                   <i className="fa-brands fa-linkedin-in"></i>
                 </a>
                 <a href="">

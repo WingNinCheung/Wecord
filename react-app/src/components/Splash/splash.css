@@ -11,7 +11,7 @@
 }
 
 .splash-logo:hover {
-  background-color: rgba(62, 3, 62, .3);
+  background-color: rgba(62, 3, 62, 0.3);
   border-radius: 3px;
 }
 

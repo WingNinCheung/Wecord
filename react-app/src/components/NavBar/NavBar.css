@@ -13,7 +13,18 @@
   font-size: 30px;
   color: white;
   text-decoration: none;
+  margin-left: -0.5%;
+
+  padding: 13px;
+}
+
+#splash-wecord {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 40px;
+  color: white;
+  text-decoration: none;
   margin-left: 2.5%;
+  background-color: rgb(74, 87, 225);
   padding: 13px;
 }
 
@@ -30,8 +41,6 @@
 .navbarli {
   height: 100%;
   width: 100%;
-  /* margin-left: 2.5%;
-  margin-right: 2.5%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +51,8 @@
   background-color: rgba(32, 34, 37, 0.4);
 }
 
-.navlink.navlink1{
-  color:white;
+.navlink.navlink1 {
+  color: white;
 }
 
 .navbarlist {
@@ -62,7 +71,7 @@
 
 .login-button,
 .signup-button {
-  margin-top: .8em;
+  margin-top: 0.8em;
   padding: 7px 16px;
   border-radius: 40px;
   margin-right: 20px;
