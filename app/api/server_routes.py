@@ -83,6 +83,17 @@ def new_server():
     db.session.add(server)
     db.session.commit()
 
+    # server needs a default #general channel
+    # NOTE: ideally this will search by the server's id and not its name
+    newestServer = Server.query.filter(Server.name == name)
+    # newChannel = Channel(title="general", serverId=newestServer.id)
+
+    print("-----------------------------NEWEST SERVER: ", newestServer)
+    # if newestServer:
+    # print("--------------newChannel: ", newChannel)
+    # db.session.add(newChannel)
+    # db.session.commit()
+
     server_user = Server_User(
         serverId=server.id, userId=server.master_admin, adminStatus=True, muted=False
     )
@@ -144,8 +155,9 @@ def checkUserInServer(userId):
 @login_required
 def get_server_channels(id):
     server = Server.query.get(id)
-    serverchannels = server.to_dict()
-    return {"channels": serverchannels["channels"]}
+    if server:
+        serverchannels = server.to_dict()
+        return {"channels": serverchannels["channels"]}
 
 
 # create a new channel in a server
@@ -182,7 +194,6 @@ def channels_edit(id, channelId):
 @login_required
 def delete_channel(serverId, channelId):
 
-    target_channel = Channel.query.filter_by(id=channelId)
     channel = Channel.query.filter(Channel.id == channelId).all()
     print("******", channel[0])
     db.session.delete(channel[0])

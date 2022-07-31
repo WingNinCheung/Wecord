@@ -58,6 +58,11 @@ class Server(db.Model):
     channels = relationship("Channel", back_populates="server", cascade="all, delete")
     masterAdmin = relationship("User", back_populates="servers")
 
+    # automatically create a default channel named general
+    def __init__(self, **kwargs):
+        super(Server, self).__init__(**kwargs)
+        self.channels.append(Channel(serverId=self.id, title="general"))
+
     def to_dict(self):
         return {
             "id": self.id,
