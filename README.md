@@ -18,16 +18,34 @@ Documentation: https://github.com/WingNinCheung/Wecord/wiki
 ## Feature lists:
 
 ### 1. User Signup and Login on splash page.
-
+* Users can sign up, log in and log out.
+* Users can add other users as friends.
+* User has its own profile page.
+* User Logout directs users to the login page.
 
 ### 2. Servers
-
+* Users can read all servers from their server lists.
+* Users can add a specific server.
+* Admins can update server title.
+* Users can delete servers from their server lists.
 
 ### 3. Channels
+* Users can view a channel and all of its messages
+* Admins can create a channel in a server.
+* Admins can edit the name of a channel.
+* Admins can delete the channel.
+
+### 4. Bonus - Messages (live chat)
+* Users can view all messages (People who can view are based on server private or not)
+* Users can create a new message to send 
+* Users can edit their own message but not others' messages
+* Users can delete their own messages 
 
 
-### 4. Messages
-* 
-
+### 5. Bonus - Friends
+* Users can add a friend to their friend lists.
+* Users can read all their friends from the list.
+* Users can remove a friend from the list.
+* Users can start a private chat with their friend in the conversation page.
 
 
