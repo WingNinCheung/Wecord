@@ -214,6 +214,8 @@ export default function Chat({ channelId }) {
               }}
             >
               <i className="fa-solid fa-pen-to-square"></i>
+            </span>
+            <span>
               <span
                 onClick={() => {
                   setMessageId(message.id);

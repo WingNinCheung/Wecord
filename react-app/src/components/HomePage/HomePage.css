@@ -191,18 +191,6 @@ body {
   height: 1.7rem;
 }
 
-.createChannelBtn {
-  color: white;
-  border-radius: 8px;
-  height: 2rem;
-  border: none;
-  background-image: radial-gradient(
-    circle 732px at 96.2% 89.9%,
-    rgba(70, 66, 159, 1) 0%,
-    rgba(187, 43, 107, 1) 92%
-  );
-}
-
 .inputUpdateServer {
   border-radius: 8px;
   height: 1.7rem;
