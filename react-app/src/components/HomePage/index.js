@@ -30,7 +30,7 @@ function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   // use this for getting members for private convos
-  const serverUsers = useSelector(state => state.serverUsers);
+  // const serverUsers = useSelector((state) => state.serverUsers);
   const loggedInUserId = sessionUser.id;
 
   useEffect(() => {
@@ -58,12 +58,15 @@ function HomePage() {
     });
   }
 
-  console.log("private Servers: ", privateServers);
   if (allServersArray) {
     publicServers = allServers.yourServers.filter(
       (server) => server.private === false
     );
   }
+
+  console.log("public is ", publicServers);
+  console.log("all is ", allServers);
+
   useEffect(() => {
     dispatch(getAllServers(loggedInUserId));
   }, [dispatch]);
@@ -83,8 +86,8 @@ function HomePage() {
   const [goToChannelMessages, setGoToChannelsMessages] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [userIsInServer, setUserIsInServer] = useState(false);
-   // true if we are in public view. false if we are looking @ private servers
-   const [isPublic, setIsPublic] = useState(true);
+  // true if we are in public view. false if we are looking @ private servers
+  const [isPublic, setIsPublic] = useState(true);
   const history = useHistory();
 
   // right-click menu section
@@ -113,7 +116,7 @@ function HomePage() {
     setUserIsInServer(false);
     setSelectedServerId("");
     setOpenChannels(false);
-    checkUserinServer(selectedServerId);
+    // checkUserinServer(selectedServerId);
   };
 
   const checkUserinServer = async (serverId) => {
@@ -320,6 +323,17 @@ function HomePage() {
     }
   }
 
+  if (privateServers) {
+    for (let i = 0; i < privateServers.length; i++) {
+      for (let j = 0; j < allUserArr.length; j++) {
+        if (privateServers[i].name == allUserArr[j].id)
+          privateServers[i]["username"] = allUserArr[j].username;
+      }
+    }
+  }
+
+  console.log("private Servers: ", privateServers);
+
   const LoadChannelMessages = async () => {
     if (goToChannelMessages) {
       const result = await dispatch(getChannelMessagesThunk(selectedChannelId));
@@ -384,56 +398,90 @@ function HomePage() {
         )}
       </div>
       <div className="outContainer">
+        {isPublic && (
+          <div className="publicServers">
+            {isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Friends
+              </button>
+            )}
+            {!isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Servers
+              </button>
+            )}
+            <h3>Servers</h3>
+            <ul className="publicServersDisplay">
+              <NavLink
+                className="addaserverbutt"
+                to="/create-server"
+                alt="Create a Server"
+              >
+                +
+              </NavLink>
+              {publicServers &&
+                publicServers.map((server) => (
+                  <div
+                    key={server.id}
+                    onContextMenu={(e) => {
+                      handleContextMenu(e);
+                      setSelectedServerId(server.id);
+                      setAdminId(server.master_admin);
+                      setEdit(false);
+                      setName(server.name);
+                      setLocation({ x: e.pageX, y: e.pageY });
+                    }}
+                  >
+                    <li>
+                      <button
+                        className="singleServerDisplay"
+                        onClick={() => {
+                          setMainServer(true);
+                          setSelectedServerId(server.id);
+                          setAdminId(server.master_admin);
+                          checkUserinServer(server.id);
+                        }}
+                      >
+                        {server.name}
+                      </button>
+                    </li>
+                  </div>
+                ))}
+              {show && <Menu x={location.y} y={location.x} />}
+            </ul>
+          </div>
+        )}
 
-        {isPublic && <div className="publicServers">
-          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
-          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
-          <h3>Servers</h3>
-          <ul className="publicServersDisplay">
-            <NavLink className="addaserverbutt" to="/create-server" alt="Create a Server">
-              +
-            </NavLink>
-            {publicServers &&
-              publicServers.map((server) => (
-                <div
-                  key={server.id}
-                  onContextMenu={(e) => {
-                    handleContextMenu(e);
-                    setSelectedServerId(server.id);
-                    setAdminId(server.master_admin);
-                    setEdit(false);
-                    setName(server.name);
-                    setLocation({ x: e.pageX, y: e.pageY });
-                  }}
-                >
-                  <li>
-                    <button
-                      className="singleServerDisplay"
-                      onClick={() => {
-                        setMainServer(true);
-                        setSelectedServerId(server.id);
-                        setAdminId(server.master_admin);
-                        checkUserinServer(server.id);
-                      }}
-                    >
-                      {server.name}
-                    </button>
-                  </li>
-                </div>
-              ))}
-            {show && <Menu x={location.y} y={location.x} />}
-          </ul>
-      </div>}
-
-        {!isPublic && <div className="privateServers">
-
-          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
-          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
-          <h3>Direct Messages</h3>
-          <ul className="privateServersDisplay">
-            {privateServers &&
-              privateServers.map((server) => (
-                <li key={server.id}
+        {!isPublic && (
+          <div className="privateServers">
+            {isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Friends
+              </button>
+            )}
+            {!isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Servers
+              </button>
+            )}
+            <h3>Direct Messages</h3>
+            <ul className="privateServersDisplay">
+              {privateServers &&
+                privateServers.map((server) => (
+                  <li
+                    key={server.id}
                     className="singleServerDisplay"
                     onClick={() => {
                       setMainServer(true);
@@ -442,15 +490,15 @@ function HomePage() {
                       checkUserinServer(server.id);
                     }}
                   >
-                    {server.conversation_partners[0]}
-                </li>
-              ))}
-            {show && <Menu x={location.y} y={location.x} />}
-          </ul>
-        </div>
-        }
+                    {server.username}
+                  </li>
+                ))}
+              {show && <Menu x={location.y} y={location.x} />}
+            </ul>
+          </div>
+        )}
         <>
-          {isPublic && <div className="serverChannels">
+          <div className="serverChannels">
             <h3>Channels</h3>
             {adminId === loggedInUserId && selectedServerId && (
               <CreateChannel
@@ -510,7 +558,6 @@ function HomePage() {
               />
             )}
           </div>
-        }
         </>
 
         <div className="messagesContainer">

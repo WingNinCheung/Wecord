@@ -1,6 +1,6 @@
 .outContainer {
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   flex: 1 1 auto;
   margin: 0px;
@@ -68,12 +68,6 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
-.privateServersDisplay {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* .serverContainer {
   text-align: center;
 } */
@@ -93,7 +87,7 @@ body {
 .serverChannels {
   color: white;
   width: 18%;
-  height: 88vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,18 +99,13 @@ body {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 8rem;
-  height: 100%;
   border: solid transparent 1px;
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px; */
-  border-radius: 5px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
   font-family: "Quicksand", sans-serif;
   padding: 1px;
-  min-width: fit-content;
-  /* justify-content: center; */
+  /* min-width: fit-content; */
   align-items: center;
 }
 
@@ -132,6 +121,7 @@ body {
   border-radius: 5px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  align-items: center;
 }
 
 .channelsDisplay {
@@ -244,7 +234,7 @@ body {
 
   border: solid 1px;
   border-radius: 35px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   margin: 2px;
   display: flex;
   text-decoration: none;
@@ -259,5 +249,4 @@ body {
 .addaserverbutt:hover {
   background-color: #202225;
   color: green;
-
 }
