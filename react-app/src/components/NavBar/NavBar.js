@@ -43,7 +43,6 @@ const NavBar = () => {
               activeClassName="active"
               to="/home"
               exact={true}
-              activeClassName="active"
             >
               Home
             </NavLink>
@@ -53,14 +52,14 @@ const NavBar = () => {
               to="/publicservers"
               exact={true}
             >
-              Public Servers
+              Discover
             </NavLink>
             <NavLink
               id="splash-nav"
               className="navlink navbarli"
               activeClassName="active"
               to="/friends">
-              Friends{" "}
+              My Friends{" "}
             </NavLink>
           <span className="navbarli">
             <LogoutButton />

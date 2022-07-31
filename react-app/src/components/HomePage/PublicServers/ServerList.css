@@ -3,14 +3,32 @@
     font-family: 'Roboto', sans-serif;
     border-radius: 5px;
     border:0;
-    height:2rem;
-    width:3.8rem;
+    height: 2rem;
+    width: auto;
     color:white;
     margin:10px;
+    padding: 8px;
     background-image: radial-gradient(circle 732px at 96.2% 89.9%, rgba(70, 66, 159, 1) 0%, rgba(187, 43, 107, 1) 92%);
 }
 
-.friendslistdiv > .pubserverTitle {
-    margin-top: 8rem;
-    /* font-family: 'Roboto', sans-serif; */
+
+.pub-server-title {
+    font-size: 2.5em;
+}
+
+/* .server-text {
+
+} */
+
+.pub-server-title,
+.server-text {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.servers-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8%;
 }
