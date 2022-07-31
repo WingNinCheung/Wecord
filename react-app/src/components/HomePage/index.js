@@ -356,10 +356,10 @@ function HomePage() {
   const getServerTitle = (chanlId) => {
     for (let server in allServers) {
       if (server.id === chanlId) {
-        return server.name
+        return server.name;
       }
     }
-  }
+  };
 
   // create a channel
 
@@ -397,55 +397,93 @@ function HomePage() {
         )}
       </div>
       <div className="outContainer">
-        {isPublic && <div className="publicServers">
-          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
-          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
-          <h3>Servers</h3>
-          <ul className="publicServersDisplay">
-            <NavLink className="addaserverbutt" to="/create-server" alt="Create a Server">
-              +
-            </NavLink>
-            {publicServers &&
-              publicServers.map((server) => (
-                <div
-                  key={server.id}
-                  onContextMenu={(e) => {
-                    handleContextMenu(e);
-                    setSelectedServerId(server.id);
-                    setAdminId(server.master_admin);
-                    setEdit(false);
-                    setName(server.name);
-                    setLocation({ x: e.pageX, y: e.pageY });
-                  }}
-                >
-                  <li>
-                    <button
-                      className="singleServerDisplay"
-                      onClick={() => {
-                        setMainServer(true);
-                        setSelectedServerId(server.id);
-                        setAdminId(server.master_admin);
-                        checkUserinServer(server.id);
-                      }}
-                    >
-                      {server.name}
-                    </button>
-                  </li>
-                </div>
-              ))}
-            {show && <Menu x={location.y} y={location.x} />}
-          </ul>
-      </div>}
+        {isPublic && (
+          <div className="publicServers">
+            {/* {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
+          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>} */}
+            <h3>Servers</h3>
+            {isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Friends
+              </button>
+            )}
+            {!isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Servers
+              </button>
+            )}
+            <ul className="publicServersDisplay">
+              <NavLink
+                className="addaserverbutt"
+                to="/create-server"
+                alt="Create a Server"
+              >
+                +
+              </NavLink>
+              {publicServers &&
+                publicServers.map((server) => (
+                  <div
+                    key={server.id}
+                    onContextMenu={(e) => {
+                      handleContextMenu(e);
+                      setSelectedServerId(server.id);
+                      setAdminId(server.master_admin);
+                      setEdit(false);
+                      setName(server.name);
+                      setLocation({ x: e.pageX, y: e.pageY });
+                    }}
+                  >
+                    <li>
+                      <button
+                        className="singleServerDisplay"
+                        onClick={() => {
+                          setMainServer(true);
+                          setSelectedServerId(server.id);
+                          setAdminId(server.master_admin);
+                          checkUserinServer(server.id);
+                        }}
+                      >
+                        {server.name}
+                      </button>
+                    </li>
+                  </div>
+                ))}
+              {show && <Menu x={location.y} y={location.x} />}
+            </ul>
+          </div>
+        )}
 
-        {!isPublic && <div className="privateServers">
-
-          {isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Friends</button>}
-          {!isPublic && <button className='switchbutton' onClick={() => setIsPublic(!isPublic)}>Servers</button>}
-          <h3>Direct Messages</h3>
-          <ul className="privateServersDisplay">
-            {privateServers &&
-              privateServers.map((server) => (
-                <li key={server.id}
+        {!isPublic && (
+          <div className="privateServers">
+            {isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Friends
+              </button>
+            )}
+            <h3>Direct Messages</h3>
+            {!isPublic && (
+              <button
+                className="switchbutton"
+                onClick={() => setIsPublic(!isPublic)}
+              >
+                Servers
+              </button>
+            )}
+            {/* <h3>Direct Messages</h3> */}
+            <ul className="privateServersDisplay">
+              {privateServers &&
+                privateServers.map((server) => (
+                  <li
+                    key={server.id}
                     className="singleServerDisplay"
                     onClick={() => {
                       setMainServer(true);
@@ -460,7 +498,7 @@ function HomePage() {
               {show && <Menu x={location.y} y={location.x} />}
             </ul>
           </div>
-        }
+        )}
         <>
           <div className="serverChannels">
             <h3>Channels</h3>
