@@ -98,4 +98,4 @@ def unfriend(userId, friendId):
     db.session.commit()
 
     # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',servers)
-    return person[0]
+    return "Deleted"
