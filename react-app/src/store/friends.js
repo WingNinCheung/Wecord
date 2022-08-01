@@ -31,7 +31,7 @@ export const unFriendThunk = (userId, friendId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(notAFriend(data));
-    return data;
+    return await data;
   }
 };
 
