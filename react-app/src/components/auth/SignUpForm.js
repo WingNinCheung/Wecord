@@ -23,6 +23,9 @@ const SignUpForm = () => {
         history.push("/home");
       }
     }
+    return setErrors([
+      "Confirm Password field must be the same as the Password field",
+    ]);
   };
 
   const updateUsername = (e) => {
@@ -49,7 +52,9 @@ const SignUpForm = () => {
     <form className="login-container" onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind} className="error">{error}</div>
+          <div key={ind} className="error">
+            {error}
+          </div>
         ))}
       </div>
       <h2 className="login-title">Create an account</h2>
