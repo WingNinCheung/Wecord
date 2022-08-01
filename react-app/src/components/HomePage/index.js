@@ -64,8 +64,8 @@ function HomePage() {
     );
   }
 
-  console.log("public is ", publicServers);
-  console.log("all is ", allServers);
+  // console.log("public is ", publicServers);
+  // console.log("all is ", allServers);
 
   useEffect(() => {
     dispatch(getAllServers(loggedInUserId));

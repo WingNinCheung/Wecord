@@ -40,13 +40,11 @@ export const getFriendsThunk = (userId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     await dispatch(getFriends(data));
-    console.log(data);
     return await data;
   }
 };
 
 export const AddFriendThunk = (userId, friendId) => async (dispatch) => {
-  console.log(userId, friendId);
   const res = await fetch("/api/friends", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

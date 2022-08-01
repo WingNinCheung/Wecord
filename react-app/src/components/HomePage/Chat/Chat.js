@@ -58,7 +58,6 @@ export default function Chat({ channelId }) {
     socket = io();
 
     socket.on("connect", () => {
-      console.log("We are connected test");
       socket.emit("join", { username: user.username, channelId: channelId });
     });
 
@@ -76,7 +75,6 @@ export default function Chat({ channelId }) {
       setOpenEditForm(false);
 
       if (oldMessages.length) {
-        console.log(Object.values(oldMessages));
         setMessages(Object.values(oldMessages));
       }
     });
@@ -94,11 +92,10 @@ export default function Chat({ channelId }) {
     setChatInput(e.target.value);
   };
 
-  console.log("messages are ", messages);
-  console.log("redux msg is ", oldMessages);
+  // console.log("messages are ", messages);
+  // console.log("redux msg is ", oldMessages);
 
   const sendChat = async (e) => {
-    console.log("enter 1st");
     e.preventDefault();
     // emit a message
 
@@ -201,7 +198,6 @@ export default function Chat({ channelId }) {
                   disabled={chatInput.length === 0}
                   className="send-button"
                 >
-                  {/* <i className="fas fa-paper-plane"></i> */}
                   Post
                 </button>
               </form>

@@ -4,32 +4,38 @@ const GET_ALL_SERVERUSERS = "serverusers/GET_ALL_SERVERUSERS";
 const LEAVE_SERVER = "serverusers/LEAVE_SERVER";
 
 const getServerUsers = (serverUsers) => {
+
   return {
     type: GET_ALL_SERVERUSERS,
     serverUsers,
   };
+  
 };
 
 const addUserToServer = (serverUser) => {
+
   return {
     type: ADD_SERVERUSER,
     serverUser,
   };
+
 };
 
 const deleteUserInServer = (serverUser) => {
+
   return {
     type: LEAVE_SERVER,
     serverUser,
   };
+
 };
 
 export const getAllServerUsers = (serverId) => async (dispatch) => {
-  //   console.log("I'm here1", serverId);
+
   const res = await fetch(`/api/server_users/${serverId}`);
+
   if (res.ok) {
     const data = await res.json();
-    // console.log("I'm ok", data.serverUser);
     dispatch(getServerUsers(data.serverUser));
     return data.serverUser;
   }
@@ -43,7 +49,6 @@ export const addServerUser = (userId, serverId) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    console.log("addserverthunk----------", data);
     dispatch(addUserToServer(data));
     return data;
   }

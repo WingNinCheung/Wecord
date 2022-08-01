@@ -14,7 +14,6 @@ function User() {
   const friendsState = useSelector((state) => state.friends);
   const [user, setUser] = useState({});
   const { userId } = useParams();
-  console.log("freinds are ", friendsState);
 
   let history = useHistory();
   //checking if current user is friends with current profile

@@ -54,7 +54,6 @@ export const getAllYourServersThunk = (userId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(getYourServers(data))
-    console.log(data)
     return data
   }
 }
@@ -66,7 +65,6 @@ export const getAllServers = (userId) => async (dispatch) => {
   if (res.ok) {
     const allServers = await res.json();
     dispatch(loadAllServers(allServers));
-    console.log(allServers)
     return res;
   }
 };
@@ -78,14 +76,12 @@ export const getAllServers = (userId) => async (dispatch) => {
 
 // Create
 export const createServer = (server) => async (dispatch) => {
-  console.log(server);
   const res = await fetch("/api/servers/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(server),
   });
 
-  console.log(res);
   if (res.ok) {
     const data = await res.json;
 
@@ -96,7 +92,6 @@ export const createServer = (server) => async (dispatch) => {
 
 // Update
 export const updateServer = (name, id) => async (dispatch) => {
-  console.log("thunk:", name, id);
   const res = await fetch(`/api/servers/${id}/edit`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -109,14 +104,12 @@ export const updateServer = (name, id) => async (dispatch) => {
 
 // Delete
 export const deleteServer = (id, userId) => async (dispatch) => {
-  console.log("thunk:", id);
   const res = await fetch(`/api/servers/${id}/${userId}/delete`, {
     method: "DELETE",
   });
 
   if (res.ok) {
     const data = await res.json();
-    console.log(data)
     dispatch(delServer(data));
   }
 };
