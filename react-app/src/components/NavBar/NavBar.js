@@ -13,9 +13,10 @@ const NavBar = () => {
     <>
       {!sessionUser && (
         <>
-          <NavLink id="splash-logo" to="/" exact={true}>
+          <NavLink className="splash-wecord" to="/" exact={true}>
             Wecord
           </NavLink>
+          <NavLink to="/">OKOK</NavLink>
           <div className="auth-button">
             <span>
               <LoginFormModal />
@@ -24,43 +25,44 @@ const NavBar = () => {
               <SignUpFormModal />
             </span>
           </div>
-
         </>
       )}
 
       {sessionUser && (
         <nav className="navbarcontainer">
-            <NavLink
-              id="splash-logo"
-              className="navbarli"
-              to="/"
-              exact={true}
-            >
-              Wecord
-            </NavLink>
-            <NavLink
-              className="navlink navlink1 navbarli"
-              activeClassName="active"
-              to="/home"
-              exact={true}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              className="navlink navlink1 navbarli"
-              activeClassName="active"
-              to="/publicservers"
-              exact={true}
-            >
-              Discover
-            </NavLink>
-            <NavLink
-              id="splash-nav"
-              className="navlink navbarli"
-              activeClassName="active"
-              to="/friends">
-              My Friends{" "}
-            </NavLink>
+          <NavLink
+            id="splash-logo"
+            className="navbarli"
+            // activeClassName="active"
+            to="/"
+            exact={true}
+          >
+            Wecord
+          </NavLink>
+          <NavLink
+            className="navlink navlink1 navbarli"
+            activeClassName="active"
+            to="/home"
+            exact={true}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className="navlink navlink1 navbarli"
+            activeClassName="active"
+            to="/publicservers"
+            exact={true}
+          >
+            Discover
+          </NavLink>
+          <NavLink
+            id="splash-nav"
+            className="navlink navbarli"
+            activeClassName="active"
+            to="/friends"
+          >
+            My Friends{" "}
+          </NavLink>
           <span className="navbarli">
             <LogoutButton />
           </span>
