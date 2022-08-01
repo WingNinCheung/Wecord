@@ -47,7 +47,7 @@ export default function EditMessageForm({
         <form className="form-body" onSubmit={sendChat}>
           <ul className="Err">
             {validationErrors.map((error) => (
-              <li key={error}>{error}</li>
+              <li key={error} className="error">{error}</li>
             ))}
           </ul>
           <textarea

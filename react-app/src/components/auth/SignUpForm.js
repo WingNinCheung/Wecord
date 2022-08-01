@@ -49,14 +49,14 @@ const SignUpForm = () => {
     <form className="login-container" onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind} className="error">{error}</div>
         ))}
       </div>
-      <h2>Create an account</h2>
+      <h2 className="login-title">Create an account</h2>
       <div className="field">
         <div>
           <div>
-            <label>User Name</label>
+            <label className="label">User Name</label>
           </div>
         </div>
         <div>
@@ -70,7 +70,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <div>
-            <label>Email</label>
+            <label className="label">Email</label>
           </div>
           <div>
             <input
@@ -84,7 +84,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <div>
-            <label>Password</label>
+            <label className="label">Password</label>
           </div>
           <input
             className="field-input"
@@ -96,7 +96,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <div>
-            <label>Confirm Password</label>
+            <label className="label">Confirm Password</label>
           </div>
           <input
             className="field-input"

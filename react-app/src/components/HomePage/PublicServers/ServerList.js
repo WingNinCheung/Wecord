@@ -15,7 +15,6 @@ function UsersList() {
   // READ ALL PUBLIC AND PRIVATE SERVERS -------- working
   const allServers = useSelector((state) => state.servers);
 
-  console.log("all servers", allServers);
 
   let allServersArray;
   if (allServers.allServers) allServersArray = Object.values(allServers.notIn);

@@ -32,14 +32,12 @@ const addChannel = (channel) => {
 };
 
 export const createChannel = (channel, serverId) => async (dispatch) => {
-  console.log("thunk", serverId);
   const res = await fetch(`/api/servers/${serverId}/channels/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(channel),
   });
 
-  console.log(res);
   if (res.ok) {
     const data = await res.json;
 
@@ -61,7 +59,6 @@ const editChannel = (channel) => {
 
 export const updateChannel =
   (title, serverId, channelId) => async (dispatch) => {
-    console.log("thunk:", title, serverId, channelId);
     const res = await fetch(
       `/api/servers/${serverId}/channels/${channelId}/edit`,
       {

@@ -42,7 +42,6 @@ export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
 
   if (res.ok) {
     const channelMessages = await res.json();
-    console.log("thunk:", channelMessages);
     dispatch(getChannelMessages(channelMessages));
     return res;
   }
@@ -50,14 +49,12 @@ export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
 
 // Create
 export const createMessage = (message) => async (dispatch) => {
-  console.log("MESSAGES in create thunk: ", message);
   const res = await fetch("/api/messages/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message),
   });
 
-  console.log("RES from createMessages thunk: ", res);
   if (res.ok) {
     const data = await res.json;
 
@@ -76,7 +73,6 @@ const editChannelMessage = (message) => {
 // EDIT MESSGAE THUNK
 export const editMessageThunk =
   (userId, messageId, message) => async (dispatch) => {
-    console.log("in the thunk:", userId, messageId, message);
     const res = await fetch(`/api/messages/${userId}/${messageId}/edit`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -104,7 +100,6 @@ const messages = (state = {}, action) => {
   let messages = {};
   switch (action.type) {
     case GET_CHANNEL_MESSAGES:
-      console.log("in the reducer", action.messages.messages);
       action.messages.messages.forEach((message) => {
         messages[message.id] = message;
       });

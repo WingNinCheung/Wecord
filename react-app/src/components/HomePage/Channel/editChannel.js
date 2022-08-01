@@ -53,7 +53,7 @@ export default function EditChannel({
       <form className="create-form" onSubmit={handleSubmit}>
         <ul>
           {validationErrors.map((error) => (
-            <li key={error}>{error}</li>
+            <li key={error} className="error">{error}</li>
           ))}
         </ul>
         <label>Title</label>

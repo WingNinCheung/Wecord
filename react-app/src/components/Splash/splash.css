@@ -10,6 +10,10 @@
   position: relative;
 }
 
+.splash-logo {
+  margin-left: 2.5%;
+}
+
 .splash-logo:hover {
   background-color: rgba(62, 3, 62, 0.3);
   border-radius: 3px;
@@ -45,10 +49,11 @@
 
   background-image: url("./8a8375ab7908384e1fd6efe408284203.png"),
     url("./c40c84ca18d84633a9d86b4046a91437.png");
-  /* background-size: contain; */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: right, left;
   margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .background-partition {
@@ -105,6 +110,10 @@
   width: 100%;
   color: black;
   margin-bottom: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top: 5px solid #8ea1e1;
+  border-bottom: 5px solid #8ea1e1;
 }
 
 .profile-pic {

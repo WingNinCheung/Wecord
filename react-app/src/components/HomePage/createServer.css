@@ -67,7 +67,7 @@
 
 .Err {
   color: black;
-  list-style-type: none;
+  list-style-type: "-";
   font-family: "Quicksand", sans-serif;
 }
 

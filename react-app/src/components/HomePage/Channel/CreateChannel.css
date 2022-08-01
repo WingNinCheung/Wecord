@@ -16,11 +16,6 @@
   margin-top: 1rem;
 }
 
-.err {
-  list-style-type: none;
-  font-size: small;
-}
-
 .createChanneForm {
   /* display: flex; */
   flex-direction: column;
