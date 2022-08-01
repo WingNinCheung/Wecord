@@ -1,5 +1,5 @@
 # Wecord
-Wecord is a website clone, inspired by Discord. It allows you hang out with your friends and communities.
+Wecord is a chatting app clone, inspired by Discord. It allows you hang out with your friends and communities.
 
 Live site: https://wecord.herokuapp.com/
 
@@ -18,6 +18,7 @@ Documentation: https://github.com/WingNinCheung/Wecord/wiki
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Flask](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
 
 ## Features & Screenshots
 
@@ -30,8 +31,7 @@ Documentation: https://github.com/WingNinCheung/Wecord/wiki
 
 ### Home Page
 
-![Screen Shot 2022-07-31 at 3 22 17 PM](https://user-images.githubusercontent.com/96600317/182047617-bb6a54c1-1de8-436e-a5ab-22fb79d8d5cf.png)
-
+![Screen Shot 2022-08-01 at 7 40 33 AM](https://user-images.githubusercontent.com/8907997/182175187-8186c717-9a74-46ca-83a5-6c8619b3de3b.png)
 
 ### Creating a Server
 
