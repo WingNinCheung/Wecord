@@ -48,7 +48,7 @@ export default function CreateForm() {
         <form onSubmit={handleSubmit} className="create-form">
           <ul className="Err">
             {validationErrors.map((error) => (
-              <li key={error}>{error}</li>
+              <li key={error} className="error">{error}</li>
             ))}
           </ul>
           <input

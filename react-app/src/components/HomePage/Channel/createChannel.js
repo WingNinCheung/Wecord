@@ -59,7 +59,7 @@ export default function CreateChannel({ props }) {
       >
         <ul>
           {validationErrors.map((error) => (
-            <li key={error} className="err">
+            <li key={error} className="error">
               {error}
             </li>
           ))}

@@ -25,6 +25,14 @@
 
 /* should add font family */
 
+.error {
+    list-style-type: none;
+    font-size: small;
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    list-style-type: '-';
+}
+
 
 .loading {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

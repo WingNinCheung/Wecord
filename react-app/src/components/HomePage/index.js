@@ -374,7 +374,7 @@ function HomePage() {
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
-                  <li key={error}>{error}</li>
+                  <li key={error} className="error">{error}</li>
                 ))}
               </ul>
               <input

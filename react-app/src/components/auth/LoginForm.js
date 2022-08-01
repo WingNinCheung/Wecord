@@ -13,7 +13,6 @@ const LoginForm = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  // console.log("user is ", user);
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -37,15 +36,15 @@ const LoginForm = () => {
     <form className="login-container" onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind} className="error">{error}</div>
         ))}
       </div>
-      <h2>Welcome back!</h2>
-      <h3>We're excited to see you back!</h3>
+      <h2 className="login-title">Welcome back!</h2>
+      <h3 className="login-text">We're excited to see you again!</h3>
       <div className="field">
         <div>
           <div>
-            <label htmlFor="email">EMAIL</label>
+            <label htmlFor="email" className="label">EMAIL</label>
           </div>
           <input
             className="field-input"
@@ -58,7 +57,7 @@ const LoginForm = () => {
         </div>
         <div>
           <div>
-            <label htmlFor="password">PASSWORD</label>
+            <label htmlFor="password" className="label">PASSWORD</label>
           </div>
           <input
             className="field-input"

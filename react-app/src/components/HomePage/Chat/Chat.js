@@ -187,7 +187,7 @@ export default function Chat({ channelId }) {
               <form onSubmit={sendChat}>
                 <ul>
                   {validationErrors.map((error) => (
-                    <li key={error}>{error}</li>
+                    <li key={error} className="error">{error}</li>
                   ))}
                 </ul>
                 <textarea
