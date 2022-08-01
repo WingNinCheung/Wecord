@@ -30,8 +30,7 @@ Documentation: https://github.com/WingNinCheung/Wecord/wiki
 
 ### Home Page
 
-![Screen Shot 2022-07-31 at 3 22 17 PM](https://user-images.githubusercontent.com/96600317/182047617-bb6a54c1-1de8-436e-a5ab-22fb79d8d5cf.png)
-
+![Screen Shot 2022-08-01 at 7 40 33 AM](https://user-images.githubusercontent.com/8907997/182175187-8186c717-9a74-46ca-83a5-6c8619b3de3b.png)
 
 ### Creating a Server
 
