@@ -27,11 +27,12 @@ Documentation: https://github.com/WingNinCheung/Wecord/wiki
 - Users must log in to access the website
 - Users can log in with their existing accounts. Alternatively, all users can log in with the Demo Login feature.
 
-<img width="1894" alt="Screen Shot 2022-07-31 at 3 20 05 PM" src="https://user-images.githubusercontent.com/96600317/182047549-b47822cd-3be5-4743-9194-378cea7d7c09.png">
+![Screen Shot 2022-08-01 at 7 40 33 AM](https://user-images.githubusercontent.com/8907997/182175187-8186c717-9a74-46ca-83a5-6c8619b3de3b.png)
+
 
 ### Home Page
 
-![Screen Shot 2022-08-01 at 7 40 33 AM](https://user-images.githubusercontent.com/8907997/182175187-8186c717-9a74-46ca-83a5-6c8619b3de3b.png)
+The home page is dynamic- a user can see all of their servers, those servers' channels, and go to their private messages, dynamically.
 
 ### Creating a Server
 
