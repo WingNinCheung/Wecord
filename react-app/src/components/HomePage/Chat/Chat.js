@@ -24,6 +24,7 @@ export default function Chat({ channelId }) {
   const [messages, setMessages] = useState([]);
   // controlled form input
   const [chatInput, setChatInput] = useState("");
+  let errors = [];
 
   const [validationErrors, setValidationErrors] = useState([]);
 
@@ -100,7 +101,7 @@ export default function Chat({ channelId }) {
     // emit a message
 
     // last object value tells database to edit message or not
-    if (chatInput !== "") {
+    if (chatInput.trim() !== "") {
       if (openEditForm) {
         if (messageId) {
           //need messageId or edit gets messed up
@@ -126,6 +127,13 @@ export default function Chat({ channelId }) {
     setOpenEditForm(false);
     setChatInput("");
   };
+
+  useEffect(() => {
+    if (chatInput.trim().length === 0) {
+      errors.push("Message cannot be empty");
+    }
+    setValidationErrors(errors);
+  }, [chatInput]);
 
   if (!oldMessages || !channelId || !socket) {
     return <p className="loading">Loading</p>;
@@ -184,7 +192,9 @@ export default function Chat({ channelId }) {
               <form onSubmit={sendChat}>
                 <ul>
                   {validationErrors.map((error) => (
-                    <li key={error} className="error">{error}</li>
+                    <li key={error} className="error">
+                      {error}
+                    </li>
                   ))}
                 </ul>
                 <textarea
@@ -195,7 +205,7 @@ export default function Chat({ channelId }) {
                 />
                 <button
                   type="Submit"
-                  disabled={chatInput.length === 0}
+                  disabled={chatInput.trim().length === 0}
                   className="send-button"
                 >
                   Post
