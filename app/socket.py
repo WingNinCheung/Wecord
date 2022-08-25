@@ -51,6 +51,8 @@ def handle_chat(data):
         message=data["message"]
     )
 
+    print("***************"*50, message)
+
     db.session.add(message)
     db.session.commit()
     socketio.emit("chat", data, broadcast=True)

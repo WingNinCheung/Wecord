@@ -13,15 +13,18 @@ import EditFormModal from "../../auth/EditMessageModal";
 // initialize socket variable
 let socket;
 
-export default function Chat({ channelId }) {
+export default function Chat({ channelId, setSelectedChannelId }) {
   //TODO: double check that this is the user
   const user = useSelector((state) => state.session.user);
   const oldMessages = useSelector((state) => state.messages);
+  const messageArr = Object.values(oldMessages);
 
+  console.log("in chat id is ", channelId);
   const dispatch = useDispatch();
 
   // user messages
   const [messages, setMessages] = useState([]);
+
   // controlled form input
   const [chatInput, setChatInput] = useState("");
   let errors = [];
@@ -34,10 +37,10 @@ export default function Chat({ channelId }) {
 
   const [deleteStatus, setDeleteStatus] = useState(false);
 
-  const loadAllMessages = async () => {
-    await dispatch(getChannelMessagesThunk(channelId));
-    await setMessages(Object.values(oldMessages));
-  };
+  // const loadAllMessages = async () => {
+  //   await dispatch(getChannelMessagesThunk(channelId));
+  //   await setMessages(Object.values(oldMessages));
+  // };
 
   useEffect(() => {
     if (deleteStatus) {
@@ -48,10 +51,14 @@ export default function Chat({ channelId }) {
 
   //   Run messages load here on page load:
   useEffect(() => {
-    if (oldMessages) {
-      loadAllMessages();
-    }
-  }, [socket, openEditForm]);
+    dispatch(getChannelMessagesThunk(channelId));
+
+    setMessages(Object.values(oldMessages));
+
+    // console.log("inside damn!", oldMessages);
+  }, [socket, openEditForm, channelId, chatInput]);
+
+  console.log("outside", messageArr);
 
   // Run socket stuff (so connect/disconnect ) whenever channelId changes
   useEffect(() => {
@@ -82,8 +89,6 @@ export default function Chat({ channelId }) {
 
     // disconnect upon component unmount
     return () => {
-      // note: I don't think leave is necessary cuz disconnect leaves all rooms but this is just for
-      // logging when ppl leave for now
       socket.emit("leave", { username: user.username, channelId: channelId });
       socket.disconnect();
     };
@@ -92,9 +97,6 @@ export default function Chat({ channelId }) {
   const updateChatInput = (e) => {
     setChatInput(e.target.value);
   };
-
-  // console.log("messages are ", messages);
-  // console.log("redux msg is ", oldMessages);
 
   const sendChat = async (e) => {
     e.preventDefault();
@@ -122,7 +124,6 @@ export default function Chat({ channelId }) {
           channelId: channelId,
         });
       }
-      // we seem to be grabbing the correct info
     }
     setOpenEditForm(false);
     setChatInput("");
@@ -142,7 +143,7 @@ export default function Chat({ channelId }) {
   return (
     <div className="container-message">
       <div className="messagesDisplay">
-        {messages.map((message, i) => (
+        {messageArr.map((message, i) => (
           <div key={i} className="singleMessageDisplay">
             <div className="username">
               <i className="fa-solid fa-user"></i>
@@ -169,7 +170,14 @@ export default function Chat({ channelId }) {
                     setMessageUserId(message.userId);
                   }}
                 >
-                  <i className="fa-solid fa-trash-can"></i>
+                  <i
+                    onClick={() => {
+                      setMessageId(message.id);
+                      setDeleteStatus(true);
+                      setMessageUserId(message.userId);
+                    }}
+                    className="fa-solid fa-trash-can"
+                  ></i>
                 </span>
               </span>
             </div>
