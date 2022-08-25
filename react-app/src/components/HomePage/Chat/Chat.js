@@ -42,26 +42,39 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   //   await setMessages(Object.values(oldMessages));
   // };
 
-  useEffect(() => {
-    if (deleteStatus) {
-      dispatch(deleteMessageThunk(user.id, messageId));
-    }
+  // useEffect(() => {
+  //   if (deleteStatus) {
+  //     dispatch(deleteMessageThunk(user.id, messageId));
+  //   }
+  //   setDeleteStatus(false);
+
+  //   let autoUpdate = setTimeout(() => {
+  //     dispatch(getChannelMessagesThunk(channelId));
+  //     setMessages(Object.values(oldMessages));
+  //   }, 100);
+
+  //   return () => clearTimeout(autoUpdate);
+  // }, [dispatch, deleteStatus]);
+
+  const deleteMsg = () => {
+    dispatch(deleteMessageThunk(user.id, messageId));
     setDeleteStatus(false);
     dispatch(getChannelMessagesThunk(channelId));
-
     setMessages(Object.values(oldMessages));
-  }, [dispatch, deleteStatus]);
+  };
 
   //   Run messages load here on page load:
   useEffect(() => {
-    dispatch(getChannelMessagesThunk(channelId));
+    let autoUpdate = setTimeout(() => {
+      dispatch(getChannelMessagesThunk(channelId));
 
-    setMessages(Object.values(oldMessages));
+      setMessages(Object.values(oldMessages));
+    }, 200);
 
-    // console.log("inside damn!", oldMessages);
-  }, [socket, openEditForm, channelId, chatInput]);
+    return () => clearTimeout(autoUpdate);
+  }, [dispatch, socket, openEditForm, channelId, openEditForm, deleteStatus]);
 
-  console.log("outside", messageArr);
+  console.log("outside", messages);
 
   // Run socket stuff (so connect/disconnect ) whenever channelId changes
   useEffect(() => {
@@ -118,6 +131,8 @@ export default function Chat({ channelId, setSelectedChannelId }) {
             messageId: messageId,
             messageUserId: messageUserId,
           });
+          setOpenEditForm(false);
+          console.log("see me how many times?");
         }
       } else {
         socket.emit("chat", {
@@ -126,9 +141,14 @@ export default function Chat({ channelId, setSelectedChannelId }) {
           userId: user.id,
           channelId: channelId,
         });
+        // await dispatch(getChannelMessagesThunk(channelId));
+
+        // setMessages(Object.values(oldMessages));
+        // console.log(oldMessages);
+        console.log("just sent!");
       }
     }
-    setOpenEditForm(false);
+    // setOpenEditForm(false);
     setChatInput("");
   };
 
@@ -140,13 +160,13 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   }, [chatInput]);
 
   if (!oldMessages || !channelId || !socket) {
-    return <p className="loading">Loading</p>;
+    return <p className="loading"></p>;
   }
 
   return (
     <div className="container-message">
       <div className="messagesDisplay">
-        {messageArr.map((message, i) => (
+        {messages.map((message, i) => (
           <div key={i} className="singleMessageDisplay">
             <div className="username">
               <i className="fa-solid fa-user"></i>
@@ -176,10 +196,11 @@ export default function Chat({ channelId, setSelectedChannelId }) {
                     }}
                   >
                     <i
-                      onClick={() => {
+                      onClick={(e) => {
                         setMessageId(message.id);
                         setDeleteStatus(true);
                         setMessageUserId(message.userId);
+                        deleteMsg();
                       }}
                       className="fa-solid fa-trash-can"
                     ></i>

@@ -135,7 +135,7 @@ function HomePage() {
       setOpenChannels(true);
       setGoToChannels(true);
       setGoToChannelsMessages(false);
-      setShowChannelMessages(false);
+      setShowChannelMessages(true);
       setUserIsInServer(true);
       return true;
     } else {
