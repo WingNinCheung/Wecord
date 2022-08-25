@@ -47,6 +47,9 @@ export default function Chat({ channelId, setSelectedChannelId }) {
       dispatch(deleteMessageThunk(user.id, messageId));
     }
     setDeleteStatus(false);
+    dispatch(getChannelMessagesThunk(channelId));
+
+    setMessages(Object.values(oldMessages));
   }, [dispatch, deleteStatus]);
 
   //   Run messages load here on page load:
@@ -152,35 +155,38 @@ export default function Chat({ channelId, setSelectedChannelId }) {
             <div className="msg-body">
               <span className="message">{message.message}</span>
             </div>
-            <div className="edit-del">
-              <span
-                onClick={() => {
-                  setMessageId(message.id);
-                  setOpenEditForm(true);
-                  setMessageUserId(message.userId);
-                }}
-              >
-                <i className="fa-solid fa-pen-to-square"></i>
-              </span>
-              <span>
+            {message.userId === user.id && (
+              <div className="edit-del">
                 <span
                   onClick={() => {
                     setMessageId(message.id);
-                    setDeleteStatus(true);
+                    setOpenEditForm(true);
                     setMessageUserId(message.userId);
                   }}
                 >
-                  <i
+                  <i className="fa-solid fa-pen-to-square"></i>
+                </span>
+
+                <span>
+                  <span
                     onClick={() => {
                       setMessageId(message.id);
                       setDeleteStatus(true);
                       setMessageUserId(message.userId);
                     }}
-                    className="fa-solid fa-trash-can"
-                  ></i>
+                  >
+                    <i
+                      onClick={() => {
+                        setMessageId(message.id);
+                        setDeleteStatus(true);
+                        setMessageUserId(message.userId);
+                      }}
+                      className="fa-solid fa-trash-can"
+                    ></i>
+                  </span>
                 </span>
-              </span>
-            </div>
+              </div>
+            )}
           </div>
         ))}
 
