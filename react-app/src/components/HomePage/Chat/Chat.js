@@ -19,7 +19,6 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   const oldMessages = useSelector((state) => state.messages);
   const messageArr = Object.values(oldMessages);
 
-  console.log("in chat id is ", channelId);
   const dispatch = useDispatch();
 
   // user messages
@@ -34,7 +33,7 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   const [openEditForm, setOpenEditForm] = useState(false);
   const [messageId, setMessageId] = useState("");
   const [messageUserId, setMessageUserId] = useState("");
-
+  const [update, setUpdate] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
   // const loadAllMessages = async () => {
@@ -43,38 +42,32 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   // };
 
   // useEffect(() => {
+  //   console.log("the msg id is, ", messageId);
   //   if (deleteStatus) {
   //     dispatch(deleteMessageThunk(user.id, messageId));
   //   }
   //   setDeleteStatus(false);
+  //   console.log("status", deleteStatus);
 
-  //   let autoUpdate = setTimeout(() => {
-  //     dispatch(getChannelMessagesThunk(channelId));
-  //     setMessages(Object.values(oldMessages));
-  //   }, 100);
-
-  //   return () => clearTimeout(autoUpdate);
+  //   dispatch(getChannelMessagesThunk(channelId));
+  //   setMessages(Object.values(oldMessages));
   // }, [dispatch, deleteStatus]);
 
-  const deleteMsg = () => {
-    dispatch(deleteMessageThunk(user.id, messageId));
-    setDeleteStatus(false);
-    dispatch(getChannelMessagesThunk(channelId));
-    setMessages(Object.values(oldMessages));
+  const deleteMsg = async (id) => {
+    await dispatch(deleteMessageThunk(user.id, id));
+
+    await dispatch(getChannelMessagesThunk(channelId));
+    await setMessages(Object.values(oldMessages));
+
+    setDeleteStatus(!deleteStatus);
   };
 
   //   Run messages load here on page load:
   useEffect(() => {
-    let autoUpdate = setTimeout(() => {
-      dispatch(getChannelMessagesThunk(channelId));
+    dispatch(getChannelMessagesThunk(channelId));
 
-      setMessages(Object.values(oldMessages));
-    }, 200);
-
-    return () => clearTimeout(autoUpdate);
-  }, [dispatch, socket, openEditForm, channelId, openEditForm, deleteStatus]);
-
-  console.log("outside", messages);
+    setMessages(Object.values(oldMessages));
+  }, [openEditForm, channelId, openEditForm, deleteStatus, update]);
 
   // Run socket stuff (so connect/disconnect ) whenever channelId changes
   useEffect(() => {
@@ -89,6 +82,7 @@ export default function Chat({ channelId, setSelectedChannelId }) {
     socket.on("chat", (chat) => {
       // when we receive a chat, add to our messages array in state
       setMessages((messages) => [...messages, chat]);
+      setUpdate(!update);
     });
 
     // listen for edited messages (oldMessage is the edited one)
@@ -131,8 +125,10 @@ export default function Chat({ channelId, setSelectedChannelId }) {
             messageId: messageId,
             messageUserId: messageUserId,
           });
-          setOpenEditForm(false);
-          console.log("see me how many times?");
+          setOpenEditForm(!openEditForm);
+          dispatch(getChannelMessagesThunk(channelId));
+          setMessages(Object.values(oldMessages));
+          setUpdate(!update);
         }
       } else {
         socket.emit("chat", {
@@ -141,14 +137,12 @@ export default function Chat({ channelId, setSelectedChannelId }) {
           userId: user.id,
           channelId: channelId,
         });
-        // await dispatch(getChannelMessagesThunk(channelId));
 
-        // setMessages(Object.values(oldMessages));
-        // console.log(oldMessages);
+        setUpdate(!update);
         console.log("just sent!");
       }
     }
-    // setOpenEditForm(false);
+
     setChatInput("");
   };
 
@@ -166,7 +160,7 @@ export default function Chat({ channelId, setSelectedChannelId }) {
   return (
     <div className="container-message">
       <div className="messagesDisplay">
-        {messages.map((message, i) => (
+        {messageArr.map((message, i) => (
           <div key={i} className="singleMessageDisplay">
             <div className="username">
               <i className="fa-solid fa-user"></i>
@@ -189,19 +183,21 @@ export default function Chat({ channelId, setSelectedChannelId }) {
 
                 <span>
                   <span
-                    onClick={() => {
-                      setMessageId(message.id);
-                      setDeleteStatus(true);
-                      setMessageUserId(message.userId);
-                    }}
+
+                  // onClick={() => {
+                  //   setMessageId(message.id);
+                  //   setDeleteStatus(true);
+                  //   setMessageUserId(message.userId);
+                  //   deleteMsg();
+                  // }}
                   >
                     <i
-                      onClick={(e) => {
-                        setMessageId(message.id);
-                        setDeleteStatus(true);
-                        setMessageUserId(message.userId);
-                        deleteMsg();
-                      }}
+                      onClick={
+                        // setMessageId(message.id);
+                        // setDeleteStatus(true);
+                        // setMessageUserId(message.userId);
+                        () => deleteMsg(message.id)
+                      }
                       className="fa-solid fa-trash-can"
                     ></i>
                   </span>

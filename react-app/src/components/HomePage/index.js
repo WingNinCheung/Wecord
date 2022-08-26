@@ -119,7 +119,6 @@ function HomePage() {
     // checkUserinServer(selectedServerId);
   };
 
-  console.log("channel ", selectedChannelId);
   const checkUserinServer = async (serverId) => {
     const data = await dispatch(getAllServerUsers(serverId));
     await dispatch(getServerChannelsThunk(serverId));
