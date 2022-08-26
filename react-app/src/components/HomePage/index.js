@@ -134,7 +134,7 @@ function HomePage() {
       setOpenChannels(true);
       setGoToChannels(true);
       setGoToChannelsMessages(false);
-      setShowChannelMessages(false);
+      setShowChannelMessages(true);
       setUserIsInServer(true);
       return true;
     } else {
@@ -331,9 +331,14 @@ function HomePage() {
     }
   };
 
-  useEffect(() => {
-    LoadChannelMessages();
-  }, [dispatch, goToChannelMessages]);
+  useEffect(async () => {
+    // LoadChannelMessages();
+
+    if (typeof selectedChannelId !== "string") {
+      await dispatch(getChannelMessagesThunk(selectedChannelId));
+      setGoToChannelsMessages(false);
+    }
+  }, [dispatch, selectedChannelId]);
 
   // ------------------------------------------------
 
@@ -374,7 +379,9 @@ function HomePage() {
             <form onSubmit={handleSubmit}>
               <ul>
                 {validationErrors.map((error) => (
-                  <li key={error} className="error">{error}</li>
+                  <li key={error} className="error">
+                    {error}
+                  </li>
                 ))}
               </ul>
               <input
@@ -447,6 +454,7 @@ function HomePage() {
                           setSelectedServerId(server.id);
                           setAdminId(server.master_admin);
                           checkUserinServer(server.id);
+                          // setShowChannelMessages(false);
                         }}
                       >
                         {server.name}
@@ -563,7 +571,12 @@ function HomePage() {
         </>
 
         <div className="messagesContainer">
-          {showChannelMessages && <Chat channelId={selectedChannelId} />}
+          {showChannelMessages && (
+            <Chat
+              channelId={selectedChannelId}
+              setSelectedChannelId={setSelectedChannelId}
+            />
+          )}
         </div>
 
         <div className="userLists">

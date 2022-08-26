@@ -211,6 +211,7 @@ def delete_channel(serverId, channelId):
 @server_routes.route("/channels/<int:id>")
 @login_required
 def get_channel_messages(id):
+    print("**************ZZZZZZZZZZZ", id)
     channel = Channel.query.get(id)
     target_channel = channel.to_dict()
     # use a for loop to append the corresponding username and photo to each message

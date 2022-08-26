@@ -42,6 +42,7 @@ export const getChannelMessagesThunk = (channelId) => async (dispatch) => {
 
   if (res.ok) {
     const channelMessages = await res.json();
+    console.log("in thunk ", channelMessages);
     dispatch(getChannelMessages(channelMessages));
     return res;
   }
