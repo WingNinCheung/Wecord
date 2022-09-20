@@ -117,7 +117,7 @@ export default function Splash() {
           <section className="dev-info">
             <img
               className="profile-pic"
-              src="https://media-exp1.licdn.com/dms/image/C4E03AQF0fmknzYk1rA/profile-displayphoto-shrink_200_200/0/1580893094660?e=1664409600&v=beta&t=7f9AE6QP-kp8pWoW34enfUdyeN6AGSNwOTZtc-khsUc"
+              src="https://media-exp1.licdn.com/dms/image/C5603AQEWN3wyR3XIsg/profile-displayphoto-shrink_800_800/0/1663177390067?e=1669248000&v=beta&t=Fgxv2s8A2a5H7ath8j1sLaVU3BMAHvQBu5EeDAgqBgQ"
               alt="Brendan"
             ></img>
             <div className="profile-section">

@@ -68,12 +68,12 @@ def getFriend(id):
 @friend_routes.route('/<int:userId>/<int:friendId>', methods=['DELETE'])
 def unfriend(userId, friendId):
     person = Friend.query.filter(Friend.friendId == userId, Friend.userId == friendId).all()
+    print('friend1ffffffffffffffffffffffffffffffffff',person)
+
     person2 = Friend.query.filter(Friend.friendId == friendId, Friend.userId == userId).all()
     for friend in person:
-        print(friend)
         db.session.delete(friend)
     for friend in person2:
-        print(friend)
         db.session.delete(friend)
     db.session.commit()
     servers = Server.query.filter(Server.private == True).all()
