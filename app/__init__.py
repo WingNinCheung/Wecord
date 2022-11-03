@@ -10,11 +10,11 @@ from .models.db import db
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.server_routes import server_routes
-from .api.message_routes import message_routes
+from .api.message_routes import message_routes, socketio
 from .api.serveruser_routes import server_user_routes
 from .api.friends import friend_routes
 
-from .socket import socketio
+# from .socket import socketio
 
 from .seeds import seed_commands
 
