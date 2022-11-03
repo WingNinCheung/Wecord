@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, redirect
-from flask_socketio import SocketIO, join_room, leave_room, disconnect, emit, connect
+from flask_socketio import SocketIO, join_room, leave_room, disconnect, emit
 import os
 from flask_login import login_required, current_user
 from ..models.db import Server_User, db, Server, Channel, Message
